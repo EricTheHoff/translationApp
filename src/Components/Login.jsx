@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import React from 'react'
 
 const Login = ({ login }) => {
@@ -23,6 +24,10 @@ const Login = ({ login }) => {
                 <br></br>
 
                 <button type='submit'>Login</button>
+
+                <br></br>
+
+                <p>Don't have an account? <NavLink to='/register'>Register for one here.</NavLink></p>
             </form>
         </>
     )
