@@ -9,17 +9,19 @@ const RegistrationForm = () => {
 
     const [usernameReg, setUsernameReg] = useState("")
     const [passwordReg, setPasswordReg] = useState("")
+    const [emailReg, setEmailReg] = useState("")
 
     const register = async (event) => {
         event.preventDefault()
-        if (usernameReg === "" || passwordReg === "") {
-            alert("Please enter a username")
+        if (usernameReg === "" || passwordReg === "" || emailReg === "") {
+            alert("Please enter a valid input")
         }
         await axios.post('/register', {
             username: usernameReg,
+            email: emailReg,
             password: passwordReg
         }).then((res) => {
-            if (res.data === "Username already in use") {
+            if (res.data === "Information already in use") {
                 alert(res.data)
             } else {
                 navigate("/translate")
@@ -33,11 +35,12 @@ const RegistrationForm = () => {
                 <h1>Create an Account</h1>
 
                 <label>Username</label>
+                <input type="text" onChange={(e) => { setUsernameReg(e.target.value) }} />
 
+                <label>Email</label>
                 <input type="text" onChange={(e) => { setUsernameReg(e.target.value) }} />
 
                 <label>Password</label>
-
                 <input type="text" onChange={(e) => { setPasswordReg(e.target.value) }} />
 
                 <button type='submit' onClick={register}>Create Account</button>
