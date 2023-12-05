@@ -17,6 +17,8 @@ import SavedTutorPage from "./Pages/SavedTutorPage.jsx";
 import StudyPage from "./Pages/StudyPage.jsx";
 import TranslatePage from "./Pages/TranslatePage.jsx";
 import HomePage from "./Pages/HomePage.jsx";
+import { Provider } from 'react-redux'
+import store from "./Store/store.js";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -36,6 +38,8 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+        <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );
