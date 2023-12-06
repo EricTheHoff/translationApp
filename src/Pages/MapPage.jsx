@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import {
   APIProvider,
@@ -8,6 +8,7 @@ import {
   Pin,
   InfoWindow,
 } from "@vis.gl/react-google-maps";
+import Places from "./PlacesPage";
 
 const MapPage = () => {
   const apiKey = "AIzaSyCUNodj8rRhB6HcoDZC0Z6XN7NkVrvhIqc";
@@ -15,8 +16,9 @@ const MapPage = () => {
   return (
     <div>
       <Link to="/">Back to Home</Link>
+      <Places />
       <APIProvider apiKey={apiKey}>
-        <div style={{ height: "100vh" }}>
+        <div style={{ height: "100vh", width: "100%" }}>
           <Map
             zoom={3}
             center={{ lat: 40.2338, lng: 111.6585 }}
