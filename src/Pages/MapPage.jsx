@@ -1,39 +1,107 @@
-import React from "react";
-import { useState, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { useState, useMemo, useEffect } from "react";
+import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng,
+} from "use-places-autocomplete";
 import {
-  APIProvider,
-  Map,
-  AdvancedMarker,
-  Pin,
-  InfoWindow,
-} from "@vis.gl/react-google-maps";
-import Places from "./PlacesPage";
+  Combobox,
+  ComboboxInput,
+  ComboboxPopover,
+  ComboboxList,
+  ComboboxOption,
+} from "@reach/combobox";
+import "@reach/combobox/styles.css";
 
-const MapPage = () => {
-  const apiKey = "AIzaSyCUNodj8rRhB6HcoDZC0Z6XN7NkVrvhIqc";
-  const mapId = "54270da3c38d6426";
+function MapPage() {
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: "AIzaSyCUNodj8rRhB6HcoDZC0Z6XN7NkVrvhIqc",
+    libraries: ["places"],
+  });
+
+  const [userLocation, setUserLocation] = useState(null);
+
+  useEffect(() => {
+    // Get user's location when the component mounts
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          console.log(position.coords);
+          setUserLocation({ lat: latitude, lng: longitude });
+        },
+        (error) => {
+          console.error("Error getting user's location:", error);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by your browser");
+    }
+  }, []);
+
+  if (!isLoaded) return <div>Loading...</div>;
+  return <Map userLocation={userLocation} />;
+}
+
+function Map({ userLocation }) {
+  const center = useMemo(() => userLocation, [userLocation]);
+  console.log(center);
+  const [selected, setSelected] = useState(null);
+
   return (
-    <div>
-      <Link to="/">Back to Home</Link>
-      <Places />
-      <APIProvider apiKey={apiKey}>
-        <div style={{ height: "100vh", width: "100%" }}>
-          <Map
-            zoom={3}
-            center={{ lat: 40.2338, lng: 111.6585 }}
-            mapId={mapId}
-          ></Map>
-          <AdvancedMarker position={{ lat: 40.282299, lng: -111.643479 }}>
-            <Pin
-              background={"red"}
-              borderColor={"white"}
-              glyphColor={"white"}
-            />
-          </AdvancedMarker>
-        </div>
-      </APIProvider>
-    </div>
+    <>
+      <div className="places-container">
+        <PlacesAutocomplete setSelected={setSelected} />
+      </div>
+
+      <GoogleMap
+        zoom={10}
+        center={center}
+        mapContainerClassName="map-container"
+      >
+        <div style={{ height: "80vh" }}></div>
+        {selected && <Marker position={selected} />}
+      </GoogleMap>
+    </>
+  );
+}
+
+const PlacesAutocomplete = ({ setSelected }) => {
+  const {
+    ready,
+    value,
+    setValue,
+    suggestions: { status, data },
+    clearSuggestions,
+  } = usePlacesAutocomplete();
+
+  const handleSelect = async (address) => {
+    setValue(address, false);
+    clearSuggestions();
+
+    const results = await getGeocode({ address });
+    const { lat, lng } = await getLatLng(results[0]);
+    setSelected({ lat, lng });
+  };
+
+  return (
+    <Combobox onSelect={handleSelect}>
+      <ComboboxInput
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        disabled={!ready}
+        className="combobox-input"
+        placeholder="Search an address"
+      />
+      <ComboboxPopover>
+        <ComboboxList>
+          {status === "OK" &&
+            data.map(({ place_id, description }) => (
+              <ComboboxOption key={place_id} value={description} />
+            ))}
+        </ComboboxList>
+      </ComboboxPopover>
+    </Combobox>
   );
 };
 
