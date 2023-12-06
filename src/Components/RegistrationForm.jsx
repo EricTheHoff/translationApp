@@ -18,10 +18,10 @@ const RegistrationForm = () => {
             alert("Please enter a valid input")
         }
         await axios.post('/register', {
-            username: usernameReg,
+            name: usernameReg,
             email: emailReg,
             password: passwordReg,
-            zipcode: zipReg
+            zipCode: zipReg
         }).then((res) => {
             if (res.data === "Information already in use") {
                 alert(res.data)

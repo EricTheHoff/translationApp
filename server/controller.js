@@ -1,26 +1,28 @@
+import { UserDetail } from '../src/Database/models.js'
+
 const handlerFunctions = {
 
     register: async (req, res) => {
 
-        const { username, email, password, zipcode } = req.body
+        const { name, email, password, zipCode } = req.body
 
-        console.log(username, email, password, zipcode)
+        console.log(name, email, password, zipCode)
 
-        const alreadyExists = await User.findAll({
+        const alreadyExists = await UserDetail.findAll({
             where: {
-                username,
+                name,
                 email
             }
         })
 
         if (alreadyExists[0]) {
-            res.status(200).send('Username already exists')
+            res.status(200).send('Username or email already exists')
         } else {
-            const newUser = await User.create({
-                username: username,
+            const newUser = await UserDetail.create({
+                name: name,
                 email: email,
                 password: password,
-                zip: zipcode
+                zipCode: zipCode
             })
 
             req.session.user = newUser

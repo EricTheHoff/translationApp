@@ -13,7 +13,7 @@ ViteExpress.listen(app, 2222, () =>
   console.log(`Server working on http://localhost:2222`)
 );
 
-import handlerFunctions from "./controller";
+import handlerFunctions from "../server/controller.js";
 
 
 app.post('/register', handlerFunctions.register)
