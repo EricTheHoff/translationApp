@@ -12,3 +12,5 @@ app.use(express.json());
 ViteExpress.listen(app, 2222, () =>
   console.log(`Server working on http://localhost:2222`)
 );
+
+import handlerFunctions from "./controller";
