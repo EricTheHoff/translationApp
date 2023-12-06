@@ -18,7 +18,7 @@ const Profile = () => {
         <div>
             <h1>Profile</h1>
 
-            <label>Add Image</label>
+            <label>Add Profile Image</label>
             <input type="file" onChange={handleChange} />
             <img src={file} />
 
@@ -41,6 +41,11 @@ const Profile = () => {
 
             <label>ZIP Code</label>
             <input type="text" />
+
+            <hr />
+
+            <button>Edit Account Information</button>
+            <button>Delete Account</button>
         </div>
     );
 }
