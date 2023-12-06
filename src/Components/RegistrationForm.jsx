@@ -23,6 +23,7 @@ const RegistrationForm = () => {
             password: passwordReg,
             zipCode: zipReg
         }).then((res) => {
+            console.log(res.data)
             if (res.data === "Information already in use") {
                 alert(res.data)
             } else {
@@ -33,7 +34,7 @@ const RegistrationForm = () => {
 
     return (
         <div>
-            <form>
+            <form onSubmit={(e) => register(e)}>
                 <h1>Create an Account</h1>
 
                 <label>Username</label>
@@ -48,7 +49,7 @@ const RegistrationForm = () => {
                 <label>ZIP Code</label>
                 <input type="text" onChange={(e) => { setZipReg(e.target.value) }} />
 
-                <button type='submit' onClick={register}>Create Account</button>
+                <button type='submit'>Create Account</button>
             </form>
         </div>
     );

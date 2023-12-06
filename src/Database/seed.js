@@ -20,7 +20,7 @@ const userOne = await UserDetail.create({
   password: "ilovejohndoe420",
 //   schoolId: 1,
 //   wordId: 1,
-  zipCode: 93457
+  zipCode: '93457'
 });
 
 const wordOne = await SavedWord.create({
