@@ -36,11 +36,11 @@ const Profile = () => {
 
             <label>Password</label>
             <input type="text" />
-            
+
             <hr />
 
             <label>ZIP Code</label>
-            <input type="text" />
+            <input type="text" maxLength="5" />
 
             <hr />
 
