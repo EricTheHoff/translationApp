@@ -13,31 +13,7 @@ ViteExpress.listen(app, 2222, () =>
   console.log(`Server working on http://localhost:2222`)
 );
 
-// Registration:
+import handlerFunctions from "./controller";
 
-app.post('/register', async (req, res) => {
-    const { username, password } = req.body
-    console.log(username, password)
-    const alreadyExists = await User.findAll({
-        where: {
-            username
-        }
-    })
-    if (alreadyExists[0]) {
-        res.status(200).send('Username already exists')
-    } else {
 
-        const newUser = await User.create({
-            username: username,
-            password: password
-        })
-
-        req.session.user = newUser
-
-        res.send({
-            message: 'account created',
-            user_id: newUser.user_id
-        })
-    }
-},
-)
+app.post('/register', handlerFunctions.register)
