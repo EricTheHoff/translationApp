@@ -40,11 +40,12 @@ export default function Places() {
   }, []);
 
   if (!isLoaded) return <div>Loading...</div>;
-  return <Map />;
+  return <Map userLocation={userLocation} />;
 }
 
 function Map({ userLocation }) {
   const center = useMemo(() => userLocation, [userLocation]);
+  console.log(center);
   const [selected, setSelected] = useState(null);
 
   return (
