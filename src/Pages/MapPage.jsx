@@ -12,6 +12,7 @@ import {
   ComboboxOption,
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
+import axios from "axios";
 
 function MapPage() {
   const { isLoaded } = useLoadScript({
@@ -20,6 +21,8 @@ function MapPage() {
   });
 
   const [userLocation, setUserLocation] = useState(null);
+  const [lat, setLat] = useState(null);
+  const [long, setLong] = useState(null);
 
   useEffect(() => {
     // Get user's location when the component mounts
@@ -39,27 +42,49 @@ function MapPage() {
     }
   }, []);
 
+  useEffect(() => {
+    if (userLocation) {
+      const { lat, lng } = userLocation;
+      axios
+        .get(`http://localhost:2222/api/places?lat=${lat}&lng=${lng}`)
+        .then(({ data }) => {
+          console.log(data);
+          console.log(data.results[0].geometry.location.lat);
+          setLat(data.results[0].geometry.location.lat);
+          setLong(data.results[0].geometry.location.lng);
+          console.log(long);
+          // Handle your data as needed
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [userLocation]);
+
   if (!isLoaded) return <div>Loading...</div>;
   return <Map userLocation={userLocation} />;
 }
 
 function Map({ userLocation }) {
   const center = useMemo(() => userLocation, [userLocation]);
-  console.log(center);
   const [selected, setSelected] = useState(null);
 
   return (
     <>
       <div className="places-container">
+        {/* PlacesAutocomplete component */}
         <PlacesAutocomplete setSelected={setSelected} />
       </div>
 
+      {/* GoogleMap component */}
       <GoogleMap
         zoom={10}
         center={center}
         mapContainerClassName="map-container"
       >
         <div style={{ height: "80vh" }}></div>
+
+        {/* Display language school markers */}
+
+        {/* Display selected marker */}
         {selected && <Marker position={selected} />}
       </GoogleMap>
     </>
