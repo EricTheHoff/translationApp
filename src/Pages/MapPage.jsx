@@ -15,14 +15,15 @@ import "@reach/combobox/styles.css";
 import axios from "axios";
 
 function MapPage() {
+  const [lat, setLat] = useState(null);
+  const [long, setLong] = useState(null);
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyCUNodj8rRhB6HcoDZC0Z6XN7NkVrvhIqc",
     libraries: ["places"],
   });
 
   const [userLocation, setUserLocation] = useState(null);
-  const [lat, setLat] = useState(null);
-  const [long, setLong] = useState(null);
+  const [places, setPlaces] = useState(null);
 
   useEffect(() => {
     // Get user's location when the component mounts
@@ -48,22 +49,38 @@ function MapPage() {
       axios
         .get(`http://localhost:2222/api/places?lat=${lat}&lng=${lng}`)
         .then(({ data }) => {
-          console.log(data);
+          console.log(data.results);
+
+          const allPlaces = data.results.map((place) => {
+            console.log(place);
+            return (
+              <Marker
+                position={{
+                  lat: +place.geometry.location.lat,
+                  lng: +place.geometry.location.lng,
+                }}
+              />
+            );
+          });
+          console.log(allPlaces);
           console.log(data.results[0].geometry.location.lat);
           setLat(data.results[0].geometry.location.lat);
           setLong(data.results[0].geometry.location.lng);
-          console.log(long);
+          setPlaces(allPlaces);
+          console.log(lat);
           // Handle your data as needed
         })
         .catch((err) => console.log(err));
     }
-  }, [userLocation]);
+  }, [userLocation, setLat, setLong]);
 
   if (!isLoaded) return <div>Loading...</div>;
-  return <Map userLocation={userLocation} />;
+  return (
+    <Map userLocation={userLocation} lat={lat} long={long} places={places} />
+  );
 }
 
-function Map({ userLocation }) {
+function Map({ userLocation, lat, long, places }) {
   const center = useMemo(() => userLocation, [userLocation]);
   const [selected, setSelected] = useState(null);
 
@@ -86,6 +103,8 @@ function Map({ userLocation }) {
 
         {/* Display selected marker */}
         {selected && <Marker position={selected} />}
+        {/* {lat && long && <Marker position={{ lat: lat, lng: long }} />} */}
+        {places && places}
       </GoogleMap>
     </>
   );
