@@ -8,6 +8,10 @@ async function myDataBaseConnection(uri) {
     {
       database: "translationApp",
       dialect: "postgres",
+      define: {
+        underscored: true,
+        timestamps: false
+      }
     }
   );
   try {

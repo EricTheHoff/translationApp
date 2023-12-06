@@ -4,12 +4,12 @@ import util from "util";
 
 export const dbConnection = await myDataBaseConnection("translationApp");
 
-export class schoolDetails extends Model {
+export class SchoolDetail extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
   }
 }
-schoolDetails.init(
+SchoolDetail.init(
   {
     schoolId: {
       type: DataTypes.INTEGER,
@@ -20,7 +20,7 @@ schoolDetails.init(
     address: { type: DataTypes.STRING },
     phone: { type: DataTypes.STRING },
     website: { type: DataTypes.STRING },
-    userId: { type: DataTypes.INTEGER },
+    // userId: { type: DataTypes.INTEGER },
   },
 
   {
@@ -28,19 +28,20 @@ schoolDetails.init(
     modelName: "schoolDetails",
   }
 );
-export class userDetails extends Model {
+export class UserDetail extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
   }
 }
-userDetails.init(
+UserDetail.init(
   {
     userId: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     name: { type: DataTypes.STRING },
     email: { type: DataTypes.STRING },
     password: { type: DataTypes.STRING },
-    schoolId: { type: DataTypes.INTEGER },
-    wordId: { type: DataTypes.INTEGER },
+    // schoolId: { type: DataTypes.INTEGER },
+    // wordId: { type: DataTypes.INTEGER },
+    zipCode: { type: DataTypes.INTEGER },
   },
 
   {
@@ -48,16 +49,16 @@ userDetails.init(
     modelName: "userDetails",
   }
 );
-export class savedWords extends Model {
+export class SavedWord extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
   }
 }
-savedWords.init(
+SavedWord.init(
   {
     wordId: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     word: { type: DataTypes.STRING },
-    userId: { type: DataTypes.INTEGER },
+    // userId: { type: DataTypes.INTEGER },
   },
 
   {
@@ -66,8 +67,10 @@ savedWords.init(
   }
 );
 
-schoolDetails.hasMany(userDetails);
-userDetails.hasMany(schoolDetails);
-// userDetails.belongsToMany(savedWords, { through: userId})
-savedWords.belongsTo(userDetails);
-savedWords.hasMany(userDetails);
+SchoolDetail.belongsToMany(UserDetail, { through: "SchoolUserDetail" });
+UserDetail.belongsToMany(SchoolDetail, {through: "SchoolUserDetail" });
+
+UserDetail.hasMany(SavedWord, {foreignKey: "userId" });
+// create userDetails.getSavedWords(), userDetails.addSavedWords(). it is going to try to create userDetails.createSavedWord
+SavedWord.belongsTo(UserDetail, {foreignKey: "userId" });
+
