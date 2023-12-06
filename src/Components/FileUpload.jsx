@@ -5,7 +5,8 @@ import { Viewer, Worker } from '@react-pdf-viewer/core'
 import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout'
 import '@react-pdf-viewer/core/lib/styles/index.css'
 import '@react-pdf-viewer/default-layout/lib/styles/index.css'
-import 'react-pdf/dist/Page/TextLayer.css'
+// import 'react-pdf/dist/Page/TextLayer.css'
+
 
 const FileUpload = () => {
     // const content = document.getElementById('content')
@@ -25,9 +26,8 @@ const FileUpload = () => {
 
     const handleChange = (e) => {
         let selectedFile = e.target.files[0]
-        if(!selectedFile) {
-            alert(`Please upload a file.`)
-        } else if (fileTypes.includes(selectedFile.type)) {
+
+        if (fileTypes.includes(selectedFile.type)) {
             let reader = new FileReader()
             reader.readAsDataURL(selectedFile)
             reader.onload = (e) => {
@@ -40,7 +40,11 @@ const FileUpload = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if(pdfFile !== null) {
+
+        if(!pdfFile) {
+            alert(`Please upload a file.`)
+
+        } else if(pdfFile !== null) {
             setViewPDF(pdfFile)
         } else {
             setViewPDF(null)
