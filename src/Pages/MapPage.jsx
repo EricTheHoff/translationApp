@@ -15,8 +15,6 @@ import "@reach/combobox/styles.css";
 import axios from "axios";
 
 function MapPage() {
-  const [lat, setLat] = useState(null);
-  const [long, setLong] = useState(null);
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyCUNodj8rRhB6HcoDZC0Z6XN7NkVrvhIqc",
     libraries: ["places"],
@@ -24,6 +22,7 @@ function MapPage() {
 
   const [userLocation, setUserLocation] = useState(null);
   const [places, setPlaces] = useState(null);
+  const [zipcode, setZipcode] = useState("");
 
   useEffect(() => {
     // Get user's location when the component mounts
@@ -64,28 +63,64 @@ function MapPage() {
           });
           console.log(allPlaces);
           console.log(data.results[0].geometry.location.lat);
-          setLat(data.results[0].geometry.location.lat);
-          setLong(data.results[0].geometry.location.lng);
           setPlaces(allPlaces);
-          console.log(lat);
+
           // Handle your data as needed
         })
         .catch((err) => console.log(err));
     }
-  }, [userLocation, setLat, setLong]);
+  }, [userLocation]);
+
+  const handleZipcodeChange = (event) => {
+    setZipcode(event.target.value);
+  };
+
+  const handleZipcodeSubmit = () => {
+    // Fetch latitude and longitude based on the entered zipcode
+    axios
+      .get(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${zipcode}&key=AIzaSyCUNodj8rRhB6HcoDZC0Z6XN7NkVrvhIqc`
+      )
+      .then(({ data }) => {
+        const { lat, lng } = data.results[0].geometry.location;
+        setUserLocation({ lat, lng });
+      })
+      .catch((err) => console.log(err));
+  };
 
   if (!isLoaded) return <div>Loading...</div>;
   return (
-    <Map userLocation={userLocation} lat={lat} long={long} places={places} />
+    <Map
+      userLocation={userLocation}
+      places={places}
+      zipcode={zipcode}
+      onZipcodeChange={handleZipcodeChange}
+      onZipcodeSubmit={handleZipcodeSubmit}
+    />
   );
 }
 
-function Map({ userLocation, lat, long, places }) {
+function Map({
+  userLocation,
+  places,
+  onZipcodeChange,
+  onZipcodeSubmit,
+  zipcode,
+}) {
   const center = useMemo(() => userLocation, [userLocation]);
   const [selected, setSelected] = useState(null);
 
   return (
     <>
+      <div className="zipcode-container">
+        <input
+          type="text"
+          value={zipcode}
+          onChange={onZipcodeChange}
+          placeholder="Enter zipcode"
+        />
+        <button onClick={onZipcodeSubmit}>Submit</button>
+      </div>
       <div className="places-container">
         {/* PlacesAutocomplete component */}
         <PlacesAutocomplete setSelected={setSelected} />
@@ -100,11 +135,9 @@ function Map({ userLocation, lat, long, places }) {
         <div style={{ height: "80vh" }}></div>
 
         {/* Display language school markers */}
-
+        {places && places}
         {/* Display selected marker */}
         {selected && <Marker position={selected} />}
-        {/* {lat && long && <Marker position={{ lat: lat, lng: long }} />} */}
-        {places && places}
       </GoogleMap>
     </>
   );
