@@ -1,5 +1,10 @@
 import { useState, useMemo, useEffect } from "react";
-import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  useLoadScript,
+  MarkerF,
+  InfoWindowF,
+} from "@react-google-maps/api";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
@@ -24,6 +29,9 @@ function MapPage() {
   const [userLocation, setUserLocation] = useState(null);
   const [places, setPlaces] = useState(null);
   const [zipcode, setZipcode] = useState("");
+  const [open, setOpen] = useState(false);
+  const [close, setClose] = useState(false);
+  const [selectedMarker, setSelectedMarker] = useState("");
 
   useEffect(() => {
     // Get user's location when the component mounts
@@ -53,13 +61,33 @@ function MapPage() {
 
           const allPlaces = data.results.map((place) => {
             console.log(place);
+            console.log(place.name);
+            let position = {
+              lat: +place.geometry.location.lat,
+              lng: +place.geometry.location.lng,
+            };
             return (
-              <Marker
-                position={{
-                  lat: +place.geometry.location.lat,
-                  lng: +place.geometry.location.lng,
-                }}
-              />
+              <div>
+                <MarkerF
+                  key={place.name}
+                  position={position}
+                  onClick={() => setOpen(true)}
+                >
+                  {open && (
+                    <InfoWindowF position={position}>
+                      <>
+                        <h1>{place.name}</h1>
+                        <p>rating: {place.rating}</p>
+                        <p> Address: {place.vicinity}</p>
+                        <label>
+                          Save To My Schools:
+                          <input type="checkbox" />
+                        </label>
+                      </>
+                    </InfoWindowF>
+                  )}
+                </MarkerF>
+              </div>
             );
           });
           console.log(allPlaces);

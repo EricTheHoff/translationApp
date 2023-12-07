@@ -46,6 +46,7 @@ function Map({
 
         {/* Display language school markers */}
         {places && places}
+
         {/* Display selected marker */}
       </GoogleMap>
     </>
