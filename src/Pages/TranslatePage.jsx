@@ -1,51 +1,36 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from 'react'
-import FileUpload from "../Components/FileUpload.jsx";
+// import PDFUpload from "../Components/PDFUpload.jsx";
 
 const TranslatePage = () => {
-    // const content = document.querySelector('.content')
-    // const [file, setFile] = useState(null)
+    const [uploadPDF, setUploadPDF] = useState(false)
+    const [uploadText, setUploadText] = useState(false)
+    const navigate = useNavigate()
 
-    // const upload = async (e) => {
-    //     e.preventDefault()
-    //     const allowedExtension = 'text/plain'
+    const handleSubmit = (e) => {
+        e.preventDefault()
 
-    //     if(!file) {
-    //         console.log(`No file selected.`)
-    //         return
-    //     } else if(!allowedExtension.includes(file.type)) {
-    //         alert(`Only .txt files are supported at this time.`)
-    //         return
-    //     }
-
-    //     console.log(file)
-
-    //     const reader = new FileReader()
-    //     reader.addEventListener('load', () => {
-    //             content.innerText = reader.result
-    //         }, 'false')
-            
-    //         if (file) {
-    //             reader.readAsText(file)
-    //         }
-    //     }
-            
-        // const formData = new FormData()
-        // formData.append('file', file)
-
-        // const response = await axios.post('/file', formData)
-        // .then(async () => {
-        //     const parsedResponse = await response.json()
-        //     console.log(parsedResponse.data)
-        // })
-        // .catch((error) => {
-        //     console.log(`The following error has occurred: ${error}`)
-        // })
+        if (uploadPDF === true) {
+            navigate('/pdf-upload')
+            return
+        } else if (uploadText === true) {
+            navigate('/text-upload')
+            return
+        } else {
+            alert(`Something went wrong. Please try again.`)
+        }
+    }
 
     return (
         <>
-            <FileUpload/>
+            <h3>Would you like to translate a file?</h3>
+            <h4>Please select a file to upload.</h4>
+
+            <form onSubmit={handleSubmit}>
+                <button type='submit' onClick={() => setUploadText(true)}>Text (.txt)</button>
+                <button type='submit' onClick={() => setUploadPDF(true)}>PDF (.pdf)</button>
+            </form>
 
             <Link to="/">Back to Home</Link>
         </>
