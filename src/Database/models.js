@@ -41,7 +41,7 @@ UserDetail.init(
     password: { type: DataTypes.STRING },
     // schoolId: { type: DataTypes.INTEGER },
     // wordId: { type: DataTypes.INTEGER },
-    zipCode: { type: DataTypes.INTEGER },
+    zipCode: { type: DataTypes.STRING(5) },
   },
 
   {
