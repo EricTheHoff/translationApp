@@ -1,4 +1,4 @@
-const initialState = { loggedIn: false, userId: null }
+const initialState = { loggedIn: false, userId: null, userZip: null }
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -20,7 +20,17 @@ const reducer = (state = initialState, action) => {
         case 'Inactive User':
             return {
                 ...state,
-                userId: action.payload
+                userId: null
+            }
+        case 'Active Zip':
+            return {
+                ...state,
+                userZip: action.payload
+            }
+        case 'Inactive Zip':
+            return {
+                ...state,
+                userZip: null
             }
         default:
             return state

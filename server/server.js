@@ -20,25 +20,9 @@ app.post('/register', handlerFunctions.register)
 app.get("/allSchools", handlerFunctions.getSavedSchools)
 app.delete("/deleteSchools/:schoolId", handlerFunctions.deleteSavedSchools)
 
-// app.post('/login', async (req, res) => {
-//     const { username, password } = req.body
-//     const user = await User.findOne({ where: {username: username} })
-
-//     if(!user) {
-//         res.json({ success: false })
-//     } else if (user && password === user.password) {
-//         req.session.userId = user.userId
-//         res.json({ success: true })
-//     } else {
-//         res.json({ success: false })
-//     }
-// })
-// app.get('/user', async (req, res) => {
-//     let id = req.session.userId
-//     const user = await User.fineOne({ where: { userId: id }})
-
-//     res.send(user)
-// })
+app.post('/login', handlerFunctions.login)
+app.get('/user', handlerFunctions.user)
+app.get('/user-status', handlerFunctions.userStatus)
 
 ViteExpress.listen(app, 2222, () =>
   console.log(`Server working on http://localhost:2222`)

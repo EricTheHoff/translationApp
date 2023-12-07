@@ -3,20 +3,20 @@ import { NavLink } from 'react-router-dom'
 import React from 'react'
 
 const Login = ({ login }) => {
-    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     return (
         <>
             <form onSubmit={(e) => {
                 login(e, {
-                    username: username,
+                    email: email,
                     password: password
                 })
             }}>
-                <label for='username'>Username: </label>
+                <label for='email'>Email: </label>
                 <br></br>
-                <input type='text' id='username' onChange={(e) => setUsername(e.target.value)}/>
+                <input type='email' id='email' onChange={(e) => setEmail(e.target.value)}/>
                 <br></br>
                 <label for='password'>Password: </label>
                 <br></br>
