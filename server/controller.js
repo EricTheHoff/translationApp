@@ -34,6 +34,16 @@ const handlerFunctions = {
         }
     },
 
+
+    deleteAccount: async (req, res) => {
+        await UserDetail.destroy({
+            where: {
+                primaryKey
+            }
+        })
+    },
+
+    editAccount: async () => {},
 }
 
 

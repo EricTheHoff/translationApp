@@ -18,8 +18,10 @@ app.use(session({
 
 import handlerFunctions from "../server/controller.js";
 
-
 app.post('/register', handlerFunctions.register)
+
+app.delete('/deleteAccount', handlerFunctions.deleteAccount)
+app.put('/editAccount', handlerFunctions.editAccount)
 
 
 ViteExpress.listen(app, 2222, () =>
