@@ -37,8 +37,8 @@ const MapForm = ({
         <option className="dropdown" value="spanish">
           Spanish
         </option>
-        <option className="dropdown" value="chinese">
-          Chinese
+        <option className="dropdown" value="mandarin">
+          Mandarin
         </option>
       </select>
     </div>
