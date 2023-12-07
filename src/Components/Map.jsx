@@ -1,18 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption,
-} from "@reach/combobox";
 import "@reach/combobox/styles.css";
-import axios from "axios";
 
 function Map({
   userLocation,
@@ -25,6 +13,7 @@ function Map({
 
   return (
     <>
+      {/* user zipcode input */}
       <div className="zipcode-container">
         <input
           type="text"
@@ -42,12 +31,11 @@ function Map({
         center={center}
         mapContainerClassName="map-container"
       >
+        {/* set height of the map (this is the only way I could get it to render) */}
         <div style={{ height: "80vh" }}></div>
 
         {/* Display language school markers */}
         {places && places}
-
-        {/* Display selected marker */}
       </GoogleMap>
     </>
   );
