@@ -69,8 +69,8 @@ const Profile = () => {
 
             <hr />
 
-            <button onClick={setEditMode}>Edit Account Information</button>
-            <button onClick={handleDelete}>Delete Account</button>
+            <button /* onClick={setEditMode} */ >Edit Account Information</button>
+            <button /* onClick={handleDelete} */ >Delete Account</button>
         </div>
     );
 }
