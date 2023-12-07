@@ -12,9 +12,11 @@
     "initdb": "dropdb --if-exists translationApp && createdb translationApp"
   },
   "dependencies": {
+    "@react-google-maps/api": "^2.19.2",
     "@react-pdf-viewer/core": "^3.12.0",
     "@react-pdf-viewer/default-layout": "^3.12.0",
     "@reduxjs/toolkit": "^2.0.1",
+    "@vis.gl/react-google-maps": "^0.4.1",
     "axios": "^1.6.2",
     "bootstrap": "^5.3.2",
     "dotenv": "^16.3.1",
@@ -30,8 +32,10 @@
     "react-pdf": "^7.5.1",
     "react-redux": "^9.0.1",
     "react-router-dom": "^6.20.1",
+    "react-scripts": "^3.0.1",
     "sequelize": "^6.35.1",
     "sqlite3": "^5.1.6",
+    "use-places-autocomplete": "^4.0.1",
     "vite-express": "^0.11.1"
   },
   "devDependencies": {
@@ -42,6 +46,7 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
+    "react-error-overlay": "^6.0.9",
     "vite": "^5.0.0"
   }
 }
