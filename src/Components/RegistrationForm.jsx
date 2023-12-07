@@ -16,6 +16,7 @@ const RegistrationForm = () => {
         event.preventDefault()
         if (usernameReg === "" || passwordReg === "" || emailReg === "" || zipReg === "") {
             alert("Please enter a valid input")
+            return
         }
         await axios.post('/register', {
             name: usernameReg,

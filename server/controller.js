@@ -8,13 +8,12 @@ const handlerFunctions = {
 
     const alreadyExists = await UserDetail.findAll({
       where: {
-        name,
         email,
       },
     });
 
-    if (alreadyExists[0]) {
-      res.status(200).send("Username or email already exists");
+    if (alreadyExists) {
+      res.json({ success: true});
     } else {
       const newUser = await UserDetail.create({
         name: name,
