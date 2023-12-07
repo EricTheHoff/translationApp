@@ -32,6 +32,59 @@ const TranslatePage = () => {
                 <button type='submit' onClick={() => setUploadPDF(true)}>PDF (.pdf)</button>
             </form>
 
+            <br></br>
+
+            <hr></hr>
+
+            <br></br>
+
+            <h3>Would you like to translate your own text?</h3>
+            <h4>Please enter a word or phrase to be translated.</h4>
+
+            <form>
+                <input
+                style={{
+                    width: '85%',
+                    height: '200px',
+                    textAlign: 'center'
+                }}
+                type='textarea'
+                maxLength='2000'
+                placeholder='2000 Character Limit'></input>
+
+                <select>
+                    <option selected default disabled>--Choose a Language--</option>
+                    <option>Bulgarian</option>
+                    <option>Czech</option>
+                    <option>Danish</option>
+                    <option>German</option>
+                    <option>Greek</option>
+                    <option>Spanish</option>
+                    <option>Estonian</option>
+                    <option>Finnish</option>
+                    <option>French</option>
+                    <option>Hungarian</option>
+                    <option>Indonesian</option>
+                    <option>Italian</option>
+                    <option>Japanese</option>
+                    <option>Korean</option>
+                    <option>Lithuanian</option>
+                    <option>Latvian</option>
+                    <option>Norwegian (Bokmål)</option>
+                    <option>Dutch</option>
+                    <option>Polish</option>
+                    <option>Portuguese</option>
+                    <option>Romanian</option>
+                    <option>Russian</option>
+                    <option>Slovak</option>
+                    <option>Slovenian</option>
+                    <option>Swedish</option>
+                    <option>Turkish</option>
+                    <option>Ukrainian</option>
+                    <option>Chinese</option>
+                </select>
+            </form>
+
             <Link to="/">Back to Home</Link>
         </>
     );

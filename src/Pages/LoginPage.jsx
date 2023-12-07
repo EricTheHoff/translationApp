@@ -12,7 +12,7 @@ const LoginPage = () => {
         e.preventDefault()
         const response = await axios.post('/login', loginData)
 
-        .then(async () => {
+        // .then(async () => {
             if (response.data.success) {
                 const user = await axios.get('/user')
                 dispatch({ type: 'Logged In' })
@@ -22,11 +22,12 @@ const LoginPage = () => {
             } else {
                 alert(`Login Failed. Please ensure that you're entering a valid email and password.`)
             }
-        })
+        // })
 
-        .catch((error) => {
-            alert(`The following error has occurred: ${error}`)
-        })
+        // .catch((error) => {
+        //     console.log(error)
+        //     alert(`The following error has occurred: ${error}`)
+        // })
     }
 
     return (
