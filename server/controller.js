@@ -45,32 +45,36 @@ const handlerFunctions = {
   },
 
   login: async (req, res) => {
-    const { email, password } = req.body
-    const user = await UserDetail.findOne({ where: { email: email } })
+    const { email, password } = req.body;
+    const user = await UserDetail.findOne({ where: { email: email } });
 
     if (user && password === user.password) {
-        req.session.userId = user.userId
-        res.json({ success: true })
+      req.session.userId = user.userId;
+      res.json({ success: true });
     } else {
-        res.json({ success: false })
+      res.json({ success: false });
     }
   },
 
   user: async (req, res) => {
-    const id = req.session.userId
-    const user = await UserDetail.findOne({ where: { userId: id } })
+    const id = req.session.userId;
+    const user = await UserDetail.findOne({ where: { userId: id } });
 
-    res.send(user)
+    res.send(user);
   },
 
   userStatus: async (req, res) => {
     if (req.session.userId) {
-        const user = await UserDetail.findByPk(req.session.userId)
-        res.send({ email: user.email, success: true })
+      const user = await UserDetail.findByPk(req.session.userId);
+      res.send({ email: user.email, success: true });
     } else {
-        res.json({ success: false })
+      res.json({ success: false });
     }
-  }
+  },
+  logout: async (req, res) => {
+    req.session.destroy();
+    res.json({ success: true });
+  },
 };
 
 export default handlerFunctions;
