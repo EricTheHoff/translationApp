@@ -1,4 +1,5 @@
 import { SchoolDetail, UserDetail } from "../src/Database/models.js";
+import axios from 'axios'
 
 const handlerFunctions = {
   register: async (req, res) => {
@@ -75,6 +76,30 @@ const handlerFunctions = {
     req.session.destroy();
     res.json({ success: true });
   },
+
+  translate: async (req, res) => {
+    try {
+        const { translation, language } = req.body
+        // const headers = {
+        //     'Authorization': 'DeepL-Auth-Key 8ac3442f-8ea2-9a61-f98f-d358fd0a2a08:fx'
+        // }
+        const body = {
+            'text': [translation],
+            'target_lang': language
+        }
+
+        const response = await axios.post('https://api-free.deepl.com/v2/translate', body, {
+            headers: {
+                'Authorization': 'DeepL-Auth-Key 8ac3442f-8ea2-9a61-f98f-d358fd0a2a08:fx'
+            }
+        })
+        res.json(response.data)
+    }
+    catch (error) {
+        console.error(error)
+        res.status(500).json({ error: 'Internal Server Error' })
+    }
+  }
 };
 
 export default handlerFunctions;

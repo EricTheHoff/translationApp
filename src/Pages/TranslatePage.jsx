@@ -2,10 +2,13 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from 'react'
 // import PDFUpload from "../Components/PDFUpload.jsx";
+import axios from 'axios'
 
 const TranslatePage = () => {
     const [uploadPDF, setUploadPDF] = useState(false)
     const [uploadText, setUploadText] = useState(false)
+    const [translation, setTranslation] = useState('')
+    const [language, setLanguage] = useState('')
     const navigate = useNavigate()
 
     const handleSubmit = (e) => {
@@ -20,6 +23,24 @@ const TranslatePage = () => {
         } else {
             alert(`Something went wrong. Please try again.`)
         }
+    }
+
+    const handleTranslation = async (e) => {
+        e.preventDefault()
+
+        const translationData = {
+            translation,
+            language
+        }
+
+        await axios.post('/translate', translationData)
+
+        .then(({data}) => {
+            console.log(data)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
     }
 
     return (
@@ -41,7 +62,7 @@ const TranslatePage = () => {
             <h3>Would you like to translate your own text?</h3>
             <h4>Please enter a word or phrase to be translated.</h4>
 
-            <form>
+            <form onSubmit={handleTranslation}>
                 <input
                 style={{
                     width: '85%',
@@ -50,39 +71,42 @@ const TranslatePage = () => {
                 }}
                 type='textarea'
                 maxLength='2000'
-                placeholder='2000 Character Limit'></input>
+                placeholder='2000 Character Limit'
+                onChange={(e) => setTranslation(e.target.value)}
+                />
 
-                <select>
+                <select onChange={(e) => setLanguage(e.target.value)}>
                     <option selected default disabled>--Choose a Language--</option>
-                    <option>Bulgarian</option>
-                    <option>Czech</option>
-                    <option>Danish</option>
-                    <option>German</option>
-                    <option>Greek</option>
-                    <option>Spanish</option>
-                    <option>Estonian</option>
-                    <option>Finnish</option>
-                    <option>French</option>
-                    <option>Hungarian</option>
-                    <option>Indonesian</option>
-                    <option>Italian</option>
-                    <option>Japanese</option>
-                    <option>Korean</option>
-                    <option>Lithuanian</option>
-                    <option>Latvian</option>
-                    <option>Norwegian (Bokmål)</option>
-                    <option>Dutch</option>
-                    <option>Polish</option>
-                    <option>Portuguese</option>
-                    <option>Romanian</option>
-                    <option>Russian</option>
-                    <option>Slovak</option>
-                    <option>Slovenian</option>
-                    <option>Swedish</option>
-                    <option>Turkish</option>
-                    <option>Ukrainian</option>
-                    <option>Chinese</option>
+                    <option value='BG'>Bulgarian</option>
+                    <option value='CS'>Czech</option>
+                    <option value='DA'>Danish</option>
+                    <option value='DE'>German</option>
+                    <option value='EL'>Greek</option>
+                    <option value='ES'>Spanish</option>
+                    <option value='ET'>Estonian</option>
+                    <option value='FI'>Finnish</option>
+                    <option value='FR'>French</option>
+                    <option value='HU'>Hungarian</option>
+                    <option value='ID'>Indonesian</option>
+                    <option value='IT'>Italian</option>
+                    <option value='JA'>Japanese</option>
+                    <option value='KO'>Korean</option>
+                    <option value='LT'>Lithuanian</option>
+                    <option value='LV'>Latvian</option>
+                    <option value='NB'>Norwegian (Bokmål)</option>
+                    <option value='NL'>Dutch</option>
+                    <option value='PL'>Polish</option>
+                    <option value='PT'>Portuguese</option>
+                    <option value='RO'>Romanian</option>
+                    <option value='RU'>Russian</option>
+                    <option value='SK'>Slovak</option>
+                    <option value='SL'>Slovenian</option>
+                    <option value='SV'>Swedish</option>
+                    <option value='TR'>Turkish</option>
+                    <option value='UK'>Ukrainian</option>
+                    <option value='ZH'>Chinese</option>
                 </select>
+                <button type='submit'>Translate</button>
             </form>
 
             <Link to="/">Back to Home</Link>

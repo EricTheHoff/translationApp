@@ -27,6 +27,8 @@ app.post("/api/logout", handlerFunctions.logout);
 app.get("/user", handlerFunctions.user);
 app.get("/user-status", handlerFunctions.userStatus);
 
+app.post('/translate', handlerFunctions.translate)
+
 ViteExpress.listen(app, 2222, () =>
   console.log(`Server working on http://localhost:2222`)
 );
