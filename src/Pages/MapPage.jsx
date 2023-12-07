@@ -32,6 +32,7 @@ function MapPage() {
   const [open, setOpen] = useState(false);
   const [close, setClose] = useState(false);
   const [selectedMarker, setSelectedMarker] = useState("");
+  const [selectedMarkerId, setSelectedMarkerId] = useState(null);
 
   useEffect(() => {
     // Get user's location when the component mounts
@@ -60,21 +61,24 @@ function MapPage() {
           console.log(data.results);
 
           const allPlaces = data.results.map((place) => {
-            console.log(place);
-            console.log(place.name);
             let position = {
               lat: +place.geometry.location.lat,
               lng: +place.geometry.location.lng,
             };
             return (
-              <div>
+              <div key={place.name}>
                 <MarkerF
-                  key={place.name}
                   position={position}
-                  onClick={() => setOpen(true)}
+                  onClick={() => {
+                    setOpen(true);
+                    setSelectedMarkerId(place.place_id);
+                  }}
                 >
-                  {open && (
-                    <InfoWindowF position={position}>
+                  {open && selectedMarkerId === place.place_id && (
+                    <InfoWindowF
+                      position={position}
+                      onCloseClick={() => setOpen(false)}
+                    >
                       <>
                         <h1>{place.name}</h1>
                         <p>rating: {place.rating}</p>
@@ -90,15 +94,11 @@ function MapPage() {
               </div>
             );
           });
-          console.log(allPlaces);
-          console.log(data.results[0].geometry.location.lat);
           setPlaces(allPlaces);
-
-          // Handle your data as needed
         })
         .catch((err) => console.log(err));
     }
-  }, [userLocation]);
+  }, [userLocation, open, selectedMarkerId]);
 
   const handleZipcodeChange = (event) => {
     setZipcode(event.target.value);
