@@ -8,6 +8,8 @@ const TranslatePage = () => {
     const [uploadText, setUploadText] = useState(false)
     const navigate = useNavigate()
 
+
+
     const handleSubmit = (e) => {
         e.preventDefault()
 
