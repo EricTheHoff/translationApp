@@ -4,7 +4,6 @@ import ViteExpress from "vite-express";
 import handlerFunctions from "../server/controller.js";
 import session from 'express-session'
 
-
 const app = express();
 
 app.use(morgan("dev"));
@@ -17,13 +16,7 @@ app.use(session({
   resave: false
 }))
 
-
-import handlerFunctions from "../server/controller.js";
-
-
 app.post('/register', handlerFunctions.register)
-
-
 app.get("/allSchools", handlerFunctions.getSavedSchools)
 app.delete("/deleteSchools/:schoolId", handlerFunctions.deleteSavedSchools)
 
