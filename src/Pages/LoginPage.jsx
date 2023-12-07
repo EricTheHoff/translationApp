@@ -12,21 +12,15 @@ const LoginPage = () => {
         e.preventDefault()
         const response = await axios.post('/login', loginData)
 
-        .then(async () => {
-            if (response.data.success) {
-                const user = await axios.get('/user')
-                dispatch({ type: 'Logged In' })
-                dispatch({ type: 'Active User', payload: user.data.userId })
-                dispatch({ type: 'Active Zip', payload: user.data.zipCode })
-                navigate('/')
-            } else {
-                alert(`Login Failed. Please ensure that you're entering a valid email and password.`)
-            }
-        })
-
-        .catch((error) => {
-            alert(`The following error has occurred: ${error}`)
-        })
+        if (response.data.success) {
+            const user = await axios.get('/user')
+            dispatch({ type: 'Logged In' })
+            dispatch({ type: 'Active User', payload: user.data.userId })
+            dispatch({ type: 'Active Zip', payload: user.data.zipCode })
+            navigate('/')
+        } else {
+            alert(`Login Failed. Please ensure that you're entering a valid email and password.`)
+        }
     }
 
     return (
