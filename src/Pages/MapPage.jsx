@@ -7,11 +7,14 @@ import {
 } from "@react-google-maps/api";
 import axios from "axios";
 import Map from "../Components/Map";
+import MapForm from "../Components/MapForm";
+
+const libraries = ["places"];
 
 function MapPage() {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyCUNodj8rRhB6HcoDZC0Z6XN7NkVrvhIqc",
-    libraries: ["places"],
+    libraries: libraries,
   });
 
   // state
@@ -20,6 +23,22 @@ function MapPage() {
   const [zipcode, setZipcode] = useState("");
   const [open, setOpen] = useState(false);
   const [selectedMarkerId, setSelectedMarkerId] = useState(null);
+  const [radius, setRadius] = useState(16093.4);
+  const [language, setLanguage] = useState("language");
+
+  // console.log(radius);
+  const changeRadius = (e) => {
+    e.preventDefault();
+    const selectedRadius = e.target.value;
+    setRadius(selectedRadius);
+    // console.log(radius);
+  };
+
+  const changeLanguage = (e) => {
+    e.preventDefault();
+    const selectedLanguage = e.target.value;
+    setLanguage(selectedLanguage);
+  };
 
   useEffect(() => {
     // Get user's location when the component renders
@@ -43,11 +62,14 @@ function MapPage() {
   useEffect(() => {
     // send lat/lng to server so it can send get request to find language schools within 25 miles
     if (userLocation) {
+      // console.log(radius);
       const { lat, lng } = userLocation;
       axios
-        .get(`http://localhost:2222/api/places?lat=${lat}&lng=${lng}`)
+        .get(
+          `http://localhost:2222/api/places?lat=${lat}&lng=${lng}&radius=${radius}&language=${language}`
+        )
         .then(({ data }) => {
-          console.log(data.results);
+          // console.log(data.results);
           //set all places equal to the results sent back by server and map through them to separate by individual location
           const allPlaces = data.results.map((place) => {
             let position = {
@@ -56,7 +78,7 @@ function MapPage() {
             };
             //return a marker for each individual location and have it open an infowindow when clicked
             return (
-              <div key={place.name}>
+              <div key={place.place_id}>
                 <MarkerF
                   position={position}
                   onClick={() => {
@@ -85,10 +107,11 @@ function MapPage() {
             );
           });
           setPlaces(allPlaces);
+          // console.log(language);
         })
         .catch((err) => console.log(err));
     }
-  }, [userLocation, open, selectedMarkerId]);
+  }, [userLocation, open, selectedMarkerId, radius, language]);
 
   //stores zipcode entered
   const handleZipcodeChange = (event) => {
@@ -103,6 +126,7 @@ function MapPage() {
         `https://maps.googleapis.com/maps/api/geocode/json?address=${zipcode}&key=AIzaSyCUNodj8rRhB6HcoDZC0Z6XN7NkVrvhIqc`
       )
       .then(({ data }) => {
+        // console.log(data);
         const { lat, lng } = data.results[0].geometry.location;
         setUserLocation({ lat, lng });
       })
@@ -111,13 +135,16 @@ function MapPage() {
 
   if (!isLoaded) return <div>Loading...</div>;
   return (
-    <Map
-      userLocation={userLocation}
-      places={places}
-      zipcode={zipcode}
-      onZipcodeChange={handleZipcodeChange}
-      onZipcodeSubmit={handleZipcodeSubmit}
-    />
+    <>
+      <Map places={places} userLocation={userLocation} />
+      <MapForm
+        changeRadius={changeRadius}
+        onZipcodeChange={handleZipcodeChange}
+        onZipcodeSubmit={handleZipcodeSubmit}
+        zipcode={zipcode}
+        changeLanguage={changeLanguage}
+      />
+    </>
   );
 }
 

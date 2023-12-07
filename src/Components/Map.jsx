@@ -1,29 +1,12 @@
 import { useState, useMemo, useEffect } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
-function Map({
-  userLocation,
-  places,
-  onZipcodeChange,
-  onZipcodeSubmit,
-  zipcode,
-}) {
+function Map({ userLocation, places }) {
   const center = useMemo(() => userLocation, [userLocation]);
 
   return (
     <>
-      {/* user zipcode input */}
-      <div className="zipcode-container">
-        <input
-          type="text"
-          value={zipcode}
-          onChange={onZipcodeChange}
-          placeholder="Enter zipcode"
-        />
-        <button onClick={onZipcodeSubmit}>Submit</button>
-      </div>
-      <div className="places-container"></div>
-
+      <div style={{ marginTop: "100px" }}></div>
       {/* GoogleMap component */}
       <GoogleMap
         zoom={10}
