@@ -5,7 +5,6 @@ import {
   MarkerF,
   InfoWindowF,
 } from "@react-google-maps/api";
-import "@reach/combobox/styles.css";
 import axios from "axios";
 import Map from "../Components/Map";
 

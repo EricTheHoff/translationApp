@@ -1,6 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
-import "@reach/combobox/styles.css";
 
 function Map({
   userLocation,

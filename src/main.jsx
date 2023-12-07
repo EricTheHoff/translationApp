@@ -19,6 +19,8 @@ import TranslatePage from "./Pages/TranslatePage.jsx";
 import HomePage from "./Pages/HomePage.jsx";
 import { Provider } from 'react-redux'
 import store from "./Store/store.js";
+import PDFUpload from "./Components/PDFUpload.jsx";
+import TextUpload from "./Components/TextUpload.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +34,8 @@ const router = createBrowserRouter(
       <Route path="saved-tutors" element={<SavedTutorPage />} />
       <Route path="study" element={<StudyPage />} />
       <Route path="translate" element={<TranslatePage />} />
+      <Route path="pdf-upload" element={<PDFUpload />} />
+      <Route path="text-upload" element={<TextUpload />} />
     </Route>
   )
 );
