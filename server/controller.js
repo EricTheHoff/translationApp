@@ -1,4 +1,4 @@
-import { SchoolDetail, UserDetail } from "../src/Database/models.js";
+import { SchoolDetail, UserDetail, SavedWord } from "../src/Database/models.js";
 
 const handlerFunctions = {
   register: async (req, res) => {
@@ -75,6 +75,17 @@ const handlerFunctions = {
     req.session.destroy();
     res.json({ success: true });
   },
+
+  getSavedWords: async (req, res) => {
+    const savedTranslation = await SavedWord.findAll();
+    res.json(savedTranslation)
+  },
+
+  getWordsById: async (req, res) => {
+    const { wordId } = req.params
+    const getWordId = await SavedWord.findByPk(wordId)
+    res.json(getWordId)
+  }
 };
 
 export default handlerFunctions;

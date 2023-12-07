@@ -26,6 +26,8 @@ app.post("/login", handlerFunctions.login);
 app.post("/api/logout", handlerFunctions.logout);
 app.get("/user", handlerFunctions.user);
 app.get("/user-status", handlerFunctions.userStatus);
+app.get("/allSavedWords", handlerFunctions.getSavedWords)
+app.get("/savedWords/:wordId", handlerFunctions.getWordsById)
 
 ViteExpress.listen(app, 2222, () =>
   console.log(`Server working on http://localhost:2222`)
