@@ -15,7 +15,7 @@ const PDFUpload = () => {
     const handleChange = (e) => {
         let selectedFile = e.target.files[0]
 
-        if (fileTypes.includes(selectedFile.type)) {
+        if (selectedFile.type.includes('application/pdf')) {
             let reader = new FileReader()
             reader.readAsDataURL(selectedFile)
             reader.onload = (e) => {
