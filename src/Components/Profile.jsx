@@ -15,29 +15,29 @@ const Profile = () => {
     }
 
     
-    // Edit Profile Information
-    const [editMode, setEditMode] = useState("")
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
-    const [zipcode, setZipcode] = useState("")
-    const [email, setEmail] = useState("")
-    const dispatch = useDispatch()
-    const select = useSelector()
+    // // Edit Profile Information
+    // const [editMode, setEditMode] = useState("")
+    // const [username, setUsername] = useState("")
+    // const [password, setPassword] = useState("")
+    // const [zipcode, setZipcode] = useState("")
+    // const [email, setEmail] = useState("")
+    // const dispatch = useDispatch()
+    // const select = useSelector()
 
     
-    const editAccount = async (event) => {
-        await axios.put("/editAccount")
-    }
+    // const editAccount = async (event) => {
+    //     await axios.put("/editAccount")
+    // }
     
-    // Delete Account
-    const handleDelete = async (event) => {
-        await axios.delete("/deleteAccount", {
-            name: username,
-            email: email,
-            password: password,
-            zipCode: zipcode
-        })
-    }
+    // // Delete Account
+    // const handleDelete = async (event) => {
+    //     await axios.delete("/deleteAccount", {
+    //         name: username,
+    //         email: email,
+    //         password: password,
+    //         zipCode: zipcode
+    //     })
+    // }
 
     return (
         <div>
