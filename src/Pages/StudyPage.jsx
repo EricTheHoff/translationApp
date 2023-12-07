@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 
 const StudyPage = () => {
     const dispatch = useDispatch()
+    dispatch({ type: 'Logged In'})
   return (
     <div>
       <Link to="/">Back to Home</Link>
@@ -11,6 +12,5 @@ const StudyPage = () => {
   );
 };
 
-dispatch({ type: 'Logged In'})
 
 export default StudyPage;
