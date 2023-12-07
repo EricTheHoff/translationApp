@@ -44,13 +44,19 @@ const handlerFunctions = {
     res.json({ success: true, deletedSchool: schoolId });
   },
 
-    // deleteAccount: async (req, res) => {
-    //     await UserDetail.destroy({
-    //         where: {
-    //             primaryKey
-    //         }
-    //     })
-    // },
+    deleteAccount: async (req, res) => {
+        const { id } = req.params
+        const user = await UserDetail.findOne({
+            where: { userId: id}
+        })
+        await user.destroy()
+        res.json({ success: true })
+        // const userId = req.session.UserDetail.userId
+        // await UserDetail.destroy({
+        //     where: { userId: userId }
+        // })
+        // req.session.destroy()
+    },
 
     // editAccount: async () => {},
 };

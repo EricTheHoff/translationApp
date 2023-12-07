@@ -18,7 +18,7 @@ app.use(session({
 
 app.post('/register', handlerFunctions.register)
 
-// app.delete('/deleteAccount', handlerFunctions.deleteAccount)
+app.delete('/deleteAccount/:id', handlerFunctions.deleteAccount)
 // app.put('/editAccount', handlerFunctions.editAccount)
 
 app.get("/allSchools", handlerFunctions.getSavedSchools)
