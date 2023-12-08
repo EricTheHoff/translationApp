@@ -20,11 +20,15 @@ const Profile = () => {
 
 
     // Upload Profile Image 
-    const handleChange = (e) => {
+    const handleChange = async (e) => {
+        await axios.get('/get-image')
         console.log(e.target.files)
         setFile(URL.createObjectURL(e.target.files[0]))
     }
 
+    // const profileImage = async (e) => {
+    //     await axios.post('/image')
+    // }
 
 
     const getAccount = async () => {
@@ -32,6 +36,7 @@ const Profile = () => {
             setEmail(response.data.email)
             setZipcode(response.data.zipCode)
             setPassword(response.data.password)
+            setFile(response.data.image)
        })
     }
     
@@ -71,9 +76,10 @@ const Profile = () => {
         getAccount()
     },[])
 
-    if (editMode === false) {
+    if (!editMode) {
         return (
             <div>
+                <img src={file} alt='http://www.w3.org/2000/svg'/>
                 <p>Email: {email}</p>
                 <p>ZIP Code: {zipcode}</p>
                 <button onClick={() => setEditMode(true)}>Edit</button>

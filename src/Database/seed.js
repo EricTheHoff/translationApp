@@ -20,7 +20,8 @@ const userOne = await UserDetail.create({
   password: "ilovejohndoe420",
 //   schoolId: 1,
 //   wordId: 1,
-  zipCode: '93457'
+  zipCode: '93457',
+  image: "https://images.pexels.com/photos/1054218/pexels-photo-1054218.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
 });
 
 const wordOne = await SavedWord.create({

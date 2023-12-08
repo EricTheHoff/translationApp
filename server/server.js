@@ -39,6 +39,9 @@ app.post("/api/logout", handlerFunctions.logout);
 app.get("/user", handlerFunctions.user);
 app.get("/user-status", handlerFunctions.userStatus);
 
+app.get("/get-image", handlerFunctions.getImage);
+app.post("/image", handlerFunctions.profileImage);
+
 
 
 

@@ -16,6 +16,7 @@ const RegistrationForm = () => {
         event.preventDefault()
         if (usernameReg === "" || passwordReg === "" || emailReg === "" || zipReg === "") {
             alert("Please enter a valid input")
+            return
         }
         await axios.post('/register', {
             name: usernameReg,
@@ -24,8 +25,8 @@ const RegistrationForm = () => {
             zipCode: zipReg
         }).then((res) => {
             console.log(res.data)
-            if (res.data === "Information already in use") {
-                alert(res.data)
+            if (res.data.message === "Information already in use") {
+                alert(res.data.message)
             } else {
                 navigate("/translate")
             }

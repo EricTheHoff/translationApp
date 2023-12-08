@@ -42,6 +42,7 @@ UserDetail.init(
     // schoolId: { type: DataTypes.INTEGER },
     // wordId: { type: DataTypes.INTEGER },
     zipCode: { type: DataTypes.STRING(5) },
+    image: { type: DataTypes.STRING },
   },
 
   {
@@ -73,4 +74,3 @@ UserDetail.belongsToMany(SchoolDetail, {through: "SchoolUserDetail" });
 UserDetail.hasMany(SavedWord, {foreignKey: "userId" });
 // create userDetails.getSavedWords(), userDetails.addSavedWords(). it is going to try to create userDetails.createSavedWord
 SavedWord.belongsTo(UserDetail, {foreignKey: "userId" });
-
