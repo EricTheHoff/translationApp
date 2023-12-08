@@ -118,7 +118,7 @@ const handlerFunctions = {
 
             const response = await axios.post('https://api-free.deepl.com/v2/translate', body, {
                 headers: {
-                    'Authorization': '8ac3442f-8ea2-9a61-f98f-d358fd0a2a08:fx'
+                    'Authorization': process.env.REACT_APP_DEEPL_API_KEY
                 }
             })
             res.json(response.data)
