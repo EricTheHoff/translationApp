@@ -53,11 +53,6 @@ const handlerFunctions = {
         await user.destroy()
         req.session.destroy()
         res.json({ success: true })
-        // const userId = req.session.UserDetail.userId
-        // await UserDetail.destroy({
-        //     where: { userId: userId }
-        // })
-        // req.session.destroy()
     },
 
 
