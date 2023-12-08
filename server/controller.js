@@ -1,4 +1,4 @@
-import { SchoolDetail, UserDetail, SavedWord, SavedWord } from "../src/Database/models.js";
+import { SchoolDetail, UserDetail, SavedWord } from "../src/Database/models.js";
 import axios from 'axios'
 
 const handlerFunctions = {
@@ -124,7 +124,7 @@ const handlerFunctions = {
         where: {wordId: wordId}
     })
     res.json({success: true, deletedWord: wordId})
-  }
+  },
 
     translate: async (req, res) => {
         try {
