@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from 'react'
-// import PDFUpload from "../Components/PDFUpload.jsx";
+import { Card } from 'react-bootstrap'
 import axios from 'axios'
+import { useSelector } from 'react-redux'
+import 'bootstrap/dist/css/bootstrap.css'
 
 const TranslatePage = () => {
     const [uploadPDF, setUploadPDF] = useState(false)
     const [uploadText, setUploadText] = useState(false)
     const [translation, setTranslation] = useState('')
     const [language, setLanguage] = useState('')
+    const [newTranslation, setNewTranslation] = useState(false)
+    const [translatedText, setTranslatedText] = useState('')
     const navigate = useNavigate()
+    const id = useSelector((state) => state.userId)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -30,88 +35,169 @@ const TranslatePage = () => {
 
         const translationData = {
             translation,
-            language
+            language,
+            source: 'EN'
+            
         }
 
         await axios.post('/translate', translationData)
 
         .then(({data}) => {
-            console.log(data)
+            console.log(data.translations[0])
+            setTranslatedText(data.translations[0].text)
+            setNewTranslation(true)
         })
         .catch((error) => {
             console.log(error)
         })
     }
 
-    return (
-        <>
-            <h3>Would you like to translate a file?</h3>
-            <h4>Please select a file to upload.</h4>
+    const saveTranslation = async (e) => {
+        e.preventDefault()
 
-            <form onSubmit={handleSubmit}>
-                <button type='submit' onClick={() => setUploadText(true)}>Text (.txt)</button>
-                <button type='submit' onClick={() => setUploadPDF(true)}>PDF (.pdf)</button>
-            </form>
+        const translationData = {
+            translatedText: translatedText,
+            originalText: translation,
+            id: id
+        }
 
-            <br></br>
+        console.log(translationData)
 
-            <hr></hr>
+        await axios.post('/save-translation', translationData, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(() => {
+            alert(`Translation has been saved.`)
+            setNewTranslation(false)
+        })
+        .catch((error) => {
+            alert(`The following error has occurred: ${error}`)
+        })
+    }
 
-            <br></br>
+    // const logSavedTranslations = async () => {
+    //     const data = {id}
+    //     const response = await axios.post(`/saved-translations`, data)
+    //     console.log(response.data)
+    // }
 
-            <h3>Would you like to translate your own text?</h3>
-            <h4>Please enter a word or phrase to be translated.</h4>
+    // useEffect(() => {
+    //     console.log(id)
+    //     logSavedTranslations()
+    // },[newTranslation])
 
-            <form onSubmit={handleTranslation}>
-                <input
-                style={{
-                    width: '85%',
-                    height: '200px',
-                    textAlign: 'center'
-                }}
-                type='textarea'
-                maxLength='2000'
-                placeholder='2000 Character Limit'
-                onChange={(e) => setTranslation(e.target.value)}
-                />
+    // const isUTF8Compatible = (e) => {
+    //     e.preventDefault()
+    //     try {
+    //         const encoder = new TextEncoder('utf-8')
+    //         const decoder = new TextDecoder('utf-8')
 
-                <select onChange={(e) => setLanguage(e.target.value)}>
-                    <option selected default disabled>--Choose a Language--</option>
-                    <option value='BG'>Bulgarian</option>
-                    <option value='CS'>Czech</option>
-                    <option value='DA'>Danish</option>
-                    <option value='DE'>German</option>
-                    <option value='EL'>Greek</option>
-                    <option value='ES'>Spanish</option>
-                    <option value='ET'>Estonian</option>
-                    <option value='FI'>Finnish</option>
-                    <option value='FR'>French</option>
-                    <option value='HU'>Hungarian</option>
-                    <option value='ID'>Indonesian</option>
-                    <option value='IT'>Italian</option>
-                    <option value='JA'>Japanese</option>
-                    <option value='KO'>Korean</option>
-                    <option value='LT'>Lithuanian</option>
-                    <option value='LV'>Latvian</option>
-                    <option value='NB'>Norwegian (Bokmål)</option>
-                    <option value='NL'>Dutch</option>
-                    <option value='PL'>Polish</option>
-                    <option value='PT'>Portuguese</option>
-                    <option value='RO'>Romanian</option>
-                    <option value='RU'>Russian</option>
-                    <option value='SK'>Slovak</option>
-                    <option value='SL'>Slovenian</option>
-                    <option value='SV'>Swedish</option>
-                    <option value='TR'>Turkish</option>
-                    <option value='UK'>Ukrainian</option>
-                    <option value='ZH'>Chinese</option>
-                </select>
-                <button type='submit'>Translate</button>
-            </form>
+    //         const encodedBuffer = encoder.encode(translatedText)
+    //         const decodedText = decoder.decode(encodedBuffer)
 
-            <Link to="/">Back to Home</Link>
-        </>
-    );
+    //         console.log(decodedText === translatedText)
+
+
+    //         return decodedText === translatedText
+    //     } catch (error) {
+    //         console.error(`Error encoding/decoding text: ${error}`)
+    //         return false
+    //     }
+    // }
+
+    if (newTranslation === false) {
+        return (
+            <>
+                <h3>Would you like to translate a file?</h3>
+                <h4>Please select a file to upload.</h4>
+    
+                <form onSubmit={handleSubmit}>
+                    <button type='submit' onClick={() => setUploadText(true)}>Text (.txt)</button>
+                    <button type='submit' onClick={() => setUploadPDF(true)}>PDF (.pdf)</button>
+                </form>
+    
+                <br></br>
+    
+                <hr></hr>
+    
+                <br></br>
+    
+                <h3>Would you like to translate your own text?</h3>
+                <h4>Please enter a word or phrase to be translated.</h4>
+    
+                <form onSubmit={handleTranslation}>
+                    <input
+                    style={{
+                        width: '85%',
+                        height: '200px',
+                        textAlign: 'center'
+                    }}
+                    type='textarea'
+                    maxLength='2000'
+                    placeholder='2000 Character Limit'
+                    onChange={(e) => setTranslation(e.target.value)}
+                    />
+
+                    <br></br>
+    
+                    <select onChange={(e) => setLanguage(e.target.value)}>
+                        <option selected default disabled>--Choose a Language--</option>
+                        <option value='BG'>Bulgarian</option>
+                        <option value='CS'>Czech</option>
+                        <option value='DA'>Danish</option>
+                        <option value='DE'>German</option>
+                        <option value='EL'>Greek</option>
+                        <option value='ES'>Spanish</option>
+                        <option value='ET'>Estonian</option>
+                        <option value='FI'>Finnish</option>
+                        <option value='FR'>French</option>
+                        <option value='HU'>Hungarian</option>
+                        <option value='ID'>Indonesian</option>
+                        <option value='IT'>Italian</option>
+                        <option value='JA'>Japanese</option>
+                        <option value='KO'>Korean</option>
+                        <option value='LT'>Lithuanian</option>
+                        <option value='LV'>Latvian</option>
+                        <option value='NB'>Norwegian (Bokmål)</option>
+                        <option value='NL'>Dutch</option>
+                        <option value='PL'>Polish</option>
+                        <option value='PT'>Portuguese</option>
+                        <option value='RO'>Romanian</option>
+                        <option value='RU'>Russian</option>
+                        <option value='SK'>Slovak</option>
+                        <option value='SL'>Slovenian</option>
+                        <option value='SV'>Swedish</option>
+                        <option value='TR'>Turkish</option>
+                        <option value='UK'>Ukrainian</option>
+                        <option value='ZH'>Chinese</option>
+                    </select>
+                    <button type='submit'>Translate</button>
+                </form>
+    
+                <Link to="/">Back to Home</Link>
+            </>
+        );
+    } else {
+        return (
+            <>
+                <Card style={{ width: '18rem', textAlign: 'center'}}>
+                    <Card.Header>Translation</Card.Header>
+                    <Card.Body>
+                        <Card.Title>{translatedText}</Card.Title>
+                    </Card.Body>
+                    <Card.Footer>
+                        <form onSubmit={saveTranslation}>
+                            <p>Would you like to save this to your translations?</p>
+                            <button type='submit'>Yes</button>
+                            <button onClick={() => setNewTranslation(false)}>No</button>
+                        </form>
+                    </Card.Footer>
+                </Card>
+            </>
+        )
+    }
 };
 
 export default TranslatePage;

@@ -29,6 +29,9 @@ app.get("/user", handlerFunctions.user);
 app.get("/user-status", handlerFunctions.userStatus);
 
 app.post('/translate', handlerFunctions.translate)
+app.post('/save-translation', handlerFunctions.saveTranslation)
+app.post('/saved-translations', handlerFunctions.savedTranslations)
+
 app.get("/api/places", async (req, res) => {
   try {
     const { lat, lng, radius, language } = req.query;

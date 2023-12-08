@@ -58,6 +58,7 @@ SavedWord.init(
   {
     wordId: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     word: { type: DataTypes.STRING },
+    original: { type: DataTypes.STRING }
     // userId: { type: DataTypes.INTEGER },
   },
 

@@ -11,6 +11,10 @@ async function myDataBaseConnection(uri) {
       define: {
         underscored: true,
         timestamps: false
+      },
+      dialectOptions: {
+        charset: 'utf8',
+        encoding: 'UTF8'
       }
     }
   );

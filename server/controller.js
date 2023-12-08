@@ -1,4 +1,4 @@
-import { SchoolDetail, UserDetail } from "../src/Database/models.js";
+import { SchoolDetail, UserDetail, SavedWord } from "../src/Database/models.js";
 import axios from 'axios'
 
 const handlerFunctions = {
@@ -79,15 +79,16 @@ const handlerFunctions = {
 
   translate: async (req, res) => {
     try {
-        const { translation, language } = req.body
+        const { translation, language, source } = req.body
         const body = {
             'text': [translation],
-            'target_lang': language
+            'target_lang': language,
+            'source_lang': source
         }
 
         const response = await axios.post('https://api-free.deepl.com/v2/translate', body, {
             headers: {
-                'Authorization': 'DeepL-Auth-Key'
+                'Authorization': 'DeepL-Auth-Key 8ac3442f-8ea2-9a61-f98f-d358fd0a2a08:fx'
             }
         })
         res.json(response.data)
@@ -96,6 +97,27 @@ const handlerFunctions = {
         console.error(error)
         res.status(500).json({ error: 'Internal Server Error' })
     }
+  },
+
+  saveTranslation: async (req, res) => {
+    const {translatedText, originalText, id} = req.body
+    const translation = await SavedWord.create({
+        word: translatedText,
+        original: originalText,
+        userId: id
+    })
+    if (translation) {
+        res.status(200).json({ message: 'OK' })
+    } else {
+        res.status(500).json({ error: 'Internal Server Error'})
+    }
+
+  },
+
+  savedTranslations: async (req, res) => {
+    const { id } = req.body
+    const translations = await SavedWord.findAll({ where: { userId: id } })
+    res.json(translations)
   }
 };
 
