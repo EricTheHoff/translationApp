@@ -85,6 +85,14 @@ const handlerFunctions = {
     const { wordId } = req.params
     const getWordId = await SavedWord.findByPk(wordId)
     res.json(getWordId)
+  },
+
+  deleteSavedWords: async (req, res) => {
+    const { wordId } = req.params
+    await SavedWord.destroy({
+        where: {wordId: wordId}
+    })
+    res.json({success: true, deletedWord: wordId})
   }
 };
 

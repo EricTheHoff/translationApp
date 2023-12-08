@@ -28,6 +28,7 @@ app.get("/user", handlerFunctions.user);
 app.get("/user-status", handlerFunctions.userStatus);
 app.get("/allSavedWords", handlerFunctions.getSavedWords)
 app.get("/savedWords/:wordId", handlerFunctions.getWordsById)
+app.delete("/deleteWords/:wordId", handlerFunctions.deleteSavedWords)
 
 ViteExpress.listen(app, 2222, () =>
   console.log(`Server working on http://localhost:2222`)

@@ -5,6 +5,7 @@ import axios from 'axios'
 import SavedWord from "../Components/SavedWord";
 
 const SavedTranslationsPage = () => {
+  
 
   const [savedWords, setSavedWords] = useState([])
 
@@ -16,13 +17,15 @@ useEffect(() => {
   })
   .catch((error) => console.error("error fetching data:", error));
   }, [])
-
-  console.log(savedWords)
+  
 
   return (
     <div>
       <Link to="/">Back to Home</Link>
-      {savedWords.map((word) => (<SavedWord word={word}/>))}
+      {savedWords.map((word) => (<SavedWord word={word} />))}
+      
+     
+     
     </div>
   );
 };
