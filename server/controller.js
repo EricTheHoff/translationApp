@@ -32,10 +32,12 @@ const handlerFunctions = {
       });
     }
   },
+  
   getSavedSchools: async (req, res) => {
     const savedSchool = await SchoolDetail.findAll();
     res.json(savedSchool);
   },
+  
   deleteSavedSchools: async (req, res) => {
     const { schoolId } = req.params;
     await SchoolDetail.destroy({
@@ -72,6 +74,7 @@ const handlerFunctions = {
       res.json({ success: false });
     }
   },
+  
   logout: async (req, res) => {
     req.session.destroy();
     res.json({ success: true });
@@ -114,6 +117,29 @@ const handlerFunctions = {
         res.status(500).json({ error: 'Internal Server Error'})
     }
 
+  },
+
+    deleteAccount: async (req, res) => {
+        const { id } = req.params
+        const user = await UserDetail.findOne({
+            where: { userId: id }
+        })
+        await user.destroy()
+        req.session.destroy()
+        res.json({ success: true })
+    },
+
+  editAccount: async (req, res) => {
+      const { email, password, zipcode } = req.body
+      const user = await UserDetail.findOne({ where: { email: email }})
+
+      user.email = email
+      user.password = password
+      user.zipCode = zipcode
+
+      await user.save()
+
+      res.json({ success: true })
   },
 };
 

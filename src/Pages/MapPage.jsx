@@ -13,7 +13,7 @@ const libraries = ["places"];
 
 function MapPage() {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyCUNodj8rRhB6HcoDZC0Z6XN7NkVrvhIqc",
+    googleMapsApiKey: import.meta.env.VITE_REACT_APP_GOOGLE_API_KEY,
     libraries: libraries,
   });
 
@@ -121,9 +121,17 @@ function MapPage() {
   //changes geolocation based on what was entered as zipcode
   const handleZipcodeSubmit = () => {
     // Fetch latitude and longitude based on the entered zipcode
+    console.log(import.meta.env.VITE_REACT_APP_GOOGLE_API_KEY);
+    console.log(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${zipcode}&key=${
+        import.meta.env.VITE_REACT_APP_GOOGLE_API_KEY
+      }`
+    );
     axios
       .get(
-        `https://maps.googleapis.com/maps/api/geocode/json?address=${zipcode}&key=AIzaSyCUNodj8rRhB6HcoDZC0Z6XN7NkVrvhIqc`
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${zipcode}&key=${
+          import.meta.env.VITE_REACT_APP_GOOGLE_API_KEY
+        }`
       )
       .then(({ data }) => {
         // console.log(data);

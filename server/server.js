@@ -4,7 +4,7 @@ import ViteExpress from "vite-express";
 import axios from "axios";
 import handlerFunctions from "../server/controller.js";
 import session from "express-session";
-import env from 'dotenv'
+import env from "dotenv";
 
 const app = express();
 
@@ -21,7 +21,13 @@ app.use(
 );
 env.config();
 
+console.log(process.env.VITE_REACT_APP_GOOGLE_API_KEY);
+
 app.post("/register", handlerFunctions.register);
+
+app.delete("/deleteAccount/:id", handlerFunctions.deleteAccount);
+app.put("/editAccount", handlerFunctions.editAccount);
+
 app.get("/allSchools", handlerFunctions.getSavedSchools);
 app.delete("/deleteSchools/:schoolId", handlerFunctions.deleteSavedSchools);
 
@@ -37,9 +43,9 @@ app.get("/api/places", async (req, res) => {
   try {
     const { lat, lng, radius, language } = req.query;
     const types = ["tutor", "academy", "institute", "center"];
-    // console.log(radius);
+    console.log(radius);
     // console.log(language);
-    const apiKey = "AIzaSyCUNodj8rRhB6HcoDZC0Z6XN7NkVrvhIqc";
+    const apiKey = process.env.VITE_REACT_APP_GOOGLE_API_KEY;
 
     const response = await axios.get(
       `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=${radius}&type=${types}&keyword=${language}%20learning&key=${apiKey}`

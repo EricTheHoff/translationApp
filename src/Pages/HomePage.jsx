@@ -9,6 +9,9 @@ const HomePage = () => {
     const auth = useSelector((state) => state.loggedIn)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const id = useSelector((state) => state.userId)
+
+    console.log(id)
 
     const saveToExpress = async () => {
         const response = await axios.get('/user-status')
