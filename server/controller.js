@@ -12,8 +12,9 @@ const handlerFunctions = {
       },
     });
 
-    if (alreadyExists) {
-      res.json({ success: true});
+    if (alreadyExists.length > 0) {
+      res.json({ message: "Information already in use"});
+      return
     } else {
       const newUser = await UserDetail.create({
         name: name,
@@ -22,11 +23,13 @@ const handlerFunctions = {
         zipCode: zipCode,
       });
 
+      console.log(newUser)
+
       req.session.user = newUser;
 
       res.send({
         message: "account created",
-        user_id: newUser.user_id,
+        user_id: newUser.userId,
       });
     }
   },
