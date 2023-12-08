@@ -80,9 +80,6 @@ const handlerFunctions = {
   translate: async (req, res) => {
     try {
         const { translation, language } = req.body
-        // const headers = {
-        //     'Authorization': 'DeepL-Auth-Key 8ac3442f-8ea2-9a61-f98f-d358fd0a2a08:fx'
-        // }
         const body = {
             'text': [translation],
             'target_lang': language
