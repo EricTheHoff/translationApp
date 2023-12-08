@@ -57,8 +57,9 @@ export class SavedWord extends Model {
 SavedWord.init(
   {
     wordId: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    word: { type: DataTypes.STRING },
-    original: { type: DataTypes.STRING }
+    word: { type: DataTypes.STRING(650) },
+    original: { type: DataTypes.STRING(500) },
+    toLanguage: { type: DataTypes.STRING },
     // userId: { type: DataTypes.INTEGER },
   },
 

@@ -4,6 +4,7 @@ import ViteExpress from "vite-express";
 import axios from "axios";
 import handlerFunctions from "../server/controller.js";
 import session from "express-session";
+import env from 'dotenv'
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(
     resave: false,
   })
 );
+env.config();
 
 app.post("/register", handlerFunctions.register);
 app.get("/allSchools", handlerFunctions.getSavedSchools);
@@ -30,7 +32,6 @@ app.get("/user-status", handlerFunctions.userStatus);
 
 app.post('/translate', handlerFunctions.translate)
 app.post('/save-translation', handlerFunctions.saveTranslation)
-app.post('/saved-translations', handlerFunctions.savedTranslations)
 
 app.get("/api/places", async (req, res) => {
   try {

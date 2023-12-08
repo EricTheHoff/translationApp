@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from 'react'
 import { Card } from 'react-bootstrap'
@@ -55,19 +55,16 @@ const TranslatePage = () => {
     const saveTranslation = async (e) => {
         e.preventDefault()
 
+        console.log(language)
+
         const translationData = {
             translatedText: translatedText,
             originalText: translation,
-            id: id
+            id: id,
+            toLanguage: language
         }
 
-        console.log(translationData)
-
-        await axios.post('/save-translation', translationData, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
+        await axios.post('/save-translation', translationData)
         .then(() => {
             alert(`Translation has been saved.`)
             setNewTranslation(false)
@@ -76,36 +73,6 @@ const TranslatePage = () => {
             alert(`The following error has occurred: ${error}`)
         })
     }
-
-    // const logSavedTranslations = async () => {
-    //     const data = {id}
-    //     const response = await axios.post(`/saved-translations`, data)
-    //     console.log(response.data)
-    // }
-
-    // useEffect(() => {
-    //     console.log(id)
-    //     logSavedTranslations()
-    // },[newTranslation])
-
-    // const isUTF8Compatible = (e) => {
-    //     e.preventDefault()
-    //     try {
-    //         const encoder = new TextEncoder('utf-8')
-    //         const decoder = new TextDecoder('utf-8')
-
-    //         const encodedBuffer = encoder.encode(translatedText)
-    //         const decodedText = decoder.decode(encodedBuffer)
-
-    //         console.log(decodedText === translatedText)
-
-
-    //         return decodedText === translatedText
-    //     } catch (error) {
-    //         console.error(`Error encoding/decoding text: ${error}`)
-    //         return false
-    //     }
-    // }
 
     if (newTranslation === false) {
         return (
@@ -128,15 +95,15 @@ const TranslatePage = () => {
                 <h4>Please enter a word or phrase to be translated.</h4>
     
                 <form onSubmit={handleTranslation}>
-                    <input
+                    <textarea
                     style={{
                         width: '85%',
                         height: '200px',
-                        textAlign: 'center'
+                        textAlign: 'center',
                     }}
-                    type='textarea'
-                    maxLength='2000'
-                    placeholder='2000 Character Limit'
+                    wrap='virtual'
+                    maxLength='500'
+                    placeholder='500 Character Limit'
                     onChange={(e) => setTranslation(e.target.value)}
                     />
 

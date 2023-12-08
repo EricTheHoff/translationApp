@@ -88,7 +88,7 @@ const handlerFunctions = {
 
         const response = await axios.post('https://api-free.deepl.com/v2/translate', body, {
             headers: {
-                'Authorization': 'DeepL-Auth-Key 8ac3442f-8ea2-9a61-f98f-d358fd0a2a08:fx'
+                'Authorization': process.env.REACT_APP_DEEPL_API_KEY
             }
         })
         res.json(response.data)
@@ -100,11 +100,13 @@ const handlerFunctions = {
   },
 
   saveTranslation: async (req, res) => {
-    const {translatedText, originalText, id} = req.body
+    const {translatedText, originalText, id, toLanguage} = req.body
+
     const translation = await SavedWord.create({
         word: translatedText,
         original: originalText,
-        userId: id
+        userId: id,
+        toLanguage: toLanguage
     })
     if (translation) {
         res.status(200).json({ message: 'OK' })
@@ -113,12 +115,6 @@ const handlerFunctions = {
     }
 
   },
-
-  savedTranslations: async (req, res) => {
-    const { id } = req.body
-    const translations = await SavedWord.findAll({ where: { userId: id } })
-    res.json(translations)
-  }
 };
 
 export default handlerFunctions;
