@@ -1,4 +1,4 @@
-import { SchoolDetail, UserDetail, SavedWord } from "../src/Database/models.js";
+import { SchoolDetail, UserDetail, SavedWord, SavedWord } from "../src/Database/models.js";
 import axios from 'axios'
 
 const handlerFunctions = {
@@ -106,6 +106,25 @@ const handlerFunctions = {
         req.session.destroy();
         res.json({ success: true });
     },
+
+  getSavedWords: async (req, res) => {
+    const savedTranslation = await SavedWord.findAll();
+    res.json(savedTranslation)
+  },
+
+  getWordsById: async (req, res) => {
+    const { wordId } = req.params
+    const getWordId = await SavedWord.findByPk(wordId)
+    res.json(getWordId)
+  },
+
+  deleteSavedWords: async (req, res) => {
+    const { wordId } = req.params
+    await SavedWord.destroy({
+        where: {wordId: wordId}
+    })
+    res.json({success: true, deletedWord: wordId})
+  }
 
     translate: async (req, res) => {
         try {
