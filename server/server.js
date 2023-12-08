@@ -6,8 +6,6 @@ import handlerFunctions from "../server/controller.js";
 import session from "express-session";
 import env from "dotenv";
 
-// import "dotenv/config.js";
-
 const app = express();
 
 app.use(morgan("dev"));
@@ -22,6 +20,7 @@ app.use(
   })
 );
 env.config();
+
 console.log(process.env.VITE_REACT_APP_GOOGLE_API_KEY);
 
 app.post("/register", handlerFunctions.register);
@@ -32,14 +31,13 @@ app.put("/editAccount", handlerFunctions.editAccount);
 app.get("/allSchools", handlerFunctions.getSavedSchools);
 app.delete("/deleteSchools/:schoolId", handlerFunctions.deleteSavedSchools);
 
-app.post("/register", handlerFunctions.register);
-app.get("/allSchools", handlerFunctions.getSavedSchools);
-app.delete("/deleteSchools/:schoolId", handlerFunctions.deleteSavedSchools);
-
 app.post("/login", handlerFunctions.login);
 app.post("/api/logout", handlerFunctions.logout);
 app.get("/user", handlerFunctions.user);
 app.get("/user-status", handlerFunctions.userStatus);
+
+app.post('/translate', handlerFunctions.translate)
+app.post('/save-translation', handlerFunctions.saveTranslation)
 
 app.get("/api/places", async (req, res) => {
   try {

@@ -1,4 +1,5 @@
-import { SchoolDetail, UserDetail } from "../src/Database/models.js";
+import { SchoolDetail, UserDetail, SavedWord } from "../src/Database/models.js";
+import axios from 'axios'
 
 const handlerFunctions = {
     register: async (req, res) => {
@@ -25,25 +26,28 @@ const handlerFunctions = {
 
             req.session.user = newUser;
 
+            
             res.send({
                 message: "account created",
                 user_id: newUser.user_id,
             });
         }
     },
+
     getSavedSchools: async (req, res) => {
         const savedSchool = await SchoolDetail.findAll();
         res.json(savedSchool);
     },
+
     deleteSavedSchools: async (req, res) => {
         const { schoolId } = req.params;
         await SchoolDetail.destroy({
             where: { schoolId: schoolId },
         });
 
-        res.json({ success: true, deletedSchool: schoolId });
+        
+    res.json({ success: true, deletedSchool: schoolId });
     },
-
 
     deleteAccount: async (req, res) => {
         const { id } = req.params
@@ -54,7 +58,6 @@ const handlerFunctions = {
         req.session.destroy()
         res.json({ success: true })
     },
-
 
     editAccount: async (req, res) => {
         const { email, password, zipcode } = req.body
@@ -69,7 +72,8 @@ const handlerFunctions = {
         res.json({ success: true })
     },
 
-    login: async (req, res) => {
+    
+login: async (req, res) => {
         const { email, password } = req.body;
         const user = await UserDetail.findOne({ where: { email: email } });
 
@@ -88,7 +92,8 @@ const handlerFunctions = {
         res.send(user);
     },
 
-    userStatus: async (req, res) => {
+    
+userStatus: async (req, res) => {
         if (req.session.userId) {
             const user = await UserDetail.findByPk(req.session.userId);
             res.send({ email: user.email, success: true });
@@ -96,11 +101,50 @@ const handlerFunctions = {
             res.json({ success: false });
         }
     },
+
     logout: async (req, res) => {
         req.session.destroy();
         res.json({ success: true });
     },
 
+    translate: async (req, res) => {
+        try {
+            const { translation, language, source } = req.body
+            const body = {
+                'text': [translation],
+                'target_lang': language,
+                'source_lang': source
+            }
+
+            const response = await axios.post('https://api-free.deepl.com/v2/translate', body, {
+                headers: {
+                    'Authorization': '8ac3442f-8ea2-9a61-f98f-d358fd0a2a08:fx'
+                }
+            })
+            res.json(response.data)
+        }
+        catch (error) {
+            console.error(error)
+            res.status(500).json({ error: 'Internal Server Error' })
+        }
+    },
+
+    saveTranslation: async (req, res) => {
+        const {translatedText, originalText, id, toLanguage} = req.body
+
+        const translation = await SavedWord.create({
+            word: translatedText,
+            original: originalText,
+            userId: id,
+            toLanguage: toLanguage
+        })
+        if (translation) {
+            res.status(200).json({ message: 'OK' })
+        } else {
+            res.status(500).json({ error: 'Internal Server Error'})
+        }
+
+    },
 };
 
 export default handlerFunctions;
