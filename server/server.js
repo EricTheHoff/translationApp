@@ -4,7 +4,9 @@ import ViteExpress from "vite-express";
 import axios from "axios";
 import handlerFunctions from "../server/controller.js";
 import session from "express-session";
-import dotenv from "dotenv";
+import env from "dotenv";
+
+// import "dotenv/config.js";
 
 const app = express();
 
@@ -19,6 +21,7 @@ app.use(
     resave: false,
   })
 );
+env.config();
 
 app.post("/register", handlerFunctions.register);
 app.get("/allSchools", handlerFunctions.getSavedSchools);
@@ -30,13 +33,12 @@ app.get("/user", handlerFunctions.user);
 app.get("/user-status", handlerFunctions.userStatus);
 
 app.get("/api/places", async (req, res) => {
-  dotenv.config();
   try {
     const { lat, lng, radius, language } = req.query;
     const types = ["tutor", "academy", "institute", "center"];
-    // console.log(radius);
+    console.log(radius);
     // console.log(language);
-    const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
+    const apiKey = process.env.VITE_REACT_APP_GOOGLE_API_KEY;
 
     const response = await axios.get(
       `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=${radius}&type=${types}&keyword=${language}%20learning&key=${apiKey}`

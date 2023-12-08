@@ -8,14 +8,12 @@ import {
 import axios from "axios";
 import Map from "../Components/Map";
 import MapForm from "../Components/MapForm";
-import dotenv from "dotenv";
 
 const libraries = ["places"];
 
 function MapPage() {
-  dotenv.config();
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
+    googleMapsApiKey: import.meta.env.VITE_REACT_APP_GOOGLE_API_KEY,
     libraries: libraries,
   });
 
@@ -123,9 +121,17 @@ function MapPage() {
   //changes geolocation based on what was entered as zipcode
   const handleZipcodeSubmit = () => {
     // Fetch latitude and longitude based on the entered zipcode
+    console.log(import.meta.env.VITE_REACT_APP_GOOGLE_API_KEY);
+    console.log(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${zipcode}&key=${
+        import.meta.env.VITE_REACT_APP_GOOGLE_API_KEY
+      }`
+    );
     axios
       .get(
-        `https://maps.googleapis.com/maps/api/geocode/json?address=${zipcode}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${zipcode}&key=${
+          import.meta.env.VITE_REACT_APP_GOOGLE_API_KEY
+        }`
       )
       .then(({ data }) => {
         // console.log(data);
