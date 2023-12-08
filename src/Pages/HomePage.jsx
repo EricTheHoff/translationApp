@@ -12,7 +12,6 @@ const HomePage = () => {
 
     const saveToExpress = async () => {
         const response = await axios.get('/user-status')
-        console.log(response.data)
 
         if (!response.data.success) {
             dispatch({ type: 'Logged Out' })
