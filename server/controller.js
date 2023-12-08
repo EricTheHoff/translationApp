@@ -73,7 +73,7 @@ const handlerFunctions = {
     },
 
     
-login: async (req, res) => {
+    login: async (req, res) => {
         const { email, password } = req.body;
         const user = await UserDetail.findOne({ where: { email: email } });
 
@@ -93,7 +93,7 @@ login: async (req, res) => {
     },
 
     
-userStatus: async (req, res) => {
+    userStatus: async (req, res) => {
         if (req.session.userId) {
             const user = await UserDetail.findByPk(req.session.userId);
             res.send({ email: user.email, success: true });
