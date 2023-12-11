@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Styles/profile.css'
-import user from "../../public/animal-avatars/user.png"
+import user from "../Images/Avatars/user.png"
+import ImageGrid from './ImageGrid';
 
 
 const Profile = () => {
@@ -37,10 +38,10 @@ const Profile = () => {
             setEmail(response.data.email)
             setZipcode(response.data.zipCode)
             setPassword(response.data.password)
-            setFile(response.data.image)
-       })
+            // setFile(response.data.image)
+        })
     }
-    
+
 
 
     // Edit Profile Information
@@ -61,8 +62,8 @@ const Profile = () => {
     }
 
 
-    
-    
+
+
     // Delete Account
     const handleDelete = async () => {
         const response = await axios.delete(`/deleteAccount/${id}`);
@@ -71,61 +72,74 @@ const Profile = () => {
             navigate('/')
         }
     }
-    
+
+
 
     useEffect(() => {
         getAccount()
-    },[])
+    }, [])
 
     if (!editMode) {
         return (
             <div>
-                <img src={user} alt="../../public/animal-avatars/user.png"/>
+                <img src={user} alt="../Images/Avatars/user.png" />
                 <p>Email: {email}</p>
                 <p>ZIP Code: {zipcode}</p>
                 <button onClick={() => setEditMode(true)}>Edit</button>
 
                 <br />
 
+                <br />
+
+
+                <br />
+
                 {/* <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a> */}
             </div>
+
+
         )
     } else {
         return (
             <div>
                 <h1>Profile</h1>
                 <form onSubmit={handleSubmit}>
-                <label>Add Profile Image</label>
 
-                <br />
-                {/* <input type="file" onChange={handleChange} /> */}
-                <img src={user} />
-                
-                <br />
-    
-                <label>Email</label>
-                <input placeholder={email} type="text" onChange={(e) => setEmail(e.target.value)}/>
-    
-                <br />
-    
-                <label>Password</label>
-                <input type="password" onChange={(e) => setPassword(e.target.value)}/>
-    
-                <br/>
-    
-                <label>ZIP Code</label>
-                <input placeholder={zipcode} type="text" maxLength="5" onChange={(e) => setZipcode(e.target.value)}/>
-    
-                <br />
+                    <br />
+                    {/* <input type="file" onChange={handleChange} /> */}
+                    <img src={user} />
 
-                <button type="submit">Save</button>
+                    <br />
+                    <br />
+
+                    <label>Choose Profile Image</label>
+                    <ImageGrid />
+
+                    <br />
+
+                    <label>Email</label>
+                    <input placeholder={email} type="text" onChange={(e) => setEmail(e.target.value)} />
+
+                    <br />
+
+                    <label>Password</label>
+                    <input type="password" onChange={(e) => setPassword(e.target.value)} />
+
+                    <br />
+
+                    <label>ZIP Code</label>
+                    <input placeholder={zipcode} type="text" maxLength="5" onChange={(e) => setZipcode(e.target.value)} />
+
+                    <br />
+
+                    <button type="submit">Save</button>
                 </form>
-                <button onClick={handleDelete}>Delete Account</button> 
+                <button onClick={handleDelete}>Delete Account</button>
 
             </div>
         );
     }
-    
+
 }
 
 export default Profile;

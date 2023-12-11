@@ -39,31 +39,31 @@ const user1Eager = await UserDetail.findOne({
 });
 
 const image1 = await Images.create({
-  image: "../../public/animal-avatars/bear.png",
+  image: "../Images/Avatars/bear.png",
 });
 const image2 = await Images.create({
-  image: "../../public/animal-avatars/cat.png",
+  image: "../Images/Avatars/cat.png",
 });
 const image3 = await Images.create({
-  image: "../../public/animal-avatars/chicken.png",
+  image: "../Images/Avatars/chicken.png",
 });
 const image4 = await Images.create({
-  image: "../../public/animal-avatars/dog.png",
+  image: "../../Images/Avatars/dog.png",
 });
 const image5 = await Images.create({
-  image: "../../public/animal-avatars/koala.png",
+  image: "../../Images/Avatars/koala.png",
 });
 const image6 = await Images.create({
-  image: "../../public/animal-avatars/meerkat.png",
+  image: "../../Images/Avatars/meerkat.png",
 });
 const image7 = await Images.create({
-  image: "../../public/animal-avatars/panda.png",
+  image: "../../Images/Avatars/panda.png",
 });
 const image8 = await Images.create({
-  image: "../../public/animal-avatars/rabbit.png",
+  image: "../../Images/Avatars/rabbit.png",
 });
 const image9 = await Images.create({
-  image: "../../public/animal-avatars/sea-lion.png",
+  image: "../../Images/Avatars/sea-lion.png",
 });
 
 
