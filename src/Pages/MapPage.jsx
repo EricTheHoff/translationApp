@@ -25,6 +25,14 @@ function MapPage() {
   const [selectedMarkerId, setSelectedMarkerId] = useState(null);
   const [radius, setRadius] = useState(16093.4);
   const [language, setLanguage] = useState("language");
+  const [userZipcode, setUserZipcode] = useState(null);
+
+  useEffect(() => {
+    axios.get("/user").then((response) => {
+      setUserZipcode(response.data.zipCode);
+      console.log(userZipcode);
+    });
+  }, []);
 
   // console.log(radius);
   const changeRadius = (e) => {
@@ -42,7 +50,9 @@ function MapPage() {
 
   useEffect(() => {
     // Get user's location when the component renders
-    if (navigator.geolocation) {
+    if (userZipcode) {
+      setUserLocation(userZipcode);
+    } else if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
