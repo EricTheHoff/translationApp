@@ -5,14 +5,13 @@ import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const PDFUpload = () => {
   const [pdfFile, setPDFFile] = useState(null);
   const [viewPDF, setViewPDF] = useState(null);
   const [highlightedText, setHighlightedText] = useState("");
-  const [translation, setTranslation] = useState("");
   const [language, setLanguage] = useState("");
-  const [translatedText, setTranslatedText] = useState("");
   const newplugin = defaultLayoutPlugin();
 
   const handleSelection = async () => {
@@ -35,26 +34,6 @@ const PDFUpload = () => {
         }
       }
     }
-  };
-
-  const handleTranslation = async (e) => {
-    e.preventDefault();
-
-    const translationData = {
-      translation,
-      language,
-      source: "EN",
-    };
-    await axios
-      .post("/translate", translationData)
-
-      .then(({ data }) => {
-        console.log(data.translations[0]);
-        setTranslatedText(data.translations[0].text);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   };
 
   const handleChange = (e) => {
@@ -97,19 +76,7 @@ const PDFUpload = () => {
         </p>
         {highlightedText && <p>Highlighted Text: {highlightedText}</p>}
 
-        <form onSubmit={handleTranslation}>
-          <textarea
-            style={{
-              width: "85%",
-              height: "200px",
-              textAlign: "center",
-            }}
-            wrap="virtual"
-            maxLength="500"
-            placeholder="500 Character Limit"
-            onChange={(e) => setTranslation(e.target.value)}
-          />
-
+        <form>
           <br></br>
 
           <select onChange={(e) => setLanguage(e.target.value)}>
@@ -145,7 +112,6 @@ const PDFUpload = () => {
             <option value="UK">Ukrainian</option>
             <option value="ZH">Chinese</option>
           </select>
-          <button type="submit">Translate</button>
         </form>
         <h3>Would you like to translate a file?</h3>
         <h4>Please select a file to upload.</h4>

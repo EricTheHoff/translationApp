@@ -7,9 +7,7 @@ const TextUpload = () => {
   const content = document.getElementById("content");
   const [textFile, setTextFile] = useState(null);
   const [highlightedText, setHighlightedText] = useState("");
-  const [translation, setTranslation] = useState("");
   const [language, setLanguage] = useState("");
-  const [translatedText, setTranslatedText] = useState("");
 
   const handleSelection = async () => {
     const selection = window.getSelection();
@@ -31,26 +29,6 @@ const TextUpload = () => {
         }
       }
     }
-  };
-
-  const handleTranslation = async (e) => {
-    e.preventDefault();
-
-    const translationData = {
-      translation,
-      language,
-      source: "EN",
-    };
-    await axios
-      .post("/translate", translationData)
-
-      .then(({ data }) => {
-        console.log(data.translations[0]);
-        setTranslatedText(data.translations[0].text);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   };
 
   const handleChange = (e) => {
@@ -90,19 +68,7 @@ const TextUpload = () => {
           Select and highlight text in this component to see it displayed below:
         </p>
         {highlightedText && <p>Highlighted Text: {highlightedText}</p>}
-        <form onSubmit={handleTranslation}>
-          <textarea
-            style={{
-              width: "85%",
-              height: "200px",
-              textAlign: "center",
-            }}
-            wrap="virtual"
-            maxLength="500"
-            placeholder="500 Character Limit"
-            onChange={(e) => setTranslation(e.target.value)}
-          />
-
+        <form>
           <br></br>
 
           <select onChange={(e) => setLanguage(e.target.value)}>
@@ -138,7 +104,6 @@ const TextUpload = () => {
             <option value="UK">Ukrainian</option>
             <option value="ZH">Chinese</option>
           </select>
-          <button type="submit">Translate</button>
         </form>
         <h3>Would you like to translate a file?</h3>
         <h4>Please select a file to upload.</h4>
