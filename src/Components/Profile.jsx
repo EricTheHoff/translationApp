@@ -4,31 +4,32 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Styles/profile.css'
+import user from "../../public/animal-avatars/user.png"
 
 
 const Profile = () => {
     const [editMode, setEditMode] = useState(false)
-    const [username, setUsername] = useState("")
+    // const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [zipcode, setZipcode] = useState("")
     const [email, setEmail] = useState("")
-    const [file, setFile] = useState("")
+    // const [file, setFile] = useState("")
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const id = useSelector((state) => state.userId)
 
 
-    // Upload Profile Image 
-    const handleChange = async (e) => {
-        await axios.get('/get-image')
-        console.log(e.target.files)
-        setFile(URL.createObjectURL(e.target.files[0]))
-    }
-
-    // const profileImage = async (e) => {
-    //     await axios.post('/image')
+    // // Upload Profile Image 
+    // const handleChange = async (e) => {
+    //     await axios.get('/get-image')
+    //     console.log(e.target.files)
+    //     setFile(URL.createObjectURL(e.target.files[0]))
     // }
+
+    // // const profileImage = async (e) => {
+    // //     await axios.post('/image')
+    // // }
 
 
     const getAccount = async () => {
@@ -79,10 +80,14 @@ const Profile = () => {
     if (!editMode) {
         return (
             <div>
-                <img src={file} alt='http://www.w3.org/2000/svg'/>
+                <img src={user} alt="../../public/animal-avatars/user.png"/>
                 <p>Email: {email}</p>
                 <p>ZIP Code: {zipcode}</p>
                 <button onClick={() => setEditMode(true)}>Edit</button>
+
+                <br />
+
+                {/* <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a> */}
             </div>
         )
     } else {
@@ -91,8 +96,10 @@ const Profile = () => {
                 <h1>Profile</h1>
                 <form onSubmit={handleSubmit}>
                 <label>Add Profile Image</label>
-                <input type="file" onChange={handleChange} />
-                <img src={file} />
+
+                <br />
+                {/* <input type="file" onChange={handleChange} /> */}
+                <img src={user} />
                 
                 <br />
     
@@ -114,6 +121,7 @@ const Profile = () => {
                 <button type="submit">Save</button>
                 </form>
                 <button onClick={handleDelete}>Delete Account</button> 
+
             </div>
         );
     }

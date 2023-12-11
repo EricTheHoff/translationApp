@@ -2,6 +2,7 @@ import {
   SchoolDetail,
   UserDetail,
   SavedWord,
+  Images,
   dbConnection,
 } from "./models.js";
 
@@ -18,29 +19,69 @@ const userOne = await UserDetail.create({
   name: "John Doe",
   email: "johndoe1998@gmail.com",
   password: "ilovejohndoe420",
-//   schoolId: 1,
-//   wordId: 1,
+  //   schoolId: 1,
+  //   wordId: 1,
   zipCode: '93457',
-  image: "https://images.pexels.com/photos/1054218/pexels-photo-1054218.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
 });
 
 const wordOne = await SavedWord.create({
   word: "novato",
-//   userId: 1,
+  //   userId: 1,
 });
 await userOne.addSavedWord(wordOne)
 
 const user1 = await UserDetail.findOne()
 const user1Eager = await UserDetail.findOne({
-    where: {
-        userId: 1
-    },
-    include: SavedWord
-})
+  where: {
+    userId: 1
+  },
+  include: SavedWord
+});
+
+const image1 = await Images.create({
+  image: "../../public/animal-avatars/bear.png",
+});
+const image2 = await Images.create({
+  image: "../../public/animal-avatars/cat.png",
+});
+const image3 = await Images.create({
+  image: "../../public/animal-avatars/chicken.png",
+});
+const image4 = await Images.create({
+  image: "../../public/animal-avatars/dog.png",
+});
+const image5 = await Images.create({
+  image: "../../public/animal-avatars/koala.png",
+});
+const image6 = await Images.create({
+  image: "../../public/animal-avatars/meerkat.png",
+});
+const image7 = await Images.create({
+  image: "../../public/animal-avatars/panda.png",
+});
+const image8 = await Images.create({
+  image: "../../public/animal-avatars/rabbit.png",
+});
+const image9 = await Images.create({
+  image: "../../public/animal-avatars/sea-lion.png",
+});
+
 
 console.log(user1)
 // console.log(await user1.getSavedWords())
 console.log(user1Eager.savedWords)
+
+console.log(
+  image1,
+  image2,
+  image3,
+  image4,
+  image5,
+  image6,
+  image7,
+  image8,
+  image9
+)
 
 
 await dbConnection.close()

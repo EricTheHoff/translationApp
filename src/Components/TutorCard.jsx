@@ -2,11 +2,9 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import ListGroup from 'react-bootstrap/ListGroup';
 import axios from "axios"
-import { useEffect, useState } from 'react'
 
 function TutorCard({ name, address, phone, website, id }) {
 
-    const [deleteTutorState, setDeleteTutorState] = useState()
 
     function handleDelete() {
         axios.delete(`http://localhost:2222/deleteSchools/${id}`);
