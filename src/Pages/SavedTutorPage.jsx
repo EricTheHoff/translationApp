@@ -1,50 +1,47 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import axios from "axios"
+import axios from "axios";
 import TutorCard from "../Components/TutorCard.jsx";
 
-
 const SavedTutorPage = () => {
-  const [tutorState, setTutorState] = useState([])
-  let tutor = []
+  const [tutorState, setTutorState] = useState([]);
+  let tutor = [];
   useEffect(() => {
     axios
-    .get("http://localhost:2222/allSchools")
-    .then((response) => {
-      // setTutorState(response.data)
-      let results = response.data
-      console.log(results)
-      // console.log(tutorState)
-      let mapResults = results.map((el) => {
-        const { name, address, phone, website, schoolId } = el
-      return (
-        <TutorCard
-        name={name}
-        address={address}
-        phone={phone}
-        website={website} 
-        id={schoolId}
-        />
-      )
+      .get("http://localhost:2222/allSchools")
+      .then((response) => {
+        // setTutorState(response.data)
+        let results = response.data;
+        console.log(results);
+        // console.log(tutorState)
+        let mapResults = results.map((el) => {
+          const { name, address, rating, schoolId, website } = el;
+          return (
+            <TutorCard
+              name={name}
+              rating={rating}
+              address={address}
+              website={website}
+              id={schoolId}
+            />
+          );
+        });
+        setTutorState(mapResults);
+        console.log(mapResults);
+        tutor.push(mapResults);
+        // console.log(response)
       })
-      setTutorState(mapResults)
-      console.log(mapResults)
-      tutor.push(mapResults)
-      // console.log(response)
-    })
-    .catch((error) => console.error("error fetching data:", error));
+      .catch((error) => console.error("error fetching data:", error));
   }, []);
   return (
     <>
-    <div>
-      <Link to="/">Back to Home</Link>
       <div>
-        {tutorState} 
+        <Link to="/">Back to Home</Link>
+        <div>{tutorState}</div>
       </div>
-    </div>
     </>
   );
-}
+};
 
 export default SavedTutorPage;

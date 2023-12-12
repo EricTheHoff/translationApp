@@ -18,7 +18,7 @@ SchoolDetail.init(
     },
     name: { type: DataTypes.STRING },
     address: { type: DataTypes.STRING },
-    phone: { type: DataTypes.STRING },
+    rating: { type: DataTypes.STRING },
     website: { type: DataTypes.STRING },
     // userId: { type: DataTypes.INTEGER },
   },

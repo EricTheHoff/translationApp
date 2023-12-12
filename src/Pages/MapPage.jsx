@@ -26,6 +26,10 @@ function MapPage() {
   const [radius, setRadius] = useState(16093.4);
   const [language, setLanguage] = useState("language");
   const [userZipcode, setUserZipcode] = useState(null);
+  const [placeName, setPlaceName] = useState("");
+  const [placeVicinity, setPlaceVicinity] = useState("");
+  const [placeRating, setPlaceRating] = useState("");
+  const [placeWebsite, setPlaceWebsite] = useState("");
 
   useEffect(() => {
     axios.get("/user").then((response) => {
@@ -46,6 +50,22 @@ function MapPage() {
     e.preventDefault();
     const selectedLanguage = e.target.value;
     setLanguage(selectedLanguage);
+  };
+
+  const handleSaveTutor = async (e) => {
+    // e.preventDefault();
+
+    const formData = {
+      name: placeName,
+      vicinity: placeVicinity,
+      rating: placeRating,
+      website: placeWebsite,
+    };
+    console.log(formData);
+    const res = await axios.post("/save-tutor", formData);
+    if (res.data.success) {
+      console.log("saved to tutors");
+    }
   };
 
   useEffect(() => {
@@ -85,47 +105,50 @@ function MapPage() {
               lat: +place.geometry.location.lat,
               lng: +place.geometry.location.lng,
             };
-            // console.log(place.photos[0].photo_reference);
-            //return a marker for each individual location and have it open an infowindow when clicked
 
+            //return a marker for each individual location and have it open an infowindow when clicked
             let htmlString =
               '<a href="https://maps.google.com/maps/contrib/100961532820129391672">A Google User</a>';
             let doc = new DOMParser().parseFromString(htmlString, "text/html");
             let links = doc.querySelectorAll("a");
-            // console.log(links[0].href);
-            // console.log(place.photos[0].photo_reference);
-            return place.icon ===
-              "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/school-71.png" ? (
-              <div key={place.place_id}>
-                <MarkerF
-                  position={position}
-                  onClick={() => {
-                    setOpen(true);
-                    setSelectedMarkerId(place.place_id);
-                  }}
-                >
-                  {open && selectedMarkerId === place.place_id && (
-                    <InfoWindowF
-                      position={position}
-                      onCloseClick={() => setOpen(false)}
-                    >
-                      <>
-                        <h1>{place.name}</h1>
-                        <p>rating: {place.rating}</p>
-                        <p> Address: {place.vicinity}</p>
-                        <a href={links[0].href}>{links[0].href}</a>
-                        <img src={place.icon} />
-                        <label>
-                          Save To My Schools:
-                          <input type="checkbox" />
-                        </label>
-                      </>
-                    </InfoWindowF>
-                  )}
-                </MarkerF>
-              </div>
-            ) : (
-              console.log("no")
+            const { name, rating, vicinity } = place;
+            //if the place icon equals the "graduation cap" which signifies it is a school, return the marker for it
+            return (
+              place.icon ===
+                "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/school-71.png" && (
+                <div key={place.place_id}>
+                  <MarkerF
+                    position={position}
+                    onClick={() => {
+                      setOpen(true);
+                      setSelectedMarkerId(place.place_id);
+                      setPlaceName(name);
+                      setPlaceVicinity(vicinity);
+                      setPlaceRating(rating);
+                      setPlaceWebsite(links[0].href);
+                    }}
+                  >
+                    {open && selectedMarkerId === place.place_id && (
+                      <InfoWindowF
+                        position={position}
+                        onCloseClick={() => setOpen(false)}
+                      >
+                        <>
+                          <h1>{name}</h1>
+                          <p>rating: {rating}</p>
+                          <p> Address: {vicinity}</p>
+                          <a href={links[0].href}>{links[0].href}</a>
+                          <br></br>
+                          <label>
+                            Save To My Schools:
+                            <input type="checkbox" onClick={handleSaveTutor} />
+                          </label>
+                        </>
+                      </InfoWindowF>
+                    )}
+                  </MarkerF>
+                </div>
+              )
             );
           });
 

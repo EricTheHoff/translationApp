@@ -183,6 +183,18 @@ const handlerFunctions = {
     });
     res.json(savingWord);
   },
+  saveTutor: async (req, res) => {
+    const { name, rating, vicinity, website } = req.body;
+    console.log(req.body);
+    console.log("hello");
+    const savingTutor = await SchoolDetail.create({
+      name: name,
+      rating: rating,
+      address: vicinity,
+      website: website,
+    });
+    res.json(savingTutor);
+  },
 };
 
 export default handlerFunctions;
