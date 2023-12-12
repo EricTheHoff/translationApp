@@ -68,11 +68,31 @@ SavedWord.init(
     modelName: "savedWords",
   }
 );
+export class FurtherStudy extends Model {
+  [util.inspect.custom]() {
+    return this.toJSON();
+  }
+}
+FurtherStudy.init(
+  {
+    phraseId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    phrase: { type: DataTypes.STRING },
+  },
+  {
+    sequelize: dbConnection,
+    modelName: "furtherStudy",
+  }
+);
 
 SchoolDetail.belongsToMany(UserDetail, { through: "SchoolUserDetail" });
-UserDetail.belongsToMany(SchoolDetail, {through: "SchoolUserDetail" });
+UserDetail.belongsToMany(SchoolDetail, { through: "SchoolUserDetail" });
 
-UserDetail.hasMany(SavedWord, {foreignKey: "userId" });
+UserDetail.hasMany(SavedWord, { foreignKey: "userId" });
 // create userDetails.getSavedWords(), userDetails.addSavedWords(). it is going to try to create userDetails.createSavedWord
-SavedWord.belongsTo(UserDetail, {foreignKey: "userId" });
-
+SavedWord.belongsTo(UserDetail, { foreignKey: "userId" });
+FurtherStudy.belongsTo(UserDetail, { foreignKey: "userId" });
+UserDetail.hasMany(FurtherStudy, { foreignKey: "userId" });
