@@ -1,11 +1,13 @@
 import { SchoolDetail, UserDetail, FurtherStudy} from "../src/Database/models.js";
 import axios from "axios";
+import bcrypt from 'bcryptjs'
 
 const handlerFunctions = {
   register: async (req, res) => {
     const { email, password, zipCode } = req.body;
 
-    console.log(email, password, zipCode);
+    const salt = bcrypt.genSaltSync(12)
+    const hash = await bcrypt.hash(password, salt)
 
     const alreadyExists = await UserDetail.findOne({
       where: {
@@ -18,7 +20,7 @@ const handlerFunctions = {
     } else {
       const newUser = await UserDetail.create({
         email: email,
-        password: password,
+        password: hash,
         zipCode: zipCode,
       });
 
@@ -60,6 +62,7 @@ const handlerFunctions = {
     const { id } = req.params
     const { email, newPassword, zipcode, currentPassword } = req.body;
     const user = await UserDetail.findOne({ where: { userId: id } });
+    const hashMatch = await bcrypt.compare(currentPassword, user.password)
 
     if (newPassword === '') {
         user.email = email
@@ -68,12 +71,14 @@ const handlerFunctions = {
         await user.save()
         res.json({ success: true })
 
-    } else if (currentPassword !== user.password) {
+    } else if (hashMatch === false) {
         res.json({ success: false })
 
     } else {
+        const salt = bcrypt.genSaltSync(12)
+        const hash = await bcrypt.hash(newPassword, salt)
         user.email = email;
-        user.password = newPassword;
+        user.password = hash;
         user.zipCode = zipcode;
     
         await user.save();
@@ -84,8 +89,9 @@ const handlerFunctions = {
   login: async (req, res) => {
     const { email, password } = req.body;
     const user = await UserDetail.findOne({ where: { email: email } });
+    const hashMatch = await bcrypt.compare(password, user.password)
 
-    if (user && password === user.password) {
+    if (user && hashMatch === true) {
       req.session.userId = user.userId;
       res.json({ success: true });
     } else {

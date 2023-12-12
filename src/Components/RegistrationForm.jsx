@@ -56,7 +56,7 @@ const RegistrationForm = () => {
                 <input type="password" placeholder='Confirm password' onChange={(e) => { setConfirmReg(e.target.value) }} />
 
                 <label>ZIP Code: </label>
-                <input type="text" maxLength="5" pattern="[0-9]" placeholder='12345' onChange={(e) => { setZipReg(e.target.value) }} />
+                <input type="text" maxLength="5" placeholder='12345' onChange={(e) => { setZipReg(e.target.value) }} />
 
                 <button type='submit'>Create Account</button>
             </form>
