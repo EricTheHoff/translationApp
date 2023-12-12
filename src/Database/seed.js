@@ -3,6 +3,7 @@ import {
   UserDetail,
   SavedWord,
   dbConnection,
+  FurtherStudy,
 } from "./models.js";
 
 await dbConnection.sync({ force: true });
@@ -18,28 +19,43 @@ const userOne = await UserDetail.create({
   name: "John Doe",
   email: "johndoe1998@gmail.com",
   password: "ilovejohndoe420",
-//   schoolId: 1,
-//   wordId: 1,
-  zipCode: '93457'
+  //   schoolId: 1,
+  //   wordId: 1,
+  zipCode: "93457",
 });
 
 const wordOne = await SavedWord.create({
   word: "novato",
-//   userId: 1,
+  //   userId: 1,
 });
-await userOne.addSavedWord(wordOne)
+await userOne.addSavedWord(wordOne);
 
-const user1 = await UserDetail.findOne()
+const user1 = await UserDetail.findOne();
 const user1Eager = await UserDetail.findOne({
-    where: {
-        userId: 1
-    },
-    include: SavedWord
-})
+  where: {
+    userId: 1,
+  },
+  include: SavedWord,
+});
 
-console.log(user1)
+await FurtherStudy.bulkCreate([{
+  phrase: "Hello, How are You?",
+  userId: 1
+},{
+  phrase: "Howdy, How are You?",
+  userId: 1
+},{
+  phrase: "Hola, How are You?",
+  userId: 1
+},{
+  phrase: "What's Gucci, How are You?",
+  userId: 1
+}]);
+
+
+console.log(user1);
 // console.log(await user1.getSavedWords())
-console.log(user1Eager.savedWords)
+console.log(user1Eager.savedWords);
 
 
-await dbConnection.close()
+await dbConnection.close();
