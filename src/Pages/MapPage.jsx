@@ -79,7 +79,6 @@ function MapPage() {
           `http://localhost:2222/api/places?lat=${lat}&lng=${lng}&radius=${radius}&language=${language}`
         )
         .then(({ data }) => {
-          console.log(data.results);
           //set all places equal to the results sent back by server and map through them to separate by individual location
           const allPlaces = data.results.map((place) => {
             let position = {
@@ -95,7 +94,8 @@ function MapPage() {
             let links = doc.querySelectorAll("a");
             // console.log(links[0].href);
             // console.log(place.photos[0].photo_reference);
-            return (
+            return place.icon ===
+              "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/school-71.png" ? (
               <div key={place.place_id}>
                 <MarkerF
                   position={position}
@@ -114,7 +114,7 @@ function MapPage() {
                         <p>rating: {place.rating}</p>
                         <p> Address: {place.vicinity}</p>
                         <a href={links[0].href}>{links[0].href}</a>
-                        <a href={place.photos[0].photo_reference}>image</a>
+                        <img src={place.icon} />
                         <label>
                           Save To My Schools:
                           <input type="checkbox" />
@@ -124,8 +124,11 @@ function MapPage() {
                   )}
                 </MarkerF>
               </div>
+            ) : (
+              console.log("no")
             );
           });
+
           setPlaces(allPlaces);
           // console.log(language);
         })
