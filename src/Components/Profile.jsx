@@ -20,7 +20,13 @@ const Profile = () => {
 
     const [profileImage, setProfileImage] = useState(user)
     const [editMode, setEditMode] = useState(false)
+    const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+
+    const [currentPassword, setCurrentPassword] = useState("")
+    const [newPassword, setNewPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
+
     const [zipcode, setZipcode] = useState("")
     const [email, setEmail] = useState("")
     const dispatch = useDispatch()
@@ -62,27 +68,37 @@ const Profile = () => {
     }
 
     const getAccount = async () => {
-        await axios.get('/user').then((response) => {
+        await axios.get('/user')
+        
+        .then((response) => {
             setEmail(response.data.email)
             setZipcode(response.data.zipCode)
             setPassword(response.data.password)
-        })
+
+       })
     }
 
     // Edit Profile Information
     const handleSubmit = async (event) => {
         event.preventDefault()
+
+        if (newPassword !== confirmPassword) {
+            alert(`The passwords do not match. Please try again.`)
+            return
+        }
+
         const requestData = {
             email: email,
-            password: password,
+            newPassword: newPassword,
+            currentPassword: currentPassword,
             zipcode: zipcode,
         }
-        const response = await axios.put("/editAccount", requestData)
+        const response = await axios.put(`/editAccount/${id}`, requestData)
         if (response.data.success) {
             setEditMode(false)
             console.log("success")
         } else {
-            console.log("fail")
+            alert(`Something went wrong. Please ensure that you're entering the correct password information before saving.`)
         }
     }
 
@@ -119,7 +135,6 @@ const Profile = () => {
             <div>
                 <h1>Profile</h1>
                 <form onSubmit={handleSubmit}>
-
                     <br />
 
                     <img src={profileImage} />
