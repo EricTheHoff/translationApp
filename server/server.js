@@ -26,7 +26,7 @@ console.log(process.env.VITE_REACT_APP_GOOGLE_API_KEY);
 app.post("/register", handlerFunctions.register);
 
 app.delete("/deleteAccount/:id", handlerFunctions.deleteAccount);
-app.put("/editAccount", handlerFunctions.editAccount);
+app.put("/editAccount/:id", handlerFunctions.editAccount);
 
 app.get("/allSchools", handlerFunctions.getSavedSchools);
 app.delete("/deleteSchools/:schoolId", handlerFunctions.deleteSavedSchools);

@@ -4,31 +4,32 @@ import {
   FurtherStudy,
 } from "../src/Database/models.js";
 import axios from "axios";
+import bcrypt from 'bcryptjs'
 
 const handlerFunctions = {
   register: async (req, res) => {
-    const { name, email, password, zipCode } = req.body;
+    const { email, password, zipCode } = req.body;
 
-    console.log(name, email, password, zipCode);
+    const salt = bcrypt.genSaltSync(12)
+    const hash = await bcrypt.hash(password, salt)
 
-    const alreadyExists = await UserDetail.findAll({
+    const alreadyExists = await UserDetail.findOne({
       where: {
-        name,
         email,
       },
     });
 
-    if (alreadyExists[0]) {
-      res.status(200).send("Username or email already exists");
+    if (alreadyExists) {
+      res.status(500).json({ error: `An account with that email already exists.`});
     } else {
       const newUser = await UserDetail.create({
-        name: name,
         email: email,
-        password: password,
+        password: hash,
         zipCode: zipCode,
       });
 
       req.session.user = newUser;
+      req.session.userId = newUser.userId
 
       res.send({
         message: "account created",
@@ -62,23 +63,39 @@ const handlerFunctions = {
   },
 
   editAccount: async (req, res) => {
-    const { email, password, zipcode } = req.body;
-    const user = await UserDetail.findOne({ where: { email: email } });
+    const { id } = req.params
+    const { email, newPassword, zipcode, currentPassword } = req.body;
+    const user = await UserDetail.findOne({ where: { userId: id } });
+    const hashMatch = await bcrypt.compare(currentPassword, user.password)
 
-    user.email = email;
-    user.password = password;
-    user.zipCode = zipcode;
+    if (newPassword === '') {
+        user.email = email
+        user.zipCode = zipcode
 
-    await user.save();
+        await user.save()
+        res.json({ success: true })
 
-    res.json({ success: true });
+    } else if (hashMatch === false) {
+        res.json({ success: false })
+
+    } else {
+        const salt = bcrypt.genSaltSync(12)
+        const hash = await bcrypt.hash(newPassword, salt)
+        user.email = email;
+        user.password = hash;
+        user.zipCode = zipcode;
+    
+        await user.save();
+        res.json({ success: true });
+    }
   },
 
   login: async (req, res) => {
     const { email, password } = req.body;
     const user = await UserDetail.findOne({ where: { email: email } });
+    const hashMatch = await bcrypt.compare(password, user.password)
 
-    if (user && password === user.password) {
+    if (user && hashMatch === true) {
       req.session.userId = user.userId;
       res.json({ success: true });
     } else {

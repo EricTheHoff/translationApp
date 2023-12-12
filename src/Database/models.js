@@ -20,7 +20,6 @@ SchoolDetail.init(
     address: { type: DataTypes.STRING },
     rating: { type: DataTypes.STRING },
     website: { type: DataTypes.STRING },
-    // userId: { type: DataTypes.INTEGER },
   },
 
   {
@@ -36,11 +35,8 @@ export class UserDetail extends Model {
 UserDetail.init(
   {
     userId: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    name: { type: DataTypes.STRING },
-    email: { type: DataTypes.STRING },
+    email: { type: DataTypes.STRING, unique: true },
     password: { type: DataTypes.STRING },
-    // schoolId: { type: DataTypes.INTEGER },
-    // wordId: { type: DataTypes.INTEGER },
     zipCode: { type: DataTypes.STRING(5) },
   },
 
@@ -60,7 +56,6 @@ SavedWord.init(
     word: { type: DataTypes.STRING(650) },
     original: { type: DataTypes.STRING(500) },
     toLanguage: { type: DataTypes.STRING },
-    // userId: { type: DataTypes.INTEGER },
   },
 
   {

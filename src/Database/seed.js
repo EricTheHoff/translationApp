@@ -5,6 +5,7 @@ import {
   dbConnection,
   FurtherStudy,
 } from "./models.js";
+import bcrypt from 'bcryptjs';
 
 await dbConnection.sync({ force: true });
 await SchoolDetail.create({
@@ -15,18 +16,15 @@ await SchoolDetail.create({
   userId: 1,
 });
 
+const hash = await bcrypt.hash('test', 12)
 const userOne = await UserDetail.create({
-  name: "John Doe",
-  email: "johndoe1998@gmail.com",
-  password: "ilovejohndoe420",
-  //   schoolId: 1,
-  //   wordId: 1,
+  email: "test@test.com",
+  password: hash,
   zipCode: "93457",
 });
 
 const wordOne = await SavedWord.create({
   word: "novato",
-  //   userId: 1,
 });
 await userOne.addSavedWord(wordOne);
 
