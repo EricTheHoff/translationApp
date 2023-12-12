@@ -3,28 +3,27 @@ import axios from "axios";
 
 const handlerFunctions = {
   register: async (req, res) => {
-    const { name, email, password, zipCode } = req.body;
+    const { email, password, zipCode } = req.body;
 
-    console.log(name, email, password, zipCode);
+    console.log(email, password, zipCode);
 
-    const alreadyExists = await UserDetail.findAll({
+    const alreadyExists = await UserDetail.findOne({
       where: {
-        name,
         email,
       },
     });
 
-    if (alreadyExists[0]) {
-      res.status(200).send("Username or email already exists");
+    if (alreadyExists) {
+      res.status(500).json({ error: `An account with that email already exists.`});
     } else {
       const newUser = await UserDetail.create({
-        name: name,
         email: email,
         password: password,
         zipCode: zipCode,
       });
 
       req.session.user = newUser;
+      req.session.userId = newUser.userId
 
       res.send({
         message: "account created",
@@ -58,16 +57,28 @@ const handlerFunctions = {
   },
 
   editAccount: async (req, res) => {
-    const { email, password, zipcode } = req.body;
-    const user = await UserDetail.findOne({ where: { email: email } });
+    const { id } = req.params
+    const { email, newPassword, zipcode, currentPassword } = req.body;
+    const user = await UserDetail.findOne({ where: { userId: id } });
 
-    user.email = email;
-    user.password = password;
-    user.zipCode = zipcode;
+    if (newPassword === '') {
+        user.email = email
+        user.zipCode = zipcode
 
-    await user.save();
+        await user.save()
+        res.json({ success: true })
 
-    res.json({ success: true });
+    } else if (currentPassword !== user.password) {
+        res.json({ success: false })
+
+    } else {
+        user.email = email;
+        user.password = newPassword;
+        user.zipCode = zipcode;
+    
+        await user.save();
+        res.json({ success: true });
+    }
   },
 
   login: async (req, res) => {
@@ -120,7 +131,7 @@ const handlerFunctions = {
       where: { wordId: wordId },
     });
     res.json({ success: true, deletedWord: wordId });
-  },,
+  },
 
   translate: async (req, res) => {
     try {
