@@ -16,16 +16,11 @@ const RegistrationForm = () => {
 
     const register = async (event) => {
         event.preventDefault()
-<<<<<<< HEAD
-        if (usernameReg === "" || passwordReg === "" || emailReg === "" || zipReg === "") {
-            alert("Please enter a valid input")
-=======
         if (emailReg === "" || passwordReg === "" || zipReg === "") {
             alert("All fields must be filled out before creating an account.")
             return
         } else if (passwordReg !== confirmReg) {
             alert("The provided passwords do not match. Please try again.")
->>>>>>> main
             return
         }
 
@@ -33,15 +28,6 @@ const RegistrationForm = () => {
             email: emailReg,
             password: passwordReg,
             zipCode: zipReg
-<<<<<<< HEAD
-        }).then((res) => {
-            console.log(res.data)
-            if (res.data.message === "Information already in use") {
-                alert(res.data.message)
-            } else {
-                navigate("/translate")
-            }
-=======
         })
         .then(async () => {
             const user = await axios.get('/user')
@@ -52,7 +38,6 @@ const RegistrationForm = () => {
         })
         .catch(() => {
             alert(`Account could not be created. There may already be an account registered to that email.`)
->>>>>>> main
         })
     }
 

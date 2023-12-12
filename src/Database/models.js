@@ -37,14 +37,8 @@ UserDetail.init(
     userId: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     email: { type: DataTypes.STRING, unique: true },
     password: { type: DataTypes.STRING },
-<<<<<<< HEAD
     profilePic: {type:DataTypes.STRING},
-    // schoolId: { type: DataTypes.INTEGER },
-    // wordId: { type: DataTypes.INTEGER },
     zipCode: { type: DataTypes.STRING(5) }
-=======
-    zipCode: { type: DataTypes.STRING(5) },
->>>>>>> main
   },
 
   {
@@ -70,42 +64,42 @@ SavedWord.init(
     modelName: "savedWords",
   }
 );
-<<<<<<< HEAD
-export class Images extends Model {
-=======
 export class FurtherStudy extends Model {
->>>>>>> main
   [util.inspect.custom]() {
     return this.toJSON();
   }
 }
-<<<<<<< HEAD
-Images.init(
-  {
-    imageId: {
-=======
 FurtherStudy.init(
   {
     phraseId: {
->>>>>>> main
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-<<<<<<< HEAD
-    image: { type: DataTypes.STRING },
-  },
-
-  {
-    sequelize: dbConnection,
-    modelName: "images",
-=======
     phrase: { type: DataTypes.STRING },
   },
   {
     sequelize: dbConnection,
     modelName: "furtherStudy",
->>>>>>> main
+  }
+);
+export class Images extends Model {
+  [util.inspect.custom]() {
+    return this.toJSON();
+  }
+}
+Images.init(
+  {
+    imageId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    image: { type: DataTypes.STRING },
+  },
+  {
+    sequelize: dbConnection,
+    modelName: "furtherStudy",
   }
 );
 
@@ -114,13 +108,11 @@ UserDetail.belongsToMany(SchoolDetail, { through: "SchoolUserDetail" });
 
 UserDetail.hasMany(SavedWord, { foreignKey: "userId" });
 // create userDetails.getSavedWords(), userDetails.addSavedWords(). it is going to try to create userDetails.createSavedWord
-<<<<<<< HEAD
-SavedWord.belongsTo(UserDetail, {foreignKey: "userId" });
 
 UserDetail.hasMany(Images, { foreignKey: "userId" });
 Images.belongsTo(UserDetail, { foreignKey: "userId" });
-=======
+
 SavedWord.belongsTo(UserDetail, { foreignKey: "userId" });
 FurtherStudy.belongsTo(UserDetail, { foreignKey: "userId" });
 UserDetail.hasMany(FurtherStudy, { foreignKey: "userId" });
->>>>>>> main
+

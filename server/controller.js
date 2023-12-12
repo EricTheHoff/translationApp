@@ -8,48 +8,7 @@ import bcrypt from 'bcryptjs'
 
 
 const handlerFunctions = {
-<<<<<<< HEAD
 
-  register: async (req, res) => {
-    const { name, email, password, zipCode, image } = req.body;
-
-
-    console.log(name, email, password, zipCode);
-
-    const alreadyExists = await UserDetail.findAll({
-      where: {
-        email,
-      },
-    });
-
-    if (alreadyExists.length > 0) {
-
-      res.json({ message: "Information already in use" });
-      return
-
-    } else {
-      const newUser = await UserDetail.create({
-        name: name,
-        email: email,
-        password: password,
-        zipCode: zipCode,
-        image: image,
-      });
-
-      console.log(newUser)
-
-
-      req.session.user = newUser;
-
-      res.send(IMAGE_DATA, {
-        message: "account created",
-        user_id: newUser.userId,
-      });
-    }
-
-  },
-
-=======
   register: async (req, res) => {
     const { email, password, zipCode } = req.body;
 
@@ -81,57 +40,10 @@ const handlerFunctions = {
     }
   },
 
->>>>>>> main
   getSavedSchools: async (req, res) => {
     const savedSchool = await SchoolDetail.findAll();
     res.json(savedSchool);
   },
-<<<<<<< HEAD
-
-
-
-  deleteSavedSchools: async (req, res) => {
-    const { schoolId } = req.params;
-    await SchoolDetail.destroy({
-      where: { schoolId: schoolId },
-    });
-
-
-    res.json({ success: true, deletedSchool: schoolId });
-
-  },
-
-
-  deleteAccount: async (req, res) => {
-    const { id } = req.params
-    const user = await UserDetail.findOne({
-      where: { userId: id }
-    })
-    await user.destroy()
-    req.session.destroy()
-    res.json({ success: true })
-  },
-
-  editAccount: async (req, res) => {
-    const { email, password, zipcode } = req.body
-    const user = await UserDetail.findOne({ where: { email: email } })
-
-    user.email = email
-    user.password = password
-    user.zipCode = zipcode
-
-    await user.save()
-
-    res.json({ success: true })
-  },
-
-
-  login: async (req, res) => {
-    const { email, password } = req.body;
-    const user = await UserDetail.findOne({ where: { email: email } });
-
-    if (user && password === user.password) {
-=======
 
   deleteSavedSchools: async (req, res) => {
     const { schoolId } = req.params;
@@ -186,7 +98,6 @@ const handlerFunctions = {
     const hashMatch = await bcrypt.compare(password, user.password)
 
     if (user && hashMatch === true) {
->>>>>>> main
       req.session.userId = user.userId;
       res.json({ success: true });
     } else {
@@ -194,10 +105,6 @@ const handlerFunctions = {
     }
   },
 
-<<<<<<< HEAD
-
-=======
->>>>>>> main
   user: async (req, res) => {
     const id = req.session.userId;
     const user = await UserDetail.findOne({ where: { userId: id } });
@@ -205,10 +112,6 @@ const handlerFunctions = {
     res.send(user);
   },
 
-<<<<<<< HEAD
-
-=======
->>>>>>> main
   userStatus: async (req, res) => {
     if (req.session.userId) {
       const user = await UserDetail.findByPk(req.session.userId);
@@ -222,7 +125,6 @@ const handlerFunctions = {
     req.session.destroy();
     res.json({ success: true });
   },
-<<<<<<< HEAD
 
   getSavedSchools: async (req, res) => {
     const savedSchool = await SchoolDetail.findAll();
@@ -250,8 +152,6 @@ const handlerFunctions = {
     })
     res.json(image)
   },
-=======
->>>>>>> main
 
   getSavedWords: async (req, res) => {
     const savedTranslation = await SavedWord.findAll();
@@ -267,38 +167,15 @@ const handlerFunctions = {
   deleteSavedWords: async (req, res) => {
     const { wordId } = req.params;
     await SavedWord.destroy({
-<<<<<<< HEAD
-      where: { wordId: wordId }
-    })
-    res.json({ success: true, deletedWord: wordId })
-=======
+
       where: { wordId: wordId },
     });
     res.json({ success: true, deletedWord: wordId });
->>>>>>> main
   },
 
   translate: async (req, res) => {
     try {
-<<<<<<< HEAD
-      const { translation, language, source } = req.body
-      const body = {
-        'text': [translation],
-        'target_lang': language,
-        'source_lang': source
-      }
 
-      const response = await axios.post('https://api-free.deepl.com/v2/translate', body, {
-        headers: {
-          'Authorization': process.env.REACT_APP_DEEPL_API_KEY
-        }
-      })
-      res.json(response.data)
-    }
-    catch (error) {
-      console.error(error)
-      res.status(500).json({ error: 'Internal Server Error' })
-=======
       const { translation, language, source } = req.body;
       const body = {
         text: [translation],
@@ -320,31 +197,17 @@ const handlerFunctions = {
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: "Internal Server Error" });
->>>>>>> main
     }
   },
 
   saveTranslation: async (req, res) => {
-<<<<<<< HEAD
-    const { translatedText, originalText, id, toLanguage } = req.body
-=======
+
     const { translatedText, originalText, id, toLanguage } = req.body;
->>>>>>> main
 
     const translation = await SavedWord.create({
       word: translatedText,
       original: originalText,
       userId: id,
-<<<<<<< HEAD
-      toLanguage: toLanguage
-    })
-    if (translation) {
-      res.status(200).json({ message: 'OK' })
-    } else {
-      res.status(500).json({ error: 'Internal Server Error' })
-    }
-
-=======
       toLanguage: toLanguage,
     });
     if (translation) {
@@ -380,7 +243,6 @@ const handlerFunctions = {
       website: website,
     });
     res.json(savingTutor);
->>>>>>> main
   },
 };
 
