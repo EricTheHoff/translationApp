@@ -35,7 +35,7 @@ app.post("/login", handlerFunctions.login);
 app.post("/api/logout", handlerFunctions.logout);
 app.get("/user", handlerFunctions.user);
 app.get("/user-status", handlerFunctions.userStatus);
-app.get("/allSavedWords", handlerFunctions.getSavedWords)
+app.get("/saved-translations", handlerFunctions.getSavedTranslations)
 app.get("/savedWords/:wordId", handlerFunctions.getWordsById)
 app.get("/savedPhrases", handlerFunctions.getSavedPhrases)
 app.delete("/deleteWords/:wordId", handlerFunctions.deleteSavedWords)

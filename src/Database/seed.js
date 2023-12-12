@@ -24,7 +24,9 @@ const userOne = await UserDetail.create({
 });
 
 const wordOne = await SavedWord.create({
-  word: "novato",
+  word: "Hvor kommer du fra?",
+  original: "Where do you come from?",
+  toLanguage: 'NB'
 });
 await userOne.addSavedWord(wordOne);
 

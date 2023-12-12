@@ -1,4 +1,4 @@
-import { SchoolDetail, UserDetail, FurtherStudy} from "../src/Database/models.js";
+import { SchoolDetail, UserDetail, FurtherStudy, SavedWord } from "../src/Database/models.js";
 import axios from "axios";
 import bcrypt from 'bcryptjs'
 
@@ -120,9 +120,15 @@ const handlerFunctions = {
     res.json({ success: true });
   },
 
-  getSavedWords: async (req, res) => {
-    const savedTranslation = await SavedWord.findAll();
-    res.json(savedTranslation);
+  getSavedTranslations: async (req, res) => {
+    const id = req.session.userId
+    const savedTranslations = await SavedWord.findAll({ where: { userId: id } });
+
+    if (savedTranslations) {
+        res.json(savedTranslations);
+    } else {
+        res.json({ success: false })
+    }
   },
 
   getWordsById: async (req, res) => {
