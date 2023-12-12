@@ -41,9 +41,8 @@ app.get("/savedWords/:wordId", handlerFunctions.getWordsById)
 app.delete("/deleteWords/:wordId", handlerFunctions.deleteSavedWords)
 
 
-app.get("/get-image", handlerFunctions.getImage);
-app.post("/image", handlerFunctions.profileImage);
-
+// app.get("/get-image", handlerFunctions.getImage);
+// app.post("/image", handlerFunctions.profileImage);
 
 
 app.post('/translate', handlerFunctions.translate)
@@ -58,7 +57,7 @@ app.get('/koala', imgFunctions.koalaImg)
 app.get('/meerkat', imgFunctions.meerkatImg)
 app.get('/panda', imgFunctions.pandaImg)
 app.get('/rabbit', imgFunctions.rabbitImg)
-app.get('sealion', imgFunctions.sealionImg)
+app.get('/sealion', imgFunctions.sealionImg)
 
 
 app.get("/api/places", async (req, res) => {

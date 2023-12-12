@@ -18,7 +18,8 @@ await SchoolDetail.create({
 const userOne = await UserDetail.create({
   name: "John Doe",
   email: "johndoe1998@gmail.com",
-  password: "ilovejohndoe420",
+  password: "asdf",
+  profilePic: null,
   //   schoolId: 1,
   //   wordId: 1,
   zipCode: '93457',
@@ -39,31 +40,31 @@ const user1Eager = await UserDetail.findOne({
 });
 
 const image1 = await Images.create({
-  image: "../Images/Avatars/bear.png",
+  image: "bear",
 });
 const image2 = await Images.create({
-  image: "../Images/Avatars/cat.png",
+  image: "cat",
 });
 const image3 = await Images.create({
-  image: "../Images/Avatars/chicken.png",
+  image: "chicken",
 });
 const image4 = await Images.create({
-  image: "../../Images/Avatars/dog.png",
+  image: "dog",
 });
 const image5 = await Images.create({
-  image: "../../Images/Avatars/koala.png",
+  image: "koala",
 });
 const image6 = await Images.create({
-  image: "../../Images/Avatars/meerkat.png",
+  image: "meerkat",
 });
 const image7 = await Images.create({
-  image: "../../Images/Avatars/panda.png",
+  image: "panda",
 });
 const image8 = await Images.create({
-  image: "../../Images/Avatars/rabbit.png",
+  image: "rabbit",
 });
 const image9 = await Images.create({
-  image: "../../Images/Avatars/sea-lion.png",
+  image: "sealion",
 });
 
 

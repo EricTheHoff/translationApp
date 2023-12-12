@@ -1,4 +1,5 @@
-import React from 'react';
+import { useState } from 'react'
+import axios from 'axios'
 import bear from "../Images/Avatars/bear.png"
 import cat from "../Images/Avatars/cat.png"
 import chicken from "../Images/Avatars/chicken.png"
@@ -10,42 +11,51 @@ import rabbit from "../Images/Avatars/rabbit.png"
 import sealion from "../Images/Avatars/sealion.png"
 import '../Styles/imageGrid.css'
 
-const ImageGrid = () => {
+const ImageGrid = ({ setProfile }) => {
 
     const bearFunction = async () => {
-        await axios.get('/bear')
+        await axios.get('/bear').then((response) => {
+            setProfile(bear)
+        })
     }
 
     const catFunction = async () => {
-        await axios.get('/cat')
+        setProfile(cat)
     }
 
     const chickenFunction = async () => {
         await axios.get('/chicken')
+        setProfile(chicken)
     }
 
     const dogFunction = async () => {
         await axios.get('/dog')
+        setProfile(dog)
     }
 
     const koalaFunction = async () => {
         await axios.get('/koala')
+        setProfile(koala)
     }
 
     const meerkatFunction = async () => {
         await axios.get('/meerkat')
+        setProfile(meerkat)
     }
 
     const pandaFunction = async () => {
         await axios.get('/panda')
+        setProfile(panda)
     }
 
     const rabbitFunction = async () => {
         await axios.get('/rabbit')
+        setProfile(rabbit)
     }
 
     const sealionFunction = async () => {
         await axios.get('/sealion')
+        setProfile(sealion)
     }
 
     return (

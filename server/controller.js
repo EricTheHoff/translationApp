@@ -2,7 +2,7 @@ import { SchoolDetail, UserDetail, SavedWord } from "../src/Database/models.js";
 import axios from 'axios'
 
 let IMAGE_DATA = [
-  { image: "https://static.vecteezy.com/system/resources/previews/005/129/844/non_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg" }
+  { image: "../" }
 ]
 
 const handlerFunctions = {

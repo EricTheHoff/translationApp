@@ -39,6 +39,7 @@ UserDetail.init(
     name: { type: DataTypes.STRING },
     email: { type: DataTypes.STRING },
     password: { type: DataTypes.STRING },
+    profilePic: {type:DataTypes.STRING},
     // schoolId: { type: DataTypes.INTEGER },
     // wordId: { type: DataTypes.INTEGER },
     zipCode: { type: DataTypes.STRING(5) }

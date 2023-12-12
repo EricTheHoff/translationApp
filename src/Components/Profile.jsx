@@ -5,20 +5,62 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Styles/profile.css'
 import user from "../Images/Avatars/user.png"
+import bear from "../Images/Avatars/bear.png"
+import cat from "../Images/Avatars/cat.png"
+import chicken from "../Images/Avatars/chicken.png"
+import dog from "../Images/Avatars/dog.png"
+import koala from "../Images/Avatars/koala.png"
+import meerkat from "../Images/Avatars/meerkat.png"
+import panda from "../Images/Avatars/panda.png"
+import rabbit from "../Images/Avatars/rabbit.png"
+import sealion from "../Images/Avatars/sealion.png"
 import ImageGrid from './ImageGrid';
 
 
 const Profile = () => {
+
+    const [profileImage, setProfileImage] = useState(user)
     const [editMode, setEditMode] = useState(false)
-    // const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [zipcode, setZipcode] = useState("")
     const [email, setEmail] = useState("")
-    // const [file, setFile] = useState("")
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const id = useSelector((state) => state.userId)
+
+
+    switch (dispatch({type: 'profileImage'})) {
+
+        case 'bear': dispatch({type: 'profileImage', payload: bear})
+            break
+
+        case 'cat': dispatch({type: 'profileImage', payload: cat})
+            break
+
+        case 'chicken': dispatch({type: 'profileImage', payload: chicken})
+            break
+
+        case 'dog': dispatch({type: 'profileImage', payload: dog})
+            break
+
+        case 'koala': dispatch({type: 'profileImage', payload: koala})
+            break
+
+        case 'meerkat': dispatch({type: 'profileImage', payload: meerkat})
+            break
+
+        case 'panda': dispatch({type: 'profileImage', payload: panda})
+            break
+
+        case 'rabbit': dispatch({type: 'profileImage', payload: rabbit})
+            break
+
+        case 'sealion': dispatch({type: 'profileImage', payload: sealion})
+            break
+        default : dispatch({type: 'profileImage', payload: user})
+
+    }
 
 
     // // Upload Profile Image 
@@ -82,19 +124,15 @@ const Profile = () => {
     if (!editMode) {
         return (
             <div>
-                <img src={user} alt="../Images/Avatars/user.png" />
+                <img src={profileImage} />
                 <p>Email: {email}</p>
                 <p>ZIP Code: {zipcode}</p>
                 <button onClick={() => setEditMode(true)}>Edit</button>
 
                 <br />
 
-                <br />
-
-
-                <br />
-
                 {/* <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a> */}
+               
             </div>
 
 
@@ -107,13 +145,13 @@ const Profile = () => {
 
                     <br />
                     {/* <input type="file" onChange={handleChange} /> */}
-                    <img src={user} />
+                    <img src={profileImage} />
 
                     <br />
                     <br />
 
                     <label>Choose Profile Image</label>
-                    <ImageGrid />
+                    <ImageGrid setProfile={setProfileImage}  />
 
                     <br />
 
