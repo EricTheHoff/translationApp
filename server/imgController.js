@@ -11,67 +11,67 @@ const imgFunctions = {
     },
 
     catImg: async (req, res) => {
-        const { imageId } = req.body;
+
         let image = await Images.findOne({
             where: { imageId: 1 }
         })
-          res.json(image)
+        res.json(image)
     },
 
     chickenImg: async (req, res) => {
-        const { imageId } = req.body;
-        await Images.findOne({
-            where: { imageId: imageId }
+
+        let image = await Images.findOne({
+            where: { imageId: 1 }
         })
-          res.json(imageId)
+        res.json(image)
     },
 
     dogImg: async (req, res) => {
-        const { imageId } = req.body;
-        await Images.findOne({
-            where: { imageId: imageId }
+
+        let image = await Images.findOne({
+            where: { imageId: 1 }
         })
-          res.json(imageId)
+        res.json(image)
     },
 
     koalaImg: async (req, res) => {
-        const { imageId } = req.body;
-        await Images.findOne({
-            where: { imageId: imageId }
+
+        let image = await Images.findOne({
+            where: { imageId: 1 }
         })
-          res.json(imageId)
+        res.json(image)
     },
 
     meerkatImg: async (req, res) => {
-        const { imageId } = req.body;
-        await Images.findOne({
-            where: { imageId: imageId }
+
+        let image = await Images.findOne({
+            where: { imageId: 1 }
         })
-          res.json(imageId)
+        res.json(image)
     },
 
     pandaImg: async (req, res) => {
-        const { imageId } = req.body;
-        await Images.findOne({
-            where: { imageId: imageId }
+
+        let image = await Images.findOne({
+            where: { imageId: 1 }
         })
-          res.json(imageId)
+        res.json(image)
     },
 
     rabbitImg: async (req, res) => {
-        const { imageId } = req.body;
-        await Images.findOne({
-            where: { imageId: imageId }
+
+        let image = await Images.findOne({
+            where: { imageId: 1 }
         })
-          res.json(imageId)
+        res.json(image)
     },
 
     sealionImg: async (req, res) => {
-        const { imageId } = req.body;
-        await Images.findOne({
-            where: { imageId: imageId }
+
+        let image = await Images.findOne({
+            where: { imageId: 1 }
         })
-          res.json(imageId)
+        res.json(image)
     },
 
 }

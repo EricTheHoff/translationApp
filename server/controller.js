@@ -1,9 +1,6 @@
 import { SchoolDetail, UserDetail, SavedWord } from "../src/Database/models.js";
 import axios from 'axios'
 
-let IMAGE_DATA = [
-  { image: "../" }
-]
 
 const handlerFunctions = {
 

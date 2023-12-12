@@ -16,7 +16,6 @@ import rabbit from "../Images/Avatars/rabbit.png"
 import sealion from "../Images/Avatars/sealion.png"
 import ImageGrid from './ImageGrid';
 
-
 const Profile = () => {
 
     const [profileImage, setProfileImage] = useState(user)
@@ -29,62 +28,46 @@ const Profile = () => {
 
     const id = useSelector((state) => state.userId)
 
+    switch (dispatch({ type: 'profileImage' })) {
 
-    switch (dispatch({type: 'profileImage'})) {
-
-        case 'bear': dispatch({type: 'profileImage', payload: bear})
+        case 'bear': dispatch({ type: 'profileImage', payload: bear })
             break
 
-        case 'cat': dispatch({type: 'profileImage', payload: cat})
+        case 'cat': dispatch({ type: 'profileImage', payload: cat })
             break
 
-        case 'chicken': dispatch({type: 'profileImage', payload: chicken})
+        case 'chicken': dispatch({ type: 'profileImage', payload: chicken })
             break
 
-        case 'dog': dispatch({type: 'profileImage', payload: dog})
+        case 'dog': dispatch({ type: 'profileImage', payload: dog })
             break
 
-        case 'koala': dispatch({type: 'profileImage', payload: koala})
+        case 'koala': dispatch({ type: 'profileImage', payload: koala })
             break
 
-        case 'meerkat': dispatch({type: 'profileImage', payload: meerkat})
+        case 'meerkat': dispatch({ type: 'profileImage', payload: meerkat })
             break
 
-        case 'panda': dispatch({type: 'profileImage', payload: panda})
+        case 'panda': dispatch({ type: 'profileImage', payload: panda })
             break
 
-        case 'rabbit': dispatch({type: 'profileImage', payload: rabbit})
+        case 'rabbit': dispatch({ type: 'profileImage', payload: rabbit })
             break
 
-        case 'sealion': dispatch({type: 'profileImage', payload: sealion})
+        case 'sealion': dispatch({ type: 'profileImage', payload: sealion })
             break
-        default : dispatch({type: 'profileImage', payload: user})
+
+        default: dispatch({ type: 'profileImage', payload: user })
 
     }
-
-
-    // // Upload Profile Image 
-    // const handleChange = async (e) => {
-    //     await axios.get('/get-image')
-    //     console.log(e.target.files)
-    //     setFile(URL.createObjectURL(e.target.files[0]))
-    // }
-
-    // // const profileImage = async (e) => {
-    // //     await axios.post('/image')
-    // // }
-
 
     const getAccount = async () => {
         await axios.get('/user').then((response) => {
             setEmail(response.data.email)
             setZipcode(response.data.zipCode)
             setPassword(response.data.password)
-            // setFile(response.data.image)
         })
     }
-
-
 
     // Edit Profile Information
     const handleSubmit = async (event) => {
@@ -103,9 +86,6 @@ const Profile = () => {
         }
     }
 
-
-
-
     // Delete Account
     const handleDelete = async () => {
         const response = await axios.delete(`/deleteAccount/${id}`);
@@ -114,8 +94,6 @@ const Profile = () => {
             navigate('/')
         }
     }
-
-
 
     useEffect(() => {
         getAccount()
@@ -132,9 +110,8 @@ const Profile = () => {
                 <br />
 
                 {/* <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a> */}
-               
-            </div>
 
+            </div>
 
         )
     } else {
@@ -144,14 +121,14 @@ const Profile = () => {
                 <form onSubmit={handleSubmit}>
 
                     <br />
-                    {/* <input type="file" onChange={handleChange} /> */}
+
                     <img src={profileImage} />
 
                     <br />
                     <br />
 
                     <label>Choose Profile Image</label>
-                    <ImageGrid setProfile={setProfileImage}  />
+                    <ImageGrid setProfile={setProfileImage} />
 
                     <br />
 
@@ -171,7 +148,9 @@ const Profile = () => {
                     <br />
 
                     <button type="submit">Save</button>
+
                 </form>
+
                 <button onClick={handleDelete}>Delete Account</button>
 
             </div>

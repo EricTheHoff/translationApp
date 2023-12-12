@@ -2,5 +2,11 @@ img {
     width: 90px;
     height: 90px;
     border-radius: 60px;
-    object-fit: cover
+    object-fit: cover;
+    border: none
+}
+
+img:hover {
+    width: 93px;
+    height: 93px;
 }
