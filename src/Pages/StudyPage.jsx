@@ -6,7 +6,6 @@ import axios from "axios";
 
 const StudyPage = () => {
   const [savedPhrases, setSavedPhrases] = useState([{ userId: 0, phrase: "" }]);
-  const [isLoading, setIsLoading] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
