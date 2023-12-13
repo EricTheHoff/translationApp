@@ -1,21 +1,18 @@
 import React from 'react'
 import Flashcard from './Flashcard.jsx'
-import { useState } from 'react'
 
-const StudyList = ({ flashcards }) => {
+const StudyList = ({ flashcards, configuration }) => {
+    
     return (
         <>
-            <div>
-                <p>Test</p>
-            </div>
-            {/* <div className='card-grid'>
+            <div className='card-grid'>
                 {flashcards.map(el => {
                     return <Flashcard
                     flashcard={el}
                     key={el.id}
                     />
                 })}
-            </div> */}
+            </div>
         </>
 )
 }

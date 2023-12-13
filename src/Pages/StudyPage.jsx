@@ -1,12 +1,33 @@
 import React from "react";
-import StudyList from "../Components/StudyList.jsx";
-import { useSelector } from "react-redux";
 import { useEffect, useState  } from "react";
 import axios from "axios";
 import Flashcard from "../Components/Flashcard.jsx";
+import StudyList from "../Components/StudyList.jsx";
 
 const StudyPage = () => {
   const [flashcards, setFlashcards] = useState([])
+  const [filteredCards, setFilteredCards] = useState([])
+  const [filteredNo, setFilteredNo] = useState([])
+  const [language, setLanguage] = useState('')
+  const [englishFront, setEnglishFront] = useState(false)
+  const [noOfCards, setNoOfCards] = useState(1)
+  const [display, setDisplay] = useState(false)
+
+  const handleSubmit = (e, number) => {
+    e.preventDefault()
+
+    let result = []
+    for (let i = 0; i < number; i++) {
+        let randomIndex = Math.floor(Math.random() * filteredCards.length)
+        if (result.includes(filteredCards[randomIndex])) {
+            i--
+        } else {
+            result.push(filteredCards[randomIndex])
+        }
+    }
+    setFilteredNo(result)
+    setDisplay(true)
+  }
 
   useEffect(() => {
     axios.get(`/saved-translations`)
@@ -19,25 +40,11 @@ const StudyPage = () => {
     })
   },[])
 
-//   useEffect(() => {
-//     console.log(flashcards)
-//   },[flashcards])
+  useEffect(() => {
+    const filteredResults = flashcards.filter((el) => el.toLanguage === language)
+    setFilteredCards(filteredResults)
+  },[language])
 
-//   useEffect(() => {
-//     let mapResults = flashcards.map((el) => {
-//         const { wordId, word, original, toLanguage } = el
-
-//         return (
-//             <Flashcard
-//             key={wordId}
-//             translatedPhrase={word}
-//             englishPhrase={original}
-//             toLanguage={toLanguage}
-//             />
-//         )
-//     })
-//     setCollection(mapResults)
-//   },[])
 
 
 
@@ -85,25 +92,74 @@ const StudyPage = () => {
 //     </div>
 //   );
 
-    return (
-        <>
-            <div>TESTING - PLEASE IGNORE</div>
+    if (display === false) {
+        return (
+            <>
+                <div>TESTING - PLEASE IGNORE</div>
 
-            <div>
-                {flashcards.map((el) => {
-                    return (
-                        <Flashcard
-                        key={el.wordId}
-                        flashcard={el}
-                        />
-                    )
-                })}
-            </div>
-            {/* <StudyList
-            flashcards={flashcards}
-            /> */}
-        </>
-    )
+                <form onSubmit={(e) => handleSubmit(e, noOfCards)}>
+
+                    <label htmlFor='english-front'>Choose Flashcard Configuration: </label>
+                    <select name='english-front' onChange={(e) => setEnglishFront(e.target.value)}>
+                        <option selected disabled>--Choose a Configuration--</option>
+                        <option value={false}>English Text on the Back</option>
+                        <option value={true}>English Text on the Front</option>
+                    </select>
+        
+                    <br/>
+
+                    <label htmlFor='quantity'>Number of Flashcards: </label>
+                    <input type='number' name='quantity' onChange={(e) => setNoOfCards(e.target.value)}/>
+
+                    <br/>
+
+                    <label htmlFor='language'>Choose a Language: </label>
+                    <select name='language' onChange={(e) => setLanguage(e.target.value)}>
+                        <option value='' selected disabled>--Choose a Language--</option>
+                        <option value='NB'>Norwegian (Bokmål)</option>
+                        <option value='ZH'>Chinese</option>
+                    </select>
+
+                    <br/>
+
+                    <button type='submit'>Study</button>
+
+                </form>
+
+                {/* <div>
+                    {flashcards.map((el) => {
+                        return (
+                            <Flashcard
+                            key={el.wordId}
+                            flashcard={el}
+                            />
+                        )
+                    })}
+                </div> */}
+            </>
+        )
+    } else {
+        return (
+            <>
+                {/* <StudyList
+                flashcards={filteredCards}
+                configuration={englishFront}
+                /> */}
+                <div className='card-grid'>
+                    {filteredNo.map((el) => {
+                            return (
+                                <Flashcard
+                                key={el.wordId}
+                                flashcard={el}
+                                configuration={englishFront}
+                                />
+                            )
+                        })}
+                </div>
+                <button onClick={() => setDisplay(false)}>Study Another Language</button>
+            </>
+        )
+    }
 }
 
 export default StudyPage;
