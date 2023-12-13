@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import '../Styles/profile.css'
 import user from "../Images/Avatars/user.png"
 import bear from "../Images/Avatars/bear.png"
@@ -36,15 +36,15 @@ const Profile = () => {
 
     const getAccount = async () => {
         await axios.get('/user')
-        
-        .then((response) => {
-            setEmail(response.data.email)
-            setZipcode(response.data.zipCode)
-            setPassword(response.data.password)
-            setProfileImage(response.data.profilePic)
-            console.log(response.data.profilePic)
 
-       })
+            .then((response) => {
+                setEmail(response.data.email)
+                setZipcode(response.data.zipCode)
+                setPassword(response.data.password)
+                setProfileImage(response.data.profilePic)
+                console.log(response.data.profilePic)
+
+            })
     }
 
     // Edit Profile Information
@@ -81,6 +81,13 @@ const Profile = () => {
         }
     }
 
+    const cancelButton = () => {
+        if (editMode) {
+            setEditMode(false)
+            window.location.reload()
+        }
+    }
+
     useEffect(() => {
         getAccount()
     }, [])
@@ -91,6 +98,7 @@ const Profile = () => {
                 <img src={imageFiles[profileImage] ? imageFiles[profileImage] : profileImage} />
                 <p>Email: {email}</p>
                 <p>ZIP Code: {zipcode}</p>
+
                 <button onClick={() => setEditMode(true)}>Edit</button>
 
                 <br />
@@ -133,6 +141,8 @@ const Profile = () => {
                     <br />
 
                     <button type="submit">Save</button>
+
+                    <button onClick={cancelButton}>Cancel</button>
 
                 </form>
 
