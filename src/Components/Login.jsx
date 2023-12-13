@@ -5,6 +5,13 @@ import React from "react";
 const Login = ({ login }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordShown, setPasswordShown] = useState(false);
+  
+  
+    const myPassword= () => {
+    
+      setPasswordShown(!passwordShown);
+    };
 
   return (
     <>
@@ -27,14 +34,13 @@ const Login = ({ login }) => {
         <label htmlFor="password">Password: </label>
         <br></br>
         <input
-          type="password"
+          type={passwordShown ? "text" : "password"}
           id="password"
           onChange={(e) => setPassword(e.target.value)}
         />
         <br></br>
-
         <button type="submit">Login</button>
-
+        <button type="button" onClick={myPassword}>Show Password</button>
         <br></br>
 
         <p>
@@ -47,3 +53,4 @@ const Login = ({ login }) => {
 };
 
 export default Login;
+
