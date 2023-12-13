@@ -246,7 +246,7 @@ const handlerFunctions = {
       const { name, rating, vicinity, website } = req.body;
 
       // Check if the tutor already exists in the database
-      const existingTutor = await SchoolDetail.findOne({
+      const existingTutor = await SchoolDetail.findAll({
         where: {
           name: name,
         },
