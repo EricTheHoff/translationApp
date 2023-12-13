@@ -4,14 +4,14 @@ import {
   FurtherStudy,
 } from "../src/Database/models.js";
 import axios from "axios";
-import bcrypt from 'bcryptjs'
+import bcrypt from "bcryptjs";
 
 const handlerFunctions = {
   register: async (req, res) => {
     const { email, password, zipCode } = req.body;
 
-    const salt = bcrypt.genSaltSync(12)
-    const hash = await bcrypt.hash(password, salt)
+    const salt = bcrypt.genSaltSync(12);
+    const hash = await bcrypt.hash(password, salt);
 
     const alreadyExists = await UserDetail.findOne({
       where: {
@@ -20,7 +20,9 @@ const handlerFunctions = {
     });
 
     if (alreadyExists) {
-      res.status(500).json({ error: `An account with that email already exists.`});
+      res
+        .status(500)
+        .json({ error: `An account with that email already exists.` });
     } else {
       const newUser = await UserDetail.create({
         email: email,
@@ -29,7 +31,7 @@ const handlerFunctions = {
       });
 
       req.session.user = newUser;
-      req.session.userId = newUser.userId
+      req.session.userId = newUser.userId;
 
       res.send({
         message: "account created",
@@ -63,37 +65,35 @@ const handlerFunctions = {
   },
 
   editAccount: async (req, res) => {
-    const { id } = req.params
+    const { id } = req.params;
     const { email, newPassword, zipcode, currentPassword } = req.body;
     const user = await UserDetail.findOne({ where: { userId: id } });
-    const hashMatch = await bcrypt.compare(currentPassword, user.password)
+    const hashMatch = await bcrypt.compare(currentPassword, user.password);
 
-    if (newPassword === '') {
-        user.email = email
-        user.zipCode = zipcode
+    if (newPassword === "") {
+      user.email = email;
+      user.zipCode = zipcode;
 
-        await user.save()
-        res.json({ success: true })
-
+      await user.save();
+      res.json({ success: true });
     } else if (hashMatch === false) {
-        res.json({ success: false })
-
+      res.json({ success: false });
     } else {
-        const salt = bcrypt.genSaltSync(12)
-        const hash = await bcrypt.hash(newPassword, salt)
-        user.email = email;
-        user.password = hash;
-        user.zipCode = zipcode;
-    
-        await user.save();
-        res.json({ success: true });
+      const salt = bcrypt.genSaltSync(12);
+      const hash = await bcrypt.hash(newPassword, salt);
+      user.email = email;
+      user.password = hash;
+      user.zipCode = zipcode;
+
+      await user.save();
+      res.json({ success: true });
     }
   },
 
   login: async (req, res) => {
     const { email, password } = req.body;
     const user = await UserDetail.findOne({ where: { email: email } });
-    const hashMatch = await bcrypt.compare(password, user.password)
+    const hashMatch = await bcrypt.compare(password, user.password);
 
     if (user && hashMatch === true) {
       req.session.userId = user.userId;
@@ -108,6 +108,14 @@ const handlerFunctions = {
     const user = await UserDetail.findOne({ where: { userId: id } });
 
     res.send(user);
+  },
+  userSchools: async (req, res) => {
+    const user = await UserDetail.findOne({
+      where: { userId: req.session.userId },
+      include: SchoolDetail,
+    });
+
+    res.json(user);
   },
 
   userStatus: async (req, res) => {
@@ -201,16 +209,49 @@ const handlerFunctions = {
     res.json(savingWord);
   },
   saveTutor: async (req, res) => {
-    const { name, rating, vicinity, website } = req.body;
-    console.log(req.body);
-    console.log("hello");
-    const savingTutor = await SchoolDetail.create({
-      name: name,
-      rating: rating,
-      address: vicinity,
-      website: website,
-    });
-    res.json(savingTutor);
+    const userId = req.session.userId;
+
+    try {
+      const { name, rating, vicinity, website } = req.body;
+
+      // Check if the tutor already exists in the database
+      const existingTutor = await SchoolDetail.findOne({
+        where: {
+          name: name,
+        },
+      });
+
+      if (!existingTutor) {
+        // If the tutor doesn't exist, create a new record in the database
+        const savingTutor = await SchoolDetail.create({
+          name: name,
+          rating: rating,
+          address: vicinity,
+          website: website,
+        });
+
+        // Associate the new tutor with the user who added it
+        const user = await UserDetail.findByPk(userId);
+        if (user) {
+          // Create an entry in the SchoolUserDetail table with the userId and savingTutorId
+          // await user.addSchoolsAddedByUser(savingTutor);
+          await user.addSchoolDetail(savingTutor);
+        }
+
+        // Fetch user data including added schools
+        const updatedUser = await UserDetail.findByPk(userId, {
+          include: SchoolDetail,
+        });
+
+        res.json({ success: true, user: updatedUser });
+      } else {
+        // If the tutor already exists, respond accordingly
+        res.json({ message: "Tutor already exists in the database" });
+      }
+    } catch (error) {
+      console.error("Error saving tutor:", error.message);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
   },
 };
 

@@ -9,13 +9,13 @@ const SavedTutorPage = () => {
   let tutor = [];
   useEffect(() => {
     axios
-      .get("http://localhost:2222/allSchools")
+      .get("http://localhost:2222/user-schools")
       .then((response) => {
         // setTutorState(response.data)
         let results = response.data;
         console.log(results);
         // console.log(tutorState)
-        let mapResults = results.map((el) => {
+        let mapResults = results.schoolDetails.map((el) => {
           const { name, address, rating, schoolId, website } = el;
           return (
             <TutorCard
