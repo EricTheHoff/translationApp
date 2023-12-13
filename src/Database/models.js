@@ -37,7 +37,7 @@ UserDetail.init(
     userId: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     email: { type: DataTypes.STRING, unique: true },
     password: { type: DataTypes.STRING },
-    profilePic: {type:DataTypes.STRING},
+    profilePic: {type: DataTypes.STRING},
     zipCode: { type: DataTypes.STRING(5) }
   },
 
@@ -109,8 +109,8 @@ UserDetail.belongsToMany(SchoolDetail, { through: "SchoolUserDetail" });
 UserDetail.hasMany(SavedWord, { foreignKey: "userId" });
 // create userDetails.getSavedWords(), userDetails.addSavedWords(). it is going to try to create userDetails.createSavedWord
 
-UserDetail.hasMany(Images, { foreignKey: "userId" });
-Images.belongsTo(UserDetail, { foreignKey: "userId" });
+UserDetail.hasOne(Images, { foreignKey: "userId" });
+Images.hasMany(UserDetail, { foreignKey: "userId" });
 
 SavedWord.belongsTo(UserDetail, { foreignKey: "userId" });
 FurtherStudy.belongsTo(UserDetail, { foreignKey: "userId" });

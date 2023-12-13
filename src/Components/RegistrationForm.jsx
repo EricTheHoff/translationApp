@@ -3,6 +3,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
+import user from '../Images/Avatars/user.png'
 
 const RegistrationForm = () => {
 
@@ -13,6 +14,8 @@ const RegistrationForm = () => {
     const [confirmReg, setConfirmReg] = useState("")
     const [emailReg, setEmailReg] = useState("")
     const [zipReg, setZipReg] = useState("")
+
+
 
     const register = async (event) => {
         event.preventDefault()
@@ -27,18 +30,19 @@ const RegistrationForm = () => {
         await axios.post('/register', {
             email: emailReg,
             password: passwordReg,
-            zipCode: zipReg
-        })
-        .then(async () => {
-            const user = await axios.get('/user')
-            dispatch({ type: 'Logged In' })
-            dispatch({ type: 'Active User', payload: user.data.userId })
-            dispatch({ type: 'Active Zip', payload: user.data.zipCode })
-            navigate('/')
-        })
-        .catch(() => {
-            alert(`Account could not be created. There may already be an account registered to that email.`)
-        })
+            zipCode: zipReg,
+            profilePic: user
+        }, console.log(user))
+            .then(async () => {
+                const user = await axios.get('/user')
+                dispatch({ type: 'Logged In' })
+                dispatch({ type: 'Active User', payload: user.data.userId })
+                dispatch({ type: 'Active Zip', payload: user.data.zipCode })
+                navigate('/')
+            })
+            .catch(() => {
+                alert(`Account could not be created. There may already be an account registered to that email.`)
+            })
     }
 
     return (

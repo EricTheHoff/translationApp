@@ -13,49 +13,49 @@ import '../Styles/imageGrid.css'
 
 const ImageGrid = ({ setProfile }) => {
 
-    const bearFunction = async () => {
-        await axios.get('/bear').then((response) => {
-            setProfile(bear)
-        })
+    const bearFunction = (event) => {
+        event.preventDefault()
+        setProfile('bear')
     }
 
-    const catFunction = async () => {
-        setProfile(cat)
+    const catFunction = async (event) => {
+        event.preventDefault()
+        setProfile('cat')
     }
 
-    const chickenFunction = async () => {
-        await axios.get('/chicken')
-        setProfile(chicken)
+    const chickenFunction = async (event) => {
+        event.preventDefault()
+        setProfile('chicken')
     }
 
-    const dogFunction = async () => {
-        await axios.get('/dog')
-        setProfile(dog)
+    const dogFunction = async (event) => {
+        event.preventDefault()
+        setProfile('dog')
     }
 
-    const koalaFunction = async () => {
-        await axios.get('/koala')
-        setProfile(koala)
+    const koalaFunction = async (event) => {
+        event.preventDefault()
+        setProfile('koala')
     }
 
-    const meerkatFunction = async () => {
-        await axios.get('/meerkat')
-        setProfile(meerkat)
+    const meerkatFunction = async (event) => {
+        event.preventDefault()
+        setProfile('meerkat')
     }
 
-    const pandaFunction = async () => {
-        await axios.get('/panda')
-        setProfile(panda)
+    const pandaFunction = async (event) => {
+        event.preventDefault()
+        setProfile('panda')
     }
 
-    const rabbitFunction = async () => {
-        await axios.get('/rabbit')
-        setProfile(rabbit)
+    const rabbitFunction = async (event) => {
+        event.preventDefault()
+        setProfile('rabbit')
     }
 
-    const sealionFunction = async () => {
-        await axios.get('/sealion')
-        setProfile(sealion)
+    const sealionFunction = async (event) => {
+        event.preventDefault()
+        setProfile('sealion')
     }
 
     return (

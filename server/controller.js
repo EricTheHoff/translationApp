@@ -10,7 +10,7 @@ import bcrypt from 'bcryptjs'
 const handlerFunctions = {
 
   register: async (req, res) => {
-    const { email, password, zipCode } = req.body;
+    const { email, password, zipCode, profilePic } = req.body;
 
     const salt = bcrypt.genSaltSync(12)
     const hash = await bcrypt.hash(password, salt)
@@ -22,12 +22,13 @@ const handlerFunctions = {
     });
 
     if (alreadyExists) {
-      res.status(500).json({ error: `An account with that email already exists.`});
+      res.status(500).json({ error: `An account with that email already exists.` });
     } else {
       const newUser = await UserDetail.create({
         email: email,
         password: hash,
         zipCode: zipCode,
+        profilePic: profilePic
       });
 
       req.session.user = newUser;
@@ -55,7 +56,8 @@ const handlerFunctions = {
   },
 
   deleteAccount: async (req, res) => {
-    const { id } = req.params;
+    // const { id } = req.params;
+    const id = req.session.userId
     const user = await UserDetail.findOne({
       where: { userId: id },
     });
@@ -65,30 +67,32 @@ const handlerFunctions = {
   },
 
   editAccount: async (req, res) => {
-    const { id } = req.params
-    const { email, newPassword, zipcode, currentPassword } = req.body;
+    // const { id } = req.params
+    const id = req.session.userId
+    const { email, newPassword, zipcode, currentPassword, profilePic } = req.body;
     const user = await UserDetail.findOne({ where: { userId: id } });
     const hashMatch = await bcrypt.compare(currentPassword, user.password)
 
     if (newPassword === '') {
-        user.email = email
-        user.zipCode = zipcode
+      user.email = email
+      user.zipCode = zipcode
+      user.profilePic = profilePic
 
-        await user.save()
-        res.json({ success: true })
+      await user.save()
+      res.json({ success: true })
 
     } else if (hashMatch === false) {
-        res.json({ success: false })
+      res.json({ success: false })
 
     } else {
-        const salt = bcrypt.genSaltSync(12)
-        const hash = await bcrypt.hash(newPassword, salt)
-        user.email = email;
-        user.password = hash;
-        user.zipCode = zipcode;
-    
-        await user.save();
-        res.json({ success: true });
+      const salt = bcrypt.genSaltSync(12)
+      const hash = await bcrypt.hash(newPassword, salt)
+      user.email = email;
+      user.password = hash;
+      user.zipCode = zipcode;
+
+      res.json({ success: true });
+      await user.save();
     }
   },
 

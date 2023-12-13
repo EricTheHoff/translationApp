@@ -15,12 +15,12 @@ import panda from "../Images/Avatars/panda.png"
 import rabbit from "../Images/Avatars/rabbit.png"
 import sealion from "../Images/Avatars/sealion.png"
 import ImageGrid from './ImageGrid';
+const imageFiles = { user, bear, cat, chicken, dog, koala, meerkat, panda, rabbit, sealion }
 
 const Profile = () => {
 
     const [profileImage, setProfileImage] = useState(user)
     const [editMode, setEditMode] = useState(false)
-    const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
     const [currentPassword, setCurrentPassword] = useState("")
@@ -34,39 +34,6 @@ const Profile = () => {
 
     const id = useSelector((state) => state.userId)
 
-    switch (dispatch({ type: 'profileImage' })) {
-
-        case 'bear': dispatch({ type: 'profileImage', payload: bear })
-            break
-
-        case 'cat': dispatch({ type: 'profileImage', payload: cat })
-            break
-
-        case 'chicken': dispatch({ type: 'profileImage', payload: chicken })
-            break
-
-        case 'dog': dispatch({ type: 'profileImage', payload: dog })
-            break
-
-        case 'koala': dispatch({ type: 'profileImage', payload: koala })
-            break
-
-        case 'meerkat': dispatch({ type: 'profileImage', payload: meerkat })
-            break
-
-        case 'panda': dispatch({ type: 'profileImage', payload: panda })
-            break
-
-        case 'rabbit': dispatch({ type: 'profileImage', payload: rabbit })
-            break
-
-        case 'sealion': dispatch({ type: 'profileImage', payload: sealion })
-            break
-
-        default: dispatch({ type: 'profileImage', payload: user })
-
-    }
-
     const getAccount = async () => {
         await axios.get('/user')
         
@@ -74,6 +41,8 @@ const Profile = () => {
             setEmail(response.data.email)
             setZipcode(response.data.zipCode)
             setPassword(response.data.password)
+            setProfileImage(response.data.profilePic)
+            console.log(response.data.profilePic)
 
        })
     }
@@ -92,8 +61,9 @@ const Profile = () => {
             newPassword: newPassword,
             currentPassword: currentPassword,
             zipcode: zipcode,
+            profilePic: profileImage
         }
-        const response = await axios.put(`/editAccount/${id}`, requestData)
+        const response = await axios.put(`/editAccount`, requestData)
         if (response.data.success) {
             setEditMode(false)
             console.log("success")
@@ -104,7 +74,7 @@ const Profile = () => {
 
     // Delete Account
     const handleDelete = async () => {
-        const response = await axios.delete(`/deleteAccount/${id}`);
+        const response = await axios.delete(`/deleteAccount`);
         if (response.data.success) {
             dispatch({ type: 'Logged Out' })
             navigate('/')
@@ -118,7 +88,7 @@ const Profile = () => {
     if (!editMode) {
         return (
             <div>
-                <img src={profileImage} />
+                <img src={imageFiles[profileImage] ? imageFiles[profileImage] : profileImage} />
                 <p>Email: {email}</p>
                 <p>ZIP Code: {zipcode}</p>
                 <button onClick={() => setEditMode(true)}>Edit</button>
@@ -137,7 +107,7 @@ const Profile = () => {
                 <form onSubmit={handleSubmit}>
                     <br />
 
-                    <img src={profileImage} />
+                    <img src={imageFiles[profileImage] ? imageFiles[profileImage] : profileImage} />
 
                     <br />
                     <br />

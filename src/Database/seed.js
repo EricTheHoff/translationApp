@@ -21,7 +21,7 @@ const hash = await bcrypt.hash('test', 12)
 const userOne = await UserDetail.create({
   email: "test@test.com",
   password: hash,
-  profilePic: null,
+  profilePic: 'chicken',
   zipCode: "93457",
 });
 
