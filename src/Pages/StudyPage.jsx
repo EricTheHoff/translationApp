@@ -12,7 +12,6 @@ const StudyPage = () => {
     (async () => {
       try {
         const results = await axios.get("http://localhost:2222/savedPhrases");
-        console.log(results);
         setSavedPhrases(results.data);
       } catch (error) {
         console.error("error fetching data", error);

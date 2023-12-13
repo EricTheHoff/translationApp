@@ -5,6 +5,7 @@ import axios from "axios";
 import handlerFunctions from "../server/controller.js";
 import session from "express-session";
 import env from "dotenv";
+import imgFunctions from './imgController.js'
 
 const app = express();
 
@@ -25,8 +26,8 @@ console.log(process.env.VITE_REACT_APP_GOOGLE_API_KEY);
 
 app.post("/register", handlerFunctions.register);
 
-app.delete("/deleteAccount/:id", handlerFunctions.deleteAccount);
-app.put("/editAccount/:id", handlerFunctions.editAccount);
+app.delete("/deleteAccount", handlerFunctions.deleteAccount);
+app.put("/editAccount", handlerFunctions.editAccount);
 
 app.get("/allSchools", handlerFunctions.getSavedSchools);
 app.delete("/deleteSchools/:schoolId", handlerFunctions.deleteSavedSchools);
@@ -36,14 +37,26 @@ app.post("/api/logout", handlerFunctions.logout);
 app.get("/user", handlerFunctions.user);
 app.get("/user-schools", handlerFunctions.userSchools);
 app.get("/user-status", handlerFunctions.userStatus);
+
 app.get("/allSavedWords", handlerFunctions.getSavedWords);
 app.get("/savedWords/:wordId", handlerFunctions.getWordsById);
 app.get("/savedPhrases", handlerFunctions.getSavedPhrases);
 app.delete("/deleteWords/:wordId", handlerFunctions.deleteSavedWords);
+
 app.post("/saveWord", handlerFunctions.saveWord);
 app.post("/translate", handlerFunctions.translate);
 app.post("/save-translation", handlerFunctions.saveTranslation);
 app.post("/save-tutor", handlerFunctions.saveTutor);
+
+app.get('/bear', imgFunctions.bearImg)
+app.get('/cat', imgFunctions.catImg)
+app.get('/chicken', imgFunctions.chickenImg)
+app.get('/dog', imgFunctions.dogImg)
+app.get('/koala', imgFunctions.koalaImg)
+app.get('/meerkat', imgFunctions.meerkatImg)
+app.get('/panda', imgFunctions.pandaImg)
+app.get('/rabbit', imgFunctions.rabbitImg)
+app.get('/sealion', imgFunctions.sealionImg)
 
 app.get("/api/places", async (req, res) => {
   try {

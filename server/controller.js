@@ -8,7 +8,7 @@ import bcrypt from "bcryptjs";
 
 const handlerFunctions = {
   register: async (req, res) => {
-    const { email, password, zipCode } = req.body;
+    const { email, password, zipCode, profilePic } = req.body;
 
     const salt = bcrypt.genSaltSync(12);
     const hash = await bcrypt.hash(password, salt);
@@ -28,6 +28,7 @@ const handlerFunctions = {
         email: email,
         password: hash,
         zipCode: zipCode,
+        profilePic: profilePic,
       });
 
       req.session.user = newUser;
@@ -55,7 +56,8 @@ const handlerFunctions = {
   },
 
   deleteAccount: async (req, res) => {
-    const { id } = req.params;
+    // const { id } = req.params;
+    const id = req.session.userId;
     const user = await UserDetail.findOne({
       where: { userId: id },
     });
@@ -65,14 +67,17 @@ const handlerFunctions = {
   },
 
   editAccount: async (req, res) => {
-    const { id } = req.params;
-    const { email, newPassword, zipcode, currentPassword } = req.body;
+    // const { id } = req.params
+    const id = req.session.userId;
+    const { email, newPassword, zipcode, currentPassword, profilePic } =
+      req.body;
     const user = await UserDetail.findOne({ where: { userId: id } });
     const hashMatch = await bcrypt.compare(currentPassword, user.password);
 
     if (newPassword === "") {
       user.email = email;
       user.zipCode = zipcode;
+      user.profilePic = profilePic;
 
       await user.save();
       res.json({ success: true });
@@ -85,8 +90,8 @@ const handlerFunctions = {
       user.password = hash;
       user.zipCode = zipcode;
 
-      await user.save();
       res.json({ success: true });
+      await user.save();
     }
   },
 
@@ -130,6 +135,32 @@ const handlerFunctions = {
   logout: async (req, res) => {
     req.session.destroy();
     res.json({ success: true });
+  },
+
+  getSavedSchools: async (req, res) => {
+    const savedSchool = await SchoolDetail.findAll();
+    res.json(savedSchool);
+  },
+  deleteSavedSchools: async (req, res) => {
+    const { schoolId } = req.params;
+    await SchoolDetail.destroy({
+      where: { schoolId: schoolId },
+    });
+  },
+
+  profileImage: async (req, res) => {
+    const { image } = req.body;
+    console.log(image);
+    await UserDetail.create({
+      where: { image: image },
+    });
+  },
+
+  getImage: async (req, res) => {
+    await UserDetail.findOne({
+      where: { image: image },
+    });
+    res.json(image);
   },
 
   getSavedWords: async (req, res) => {

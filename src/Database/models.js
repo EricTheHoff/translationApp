@@ -37,7 +37,8 @@ UserDetail.init(
     userId: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     email: { type: DataTypes.STRING, unique: true },
     password: { type: DataTypes.STRING },
-    zipCode: { type: DataTypes.STRING(5) },
+    profilePic: {type: DataTypes.STRING},
+    zipCode: { type: DataTypes.STRING(5) }
   },
 
   {
@@ -82,6 +83,25 @@ FurtherStudy.init(
     modelName: "furtherStudy",
   }
 );
+export class Images extends Model {
+  [util.inspect.custom]() {
+    return this.toJSON();
+  }
+}
+Images.init(
+  {
+    imageId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    image: { type: DataTypes.STRING },
+  },
+  {
+    sequelize: dbConnection,
+    modelName: "furtherStudy",
+  }
+);
 
 SchoolDetail.belongsToMany(UserDetail, { through: "SchoolUserDetail" });
 UserDetail.belongsToMany(SchoolDetail, { through: "SchoolUserDetail" });
@@ -90,6 +110,11 @@ UserDetail.belongsToMany(SchoolDetail, { through: "SchoolUserDetail" });
 
 UserDetail.hasMany(SavedWord, { foreignKey: "userId" });
 // create userDetails.getSavedWords(), userDetails.addSavedWords(). it is going to try to create userDetails.createSavedWord
+
+UserDetail.hasOne(Images, { foreignKey: "userId" });
+Images.hasMany(UserDetail, { foreignKey: "userId" });
+
 SavedWord.belongsTo(UserDetail, { foreignKey: "userId" });
 FurtherStudy.belongsTo(UserDetail, { foreignKey: "userId" });
 UserDetail.hasMany(FurtherStudy, { foreignKey: "userId" });
+
