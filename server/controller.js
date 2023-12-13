@@ -187,11 +187,16 @@ const handlerFunctions = {
     }
   },
 
-    getSavedPhrases: async (req, res) => {
-        const savedPhrases = await FurtherStudy.findAll()
-        console.log(savedPhrases)
-        res.json(savedPhrases)
-        
+    getSeedTranslations: async (req, res) => {
+        const { difficulty } = req.body
+
+        if (difficulty === '') {
+            const seedTranslations = await FurtherStudy.findAll()
+            res.json(seedTranslations)
+        } else {
+            const difficultyTranslations = await FurtherStudy.findAll({ where: { difficulty: Number(difficulty) } })
+            res.json(difficultyTranslations)
+        }
     },
 
     saveWord: async (req, res) => {

@@ -40,16 +40,22 @@ const user1Eager = await UserDetail.findOne({
 
 await FurtherStudy.bulkCreate([{
   phrase: "Hello, How are You?",
-  userId: 1
+  difficulty: 1
 },{
-  phrase: "Howdy, How are You?",
-  userId: 1
+  phrase: "What's your name?",
+  difficulty: 1
 },{
-  phrase: "Hola, How are You?",
-  userId: 1
+  phrase: "How much does this item cost?",
+  difficulty: 2
 },{
-  phrase: "What's Gucci, How are You?",
-  userId: 1
+  phrase: "Where did you go last Thursday?",
+  difficulty: 2
+},{
+  phrase: "My car broke down on the freeway and I forgot to update my insurance.",
+  difficulty: 3
+},{
+  phrase: "I went to a concert yesterday but I was too close to the speakers.",
+  difficulty: 3
 }]);
 
 

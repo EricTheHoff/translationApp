@@ -76,6 +76,7 @@ FurtherStudy.init(
       autoIncrement: true,
     },
     phrase: { type: DataTypes.STRING },
+    difficulty: { type: DataTypes.INTEGER}
   },
   {
     sequelize: dbConnection,
@@ -89,5 +90,5 @@ UserDetail.belongsToMany(SchoolDetail, { through: "SchoolUserDetail" });
 UserDetail.hasMany(SavedWord, { foreignKey: "userId" });
 // create userDetails.getSavedWords(), userDetails.addSavedWords(). it is going to try to create userDetails.createSavedWord
 SavedWord.belongsTo(UserDetail, { foreignKey: "userId" });
-FurtherStudy.belongsTo(UserDetail, { foreignKey: "userId" });
-UserDetail.hasMany(FurtherStudy, { foreignKey: "userId" });
+// FurtherStudy.belongsTo(UserDetail, { foreignKey: "userId" });
+// UserDetail.hasMany(FurtherStudy, { foreignKey: "userId" });
