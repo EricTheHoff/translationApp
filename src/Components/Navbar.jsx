@@ -3,11 +3,23 @@ import "../Styles/navbar.css";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "../Styles/profile.css"
 import user from "../Images/Avatars/user.png"
+import bear from "../Images/Avatars/bear.png"
+import cat from "../Images/Avatars/cat.png"
+import chicken from "../Images/Avatars/chicken.png"
+import dog from "../Images/Avatars/dog.png"
+import koala from "../Images/Avatars/koala.png"
+import meerkat from "../Images/Avatars/meerkat.png"
+import panda from "../Images/Avatars/panda.png"
+import rabbit from "../Images/Avatars/rabbit.png"
+import sealion from "../Images/Avatars/sealion.png"
+const imageFiles = { user, bear, cat, chicken, dog, koala, meerkat, panda, rabbit, sealion }
 
 const Navbar = () => {
+
+  const [navImage, setNavImage] = useState(user)
 
   const auth = useSelector((state) => state.loggedIn)
   const dispatch = useDispatch()
@@ -41,9 +53,23 @@ const Navbar = () => {
       window.location.reload();
     }
   };
-
+  
+  const requestData = {
+    profilePic: profileImage
+  }
+  
+  const getAccount = async () => {
+    await axios.get('/user', requestData)
+    
+    .then((response) => {
+      setProfileImage(response.data.profilePic)
+      console.log(response.data.profilePic)
+    })
+  }
+  
   useEffect(() => {
     saveToExpress()
+    getAccount()
   }, [])
 
 
@@ -55,11 +81,11 @@ const Navbar = () => {
           <a href="/">translationApp</a>
           <a href="/map">Map</a>
 
-          <div class="dropdown">
+          <div className="dropdown">
             <a href="/account">
-            <img className="navImage" src={user}></img>
+            <img className= "navImage" src={imageFiles[profileImage] ? imageFiles[profileImage] : profileImage}></img>
             </a>
-            <div class="dropdown-content">
+            <div className="dropdown-content">
 
               <a href="/account">Profile</a>
               <br />
