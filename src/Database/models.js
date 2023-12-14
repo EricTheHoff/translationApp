@@ -77,6 +77,26 @@ FurtherStudy.init(
       autoIncrement: true,
     },
     phrase: { type: DataTypes.STRING },
+    difficulty: { type: DataTypes.INTEGER}
+  },
+  {
+    sequelize: dbConnection,
+    modelName: "furtherStudy",
+  }
+);
+export class Images extends Model {
+  [util.inspect.custom]() {
+    return this.toJSON();
+  }
+}
+Images.init(
+  {
+    imageId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    image: { type: DataTypes.STRING },
   },
   {
     sequelize: dbConnection,
@@ -115,6 +135,3 @@ UserDetail.hasOne(Images, { foreignKey: "userId" });
 Images.hasMany(UserDetail, { foreignKey: "userId" });
 
 SavedWord.belongsTo(UserDetail, { foreignKey: "userId" });
-FurtherStudy.belongsTo(UserDetail, { foreignKey: "userId" });
-UserDetail.hasMany(FurtherStudy, { foreignKey: "userId" });
-
