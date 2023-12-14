@@ -21,6 +21,8 @@ import { Provider } from 'react-redux'
 import store from "./Store/store.js";
 import PDFUpload from "./Components/PDFUpload.jsx";
 import TextUpload from "./Components/TextUpload.jsx";
+import StudySaved from "./Components/StudySaved.jsx"
+import StudySeed from "./Components/StudySeed.jsx"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -36,6 +38,8 @@ const router = createBrowserRouter(
       <Route path="translate" element={<TranslatePage />} />
       <Route path="pdf-upload" element={<PDFUpload />} />
       <Route path="text-upload" element={<TextUpload />} />
+      <Route path="study-saved" element={<StudySaved />} />
+      <Route path="study-seed" element={<StudySeed />} />
     </Route>
   )
 );

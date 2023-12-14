@@ -138,7 +138,7 @@ const Profile = () => {
                     <br />
 
                     <label>ZIP Code</label>
-                    <input placeholder={zipcode} type="number" min="0" maxLength="5" onChange={(e) => setZipcode(e.target.value)} />
+                    <input placeholder={zipcode} type="text" pattern="[0-5]{5}" maxLength="5" onChange={(e) => setZipcode(e.target.value)} />
 
                     <br />
 

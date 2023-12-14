@@ -10,7 +10,6 @@ import panda from "../Images/Avatars/panda.png";
 import rabbit from "../Images/Avatars/rabbit.png";
 import sealion from "../Images/Avatars/sealion.png";
 import "../Styles/imageGrid.css";
-import toast from "react-hot-toast";
 
 const ImageGrid = ({ setProfile }) => {
   const bearFunction = (event) => {
