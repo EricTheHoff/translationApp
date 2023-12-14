@@ -100,6 +100,25 @@ const schoolFunctions = {
       res.status(500).json({ error: "Internal Server Error" });
     }
   },
+  placeSearch: async (req, res) => {
+    try {
+      const { lat, lng, radius, language } = req.query;
+      const types = ["tutor", "academy", "institute", "center"];
+      console.log(radius);
+      // console.log(language);
+      const apiKey = process.env.VITE_REACT_APP_GOOGLE_API_KEY;
+
+      const response = await axios.get(
+        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=${radius}&type=${types}&keyword=${language}%20learning&key=${apiKey}`
+      );
+      // console.log(response.data);
+
+      res.json(response.data);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  },
 };
 
 export default schoolFunctions;

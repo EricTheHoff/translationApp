@@ -54,8 +54,13 @@ const {
   rabbitImg,
   sealionImg,
 } = imgFunctions;
-const { getSavedSchools, userSchools, saveSchool, deleteUserSchool } =
-  schoolFunctions;
+const {
+  getSavedSchools,
+  userSchools,
+  saveSchool,
+  deleteUserSchool,
+  placeSearch,
+} = schoolFunctions;
 
 console.log(process.env.VITE_REACT_APP_GOOGLE_API_KEY);
 
@@ -74,7 +79,7 @@ app.get("/allSchools", getSavedSchools);
 app.delete("/deleteSchools/:schoolId", deleteUserSchool);
 
 app.post("/login", login);
-app.post("/api/logout", logout);
+app.post("/logout", logout);
 app.get("/user", loginRequired, user);
 app.get("/user-schools", userSchools);
 
@@ -89,6 +94,7 @@ app.post("/saveWord", saveWord);
 app.post("/translate", translate);
 app.post("/save-translation", saveTranslation);
 app.post("/save-tutor", saveSchool);
+app.get("/api/places", placeSearch);
 
 app.get("/bear", bearImg);
 app.get("/cat", catImg);
@@ -99,26 +105,6 @@ app.get("/meerkat", meerkatImg);
 app.get("/panda", pandaImg);
 app.get("/rabbit", rabbitImg);
 app.get("/sealion", sealionImg);
-
-app.get("/api/places", async (req, res) => {
-  try {
-    const { lat, lng, radius, language } = req.query;
-    const types = ["tutor", "academy", "institute", "center"];
-    console.log(radius);
-    // console.log(language);
-    const apiKey = process.env.VITE_REACT_APP_GOOGLE_API_KEY;
-
-    const response = await axios.get(
-      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=${radius}&type=${types}&keyword=${language}%20learning&key=${apiKey}`
-    );
-    // console.log(response.data);
-
-    res.json(response.data);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
 
 ViteExpress.listen(app, 2222, () =>
   console.log(`Server working on http://localhost:2222`)

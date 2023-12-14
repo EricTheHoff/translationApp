@@ -33,7 +33,7 @@ const Navbar = () => {
 
   const handleLogout = async (e) => {
     e.preventDefault();
-    const res = await axios.post("/api/logout");
+    const res = await axios.post("/logout");
     if (res.data.success) {
       console.log("success with logout");
       navigate("/login");
