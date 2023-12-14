@@ -69,6 +69,7 @@ const Profile = () => {
         } else {
             alert(`Something went wrong. Please ensure that you're entering the correct password information before saving.`)
         }
+        window.location.reload();
     }
 
     // Delete Account
