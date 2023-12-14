@@ -26,6 +26,7 @@ const handlerFunctions = {
 
       req.session.user = newUser;
       req.session.userId = newUser.userId
+      req.session.avatar = 
 
       res.send({
         message: "account created",

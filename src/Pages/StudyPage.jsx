@@ -118,8 +118,6 @@ const StudyPage = () => {
                     <button type='submit' onClick={(e) => setStudySeed(true)}>Sample Translations</button>
                 </form>
 
-                <div>TESTING - PLEASE IGNORE</div>
-
                 {/* <form onSubmit={(e) => handleSubmit(e, noOfCards)}>
 
                     <label htmlFor='quantity'>Number of Flashcards: </label>

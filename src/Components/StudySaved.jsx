@@ -12,6 +12,38 @@ const StudySaved = () => {
     const [englishFront, setEnglishFront] = useState(false)
     const [noOfCards, setNoOfCards] = useState(1)
     const [display, setDisplay] = useState(false)
+    
+    const uniqueToLanguages = [...new Set(flashcards.map((el) => el.toLanguage))]
+    const codeMapping = {
+        'CS': 'Czech',
+        'DA': 'Danish',
+        'DE': 'German',
+        'EL': 'Greek',
+        'ES': 'Spanish',
+        'ET': 'Estonian',
+        'FI': 'Finnish',
+        'FR': 'French',
+        'HU': 'Hungarian',
+        'ID': 'Indonesian',
+        'IT': 'Italian',
+        'JA': 'Japanese',
+        'KO': 'Korean',
+        'LT': 'Lithuanian',
+        'LV': 'Latvian',
+        'NB': 'Norwegian (Bokmål)',
+        'NL': 'Dutch',
+        'PL': 'Polish',
+        'PT': 'Portuguese',
+        'RO': 'Romanian',
+        'RU': 'Russian',
+        'SK': 'Slovak',
+        'SL': 'Slovenian',
+        'SV': 'Swedish',
+        'TR': 'Turkish',
+        'UK': 'Ukranian',
+        'ZH': 'Chinese',
+    }
+
 
     const handleSubmit = (e, number) => {
         e.preventDefault()
@@ -34,7 +66,8 @@ const StudySaved = () => {
             setFilteredNo(result)
             setDisplay(true)
         }
-      }
+    }
+
 
     useEffect(() => {
         axios.get(`/saved-translations`)
@@ -46,6 +79,7 @@ const StudySaved = () => {
             console.log(`The following error has occurred: ${error}`)
         })
     },[])
+
     
     useEffect(() => {
         const filteredResults = flashcards.filter((el) => el.toLanguage === language)
@@ -84,8 +118,11 @@ const StudySaved = () => {
                     <label htmlFor='language'>Choose a Language: </label>
                     <select name='language' onChange={(e) => setLanguage(e.target.value)}>
                         <option value='' selected disabled>--Choose a Language--</option>
-                        <option value='NB'>Norwegian (Bokmål)</option>
-                        <option value='ZH'>Chinese</option>
+                        {uniqueToLanguages.map((language, idx) => {
+                            return (
+                                <option key={idx} value={language}>{codeMapping[language]}</option>
+                            )
+                        })}
                     </select>
     
                 <br/>
