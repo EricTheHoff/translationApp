@@ -38,6 +38,7 @@ const Navbar = () => {
     if (res.data.success) {
       console.log("success with logout");
       navigate("/login");
+      window.location.reload();
     }
   };
 
