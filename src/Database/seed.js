@@ -2,6 +2,7 @@ import {
   SchoolDetail,
   UserDetail,
   SavedWord,
+  Images,
   dbConnection,
   FurtherStudy,
 } from "./models.js";
@@ -20,6 +21,7 @@ const hash = await bcrypt.hash('test', 12)
 const userOne = await UserDetail.create({
   email: "test@test.com",
   password: hash,
+  profilePic: 'chicken',
   zipCode: "93457",
 });
 
@@ -32,10 +34,10 @@ await userOne.addSavedWord(wordOne);
 
 const user1 = await UserDetail.findOne();
 const user1Eager = await UserDetail.findOne({
-  where: {
-    userId: 1,
-  },
-  include: SavedWord,
+    where: {
+        userId: 1
+    },
+    include: SavedWord
 });
 
 await FurtherStudy.bulkCreate([{
@@ -490,10 +492,38 @@ await FurtherStudy.bulkCreate([{
   difficulty: 3
 }]);
 
+const image1 = await Images.create({
+  image: "bear",
+});
+const image2 = await Images.create({
+  image: "cat",
+});
+const image3 = await Images.create({
+  image: "chicken",
+});
+const image4 = await Images.create({
+  image: "dog",
+});
+const image5 = await Images.create({
+  image: "koala",
+});
+const image6 = await Images.create({
+  image: "meerkat",
+});
+const image7 = await Images.create({
+  image: "panda",
+});
+const image8 = await Images.create({
+  image: "rabbit",
+});
+const image9 = await Images.create({
+  image: "sealion",
+});
+
 
 console.log(user1);
 // console.log(await user1.getSavedWords())
-console.log(user1Eager.savedWords);
+console.log(user1Eager.savedWords)
 
 
 await dbConnection.close();

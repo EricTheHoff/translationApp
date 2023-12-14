@@ -1,31 +1,47 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import ListGroup from 'react-bootstrap/ListGroup';
-import axios from "axios"
+import ListGroup from "react-bootstrap/ListGroup";
+import axios from "axios";
+import { useState } from "react";
 
-function TutorCard({ name, address, phone, website, id }) {
+function TutorCard({
+  name,
+  address,
+  rating,
+  id,
+  website,
+  setDeleter,
+  deleter,
+}) {
+  const handleDelete = async (event) => {
+    event.preventDefault();
 
-
-    function handleDelete() {
-        axios.delete(`http://localhost:2222/deleteSchools/${id}`);
+    const res = await axios.delete(`http://localhost:2222/deleteSchools/${id}`);
+    console.log(res.data);
+    if (res.data.success) {
+      console.log("deleted successfully");
+      setDeleter(!deleter);
     }
-    return (
-        <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src="holder.js/100px180" />
-        <Card.Body>
-            <Card.Title>{name}</Card.Title>
-            <Card.Text>
-            <ListGroup variant="flush">
-                <ListGroup.Item>Address: {address}</ListGroup.Item>
-                <ListGroup.Item>Phone: {phone}</ListGroup.Item>
-                <ListGroup.Item>Website: {website}</ListGroup.Item>
-            </ListGroup>
-            </Card.Text>
-            <Button onClick={handleDelete}>Delete</Button>
-        </Card.Body>
-        </Card>
-    );
-}
+  };
 
+  return (
+    <Card style={{ width: "18rem" }}>
+      <Card.Img variant="top" src="holder.js/100px180" />
+      <Card.Body>
+        <Card.Text>
+          {name}
+          <br></br>
+          Address: {address}
+          <br></br>
+          Rating: {rating}
+          <br></br>
+          Website:
+          <a href={website}> {website}</a>
+        </Card.Text>
+        <Button onClick={(event) => handleDelete(event)}>Remove</Button>
+      </Card.Body>
+    </Card>
+  );
+}
 
 export default TutorCard;
