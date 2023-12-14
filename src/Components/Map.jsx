@@ -20,13 +20,17 @@ function Map({ userLocation, radius, language }) {
       rating: placeRating,
       website: placeWebsite,
     };
+    console.log("about to post");
     const res = await axios.post("/save-tutor", formData);
+    console.log("posted");
     if (res.data.success) {
-    } else alert("This tutor already exists");
+      console.log("successfully added");
+    } else alert("This tutor has already been added");
   };
 
   const addClick = (placeId) => {
     handleSaveTutor();
+    console.log("firing handleSaveTutor");
     setClickedMarkers((prevClickedMarkers) => ({
       ...prevClickedMarkers,
       [placeId]: true, // Set the clicked state for the specific marker

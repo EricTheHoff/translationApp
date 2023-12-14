@@ -245,43 +245,46 @@ const handlerFunctions = {
     try {
       const { name, rating, vicinity, website } = req.body;
 
+      // 1. Query for UserDetail
+      const user = await UserDetail.findByPk(userId, {
+        include: {
+          model: SchoolDetail,
+        },
+      });
+      // 2. Check if SchoolDetail exists in db (query for SchoolDetail)
       // Check if the tutor already exists in the database
-      const existingTutor = await SchoolDetail.findAll({
+      const existingTutor = await SchoolDetail.findOne({
         where: {
           name: name,
         },
       });
-
-      if (!existingTutor) {
-        // If the tutor doesn't exist, create a new record in the database
-        const savingTutor = await SchoolDetail.create({
+      // - if Yes, need to check if SchoolDetail is already related to the user
+      if (existingTutor) {
+        for (let schoolDetailObj of user.schoolDetails) {
+          // - if yes, reject because rel.already exists
+          if (schoolDetailObj.name === name) {
+            res.json({ message: "Tutor already added to this user" });
+            return;
+          }
+        }
+        await user.addSchoolDetail(existingTutor);
+        // - if no, need to create SchoolDetail & relate it to the user
+      } else {
+        const newTutor = await SchoolDetail.create({
           name: name,
           rating: rating,
           address: vicinity,
           website: website,
         });
-
         // Associate the new tutor with the user who added it
-        const user = await UserDetail.findByPk(userId);
-        if (user) {
-          // Create an entry in the SchoolUserDetail table with the userId and savingTutorId
-          // await user.addSchoolsAddedByUser(savingTutor);
-          await user.addSchoolDetail(savingTutor);
-        }
-
-        // Fetch user data including added schools
-        const updatedUser = await UserDetail.findByPk(userId, {
-          include: SchoolDetail,
-        });
-
-        res.json({ success: true, user: updatedUser });
-      } else {
-        // If the tutor already exists, respond accordingly
-        res.json({ message: "Tutor already exists in the database" });
+        await user.addSchoolDetail(newTutor);
+        res.json({ success: true });
+        return;
       }
     } catch (error) {
       console.error("Error saving tutor:", error.message);
       res.status(500).json({ error: "Internal Server Error" });
+      return;
     }
   },
 };
