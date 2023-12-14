@@ -4,19 +4,29 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import "../Styles/profile.css"
-import user from "../Images/Avatars/user.png"
-import bear from "../Images/Avatars/bear.png"
-import cat from "../Images/Avatars/cat.png"
-import chicken from "../Images/Avatars/chicken.png"
-import dog from "../Images/Avatars/dog.png"
-import koala from "../Images/Avatars/koala.png"
-import meerkat from "../Images/Avatars/meerkat.png"
-import panda from "../Images/Avatars/panda.png"
-import rabbit from "../Images/Avatars/rabbit.png"
-import sealion from "../Images/Avatars/sealion.png"
-const imageFiles = { user, bear, cat, chicken, dog, koala, meerkat, panda, rabbit, sealion }
-
+import "../Styles/profile.css";
+import user from "../Images/Avatars/user.png";
+import bear from "../Images/Avatars/bear.png";
+import cat from "../Images/Avatars/cat.png";
+import chicken from "../Images/Avatars/chicken.png";
+import dog from "../Images/Avatars/dog.png";
+import koala from "../Images/Avatars/koala.png";
+import meerkat from "../Images/Avatars/meerkat.png";
+import panda from "../Images/Avatars/panda.png";
+import rabbit from "../Images/Avatars/rabbit.png";
+import sealion from "../Images/Avatars/sealion.png";
+const imageFiles = {
+  user,
+  bear,
+  cat,
+  chicken,
+  dog,
+  koala,
+  meerkat,
+  panda,
+  rabbit,
+  sealion,
+};
 
 const Navbar = () => {
   const auth = useSelector((state) => state.loggedIn);
@@ -24,14 +34,8 @@ const Navbar = () => {
   const navigate = useNavigate();
   const id = useSelector((state) => state.userId);
 
-  const [navImage, setNavImage] = useState(user)
-
-  const auth = useSelector((state) => state.loggedIn)
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const id = useSelector((state) => state.userId)
-
-  console.log(id)
+  const [navImage, setNavImage] = useState(user);
+  // console.log(id);
 
   const saveToExpress = async () => {
     const response = await axios.get("/user-status");
@@ -59,21 +63,19 @@ const Navbar = () => {
     }
   };
 
-  
   const getAccount = async () => {
-    await axios.get('/user')
-    
-    .then((response) => {
-      setNavImage(response.data.profilePic)
-      console.log(response.data.profilePic)
-    })
-  }
-  
-  useEffect(() => {
-    saveToExpress()
-    getAccount()
-  }, [])
+    await axios
+      .get("/user")
 
+      .then((response) => {
+        setNavImage(response.data.profilePic);
+      });
+  };
+
+  useEffect(() => {
+    saveToExpress();
+    getAccount();
+  }, []);
 
   if (auth === true) {
     return (
@@ -84,7 +86,10 @@ const Navbar = () => {
 
           <div className="dropdown">
             <a href="/account">
-            <img className= "navImage" src={imageFiles[navImage] ? imageFiles[navImage] : navImage}></img>
+              <img
+                className="navImage"
+                src={imageFiles[navImage] ? imageFiles[navImage] : navImage}
+              ></img>
             </a>
             <div className="dropdown-content">
               <a href="/account">Profile</a>

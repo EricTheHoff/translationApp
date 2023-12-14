@@ -93,7 +93,7 @@ app.delete("/deleteWords/:wordId", deleteWords);
 app.post("/saveWord", saveWord);
 app.post("/translate", translate);
 app.post("/save-translation", saveTranslation);
-app.post("/save-tutor", saveSchool);
+app.post("/save-school", saveSchool);
 app.get("/api/places", placeSearch);
 
 app.get("/bear", bearImg);

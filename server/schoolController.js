@@ -44,37 +44,37 @@ const schoolFunctions = {
         },
       });
       // 2. Check if SchoolDetail exists in db (query for SchoolDetail)
-      // Check if the tutor already exists in the database
-      const existingTutor = await SchoolDetail.findOne({
+      // Check if the school already exists in the database
+      const existingSchool = await SchoolDetail.findOne({
         where: {
           name: name,
         },
       });
       // - if Yes, need to check if SchoolDetail is already related to the user
-      if (existingTutor) {
+      if (existingSchool) {
         for (let schoolDetailObj of user.schoolDetails) {
           // - if yes, reject because rel.already exists
           if (schoolDetailObj.name === name) {
-            res.json({ message: "Tutor already added to this user" });
+            res.json({ message: "School already added to this user" });
             return;
           }
         }
-        await user.addSchoolDetail(existingTutor);
+        await user.addSchoolDetail(existingSchool);
         // - if no, need to create SchoolDetail & relate it to the user
       } else {
-        const newTutor = await SchoolDetail.create({
+        const newSchool = await SchoolDetail.create({
           name: name,
           rating: rating,
           address: vicinity,
           website: website,
         });
-        // Associate the new tutor with the user who added it
-        await user.addSchoolDetail(newTutor);
+        // Associate the new school with the user who added it
+        await user.addSchoolDetail(newSchool);
         res.json({ success: true });
         return;
       }
     } catch (error) {
-      console.error("Error saving tutor:", error.message);
+      console.error("Error saving school:", error.message);
       res.status(500).json({ error: "Internal Server Error" });
       return;
     }
