@@ -2,6 +2,7 @@ import {
   SchoolDetail,
   UserDetail,
   FurtherStudy,
+  SavedWord,
 } from "../src/Database/models.js";
 import axios from "axios";
 import bcrypt from "bcryptjs";
