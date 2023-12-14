@@ -45,16 +45,6 @@ const handlerFunctions = {
     const savedSchool = await SchoolDetail.findAll();
     res.json(savedSchool);
   },
-
-  deleteSavedSchools: async (req, res) => {
-    const { schoolId } = req.params;
-    await SchoolDetail.destroy({
-      where: { schoolId: schoolId },
-    });
-
-    res.json({ success: true, deletedSchool: schoolId });
-  },
-
   deleteAccount: async (req, res) => {
     // const { id } = req.params;
     const id = req.session.userId;
@@ -145,6 +135,9 @@ const handlerFunctions = {
     const { schoolId } = req.params;
     await SchoolDetail.destroy({
       where: { schoolId: schoolId },
+    });
+    res.send({
+      success: true,
     });
   },
 
@@ -285,6 +278,27 @@ const handlerFunctions = {
       console.error("Error saving tutor:", error.message);
       res.status(500).json({ error: "Internal Server Error" });
       return;
+    }
+  },
+  deleteSavedSchools: async (req, res) => {
+    const { schoolId } = req.params;
+    const userId = req.session.userId;
+
+    try {
+      // Find the user
+      const user = await UserDetail.findByPk(userId);
+
+      if (user) {
+        // Use the `SchoolUserDetail` association to delete the relationship
+        await user.removeSchoolDetail(schoolId);
+
+        res.json({ success: true, deletedSchool: schoolId });
+      } else {
+        res.status(404).json({ error: "User not found" });
+      }
+    } catch (error) {
+      console.error("Error deleting saved school:", error.message);
+      res.status(500).json({ error: "Internal Server Error" });
     }
   },
 };

@@ -17,7 +17,12 @@ import rabbit from "../Images/Avatars/rabbit.png"
 import sealion from "../Images/Avatars/sealion.png"
 const imageFiles = { user, bear, cat, chicken, dog, koala, meerkat, panda, rabbit, sealion }
 
+
 const Navbar = () => {
+  const auth = useSelector((state) => state.loggedIn);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const id = useSelector((state) => state.userId);
 
   const [navImage, setNavImage] = useState(user)
 
@@ -29,20 +34,20 @@ const Navbar = () => {
   console.log(id)
 
   const saveToExpress = async () => {
-    const response = await axios.get('/user-status')
+    const response = await axios.get("/user-status");
 
     if (!response.data.success) {
-      dispatch({ type: 'Logged Out' })
-      dispatch({ type: 'Inactive User' })
-      dispatch({ type: 'Inactive Zip' })
-      navigate('/')
+      dispatch({ type: "Logged Out" });
+      dispatch({ type: "Inactive User" });
+      dispatch({ type: "Inactive Zip" });
+      navigate("/");
     } else {
-      const user = await axios.get('/user')
-      dispatch({ type: 'Logged In' })
-      dispatch({ type: 'Active User', payload: user.data.userId })
-      dispatch({ type: 'Active Zip', payload: user.data.zipCode })
+      const user = await axios.get("/user");
+      dispatch({ type: "Logged In" });
+      dispatch({ type: "Active User", payload: user.data.userId });
+      dispatch({ type: "Active Zip", payload: user.data.zipCode });
     }
-  }
+  };
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -71,7 +76,6 @@ const Navbar = () => {
 
 
   if (auth === true) {
-
     return (
       <div className="navbar">
         <nav>
@@ -83,17 +87,14 @@ const Navbar = () => {
             <img className= "navImage" src={imageFiles[navImage] ? imageFiles[navImage] : navImage}></img>
             </a>
             <div className="dropdown-content">
-
               <a href="/account">Profile</a>
               <br />
-          <button onClick={handleLogout}>Logout</button>
+              <button onClick={handleLogout}>Logout</button>
             </div>
           </div>
-
         </nav>
       </div>
-
-    )
+    );
   } else {
     return (
       <div>
@@ -104,7 +105,7 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
-    )
+    );
   }
 };
 
