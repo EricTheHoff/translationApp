@@ -105,6 +105,8 @@ Images.init(
 
 SchoolDetail.belongsToMany(UserDetail, { through: "SchoolUserDetail" });
 UserDetail.belongsToMany(SchoolDetail, { through: "SchoolUserDetail" });
+// schDetObj.addUserDetail(userDetObj)
+// userDetObj.addSchoolDetail(schDetObj)
 
 UserDetail.hasMany(SavedWord, { foreignKey: "userId" });
 // create userDetails.getSavedWords(), userDetails.addSavedWords(). it is going to try to create userDetails.createSavedWord

@@ -11,6 +11,7 @@ function Map({ userLocation, radius, language }) {
   const [placeRating, setPlaceRating] = useState("");
   const [placeWebsite, setPlaceWebsite] = useState("");
   const [places, setPlaces] = useState(null);
+  const [clickedMarkers, setClickedMarkers] = useState({});
 
   const handleSaveTutor = async (e) => {
     const formData = {
@@ -19,11 +20,21 @@ function Map({ userLocation, radius, language }) {
       rating: placeRating,
       website: placeWebsite,
     };
-    console.log(formData);
+    console.log("about to post");
     const res = await axios.post("/save-tutor", formData);
+    console.log("posted");
     if (res.data.success) {
-      console.log("saved to tutors");
-    }
+      console.log("successfully added");
+    } else alert("This tutor has already been added");
+  };
+
+  const addClick = (placeId) => {
+    handleSaveTutor();
+    console.log("firing handleSaveTutor");
+    setClickedMarkers((prevClickedMarkers) => ({
+      ...prevClickedMarkers,
+      [placeId]: true, // Set the clicked state for the specific marker
+    }));
   };
 
   useEffect(() => {
@@ -76,10 +87,15 @@ function Map({ userLocation, radius, language }) {
                           <p> Address: {vicinity}</p>
                           <a href={links[0].href}>{links[0].href}</a>
                           <br></br>
-                          <label>
-                            Save To My Schools:
-                            <input type="checkbox" onClick={handleSaveTutor} />
-                          </label>
+                          <div>
+                            {clickedMarkers[place.place_id] ? (
+                              <p>Added</p>
+                            ) : (
+                              <button onClick={() => addClick(place.place_id)}>
+                                Add
+                              </button>
+                            )}
+                          </div>
                         </>
                       </InfoWindowF>
                     )}
@@ -94,7 +110,7 @@ function Map({ userLocation, radius, language }) {
         })
         .catch((err) => console.log(err));
     }
-  }, [userLocation, open, selectedMarkerId, radius, language]);
+  }, [userLocation, open, selectedMarkerId, radius, language, clickedMarkers]);
 
   return (
     <>

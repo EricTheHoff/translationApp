@@ -5,20 +5,21 @@ import axios from "axios";
 import TutorCard from "../Components/TutorCard.jsx";
 
 const SavedTutorPage = () => {
-  const [tutorState, setTutorState] = useState([]);
-  let tutor = [];
+  const [tutor, setTutor] = useState([]);
+
   useEffect(() => {
     axios
-      .get("http://localhost:2222/allSchools")
+      .get("http://localhost:2222/user-schools")
       .then((response) => {
         // setTutorState(response.data)
         let results = response.data;
         console.log(results);
         // console.log(tutorState)
-        let mapResults = results.map((el) => {
+        let mapResults = results.schoolDetails.map((el) => {
           const { name, address, rating, schoolId, website } = el;
           return (
             <TutorCard
+              key={schoolId}
               name={name}
               rating={rating}
               address={address}
@@ -27,9 +28,7 @@ const SavedTutorPage = () => {
             />
           );
         });
-        setTutorState(mapResults);
-        console.log(mapResults);
-        tutor.push(mapResults);
+        setTutor(mapResults);
         // console.log(response)
       })
       .catch((error) => console.error("error fetching data:", error));
@@ -38,7 +37,7 @@ const SavedTutorPage = () => {
     <>
       <div>
         <Link to="/">Back to Home</Link>
-        <div>{tutorState}</div>
+        <div>{tutor}</div>
       </div>
     </>
   );

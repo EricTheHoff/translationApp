@@ -43,6 +43,8 @@ app.delete("/deleteSchools/:schoolId", handlerFunctions.deleteSavedSchools);
 app.post("/login", handlerFunctions.login);
 app.post("/api/logout", handlerFunctions.logout);
 app.get("/user", loginRequired, handlerFunctions.user);
+app.get("/user-schools", handlerFunctions.userSchools);
+
 app.get("/user-status", handlerFunctions.userStatus);
 
 app.get("/allSavedWords", handlerFunctions.getSavedWords);
