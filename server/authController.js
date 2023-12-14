@@ -3,7 +3,6 @@ import {
   UserDetail,
   FurtherStudy,
 } from "../src/Database/models.js";
-import axios from "axios";
 import bcrypt from "bcryptjs";
 
 const authFunctions = {
