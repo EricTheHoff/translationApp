@@ -93,6 +93,19 @@ const schoolFunctions = {
         // Use the `SchoolUserDetail` association to delete the relationship
         await user.removeSchoolDetail(schoolId);
 
+        const existingSchool = await SchoolDetail.findOne({
+          where: {
+            schoolId: schoolId,
+          },
+          include: {
+            model: UserDetail,
+          },
+        });
+
+        if (existingSchool.userDetails.length === 0) {
+          await existingSchool.destroy();
+        }
+
         res.json({ success: true, deletedSchool: schoolId });
       } else {
         res.status(404).json({ error: "User not found" });
