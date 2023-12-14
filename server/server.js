@@ -2,10 +2,12 @@ import express from "express";
 import morgan from "morgan";
 import ViteExpress from "vite-express";
 import axios from "axios";
-import handlerFunctions from "../server/controller.js";
 import session from "express-session";
 import env from "dotenv";
-import imgFunctions from './imgController.js'
+import imgFunctions from "./imgController.js";
+import schoolFunctions from "./schoolController.js";
+import authFunctions from "./authController.js";
+import translateFunctions from "./translateController.js";
 
 const app = express();
 
@@ -22,50 +24,81 @@ app.use(
 );
 env.config();
 
+const {
+  login,
+  logout,
+  user,
+  register,
+  editAccount,
+  deleteAccount,
+  userStatus,
+} = authFunctions;
+const {
+  getSavedWords,
+  getWordsById,
+  deleteWords,
+  getSavedPhrases,
+  saveWord,
+  translate,
+  saveTranslation,
+} = translateFunctions;
+const {
+  profileImg,
+  bearImg,
+  catImg,
+  chickenImg,
+  dogImg,
+  koalaImg,
+  meerkatImg,
+  pandaImg,
+  rabbitImg,
+  sealionImg,
+} = imgFunctions;
+const { getSavedSchools, userSchools, saveSchool, deleteUserSchool } =
+  schoolFunctions;
+
 console.log(process.env.VITE_REACT_APP_GOOGLE_API_KEY);
 
 const loginRequired = (req, res, next) => {
   if (!req.session.userId) {
-      res.status(401).json({ error: 'Unauthorized' })
+    res.status(401).json({ error: "Unauthorized" });
   } else {
-      next()
+    next();
   }
-}
+};
 
-app.post("/register", handlerFunctions.register);
+app.post("/register", register);
+app.delete("/deleteAccount", loginRequired, deleteAccount);
+app.put("/editAccount", loginRequired, editAccount);
+app.get("/allSchools", getSavedSchools);
+app.delete("/deleteSchools/:schoolId", deleteUserSchool);
 
-app.delete("/deleteAccount", loginRequired, handlerFunctions.deleteAccount);
-app.put("/editAccount", loginRequired, handlerFunctions.editAccount);
+app.post("/login", login);
+app.post("/api/logout", logout);
+app.get("/user", loginRequired, user);
+app.get("/user-schools", userSchools);
 
-app.get("/allSchools", handlerFunctions.getSavedSchools);
-app.delete("/deleteSchools/:schoolId", handlerFunctions.deleteSavedSchools);
+app.get("/user-status", userStatus);
 
-app.post("/login", handlerFunctions.login);
-app.post("/api/logout", handlerFunctions.logout);
-app.get("/user", loginRequired, handlerFunctions.user);
-app.get("/user-schools", handlerFunctions.userSchools);
+app.get("/allSavedWords", getSavedWords);
+app.get("/savedWords/:wordId", getWordsById);
+app.get("/savedPhrases", getSavedPhrases);
+app.delete("/deleteWords/:wordId", deleteWords);
 
-app.get("/user-status", handlerFunctions.userStatus);
+app.post("/saveWord", saveWord);
+app.post("/translate", translate);
+app.post("/save-translation", saveTranslation);
+app.post("/save-tutor", saveSchool);
 
-app.get("/allSavedWords", handlerFunctions.getSavedWords);
-app.get("/savedWords/:wordId", handlerFunctions.getWordsById);
-app.get("/savedPhrases", handlerFunctions.getSavedPhrases);
-app.delete("/deleteWords/:wordId", handlerFunctions.deleteSavedWords);
-
-app.post("/saveWord", handlerFunctions.saveWord);
-app.post("/translate", handlerFunctions.translate);
-app.post("/save-translation", handlerFunctions.saveTranslation);
-app.post("/save-tutor", handlerFunctions.saveTutor);
-
-app.get('/bear', imgFunctions.bearImg)
-app.get('/cat', imgFunctions.catImg)
-app.get('/chicken', imgFunctions.chickenImg)
-app.get('/dog', imgFunctions.dogImg)
-app.get('/koala', imgFunctions.koalaImg)
-app.get('/meerkat', imgFunctions.meerkatImg)
-app.get('/panda', imgFunctions.pandaImg)
-app.get('/rabbit', imgFunctions.rabbitImg)
-app.get('/sealion', imgFunctions.sealionImg)
+app.get("/bear", bearImg);
+app.get("/cat", catImg);
+app.get("/chicken", chickenImg);
+app.get("/dog", dogImg);
+app.get("/koala", koalaImg);
+app.get("/meerkat", meerkatImg);
+app.get("/panda", pandaImg);
+app.get("/rabbit", rabbitImg);
+app.get("/sealion", sealionImg);
 
 app.get("/api/places", async (req, res) => {
   try {
