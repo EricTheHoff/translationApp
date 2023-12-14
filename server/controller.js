@@ -146,6 +146,9 @@ const handlerFunctions = {
     await SchoolDetail.destroy({
       where: { schoolId: schoolId },
     });
+    res.send({
+      success: true,
+    });
   },
 
   profileImage: async (req, res) => {
