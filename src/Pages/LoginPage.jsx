@@ -17,7 +17,7 @@ const LoginPage = () => {
       dispatch({ type: "Logged In" });
       dispatch({ type: "Active User", payload: user.data.userId });
       dispatch({ type: "Active Zip", payload: user.data.zipCode });
-      navigate("/");
+      window.location.href = '/'
     } else {
       alert(
         `Login Failed. Please ensure that you're entering a valid email and password.`

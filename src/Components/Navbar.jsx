@@ -53,16 +53,13 @@ const Navbar = () => {
       window.location.reload();
     }
   };
-  
-  const requestData = {
-    profilePic: profileImage
-  }
+
   
   const getAccount = async () => {
-    await axios.get('/user', requestData)
+    await axios.get('/user')
     
     .then((response) => {
-      setProfileImage(response.data.profilePic)
+      setNavImage(response.data.profilePic)
       console.log(response.data.profilePic)
     })
   }
@@ -83,7 +80,7 @@ const Navbar = () => {
 
           <div className="dropdown">
             <a href="/account">
-            <img className= "navImage" src={imageFiles[profileImage] ? imageFiles[profileImage] : profileImage}></img>
+            <img className= "navImage" src={imageFiles[navImage] ? imageFiles[navImage] : navImage}></img>
             </a>
             <div className="dropdown-content">
 
