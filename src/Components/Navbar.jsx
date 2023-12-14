@@ -55,7 +55,9 @@ const Navbar = () => {
           <a href="/map">Map</a>
 
           <div class="dropdown">
+            <a href="/account">
             <img className="navImage" src={user}></img>
+            </a>
             <div class="dropdown-content">
 
               <a href="/account">Profile</a>
