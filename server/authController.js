@@ -10,13 +10,16 @@ const authFunctions = {
   login: async (req, res) => {
     const { email, password } = req.body;
     const user = await UserDetail.findOne({ where: { email: email } });
-    const hashMatch = await bcrypt.compare(password, user.password);
 
-    if (user && hashMatch === true) {
-      req.session.userId = user.userId;
-      res.json({ success: true });
-    } else {
-      res.json({ success: false });
+    if (user) {
+      const hashMatch = await bcrypt.compare(password, user.password);
+      
+      if (user && hashMatch === true) {
+        req.session.userId = user.userId;
+        res.json({ success: true });
+      } else {
+        res.json({ success: false });
+      }
     }
   },
   logout: async (req, res) => {
