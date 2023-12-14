@@ -8,6 +8,7 @@ import imgFunctions from "./imgController.js";
 import schoolFunctions from "./schoolController.js";
 import authFunctions from "./authController.js";
 import translateFunctions from "./translateController.js";
+import handlerFunctions from "./controller.js"
 
 const app = express();
 
@@ -95,6 +96,8 @@ app.post("/translate", translate);
 app.post("/save-translation", saveTranslation);
 app.post("/save-school", saveSchool);
 app.get("/api/places", placeSearch);
+app.get("/saved-translations", handlerFunctions.getSavedTranslations);
+app.post("/seed-translations", handlerFunctions.getSeedTranslations);
 
 app.get("/bear", bearImg);
 app.get("/cat", catImg);

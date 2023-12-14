@@ -82,8 +82,28 @@ FurtherStudy.init(
   {
     sequelize: dbConnection,
     modelName: "furtherStudy",
+    underscored: true,
   }
 );
+// export class Images extends Model {
+//   [util.inspect.custom]() {
+//     return this.toJSON();
+//   }
+// }
+// Images.init(
+//   {
+//     imageId: {
+//       type: DataTypes.INTEGER,
+//       primaryKey: true,
+//       autoIncrement: true,
+//     },
+//     image: { type: DataTypes.STRING },
+//   },
+//   {
+//     sequelize: dbConnection,
+//     modelName: "furtherStudy",
+//   }
+// );
 export class Images extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
@@ -100,26 +120,7 @@ Images.init(
   },
   {
     sequelize: dbConnection,
-    modelName: "furtherStudy",
-  }
-);
-export class Images extends Model {
-  [util.inspect.custom]() {
-    return this.toJSON();
-  }
-}
-Images.init(
-  {
-    imageId: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    image: { type: DataTypes.STRING },
-  },
-  {
-    sequelize: dbConnection,
-    modelName: "furtherStudy",
+    modelName: "images",
   }
 );
 
