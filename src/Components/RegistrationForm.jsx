@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import user from "../Images/Avatars/user.png";
+import toast from "react-hot-toast";
 
 const RegistrationForm = () => {
   const navigate = useNavigate();
@@ -24,10 +25,10 @@ const RegistrationForm = () => {
   const register = async (event) => {
     event.preventDefault();
     if (emailReg === "" || passwordReg === "" || zipReg === "") {
-      alert("All fields must be filled out before creating an account.");
+      toast.error("All fields must be filled out before creating an account.");
       return;
     } else if (passwordReg !== confirmReg) {
-      alert("The provided passwords do not match. Please try again.");
+      toast.error("The provided passwords do not match. Please try again.");
       return;
     }
 
@@ -44,9 +45,10 @@ const RegistrationForm = () => {
         dispatch({ type: "Active User", payload: user.data.userId });
         dispatch({ type: "Active Zip", payload: user.data.zipCode });
         navigate("/");
+        toast.success("Registration Successful");
       })
       .catch(() => {
-        alert(
+        toast.error(
           `Account could not be created. There may already be an account registered to that email.`
         );
       });

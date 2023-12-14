@@ -5,6 +5,7 @@ import { Card } from "react-bootstrap";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import "bootstrap/dist/css/bootstrap.css";
+import toast from "react-hot-toast";
 
 const TranslatePage = () => {
   const [uploadPDF, setUploadPDF] = useState(false);
@@ -26,7 +27,7 @@ const TranslatePage = () => {
       navigate("/text-upload");
       return;
     } else {
-      alert(`Something went wrong. Please try again.`);
+      toast.error(`Something went wrong. Please try again.`);
     }
   };
 
@@ -67,11 +68,11 @@ const TranslatePage = () => {
     await axios
       .post("/save-translation", translationData)
       .then(() => {
-        alert(`Translation has been saved.`);
+        toast.success(`Translation has been saved.`);
         setNewTranslation(false);
       })
       .catch((error) => {
-        alert(`The following error has occurred: ${error}`);
+        toast.error(`The following error has occurred: ${error}`);
       });
   };
 

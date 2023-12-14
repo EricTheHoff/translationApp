@@ -120,7 +120,7 @@ Images.init(
   },
   {
     sequelize: dbConnection,
-    modelName: "images",
+    modelName: "image",
   }
 );
 

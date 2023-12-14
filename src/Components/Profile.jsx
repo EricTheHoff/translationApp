@@ -15,6 +15,7 @@ import panda from "../Images/Avatars/panda.png"
 import rabbit from "../Images/Avatars/rabbit.png"
 import sealion from "../Images/Avatars/sealion.png"
 import ImageGrid from './ImageGrid';
+import toast from "react-hot-toast";
 const imageFiles = { user, bear, cat, chicken, dog, koala, meerkat, panda, rabbit, sealion }
 
 const Profile = () => {
@@ -51,7 +52,7 @@ const Profile = () => {
         event.preventDefault()
 
         if (newPassword !== confirmPassword) {
-            alert(`The passwords do not match. Please try again.`)
+            toast.error(`The passwords do not match. Please try again.`)
             return
         }
 
@@ -66,8 +67,9 @@ const Profile = () => {
         if (response.data.success) {
             setEditMode(false)
             console.log("success")
+            toast.success("Account Updated")
         } else {
-            alert(`Something went wrong. Please ensure that you're entering the correct password information before saving.`)
+            toast.error(`Something went wrong. Please ensure that you're entering the correct password information before saving.`)
         }
         window.location.reload();
     }
@@ -136,7 +138,7 @@ const Profile = () => {
                     <br />
 
                     <label>ZIP Code</label>
-                    <input placeholder={zipcode} type="number" min="0" maxLength="5" onChange={(e) => setZipcode(e.target.value)} />
+                    <input placeholder={zipcode} type="text" pattern="[0-5]{5}" maxLength="5" onChange={(e) => setZipcode(e.target.value)} />
 
                     <br />
 

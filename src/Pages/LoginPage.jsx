@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import React from "react";
 import Login from "../Components/Login.jsx";
 import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -17,9 +18,9 @@ const LoginPage = () => {
       dispatch({ type: "Logged In" });
       dispatch({ type: "Active User", payload: user.data.userId });
       dispatch({ type: "Active Zip", payload: user.data.zipCode });
-      window.location.href = '/'
+      window.location.href = "/";
     } else {
-      alert(
+      toast.error(
         `Login Failed. Please ensure that you're entering a valid email and password.`
       );
     }
@@ -28,8 +29,6 @@ const LoginPage = () => {
   return (
     <>
       <Login login={login} />
-     
-      
     </>
   );
 };

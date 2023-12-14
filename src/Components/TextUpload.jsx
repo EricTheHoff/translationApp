@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const TextUpload = () => {
   const content = document.getElementById("content");
@@ -40,10 +41,10 @@ const TextUpload = () => {
 
     if (!textFile) {
       console.log(`No file selected.`);
-      alert(`Please choose a file to upload.`);
+      toast.error(`Please choose a file to upload.`);
       return;
     } else if (textFile.type !== "text/plain") {
-      alert(`Please select a Plain Text file (.txt) instead.`);
+      toast.error(`Please select a Plain Text file (.txt) instead.`);
       return;
     }
 

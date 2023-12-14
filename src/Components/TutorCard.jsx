@@ -3,6 +3,7 @@ import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import axios from "axios";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 function TutorCard({
   name,
@@ -21,6 +22,7 @@ function TutorCard({
     if (res.data.success) {
       console.log("deleted successfully");
       setDeleter(!deleter);
+      toast.success("School Removed");
     }
   };
 
