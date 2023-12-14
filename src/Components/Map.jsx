@@ -13,24 +13,21 @@ function Map({ userLocation, radius, language }) {
   const [places, setPlaces] = useState(null);
   const [clickedMarkers, setClickedMarkers] = useState({});
 
-  const handleSaveTutor = async (e) => {
+  const handleSaveSchool = async (e) => {
     const formData = {
       name: placeName,
       vicinity: placeVicinity,
       rating: placeRating,
       website: placeWebsite,
     };
-    console.log("about to post");
-    const res = await axios.post("/save-tutor", formData);
-    console.log("posted");
+    const res = await axios.post("/save-school", formData);
     if (res.data.success) {
       console.log("successfully added");
-    } else alert("This tutor has already been added");
+    } else alert("This school has already been added");
   };
 
   const addClick = (placeId) => {
-    handleSaveTutor();
-    console.log("firing handleSaveTutor");
+    handleSaveSchool();
     setClickedMarkers((prevClickedMarkers) => ({
       ...prevClickedMarkers,
       [placeId]: true, // Set the clicked state for the specific marker

@@ -32,16 +32,12 @@ const RegistrationForm = () => {
     }
 
     await axios
-      .post(
-        "/register",
-        {
-          email: emailReg,
-          password: passwordReg,
-          zipCode: zipReg,
-          profilePic: user,
-        },
-        console.log(user)
-      )
+      .post("/register", {
+        email: emailReg,
+        password: passwordReg,
+        zipCode: zipReg,
+        profilePic: user,
+      })
       .then(async () => {
         const user = await axios.get("/user");
         dispatch({ type: "Logged In" });
