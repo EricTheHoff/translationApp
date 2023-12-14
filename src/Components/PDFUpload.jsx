@@ -6,6 +6,7 @@ import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const PDFUpload = () => {
   const [pdfFile, setPDFFile] = useState(null);
@@ -54,9 +55,9 @@ const PDFUpload = () => {
     e.preventDefault();
 
     if (!pdfFile) {
-      alert(`Please choose a file to upload.`);
+      toast.error(`Please choose a file to upload.`);
     } else if (!pdfFile.includes("application/pdf")) {
-      alert(`Please select a PDF File.`);
+      toast.error(`Please select a PDF File.`);
     } else if (pdfFile !== null) {
       setViewPDF(pdfFile);
     } else {

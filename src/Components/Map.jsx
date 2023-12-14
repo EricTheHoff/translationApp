@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from "react";
 import { GoogleMap, MarkerF, InfoWindowF } from "@react-google-maps/api";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 function Map({ userLocation, radius, language }) {
   const center = useMemo(() => userLocation, [userLocation]);
@@ -12,6 +13,7 @@ function Map({ userLocation, radius, language }) {
   const [placeWebsite, setPlaceWebsite] = useState("");
   const [places, setPlaces] = useState(null);
   const [clickedMarkers, setClickedMarkers] = useState({});
+  
 
   const handleSaveSchool = async (e) => {
     const formData = {
@@ -23,7 +25,8 @@ function Map({ userLocation, radius, language }) {
     const res = await axios.post("/save-school", formData);
     if (res.data.success) {
       console.log("successfully added");
-    } else alert("This school has already been added");
+      toast.success("Added to your Schools!");
+    } else toast.error("This school has already been added");
   };
 
   const addClick = (placeId) => {

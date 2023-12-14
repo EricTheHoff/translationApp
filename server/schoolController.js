@@ -60,6 +60,8 @@ const schoolFunctions = {
           }
         }
         await user.addSchoolDetail(existingSchool);
+        res.json({ success: true });
+        return;
         // - if no, need to create SchoolDetail & relate it to the user
       } else {
         const newSchool = await SchoolDetail.create({
