@@ -1,10 +1,37 @@
 import React from "react";
 import "../Styles/navbar.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import "../Styles/profile.css"
+import user from "../Images/Avatars/user.png"
 
 const Navbar = () => {
-  const navigate = useNavigate();
+
+  const auth = useSelector((state) => state.loggedIn)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const id = useSelector((state) => state.userId)
+
+  console.log(id)
+
+  const saveToExpress = async () => {
+    const response = await axios.get('/user-status')
+
+    if (!response.data.success) {
+      dispatch({ type: 'Logged Out' })
+      dispatch({ type: 'Inactive User' })
+      dispatch({ type: 'Inactive Zip' })
+      navigate('/')
+    } else {
+      const user = await axios.get('/user')
+      dispatch({ type: 'Logged In' })
+      dispatch({ type: 'Active User', payload: user.data.userId })
+      dispatch({ type: 'Active Zip', payload: user.data.zipCode })
+    }
+  }
+
   const handleLogout = async (e) => {
     e.preventDefault();
     const res = await axios.post("/api/logout");
@@ -14,18 +41,45 @@ const Navbar = () => {
     }
   };
 
-  return (
-    <div className="navbar">
-      <nav>
-        <a href="/">translationApp</a>
-        <a href="/map">Map</a>
-        <a href="/login">Login</a>
-        <a href="/register">Register</a>
-        <a href="/account">Profile</a>
-        <button onClick={handleLogout}>Logout</button>
-      </nav>
-    </div>
-  );
+  useEffect(() => {
+    saveToExpress()
+  }, [])
+
+
+  if (auth === true) {
+
+    return (
+      <div className="navbar">
+        <nav>
+          <a href="/">translationApp</a>
+          <a href="/map">Map</a>
+
+          <div class="dropdown">
+            <img className="navImage" src={user}></img>
+            <div class="dropdown-content">
+
+              <a href="/account">Profile</a>
+              <br />
+          <button onClick={handleLogout}>Logout</button>
+            </div>
+          </div>
+
+        </nav>
+      </div>
+
+    )
+  } else {
+    return (
+      <div>
+        <ul>
+          <li>
+            <Link to="/login">Login</Link>
+            <Link to="/register">Register</Link>
+          </li>
+        </ul>
+      </div>
+    )
+  }
 };
 
 export default Navbar;

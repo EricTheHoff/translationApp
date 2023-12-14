@@ -31,18 +31,18 @@ const HomePage = () => {
 
     useEffect(() => {
         saveToExpress()
-    },[])
+    }, [])
 
     if (auth === true) {
         return (
             <div>
                 <ul>
-                    <li>
+                    {/* <li>
                         <Link to="/login">Login</Link>
                     </li>
                     <li>
                         <Link to="/register">Register</Link>
-                    </li>
+                    </li> */}
                     <li>
                         <Link to="/account">Account Info</Link>
                     </li>
@@ -69,7 +69,7 @@ const HomePage = () => {
             <div>
                 <ul>
                     <li>
-                        <Link to="/login">Login</Link>
+                        <Link to="/register">Get Started</Link>
                     </li>
                 </ul>
             </div>
