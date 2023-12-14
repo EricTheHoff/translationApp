@@ -43,7 +43,6 @@ const Profile = () => {
                 setPassword(response.data.password)
                 setProfileImage(response.data.profilePic)
                 console.log(response.data.profilePic)
-
             })
     }
 
@@ -136,7 +135,7 @@ const Profile = () => {
                     <br />
 
                     <label>ZIP Code</label>
-                    <input placeholder={zipcode} type="text" maxLength="5" onChange={(e) => setZipcode(e.target.value)} />
+                    <input placeholder={zipcode} type="number" min="0" maxLength="5" onChange={(e) => setZipcode(e.target.value)} />
 
                     <br />
 

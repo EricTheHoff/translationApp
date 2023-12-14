@@ -6,7 +6,13 @@ img {
     border: none
 }
 
-img:hover {
+/* img:hover {
     width: 90.1px;
     height: 90.1px;
+} */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

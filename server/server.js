@@ -24,18 +24,27 @@ env.config();
 
 console.log(process.env.VITE_REACT_APP_GOOGLE_API_KEY);
 
+const loginRequired = (req, res, next) => {
+  if (!req.session.userId) {
+      res.status(401).json({ error: 'Unauthorized' })
+  } else {
+      next()
+  }
+}
+
 app.post("/register", handlerFunctions.register);
 
-app.delete("/deleteAccount", handlerFunctions.deleteAccount);
-app.put("/editAccount", handlerFunctions.editAccount);
+app.delete("/deleteAccount", loginRequired, handlerFunctions.deleteAccount);
+app.put("/editAccount", loginRequired, handlerFunctions.editAccount);
 
 app.get("/allSchools", handlerFunctions.getSavedSchools);
 app.delete("/deleteSchools/:schoolId", handlerFunctions.deleteSavedSchools);
 
 app.post("/login", handlerFunctions.login);
 app.post("/api/logout", handlerFunctions.logout);
-app.get("/user", handlerFunctions.user);
+app.get("/user", loginRequired, handlerFunctions.user);
 app.get("/user-schools", handlerFunctions.userSchools);
+
 app.get("/user-status", handlerFunctions.userStatus);
 
 app.get("/allSavedWords", handlerFunctions.getSavedWords);
