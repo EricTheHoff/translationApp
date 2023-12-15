@@ -103,7 +103,6 @@ const handlerFunctions = {
   user: async (req, res) => {
     const id = req.session.userId;
     const user = await UserDetail.findOne({ where: { userId: id } });
-
     res.send(user);
   },
 
