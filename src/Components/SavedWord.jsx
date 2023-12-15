@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Card, ListGroup } from 'react-bootstrap'
 
-export default function SavedWord({ word }) {
-    
-    function handleDelete(id) {
-        axios.delete(`http://localhost:2222/deleteWords/${id}`);
-      }
+export default function SavedWord({ translation, handleDelete, id, codeMapping }) {
     return (
-    <div>
-      Saved Word <p>{word.word}</p>
-      <button onClick={() => handleDelete(word.wordId)}>Delete Translation</button>
-      
-      
-    </div>
-  );
+        <>
+            <Card style={{ width: '18rem' }}>
+                <ListGroup variant='flush'>
+                    <ListGroup.Item>English: {translation.original}</ListGroup.Item>
+                    <ListGroup.Item>{codeMapping[translation.toLanguage]}: {translation.word}</ListGroup.Item>
+                </ListGroup>
+                <Card.Footer>
+                    <button onClick={() => handleDelete(id)}>Delete</button>
+                </Card.Footer>
+            </Card>
+        </>
+    );
 }
