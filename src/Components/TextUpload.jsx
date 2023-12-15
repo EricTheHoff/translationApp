@@ -48,7 +48,7 @@ const TextUpload = () => {
           }
         }
       } else {
-        toast.error("Please select word from the file");
+        toast.error("Please select text from the file");
       }
     }
   };
@@ -91,15 +91,22 @@ const TextUpload = () => {
       return;
     }
 
-    const reader = new FileReader();
-    reader.addEventListener("load", () => {
-      // content.innerText = reader.result;
-      setTextFileContent(reader.result);
-    });
+    toast.promise(
+      new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.addEventListener("load", () => {
+          setTextFileContent(reader.result); // Update state with the file content
+          resolve(); // Resolve the promise after setting the content
+        });
 
-    if (textFile) {
-      reader.readAsText(textFile);
-    }
+        reader.readAsText(textFile);
+      }),
+      {
+        loading: "loading file...", // Display while reading the file
+        success: "successfully loaded",
+        error: <b>Could not load file content.</b>,
+      }
+    );
   };
 
   if (!uploaded) {
