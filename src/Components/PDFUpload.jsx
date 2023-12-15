@@ -111,7 +111,7 @@ const PDFUpload = () => {
       <>
         <div
           onMouseUp={() => {
-            setTimeout(handleSelection, 0); // Add a small delay to allow the selection to be updated
+            handleSelection();
           }}
         >
           <p>Highlight text in the file to see its translation</p>
