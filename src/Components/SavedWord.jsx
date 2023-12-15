@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
 import { Card, ListGroup } from 'react-bootstrap'
 
 export default function SavedWord({ translation, handleDelete, id, codeMapping }) {

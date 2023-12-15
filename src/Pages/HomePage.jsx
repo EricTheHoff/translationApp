@@ -50,7 +50,7 @@ const HomePage = () => {
             <Link to="/map">Map</Link>
           </li>
           <li>
-            <Link to="/saved-translations">Saved Translations</Link>
+            <Link to="/translations">Saved Translations</Link>
           </li>
           <li>
             <Link to="/saved-tutors">Saved Tutors</Link>

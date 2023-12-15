@@ -119,7 +119,7 @@ const TextUpload = () => {
 
         <br></br>
 
-        <p id="content"> No Text Uploaded</p>
+        <p id="content">No Text Uploaded</p>
 
         <br></br>
 

@@ -49,7 +49,6 @@ const SavedTranslationsPage = () => {
             const updatedTranslations = savedTranslations.filter((el) => el.wordId !== id)
 
             setSavedTranslations(updatedTranslations)
-            setLanguage('')
 
             if (language !== '') {
                 const updatedFilteredTranslations = updatedTranslations.filter((el) => el.toLanguage === language)
