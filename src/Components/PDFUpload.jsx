@@ -37,6 +37,29 @@ const PDFUpload = () => {
     }
   };
 
+  const saveTranslation = async (e) => {
+    e.preventDefault();
+
+    console.log(language);
+
+    const translationData = {
+      translatedText: highlightedText,
+      originalText: translation,
+      id: id,
+      toLanguage: language,
+    };
+
+    await axios
+      .post("/save-translation", translationData)
+      .then(() => {
+        toast.success(`Translation has been saved.`);
+        setNewTranslation(false);
+      })
+      .catch((error) => {
+        toast.error(`The following error has occurred: ${error}`);
+      });
+  };
+
   const handleChange = (e) => {
     let selectedFile = e.target.files[0];
 
