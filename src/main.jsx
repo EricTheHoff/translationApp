@@ -32,7 +32,7 @@ const router = createBrowserRouter(
       <Route path="register" element={<RegisterPage />} />
       <Route path="account" element={<AccountInfoPage />} />
       <Route path="map" element={<MapPage />} />
-      <Route path="saved-translations" element={<SavedTranslationsPage />} />
+      <Route path="translations" element={<SavedTranslationsPage />} />
       <Route path="saved-tutors" element={<SavedTutorPage />} />
       <Route path="study" element={<StudyPage />} />
       <Route path="translate" element={<TranslatePage />} />
