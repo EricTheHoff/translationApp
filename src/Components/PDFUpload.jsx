@@ -14,7 +14,6 @@ import "bootstrap/dist/css/bootstrap.css";
 const PDFUpload = () => {
   const [pdfFile, setPDFFile] = useState(null);
   const [viewPDF, setViewPDF] = useState(null);
-  const [highlightedText, setHighlightedText] = useState("");
   const [language, setLanguage] = useState("");
   const newplugin = defaultLayoutPlugin();
   const [selected, setSelected] = useState("");
@@ -22,26 +21,36 @@ const PDFUpload = () => {
   const [translation, setTranslation] = useState("");
   const id = useSelector((state) => state.userId);
 
+  const saveButton = () => {
+    setNewTranslation(true);
+    console.log(newTranslation);
+  };
+
   const handleSelection = async () => {
     const selection = window.getSelection();
     if (selection && selection.toString().trim() !== "") {
       const selectedText = selection.toString();
-      setSelected(selectedText);
 
-      // Perform translation when text is highlighted
-      if (language) {
-        try {
-          const translationData = {
-            translation: selected,
-            language,
-            source: "EN",
-          };
-          const response = await axios.post("/translate", translationData);
-          setTranslation(response.data.translations[0].text);
-          setNewTranslation(true);
-        } catch (error) {
-          console.error(error);
+      // Check if the selection is within the element with id 'pdffile'
+      const pdffileElement = document.getElementById("pdffile");
+      if (pdffileElement && pdffileElement.contains(selection.anchorNode)) {
+        // Perform translation when text is highlighted
+        if (language) {
+          try {
+            const translationData = {
+              translation: selectedText,
+              language,
+              source: "EN",
+            };
+            const response = await axios.post("/translate", translationData);
+            setSelected(selectedText);
+            setTranslation(response.data.translations[0].text);
+          } catch (error) {
+            console.error(error);
+          }
         }
+      } else {
+        toast.error("Please select word from the file");
       }
     }
   };
@@ -52,7 +61,7 @@ const PDFUpload = () => {
     console.log(language);
 
     const translationData = {
-      translation: translation,
+      translatedText: translation,
       originalText: selected,
       id: id,
       toLanguage: language,
@@ -105,14 +114,11 @@ const PDFUpload = () => {
             setTimeout(handleSelection, 0); // Add a small delay to allow the selection to be updated
           }}
         >
-          <p>
-            Select and highlight text in this component to see it displayed
-            below:
-          </p>
+          <p>Highlight text in the file to see its translation</p>
           {translation && (
             <div>
               <p>Translation: {translation}</p>{" "}
-              <button>Save To Translations</button>
+              <button onClick={saveButton}>Save To Translations</button>
             </div>
           )}
 
@@ -169,9 +175,9 @@ const PDFUpload = () => {
           <div>
             <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js">
               {viewPDF && (
-                <>
+                <div id="pdffile">
                   <Viewer fileUrl={viewPDF} plugins={[newplugin]} />
-                </>
+                </div>
               )}
               {!viewPDF && <>No PDF Uploaded</>}
             </Worker>
