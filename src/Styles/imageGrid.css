@@ -6,23 +6,9 @@
     /* padding: 0px; */
     width: 30%;
   }
-  
-  /* .grid-item9 {
 
-  } */
-
-.grid-button9 {
-  background-color: blue;
-  border-width: 0px;
-  color: red;
-}
 
 button {
   background-color: transparent;
   border: 0px;
-}
-
-img:hover {
-    width: 90.1px;
-    height: 90.1px;
 }

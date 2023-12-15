@@ -15,6 +15,8 @@ import meerkat from "../Images/Avatars/meerkat.png";
 import panda from "../Images/Avatars/panda.png";
 import rabbit from "../Images/Avatars/rabbit.png";
 import sealion from "../Images/Avatars/sealion.png";
+import '../Styles/images.css'
+
 const imageFiles = {
   user,
   bear,

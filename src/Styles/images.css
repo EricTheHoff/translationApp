@@ -1,0 +1,43 @@
+img {
+  width: 80px;
+  height: 80px;
+  border-radius: 60px;
+  object-fit: cover;
+  border: none;
+}
+
+img:hover {
+    width: 90.1px;
+    height: 90.1px;
+    z-index: 2;
+}
+
+#pic {
+  max-width: 120px;
+  max-height: 120px;
+
+  width: 50%;
+
+  display: block;
+  position: absolute;
+
+  top: 5%;
+  margin-left: 50%;
+  margin-right: 50%;
+
+  z-index: 1;
+
+  border-color: black;
+
+  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.navImage {
+  height: 40px;
+  width: 40px;
+}
+
+.navImage:hover {
+  height: 40px;
+  width: 40px;
+}
