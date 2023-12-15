@@ -1,5 +1,3 @@
-import { useState } from "react";
-import axios from "axios";
 import bear from "../Images/Avatars/bear.png";
 import cat from "../Images/Avatars/cat.png";
 import chicken from "../Images/Avatars/chicken.png";
@@ -59,59 +57,61 @@ const ImageGrid = ({ setProfile }) => {
 
   return (
     <div className="grid-container">
-      <div className="grid-item">
-        <button onClick={bearFunction}>
+
+      <div className="grid-item1">
+        <button className="gridButton" onClick={bearFunction}>
           <img src={bear} />
         </button>
       </div>
 
-      <div className="grid-item">
-        <button onClick={catFunction}>
+      <div className="grid-item2">
+        <button className="gridButton" onClick={catFunction}>
           <img src={cat} />
         </button>
       </div>
 
-      <div className="grid-item">
-        <button onClick={chickenFunction}>
+      <div className="grid-item3">
+        <button className="gridButton" onClick={chickenFunction}>
           <img src={chicken} />
         </button>
       </div>
 
-      <div className="grid-item">
-        <button onClick={dogFunction}>
+      <div className="grid-item4">
+        <button className="gridButton" onClick={dogFunction}>
           <img src={dog} />
         </button>
       </div>
 
-      <div className="grid-item">
-        <button onClick={koalaFunction}>
+      <div className="grid-item5">
+        <button className="gridButton" onClick={koalaFunction}>
           <img src={koala} />
         </button>
       </div>
 
-      <div className="grid-item">
-        <button onClick={meerkatFunction}>
+      <div className="grid-item6">
+        <button className="gridButton" onClick={meerkatFunction}>
           <img src={meerkat} />
         </button>
       </div>
 
-      <div className="grid-item">
-        <button onClick={pandaFunction}>
+      <div className="grid-item7">
+        <button className="gridButton" onClick={pandaFunction}>
           <img src={panda} />
         </button>
       </div>
 
-      <div className="grid-item">
-        <button onClick={rabbitFunction}>
+      <div className="grid-item8">
+        <button className="gridButton" onClick={rabbitFunction}>
           <img src={rabbit} />
         </button>
       </div>
 
-      <div className="grid-item">
-        <button onClick={sealionFunction}>
+      <div className="grid-item9">
+        <button className="gridButton9" onClick={sealionFunction}>
           <img src={sealion} />
         </button>
       </div>
+
     </div>
   );
 };

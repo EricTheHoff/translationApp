@@ -7,11 +7,22 @@
     width: 30%;
   }
   
-  .grid-item {
-    /* background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8); */
-    border-radius: 60px;
-    /* padding: 5px; */
-    /* font-size: 30px; */
-    text-align: center;
-  }
+  /* .grid-item9 {
+
+  } */
+
+.grid-button9 {
+  background-color: blue;
+  border-width: 0px;
+  color: red;
+}
+
+button {
+  background-color: transparent;
+  border: 0px;
+}
+
+img:hover {
+    width: 90.1px;
+    height: 90.1px;
+}
