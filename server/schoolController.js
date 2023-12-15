@@ -20,17 +20,6 @@ const schoolFunctions = {
 
     res.json(user);
   },
-
-  // deleteSchool: async (req, res) => {
-  //   const { schoolId } = req.params;
-  //   await SchoolDetail.destroy({
-  //     where: { schoolId: schoolId },
-  //   });
-  //   res.send({
-  //     success: true,
-  //   });
-  // },
-
   saveSchool: async (req, res) => {
     const userId = req.session.userId;
 

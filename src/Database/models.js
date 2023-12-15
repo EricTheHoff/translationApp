@@ -37,8 +37,8 @@ UserDetail.init(
     userId: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     email: { type: DataTypes.STRING, unique: true },
     password: { type: DataTypes.STRING },
-    profilePic: {type: DataTypes.STRING},
-    zipCode: { type: DataTypes.STRING(5) }
+    profilePic: { type: DataTypes.STRING },
+    zipCode: { type: DataTypes.STRING(5) },
   },
 
   {
@@ -77,7 +77,7 @@ FurtherStudy.init(
       autoIncrement: true,
     },
     phrase: { type: DataTypes.STRING },
-    difficulty: { type: DataTypes.INTEGER}
+    difficulty: { type: DataTypes.INTEGER },
   },
   {
     sequelize: dbConnection,
@@ -85,25 +85,6 @@ FurtherStudy.init(
     underscored: true,
   }
 );
-// export class Images extends Model {
-//   [util.inspect.custom]() {
-//     return this.toJSON();
-//   }
-// }
-// Images.init(
-//   {
-//     imageId: {
-//       type: DataTypes.INTEGER,
-//       primaryKey: true,
-//       autoIncrement: true,
-//     },
-//     image: { type: DataTypes.STRING },
-//   },
-//   {
-//     sequelize: dbConnection,
-//     modelName: "furtherStudy",
-//   }
-// );
 export class Images extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
