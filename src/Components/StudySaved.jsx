@@ -15,6 +15,7 @@ const StudySaved = () => {
     
     const uniqueToLanguages = [...new Set(flashcards.map((el) => el.toLanguage))]
     const codeMapping = {
+        'BG': 'Bulgarian',
         'CS': 'Czech',
         'DA': 'Danish',
         'DE': 'German',
