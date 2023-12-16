@@ -8,8 +8,11 @@ import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import { Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
+import TranslationModal from "../Pages/TranslationModal";
 
 const PDFUpload = () => {
   const [pdfFile, setPDFFile] = useState(null);
@@ -17,8 +20,11 @@ const PDFUpload = () => {
   const [language, setLanguage] = useState("");
   const newplugin = defaultLayoutPlugin();
   const [selected, setSelected] = useState("");
+  const [uploaded, setUploaded] = useState(false);
   const [newTranslation, setNewTranslation] = useState(false);
+  const [modalShow, setModalShow] = React.useState(false);
   const [translation, setTranslation] = useState("");
+  const [longLang, setLongLang] = useState("");
   const id = useSelector((state) => state.userId);
 
   const saveButton = () => {
@@ -50,7 +56,7 @@ const PDFUpload = () => {
           }
         }
       } else {
-        toast.error("Please select word from the file");
+        toast.error("Please select text from the file");
       }
     }
   };
@@ -101,12 +107,38 @@ const PDFUpload = () => {
       toast.error(`Please select a PDF File.`);
     } else if (pdfFile !== null) {
       setViewPDF(pdfFile);
+      toast.success("Successfully loaded");
     } else {
       setViewPDF(null);
     }
   };
 
-  if (newTranslation === false) {
+  if (!uploaded) {
+    return (
+      <div>
+        <h3>Would you like to translate a file?</h3>
+        <h4>Please select a PDF file to upload.</h4>
+
+        <form
+          onSubmit={(e) => {
+            setUploaded(true);
+            handleSubmit(e);
+          }}
+        >
+          <label htmlFor="upload">Upload a File: </label>
+          <input type="file" name="upload" onChange={handleChange} />
+          <br></br>
+          <button type="submit">Upload</button>
+        </form>
+
+        <br></br>
+
+        <p>No PDF Uploaded</p>
+      </div>
+    );
+  }
+
+  if (uploaded && !newTranslation) {
     return (
       <>
         <div
@@ -118,14 +150,26 @@ const PDFUpload = () => {
           {translation && (
             <div>
               <p>Translation: {translation}</p>{" "}
-              <button onClick={saveButton}>Save To Translations</button>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  setModalShow(true);
+                  saveButton();
+                }}
+              >
+                Save Translation
+              </Button>
             </div>
           )}
-
           <form>
             <br></br>
 
-            <select onChange={(e) => setLanguage(e.target.value)}>
+            <select
+              onChange={(e) => {
+                setLanguage(e.target.value);
+                setLongLang(e.target.options[e.target.selectedIndex].text);
+              }}
+            >
               <option selected default disabled>
                 --Choose a Language--
               </option>
@@ -159,19 +203,7 @@ const PDFUpload = () => {
               <option value="ZH">Chinese</option>
             </select>
           </form>
-          <h3>Would you like to translate a file?</h3>
-          <h4>Please select a file to upload.</h4>
-          <h3>Please Upload a PDF File</h3>
-
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="upload">Upload a File: </label>
-            <input type="file" name="upload" onChange={handleChange} />
-            <br></br>
-            <button type="submit">Upload</button>
-          </form>
-
           <br></br>
-
           <div>
             <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js">
               {viewPDF && (
@@ -183,30 +215,28 @@ const PDFUpload = () => {
             </Worker>
           </div>
 
-          <br></br>
-
           <Link to="/translate">Select a New File</Link>
         </div>
+        ;
+      </>
+    );
+  } else if (newTranslation) {
+    // Render the modal when newTranslation is true
+    return (
+      <>
+        <TranslationModal
+          selected={selected}
+          translation={translation}
+          saveTranslation={saveTranslation}
+          setNewTranslation={setNewTranslation}
+          show={modalShow}
+          longLang={longLang}
+          onHide={() => setModalShow(false)}
+        />
       </>
     );
   } else {
-    return (
-      <>
-        <Card style={{ width: "18rem", textAlign: "center" }}>
-          <Card.Header>Translation</Card.Header>
-          <Card.Body>
-            <Card.Title>{translation}</Card.Title>
-          </Card.Body>
-          <Card.Footer>
-            <form onSubmit={saveTranslation}>
-              <p>Would you like to save this to your translations?</p>
-              <button type="submit">Yes</button>
-              <button onClick={() => setNewTranslation(false)}>No</button>
-            </form>
-          </Card.Footer>
-        </Card>
-      </>
-    );
+    null;
   }
 };
 
