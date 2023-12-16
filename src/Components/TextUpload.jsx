@@ -6,17 +6,21 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import TranslationModal from "../Pages/TranslationModal";
 
 const TextUpload = () => {
   const content = document.getElementById("content");
   const [textFile, setTextFile] = useState(null);
-  const [highlightedText, setHighlightedText] = useState("");
   const [language, setLanguage] = useState("");
   const [selected, setSelected] = useState("");
   const [newTranslation, setNewTranslation] = useState(false);
   const [translation, setTranslation] = useState("");
   const [uploaded, setUploaded] = useState(false);
   const [textFileContent, setTextFileContent] = useState("");
+  const [modalShow, setModalShow] = React.useState(false);
+  const [longLang, setLongLang] = useState("");
   const id = useSelector((state) => state.userId);
 
   const saveButton = () => {
@@ -146,13 +150,26 @@ const TextUpload = () => {
           {translation && (
             <div>
               <p>Translation: {translation}</p>{" "}
-              <button onClick={saveButton}>Save To Translations</button>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  setModalShow(true);
+                  saveButton();
+                }}
+              >
+                Save Translation
+              </Button>
             </div>
           )}
           <form>
             <br></br>
 
-            <select onChange={(e) => setLanguage(e.target.value)}>
+            <select
+              onChange={(e) => {
+                setLanguage(e.target.value);
+                setLongLang(e.target.options[e.target.selectedIndex].text);
+              }}
+            >
               <option selected default disabled>
                 --Choose a Language--
               </option>
@@ -193,24 +210,23 @@ const TextUpload = () => {
         </div>
       </>
     );
-  } else {
+  } else if (newTranslation) {
+    // Render the modal when newTranslation is true
     return (
       <>
-        <Card style={{ width: "18rem", textAlign: "center" }}>
-          <Card.Header>Translation</Card.Header>
-          <Card.Body>
-            <Card.Title>{translation}</Card.Title>
-          </Card.Body>
-          <Card.Footer>
-            <form onSubmit={saveTranslation}>
-              <p>Would you like to save this to your translations?</p>
-              <button type="submit">Yes</button>
-              <button onClick={() => setNewTranslation(false)}>No</button>
-            </form>
-          </Card.Footer>
-        </Card>
+        <TranslationModal
+          selected={selected}
+          translation={translation}
+          saveTranslation={saveTranslation}
+          setNewTranslation={setNewTranslation}
+          show={modalShow}
+          longLang={longLang}
+          onHide={() => setModalShow(false)}
+        />
       </>
     );
+  } else {
+    null;
   }
 };
 
