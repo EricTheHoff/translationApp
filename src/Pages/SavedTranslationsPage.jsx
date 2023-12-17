@@ -4,42 +4,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import SavedWord from "../Components/SavedWord";
 import toast from 'react-hot-toast'
+import { codeMapping } from "../CountryCodes/countryCodes.js";
 
 const SavedTranslationsPage = () => {
     const [savedTranslations, setSavedTranslations] = useState([]);
     const [filteredTranslations, setFilteredTranslations] = useState([])
     const [language, setLanguage] = useState('')
-
     const uniqueToLanguages = [...new Set(savedTranslations.map((el) => el.toLanguage))]
-    const codeMapping = {
-        'CS': 'Czech',
-        'DA': 'Danish',
-        'DE': 'German',
-        'EL': 'Greek',
-        'ES': 'Spanish',
-        'ET': 'Estonian',
-        'FI': 'Finnish',
-        'FR': 'French',
-        'HU': 'Hungarian',
-        'ID': 'Indonesian',
-        'IT': 'Italian',
-        'JA': 'Japanese',
-        'KO': 'Korean',
-        'LT': 'Lithuanian',
-        'LV': 'Latvian',
-        'NB': 'Norwegian (Bokmål)',
-        'NL': 'Dutch',
-        'PL': 'Polish',
-        'PT': 'Portuguese',
-        'RO': 'Romanian',
-        'RU': 'Russian',
-        'SK': 'Slovak',
-        'SL': 'Slovenian',
-        'SV': 'Swedish',
-        'TR': 'Turkish',
-        'UK': 'Ukranian',
-        'ZH': 'Chinese',
-    }
     
     const handleDelete = (id) => {
         axios.delete(`/deleteWords/${id}`)
