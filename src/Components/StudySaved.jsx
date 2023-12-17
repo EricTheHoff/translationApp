@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Flashcard from './Flashcard.jsx'
+import { codeMapping } from '../CountryCodes/countryCodes.js'
 
 const StudySaved = () => {
     const [flashcards, setFlashcards] = useState([])
@@ -12,39 +13,7 @@ const StudySaved = () => {
     const [englishFront, setEnglishFront] = useState(false)
     const [noOfCards, setNoOfCards] = useState(1)
     const [display, setDisplay] = useState(false)
-    
     const uniqueToLanguages = [...new Set(flashcards.map((el) => el.toLanguage))]
-    const codeMapping = {
-        'BG': 'Bulgarian',
-        'CS': 'Czech',
-        'DA': 'Danish',
-        'DE': 'German',
-        'EL': 'Greek',
-        'ES': 'Spanish',
-        'ET': 'Estonian',
-        'FI': 'Finnish',
-        'FR': 'French',
-        'HU': 'Hungarian',
-        'ID': 'Indonesian',
-        'IT': 'Italian',
-        'JA': 'Japanese',
-        'KO': 'Korean',
-        'LT': 'Lithuanian',
-        'LV': 'Latvian',
-        'NB': 'Norwegian (Bokmål)',
-        'NL': 'Dutch',
-        'PL': 'Polish',
-        'PT': 'Portuguese',
-        'RO': 'Romanian',
-        'RU': 'Russian',
-        'SK': 'Slovak',
-        'SL': 'Slovenian',
-        'SV': 'Swedish',
-        'TR': 'Turkish',
-        'UK': 'Ukranian',
-        'ZH': 'Chinese',
-    }
-
 
     const handleSubmit = (e, number) => {
         e.preventDefault()
@@ -81,11 +50,12 @@ const StudySaved = () => {
         })
     },[])
 
-    
+
     useEffect(() => {
         const filteredResults = flashcards.filter((el) => el.toLanguage === language)
         setFilteredCards(filteredResults)
     },[language])
+    
 
     if (display === false) {
         return (
