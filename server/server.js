@@ -76,28 +76,28 @@ const loginRequired = (req, res, next) => {
 app.post("/register", register);
 app.delete("/deleteAccount", loginRequired, deleteAccount);
 app.put("/editAccount", loginRequired, editAccount);
-app.get("/allSchools", getSavedSchools);
-app.delete("/deleteSchools/:schoolId", deleteUserSchool);
+app.get("/allSchools", loginRequired, getSavedSchools);
+app.delete("/deleteSchools/:schoolId", loginRequired, deleteUserSchool);
 
 app.post("/login", login);
-app.post("/logout", logout);
+app.post("/logout", loginRequired, logout);
 app.get("/user", loginRequired, user);
-app.get("/user-schools", userSchools);
+app.get("/user-schools", loginRequired, userSchools);
 
-app.get("/user-status", userStatus);
+app.get("/user-status", loginRequired, userStatus);
 
-app.get("/allSavedWords", getSavedWords);
-app.get("/savedWords/:wordId", getWordsById);
-app.get("/savedPhrases", getSavedPhrases);
-app.delete("/deleteWords/:wordId", deleteWords);
+app.get("/allSavedWords", loginRequired, getSavedWords);
+app.get("/savedWords/:wordId", loginRequired, getWordsById);
+app.get("/savedPhrases", loginRequired, getSavedPhrases);
+app.delete("/deleteWords/:wordId", loginRequired, deleteWords);
 
-app.post("/saveWord", saveWord);
-app.post("/translate", translate);
-app.post("/save-translation", saveTranslation);
-app.post("/save-school", saveSchool);
-app.get("/api/places", placeSearch);
-app.get("/saved-translations", handlerFunctions.getSavedTranslations);
-app.post("/seed-translations", handlerFunctions.getSeedTranslations);
+app.post("/saveWord", loginRequired, saveWord);
+app.post("/translate", loginRequired, translate);
+app.post("/save-translation", loginRequired, saveTranslation);
+app.post("/save-school", loginRequired, saveSchool);
+app.get("/api/places", loginRequired, placeSearch);
+app.get("/saved-translations", loginRequired, handlerFunctions.getSavedTranslations);
+app.post("/seed-translations", loginRequired, handlerFunctions.getSeedTranslations);
 
 app.get("/bear", bearImg);
 app.get("/cat", catImg);

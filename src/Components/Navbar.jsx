@@ -35,23 +35,31 @@ const Navbar = () => {
   const id = useSelector((state) => state.userId);
 
   const [navImage, setNavImage] = useState(user);
-  // console.log(id);
 
-  const saveToExpress = async () => {
-    const response = await axios.get("/user-status");
+    const saveToExpress = () => {
+        axios.get("/user-status")
 
-    if (!response.data.success) {
-      dispatch({ type: "Logged Out" });
-      dispatch({ type: "Inactive User" });
-      dispatch({ type: "Inactive Zip" });
-      navigate("/");
-    } else {
-      const user = await axios.get("/user");
-      dispatch({ type: "Logged In" });
-      dispatch({ type: "Active User", payload: user.data.userId });
-      dispatch({ type: "Active Zip", payload: user.data.zipCode });
-    }
-  };
+        .then(async (response) => {
+            if (!response.data.success) {
+                dispatch({ type: "Logged Out" });
+                dispatch({ type: "Inactive User" });
+                dispatch({ type: "Inactive Zip" });
+                navigate("/");
+            } else {
+                const user = await axios.get("/user");
+                dispatch({ type: "Logged In" });
+                dispatch({ type: "Active User", payload: user.data.userId });
+                dispatch({ type: "Active Zip", payload: user.data.zipCode });
+            }
+        })
+        .catch((error) => {
+            console.error(`The following has occurred: ${error}`)
+            dispatch({ type: "Logged Out" });
+            dispatch({ type: "Inactive User" });
+            dispatch({ type: "Inactive Zip" });
+            navigate("/");
+        })
+    };
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -63,14 +71,17 @@ const Navbar = () => {
     }
   };
 
-  const getAccount = async () => {
-    await axios
-      .get("/user")
+  const getAccount = () => {
+    axios.get('/user')
 
-      .then((response) => {
-        setNavImage(response.data.profilePic);
-      });
-  };
+    .then((response) => {
+        setNavImage(response.data.profilePic)
+    })
+
+    .catch((error) => {
+        return
+    })
+  }
 
   useEffect(() => {
     saveToExpress();
