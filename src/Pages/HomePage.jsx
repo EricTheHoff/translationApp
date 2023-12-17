@@ -35,6 +35,24 @@ const HomePage = () => {
     })
   };
 
+  const logout = () => {
+    axios.post('/logout')
+
+    .then(() => {
+        dispatch({ type: "Logged Out" });
+        dispatch({ type: "Inactive User" });
+        dispatch({ type: "Inactive Zip" });
+        navigate("/")
+    })
+    .catch((error) => {
+        console.error(`The following error has occurred: ${error}`)
+        dispatch({ type: "Logged Out" });
+        dispatch({ type: "Inactive User" });
+        dispatch({ type: "Inactive Zip" });
+        navigate("/")
+    })
+  }
+
   useEffect(() => {
     saveToExpress();
   }, []);
@@ -62,6 +80,8 @@ const HomePage = () => {
             <Link to="/translate">Translate</Link>
           </li>
         </ul>
+
+        <button onClick={logout}>Logout</button>
       </div>
     );
   } else {
