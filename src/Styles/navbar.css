@@ -1,5 +1,6 @@
 .navbar {
     background: linear-gradient(to bottom, #33ccff 0%, rgba(62, 118, 249, 0.91));
+    background: linear-gradient(to bottom, #72a2d1, #496786);
     color: white;
 
     position: fixed;
@@ -22,24 +23,44 @@
 .navHome {
   font-size: large;
   text-decoration: none;
-  font-weight: lighter;
+  font-weight: light;
   color: white;
 
-  margin-left: 1%;
+  margin-left: 3%;
+  margin-right: 20%;
+}
+
+.bigScreenLink {
+  font-size: 1.5vw;
+  text-decoration: none;
+  color: white;
+  margin: 10%;
+  font-weight: lighter;
+}
+
+.bigScreenLink:hover {
+  /* text-decoration: underline; */
+  color: rgba(255, 255, 255, 0.663);
+  margin: 10%;
+  font-weight: lighter;
 }
 
 .navLink {
   color: white;
-  text-decoration: none;
-  margin: 8%;
-  font-size: 0.8vw;
+  border: none;
+  background-color: transparent;
+  font-size: 0.5vw;
+  text-align: left;
+  padding-right: 40px;
 }
 
 .profileLink {
-  color:black;
-  text-decoration: none;
+  color: rgb(113, 113, 113);
+  border: none;
+  background-color: transparent;
   font-size: 1vw;
-  text-align: center;
+  text-align: left;
+  display: inline-block;
 }
 
 #logoutButton {
@@ -51,29 +72,39 @@
   font-size: 1vw;
 }
 
+#logoutButton:hover {
+  color: rgb(255, 149, 149);
+}
+
+.profileLink:hover {
+  background-color: rgba(128, 128, 128, 0.663);
+}
+
 .dropdown {
     position: relative;
     display: inline-block;
     margin-right: 1%;
   }
   
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    z-index: 1;
-    padding: 22px 26px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+.dropdown-content {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  padding: 12px 16px;
+  /* padding-bottom: 50px; */
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 
+  border-radius: 10px;
+  background-color:rgb(231, 231, 231);
 
-    border-radius: 10px;
-    background-color:rgb(231, 231, 231);
+  margin: auto;
 
-    margin: auto;
+  right: 0px;
+  top: 100%;
 
-    right: 0px;
-    top: 100%;
+  width: 300px;
 
-  }
+}
 
 .dropdown:hover .dropdown-content {
     display: block;
@@ -81,6 +112,21 @@
 
 .hrColor {
   color:black;
+}
+
+.mobile-dropdown {
+  /* display: flex; */
+  display: inline-block;
+  margin-left: 1%;
+}
+
+.mobile-dropdown-content {
+  display: inline-block;
+}
+
+.navForm {
+  padding: 0;
+  margin: 0;
 }
 
   @media only screen and (max-width: 600px) {
@@ -94,7 +140,14 @@
 
     .navLink {
       margin: 1.5%;
-      font-size: 2%;
+      font-size: 3vw;
+      color: black;
+      padding: 0;
+    }
+
+    .navlink:hover {
+      background-color: rgba(255, 0, 0, 0.663);
+      color: white;
     }
 
     .navHome {
@@ -113,11 +166,78 @@
     #logoutButton {
       font-size: 3vw;
     }
+
+    .mobile-dropdown {
+      position: relative;
+      display: inline-block;
+      margin-left: 1%;
+    }
+    
+    .mobile-dropdown-content {
+      display: none;
+      position: absolute;
+      z-index: 1;
+      padding: 12px 16px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    
+      border-radius: 10px;
+      background-color:rgb(231, 231, 231);
+    
+      margin: auto;
+    }
+    
+    .mobile-dropdown:hover .mobile-dropdown-content {
+      display: block;
+    }
+
+    .bigScreenLink {
+      display: none;
+    }
+
+    .profileLink {
+      font-size: 3vw;
+    }
+
+  }
+
+  @media only screen and (min-width: 1200px) {
+    .navbar {
+      border-radius: 50px;
+      width: 98%;
+      margin-top: 1%;
+    }
+
+    .navLink {
+      display: none;
+    }
+
+    .bigScreenLink {
+      font-size: 1vw;
+    }
+
+    .navHome {
+      font-size: 1.3vw;
+    }
+
+    .mobile-dropdown-content {
+      display: none;
+    }
   }
 
   @media only screen and (max-width: 1500px) {
-    .navLink {
-      font-size: 1vw;
+
+    .mobile-dropdown-content {
+      display: none;
+      position: absolute;
+      z-index: 1;
+      padding: 12px 16px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    
+      border-radius: 10px;
+      background-color:rgb(231, 231, 231);
+    
+      /* margin: auto; */
+      margin-bottom: 0;
     }
   }
 
@@ -126,5 +246,21 @@
       border-radius: 50px;
       width: 98%;
       margin-top: 1%;
+    }
+
+    .navLink {
+      display: none;
+    }
+
+    .bigScreenLink {
+      font-size: 1vw;
+    }
+
+    .navHome {
+      font-size: 1.3vw;
+    }
+
+    .mobile-dropdown-content {
+      display: none;
     }
   }

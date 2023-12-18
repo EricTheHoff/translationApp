@@ -68,7 +68,7 @@ input::-webkit-inner-spin-button {
   background-color: azure;
   width: 80%;
   margin: 10%;
-  margin-top: 15%;
+  margin-top: -40%;
   border-radius: 15px;
 }
 

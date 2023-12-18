@@ -15,7 +15,7 @@ import meerkat from "../Images/Avatars/meerkat.png";
 import panda from "../Images/Avatars/panda.png";
 import rabbit from "../Images/Avatars/rabbit.png";
 import sealion from "../Images/Avatars/sealion.png";
-import '../Styles/images.css'
+import "../Styles/images.css";
 
 const imageFiles = {
   user,
@@ -37,30 +37,31 @@ const Navbar = () => {
 
   const [navImage, setNavImage] = useState(user);
 
-    const saveToExpress = () => {
-        axios.get("/user-status")
+  const saveToExpress = () => {
+    axios
+      .get("/user-status")
 
-        .then(async (response) => {
-            if (!response.data.success) {
-                dispatch({ type: "Logged Out" });
-                dispatch({ type: "Inactive User" });
-                dispatch({ type: "Inactive Zip" });
-                navigate("/login");
-            } else {
-                const user = await axios.get("/user");
-                dispatch({ type: "Logged In" });
-                dispatch({ type: "Active User", payload: user.data.userId });
-                dispatch({ type: "Active Zip", payload: user.data.zipCode });
-            }
-        })
-        .catch((error) => {
-            console.error(`The following has occurred: ${error}`)
-            dispatch({ type: "Logged Out" });
-            dispatch({ type: "Inactive User" });
-            dispatch({ type: "Inactive Zip" });
-            navigate("/login");
-        })
-    };
+      .then(async (response) => {
+        if (!response.data.success) {
+          dispatch({ type: "Logged Out" });
+          dispatch({ type: "Inactive User" });
+          dispatch({ type: "Inactive Zip" });
+          navigate("/login");
+        } else {
+          const user = await axios.get("/user");
+          dispatch({ type: "Logged In" });
+          dispatch({ type: "Active User", payload: user.data.userId });
+          dispatch({ type: "Active Zip", payload: user.data.zipCode });
+        }
+      })
+      .catch((error) => {
+        console.error(`The following has occurred: ${error}`);
+        dispatch({ type: "Logged Out" });
+        dispatch({ type: "Inactive User" });
+        dispatch({ type: "Inactive Zip" });
+        navigate("/login");
+      });
+  };
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -73,16 +74,17 @@ const Navbar = () => {
   };
 
   const getAccount = () => {
-    axios.get('/user')
+    axios
+      .get("/user")
 
-    .then((response) => {
-        setNavImage(response.data.profilePic)
-    })
+      .then((response) => {
+        setNavImage(response.data.profilePic);
+      })
 
-    .catch((error) => {
-        return
-    })
-  }
+      .catch((error) => {
+        return;
+      });
+  };
 
   useEffect(() => {
     saveToExpress();
@@ -92,41 +94,64 @@ const Navbar = () => {
   if (auth === true) {
     return (
       <div className="navbar">
+        <div className="mobile-dropdown">
+          <a className="navHome" href="/">
+            translationApp
+          </a>
 
-          <a className="navHome" href="/">translationApp</a>
-          
-          <nav id="navTag">
+          <a className="bigScreenLink" href="/translate">
+            Translate
+          </a>
+          <a className="bigScreenLink" href="/study">
+            Study
+          </a>
+          <a className="bigScreenLink" href="/map">
+            Map
+          </a>
 
-            <a className="navLink" href='/translate'>Translate</a>
+          <div className="mobile-dropdown-content">
+            <nav id="navTag">
+              <form className="navForm" action="/translate">
+                <button className="navLink">Translate</button>
+              </form>
 
-            
-            <a className="navLink" href='/study'>Study</a>
+              <form className="navForm" action="/study">
+                <button className="navLink">Study</button>
+              </form>
 
-            <a className="navLink" href='/map'>Map</a>
-
-
-          </nav>
-          
-          <div className="dropdown">
-            <a href="/account">
-              <img
-                className="navImage"
-                src={imageFiles[navImage] ? imageFiles[navImage] : navImage}
-              ></img>
-            </a>
-            <div className="dropdown-content">
-              <a className="profileLink" href="/account">Profile</a>
-              <br />
-              <a className="profileLink" href='/translations'>Saved Translations</a>
-              <br />
-              <a className="profileLink" href='/saved-tutors'>Saved Tutors</a>
-              <hr className="hrColor"/>
-              <button id="logoutButton" onClick={handleLogout}>Logout</button>
-            </div>
-
+              <form className="navForm" action="/map">
+                <button className="navLink">Map</button>
+              </form>
+            </nav>
+          </div>
         </div>
-          
 
+        <div className="dropdown">
+          <a href="/account">
+            <img
+              className="navImage"
+              src={imageFiles[navImage] ? imageFiles[navImage] : navImage}
+            ></img>
+          </a>
+          <div className="dropdown-content">
+            <form className="navForm" action="/account">
+              <button className="profileLink">Profile</button>
+            </form>
+
+            <form className="navForm" action="/translations">
+              <button className="profileLink">Saved Translations</button>
+            </form>
+
+            <form className="navForm" action="/saved-tutors">
+              <button className="profileLink">Saved Tutors</button>
+            </form>
+
+            <hr className="hrColor" />
+            <button id="logoutButton" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
+        </div>
       </div>
     );
   } else {
