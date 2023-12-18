@@ -17,7 +17,6 @@ const LoginPage = () => {
       const user = await axios.get("/user");
       dispatch({ type: "Logged In" });
       dispatch({ type: "Active User", payload: user.data.userId });
-      dispatch({ type: "Active Zip", payload: user.data.zipCode });
       window.location.href = "/";
     } else {
       toast.error(

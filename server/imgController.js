@@ -1,14 +1,6 @@
 import { Images } from "../src/Database/models.js";
 
 const imgFunctions = {
-  profileImg: async (req, res) => {
-    const { image } = req.body;
-    console.log(image);
-    await UserDetail.create({
-      where: { image: image },
-    });
-  },
-
   bearImg: async (req, res) => {
     let image = await Images.findOne({
       where: { imageId: 1 },
