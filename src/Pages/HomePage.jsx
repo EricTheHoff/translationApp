@@ -9,25 +9,49 @@ const HomePage = () => {
   const auth = useSelector((state) => state.loggedIn);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const id = useSelector((state) => state.userId);
 
-  // console.log(id)
+  const saveToExpress = () => {
+    axios.get("/user-status")
 
-  const saveToExpress = async () => {
-    const response = await axios.get("/user-status");
-
-    if (!response.data.success) {
-      dispatch({ type: "Logged Out" });
-      dispatch({ type: "Inactive User" });
-      dispatch({ type: "Inactive Zip" });
-      navigate("/");
-    } else {
-      const user = await axios.get("/user");
-      dispatch({ type: "Logged In" });
-      dispatch({ type: "Active User", payload: user.data.userId });
-      dispatch({ type: "Active Zip", payload: user.data.zipCode });
-    }
+    .then(async (response) => {
+        if (!response.data.success) {
+            dispatch({ type: "Logged Out" });
+            dispatch({ type: "Inactive User" });
+            dispatch({ type: "Inactive Zip" });
+            navigate("/");
+        } else {
+            const user = await axios.get("/user");
+            dispatch({ type: "Logged In" });
+            dispatch({ type: "Active User", payload: user.data.userId });
+            dispatch({ type: "Active Zip", payload: user.data.zipCode });
+        }
+    })
+    .catch((error) => {
+        console.error(`The following has occurred: ${error}`)
+        dispatch({ type: "Logged Out" });
+        dispatch({ type: "Inactive User" });
+        dispatch({ type: "Inactive Zip" });
+        navigate("/");
+    })
   };
+
+  const logout = () => {
+    axios.post('/logout')
+
+    .then(() => {
+        dispatch({ type: "Logged Out" });
+        dispatch({ type: "Inactive User" });
+        dispatch({ type: "Inactive Zip" });
+        navigate("/")
+    })
+    .catch((error) => {
+        console.error(`The following error has occurred: ${error}`)
+        dispatch({ type: "Logged Out" });
+        dispatch({ type: "Inactive User" });
+        dispatch({ type: "Inactive Zip" });
+        navigate("/")
+    })
+  }
 
   useEffect(() => {
     saveToExpress();
@@ -37,12 +61,6 @@ const HomePage = () => {
     return (
       <div>
         <ul>
-          {/* <li>
-                        <Link to="/login">Login</Link>
-                    </li>
-                    <li>
-                        <Link to="/register">Register</Link>
-                    </li> */}
           <li>
             <Link to="/account">Account Info</Link>
           </li>
@@ -62,6 +80,8 @@ const HomePage = () => {
             <Link to="/translate">Translate</Link>
           </li>
         </ul>
+
+        <button onClick={logout}>Logout</button>
       </div>
     );
   } else {

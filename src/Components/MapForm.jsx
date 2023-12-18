@@ -1,4 +1,5 @@
 import React from "react";
+import { codes, codeMappingForMap } from '../CountryCodes/countryCodes.js'
 
 const MapForm = ({
   changeRadius,
@@ -33,10 +34,13 @@ const MapForm = ({
         </option>
       </select>
       <select onChange={changeLanguage}>
-        <option className="dropdown" value="language">
-          Select a Language
-        </option>
-        <option className="dropdown" value="bulgarian">
+        <option className="dropdown" value="language">Select a Language</option>
+        {codes.map((el, idx) => {
+            return (
+                <option key={idx} className='dropdown' value={codeMappingForMap[el]}>{codeMappingForMap[el]}</option>
+            )
+        })}
+        {/* <option className="dropdown" value="bulgarian">
           Bulgarian
         </option>
         <option className="dropdown" value="chinese">
@@ -119,7 +123,7 @@ const MapForm = ({
         </option>
         <option className="dropdown" value="ukranian">
           Ukranian
-        </option>
+        </option> */}
       </select>
     </div>
   );
