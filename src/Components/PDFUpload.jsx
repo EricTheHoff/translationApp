@@ -25,6 +25,7 @@ const PDFUpload = () => {
   const [modalShow, setModalShow] = React.useState(false);
   const [translation, setTranslation] = useState("");
   const [longLang, setLongLang] = useState("");
+  const [fileSelected, setFileSelected] = useState(false);
   const id = useSelector((state) => state.userId);
 
   const saveButton = () => {
@@ -92,9 +93,11 @@ const PDFUpload = () => {
       reader.readAsDataURL(selectedFile);
       reader.onload = (e) => {
         setPDFFile(e.target.result);
+        setFileSelected(true);
       };
     } else {
       setPDFFile(null);
+      setFileSelected(false);
     }
   };
 
@@ -140,7 +143,9 @@ const PDFUpload = () => {
           <label htmlFor="upload">Upload a File: </label>
           <input type="file" name="upload" onChange={handleChange} />
           <br></br>
-          <button type="submit">Upload</button>
+          <button type="submit" disabled={!fileSelected}>
+            Upload
+          </button>
         </form>
 
         <br></br>

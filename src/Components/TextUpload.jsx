@@ -22,6 +22,7 @@ const TextUpload = () => {
   const [textFileContent, setTextFileContent] = useState("");
   const [modalShow, setModalShow] = React.useState(false);
   const [longLang, setLongLang] = useState("");
+  const [fileSelected, setFileSelected] = useState(false);
   const id = useSelector((state) => state.userId);
 
   const saveButton = () => {
@@ -83,6 +84,7 @@ const TextUpload = () => {
 
   const handleChange = (e) => {
     setTextFile(e.target.files[0]);
+    setFileSelected(true);
   };
 
   const handleSubmit = async (e) => {
@@ -137,7 +139,9 @@ const TextUpload = () => {
         >
           <input type="file" name="upload" onChange={handleChange} />
           <br></br>
-          <button type="submit">Upload</button>
+          <button type="submit" disabled={!fileSelected}>
+            Upload
+          </button>
         </form>
       </div>
     );
