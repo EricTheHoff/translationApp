@@ -92,18 +92,20 @@ const Navbar = () => {
   if (auth === true) {
     return (
       <div className="navbar">
-        <nav>
-          <a href="/">translationApp</a>
 
-          <a href='/map'>Map</a>
-
-          <a href='/translate'>Translate</a>
+          <a className="navHome" href="/">translationApp</a>
           
-          <a href='/translations'>Saved Translations</a>
+          <nav id="navTag">
 
-          <a href='/study'>Study</a>
+            <a className="navLink" href='/translate'>Translate</a>
 
-          <a href='/saved-tutors'>Saved Tutors</a>
+            
+            <a className="navLink" href='/study'>Study</a>
+
+            <a className="navLink" href='/map'>Map</a>
+
+
+          </nav>
           
           <div className="dropdown">
             <a href="/account">
@@ -113,12 +115,18 @@ const Navbar = () => {
               ></img>
             </a>
             <div className="dropdown-content">
-              <a href="/account">Profile</a>
+              <a className="profileLink" href="/account">Profile</a>
               <br />
-              <button onClick={handleLogout}>Logout</button>
+              <a className="profileLink" href='/translations'>Saved Translations</a>
+              <br />
+              <a className="profileLink" href='/saved-tutors'>Saved Tutors</a>
+              <hr className="hrColor"/>
+              <button id="logoutButton" onClick={handleLogout}>Logout</button>
             </div>
-          </div>
-        </nav>
+
+        </div>
+          
+
       </div>
     );
   } else {
