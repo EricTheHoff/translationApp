@@ -30,8 +30,3 @@
 .dropdown:hover .dropdown-content {
     display: block;
   }
-
-.navImage {
-    height: 50px;
-    width: 50px
-}
