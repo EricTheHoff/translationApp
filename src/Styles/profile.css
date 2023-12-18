@@ -5,7 +5,8 @@ input::-webkit-inner-spin-button {
 }
 
 input {
-  border: none;
+  /* border: gray;
+  border-width: 5px; */
   border-radius: 15px;
   padding: 3%;
 }
