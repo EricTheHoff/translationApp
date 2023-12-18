@@ -133,9 +133,8 @@ const PDFUpload = () => {
   if (!uploaded) {
     return (
       <div className="upload-container">
+        <h4 className="form-label">Please select a PDF file to upload</h4>
         <div className="form-container">
-          <h4 className="form-label">Please select a PDF file to upload</h4>
-
           <form
             onSubmit={(e) => {
               handleSubmit(e);
@@ -158,7 +157,7 @@ const PDFUpload = () => {
           </form>
         </div>
         <div className="cancel-button">
-          <Link className="button-link btn btn-dark" to="/translate">
+          <Link className="button-link btn" to="/translate">
             Cancel
           </Link>
         </div>
@@ -188,6 +187,7 @@ const PDFUpload = () => {
             <div className="translation-container">
               <p>Translation: {translation}</p>{" "}
               <Button
+                className="blue-button"
                 variant="primary"
                 onClick={() => {
                   setModalShow(true);
