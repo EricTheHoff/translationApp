@@ -9,6 +9,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import TranslationModal from "../Pages/TranslationModal";
+import "../Styles/txt.css";
 
 const TextUpload = () => {
   const content = document.getElementById("content");
@@ -107,8 +108,15 @@ const TextUpload = () => {
       }),
       {
         loading: "loading file...", // Display while reading the file
-        success: "successfully loaded",
-        error: <b>Could not load file content.</b>,
+        success: () => {
+          setUploaded(true); // Set uploaded to true when the file is successfully loaded
+          return "successfully loaded";
+        },
+        error: () => {
+          toast.error(<b>Could not load file content.</b>);
+          setUploaded(false); // Set uploaded to false when there's an error loading the file
+          return <b>Could not load file content.</b>;
+        },
       }
     );
   };
@@ -116,24 +124,21 @@ const TextUpload = () => {
   if (!uploaded) {
     return (
       <div>
-        <h3>Would you like to translate a file?</h3>
-        <h4>Please select a Plain Text (.txt) file to upload.</h4>
+        <h3 className="file-header">Text File Translator</h3>
+        <h4 className="file-subheader">
+          Please select a Plain Text (.txt) file to upload
+        </h4>
 
         <form
           onSubmit={(e) => {
-            setUploaded(true);
             handleSubmit(e);
           }}
+          className="file-form"
         >
-          <label htmlFor="upload">Upload a File: </label>
           <input type="file" name="upload" onChange={handleChange} />
           <br></br>
           <button type="submit">Upload</button>
         </form>
-
-        <br></br>
-
-        <p>No Text Uploaded</p>
       </div>
     );
   }

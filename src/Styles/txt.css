@@ -1,0 +1,17 @@
+.file-header {
+  text-align: center;
+  margin-top: 10vh;
+}
+
+.file-subheader {
+  margin-top: 7vh;
+}
+
+.file-form {
+  text-align: center;
+  border-style: solid;
+  border-color: black;
+  border-width: 3px;
+  margin-left: 5vw;
+  margin-right: 5vw;
+}

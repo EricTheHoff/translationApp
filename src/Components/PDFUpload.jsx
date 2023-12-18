@@ -105,11 +105,24 @@ const PDFUpload = () => {
       toast.error(`Please choose a file to upload.`);
     } else if (!pdfFile.includes("application/pdf")) {
       toast.error(`Please select a PDF File.`);
-    } else if (pdfFile !== null) {
-      setViewPDF(pdfFile);
-      toast.success("Successfully loaded");
     } else {
-      setViewPDF(null);
+      toast.promise(
+        new Promise((resolve) => {
+          setViewPDF(pdfFile);
+          resolve(); // Resolve the promise after setting the PDF content
+        }),
+        {
+          loading: "loading file...", // Display while setting the PDF content
+          success: () => {
+            setUploaded(true); // Set uploaded to true when the file is successfully loaded
+            return "Successfully loaded";
+          },
+          error: () => {
+            setUploaded(false); // Set uploaded to false when there's an error loading the file
+            return <b>Could not load PDF file content.</b>;
+          },
+        }
+      );
     }
   };
 
@@ -121,7 +134,6 @@ const PDFUpload = () => {
 
         <form
           onSubmit={(e) => {
-            setUploaded(true);
             handleSubmit(e);
           }}
         >
