@@ -8,7 +8,6 @@ import imgFunctions from "./imgController.js";
 import schoolFunctions from "./schoolController.js";
 import authFunctions from "./authController.js";
 import translateFunctions from "./translateController.js";
-import handlerFunctions from "./controller.js"
 
 const app = express();
 
@@ -42,9 +41,10 @@ const {
   saveWord,
   translate,
   saveTranslation,
+  getSeedTranslations,
+  getSavedTranslations,
 } = translateFunctions;
 const {
-  profileImg,
   bearImg,
   catImg,
   chickenImg,
@@ -62,8 +62,6 @@ const {
   deleteUserSchool,
   placeSearch,
 } = schoolFunctions;
-
-console.log(process.env.VITE_REACT_APP_GOOGLE_API_KEY);
 
 const loginRequired = (req, res, next) => {
   if (!req.session.userId) {
@@ -96,8 +94,8 @@ app.post("/translate", loginRequired, translate);
 app.post("/save-translation", loginRequired, saveTranslation);
 app.post("/save-school", loginRequired, saveSchool);
 app.get("/api/places", loginRequired, placeSearch);
-app.get("/saved-translations", loginRequired, handlerFunctions.getSavedTranslations);
-app.post("/seed-translations", loginRequired, handlerFunctions.getSeedTranslations);
+app.get("/saved-translations", loginRequired, getSavedTranslations);
+app.post("/seed-translations", loginRequired, getSeedTranslations);
 
 app.get("/bear", bearImg);
 app.get("/cat", catImg);

@@ -27,8 +27,6 @@ const Profile = () => {
     const [currentPassword, setCurrentPassword] = useState("")
     const [newPassword, setNewPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
-
-    const [zipcode, setZipcode] = useState("")
     const [email, setEmail] = useState("")
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -40,7 +38,6 @@ const Profile = () => {
 
             .then((response) => {
                 setEmail(response.data.email)
-                setZipcode(response.data.zipCode)
                 setPassword(response.data.password)
                 setProfileImage(response.data.profilePic)
                 console.log(response.data.profilePic)
@@ -60,7 +57,6 @@ const Profile = () => {
             email: email,
             newPassword: newPassword,
             currentPassword: currentPassword,
-            zipcode: zipcode,
             profilePic: profileImage
         }
         const response = await axios.put(`/editAccount`, requestData)
@@ -99,7 +95,6 @@ const Profile = () => {
             <div>
                 <img src={imageFiles[profileImage] ? imageFiles[profileImage] : profileImage} />
                 <p>Email: {email}</p>
-                <p>ZIP Code: {zipcode}</p>
 
                 <button onClick={() => setEditMode(true)}>Edit</button>
 
@@ -134,11 +129,6 @@ const Profile = () => {
 
                     <label>Password</label>
                     <input type="password" onChange={(e) => setPassword(e.target.value)} />
-
-                    <br />
-
-                    <label>ZIP Code</label>
-                    <input placeholder={zipcode} type="text" pattern="[0-5]{5}" maxLength="5" onChange={(e) => setZipcode(e.target.value)} />
 
                     <br />
 

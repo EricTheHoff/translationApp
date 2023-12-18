@@ -12,7 +12,7 @@ const authFunctions = {
 
     if (user) {
       const hashMatch = await bcrypt.compare(password, user.password);
-      
+
       if (user && hashMatch === true) {
         req.session.userId = user.userId;
         res.json({ success: true });
@@ -32,7 +32,7 @@ const authFunctions = {
     res.send(user);
   },
   register: async (req, res) => {
-    const { email, password, zipCode, profilePic } = req.body;
+    const { email, password, profilePic } = req.body;
 
     const salt = bcrypt.genSaltSync(12);
     const hash = await bcrypt.hash(password, salt);
@@ -51,7 +51,6 @@ const authFunctions = {
       const newUser = await UserDetail.create({
         email: email,
         password: hash,
-        zipCode: zipCode,
         profilePic: profilePic,
       });
 
@@ -67,14 +66,12 @@ const authFunctions = {
   editAccount: async (req, res) => {
     // const { id } = req.params
     const id = req.session.userId;
-    const { email, newPassword, zipcode, currentPassword, profilePic } =
-      req.body;
+    const { email, newPassword, currentPassword, profilePic } = req.body;
     const user = await UserDetail.findOne({ where: { userId: id } });
     const hashMatch = await bcrypt.compare(currentPassword, user.password);
 
     if (newPassword === "") {
       user.email = email;
-      user.zipCode = zipcode;
       user.profilePic = profilePic;
 
       await user.save();
@@ -86,14 +83,12 @@ const authFunctions = {
       const hash = await bcrypt.hash(newPassword, salt);
       user.email = email;
       user.password = hash;
-      user.zipCode = zipcode;
 
       res.json({ success: true });
       await user.save();
     }
   },
   deleteAccount: async (req, res) => {
-    // const { id } = req.params;
     const id = req.session.userId;
     const user = await UserDetail.findOne({
       where: { userId: id },
