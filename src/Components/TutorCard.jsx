@@ -29,29 +29,33 @@ function TutorCard({
   };
 
   return (
-    <div style={{display: "inline-block", width: "25rem", marginLeft: "5rem"}}>
-          <Card
-            style={{ width: "30rem", width: "21.5em", margin: "10px auto",}}
-          >
-            <div class="card-header">Your Saved Tutor</div>
-            <Card.Body style={{ width: "18rem" }}>
-              <Card.Text style={{ width: "18rem" }}>
-                {name}
-                <br></br>
-                <br></br>
-                Address: {address}
-                <br></br>
-                <br></br>
-                Rating: {rating}
-                <br></br>
-                <br></br>
-                Google Maps Link:
-                <a href={website}> {website}</a>
-              </Card.Text>
-              <Button onClick={(event) => handleDelete(event)}>Remove</Button>
-            </Card.Body>
-          </Card>
-          </div>
+    <div
+      style={{
+        display: "inline-block",
+        width: "25rem",
+        margin: "5px auto",
+      }}
+    >
+      <Card style={{ width: "rem", width: "21.5em", margin: "10px auto" }}>
+        <div class="card-header">Your Saved Tutor</div>
+        <Card.Body style={{ width: "18rem" }}>
+          <Card.Text style={{ width: "18rem" }}>
+            {name}
+            <br></br>
+            <br></br>
+            Address: {address}
+            <br></br>
+            <br></br>
+            Rating: {rating}
+            <br></br>
+            <br></br>
+            Google Maps Link:
+            <a href={website}> {website}</a>
+          </Card.Text>
+          <Button onClick={(event) => handleDelete(event)}>Remove</Button>
+        </Card.Body>
+      </Card>
+    </div>
   );
 }
 
