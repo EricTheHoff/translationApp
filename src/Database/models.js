@@ -116,3 +116,5 @@ UserDetail.hasOne(Images, { foreignKey: "userId" });
 Images.hasMany(UserDetail, { foreignKey: "userId" });
 
 SavedWord.belongsTo(UserDetail, { foreignKey: "userId" });
+FurtherStudy.belongsTo(UserDetail, { foreignKey: "userId" });
+UserDetail.hasMany(FurtherStudy, { foreignKey: "userId" });
