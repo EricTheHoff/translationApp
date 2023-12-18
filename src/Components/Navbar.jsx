@@ -94,8 +94,17 @@ const Navbar = () => {
       <div className="navbar">
         <nav>
           <a href="/">translationApp</a>
-          <a href="/map">Map</a>
 
+          <a href='/map'>Map</a>
+
+          <a href='/translate'>Translate</a>
+          
+          <a href='/translations'>Saved Translations</a>
+
+          <a href='/study'>Study</a>
+
+          <a href='/saved-tutors'>Saved Tutors</a>
+          
           <div className="dropdown">
             <a href="/account">
               <img
