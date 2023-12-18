@@ -32,7 +32,6 @@ const Navbar = () => {
   const auth = useSelector((state) => state.loggedIn);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const id = useSelector((state) => state.userId);
 
   const [navImage, setNavImage] = useState(user);
 
@@ -44,7 +43,7 @@ const Navbar = () => {
                 dispatch({ type: "Logged Out" });
                 dispatch({ type: "Inactive User" });
                 dispatch({ type: "Inactive Zip" });
-                navigate("/");
+                navigate("/login");
             } else {
                 const user = await axios.get("/user");
                 dispatch({ type: "Logged In" });
@@ -57,7 +56,7 @@ const Navbar = () => {
             dispatch({ type: "Logged Out" });
             dispatch({ type: "Inactive User" });
             dispatch({ type: "Inactive Zip" });
-            navigate("/");
+            navigate("/login");
         })
     };
 
