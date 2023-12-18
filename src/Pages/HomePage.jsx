@@ -64,7 +64,7 @@ const HomePage = () => {
         <>
             <TranslatePage />
             
-            <div>
+            {/* <div>
                 <ul>
                 <li>
                     <Link to="/account">Account Info</Link>
@@ -87,7 +87,7 @@ const HomePage = () => {
                 </ul>
 
                 <button onClick={logout}>Logout</button>
-            </div>
+            </div> */}
         </>
     );
   } else {
