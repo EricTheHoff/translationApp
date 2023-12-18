@@ -18,7 +18,7 @@ const HomePage = () => {
             dispatch({ type: "Logged Out" });
             dispatch({ type: "Inactive User" });
             dispatch({ type: "Inactive Zip" });
-            navigate("/");
+            navigate("/login");
         } else {
             const user = await axios.get("/user");
             dispatch({ type: "Logged In" });
@@ -31,7 +31,7 @@ const HomePage = () => {
         dispatch({ type: "Logged Out" });
         dispatch({ type: "Inactive User" });
         dispatch({ type: "Inactive Zip" });
-        navigate("/");
+        navigate("/login");
     })
   };
 
@@ -42,14 +42,14 @@ const HomePage = () => {
         dispatch({ type: "Logged Out" });
         dispatch({ type: "Inactive User" });
         dispatch({ type: "Inactive Zip" });
-        navigate("/")
+        navigate("/login")
     })
     .catch((error) => {
         console.error(`The following error has occurred: ${error}`)
         dispatch({ type: "Logged Out" });
         dispatch({ type: "Inactive User" });
         dispatch({ type: "Inactive Zip" });
-        navigate("/")
+        navigate("/login")
     })
   }
 
