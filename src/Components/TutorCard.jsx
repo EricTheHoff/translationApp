@@ -29,7 +29,7 @@ function TutorCard({
   };
 
   return (
-    <div style={{display: "inline-block"}}>
+    <div style={{display: "inline-block", width: "25rem", marginLeft: "5rem"}}>
           <Card
             style={{ width: "30rem", width: "21.5em", margin: "10px auto",}}
           >
