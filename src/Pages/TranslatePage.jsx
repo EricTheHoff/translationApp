@@ -148,7 +148,6 @@ const TranslatePage = () => {
           <button type="submit">Translate</button>
         </form>
 
-        <Link to="/">Back to Home</Link>
       </>
     );
   } else {
