@@ -58,34 +58,34 @@ const HomePage = () => {
 
   if (auth === true) {
     return (
-      <>
-        <TranslatePage />
+        <>
+            <TranslatePage />
+            
+            {/* <div>
+                <ul>
+                <li>
+                    <Link to="/account">Account Info</Link>
+                </li>
+                <li>
+                    <Link to="/map">Map</Link>
+                </li>
+                <li>
+                    <Link to="/translations">Saved Translations</Link>
+                </li>
+                <li>
+                    <Link to="/saved-tutors">Saved Tutors</Link>
+                </li>
+                <li>
+                    <Link to="/study">Study</Link>
+                </li>
+                <li>
+                    <Link to="/translate">Translate</Link>
+                </li>
+                </ul>
 
-        <div>
-          <ul>
-            <li>
-              <Link to="/account">Account Info</Link>
-            </li>
-            <li>
-              <Link to="/map">Map</Link>
-            </li>
-            <li>
-              <Link to="/translations">Saved Translations</Link>
-            </li>
-            <li>
-              <Link to="/saved-tutors">Saved Tutors</Link>
-            </li>
-            <li>
-              <Link to="/study">Study</Link>
-            </li>
-            <li>
-              <Link to="/translate">Translate</Link>
-            </li>
-          </ul>
-
-          <button onClick={logout}>Logout</button>
-        </div>
-      </>
+                <button onClick={logout}>Logout</button>
+            </div> */}
+        </>
     );
   } else {
     return (

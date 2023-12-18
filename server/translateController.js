@@ -67,7 +67,8 @@ const translateFunctions = {
     }
   },
   saveTranslation: async (req, res) => {
-    const { translatedText, originalText, id, toLanguage } = req.body;
+    const id = req.session.userId
+    const { translatedText, originalText, toLanguage } = req.body;
 
     const translation = await SavedWord.create({
       word: translatedText,
