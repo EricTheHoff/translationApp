@@ -82,6 +82,31 @@ const translateFunctions = {
       res.status(500).json({ error: "Internal Server Error" });
     }
   },
+  getSeedTranslations: async (req, res) => {
+    const { difficulty } = req.body;
+
+    if (difficulty === "") {
+      const seedTranslations = await FurtherStudy.findAll();
+      res.json(seedTranslations);
+    } else {
+      const difficultyTranslations = await FurtherStudy.findAll({
+        where: { difficulty: Number(difficulty) },
+      });
+      res.json(difficultyTranslations);
+    }
+  },
+  getSavedTranslations: async (req, res) => {
+    const id = req.session.userId;
+    const savedTranslations = await SavedWord.findAll({
+      where: { userId: id },
+    });
+
+    if (savedTranslations) {
+      res.json(savedTranslations);
+    } else {
+      res.json({ success: false });
+    }
+  },
 };
 
 export default translateFunctions;

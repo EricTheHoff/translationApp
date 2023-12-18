@@ -38,7 +38,6 @@ UserDetail.init(
     email: { type: DataTypes.STRING, unique: true },
     password: { type: DataTypes.STRING },
     profilePic: { type: DataTypes.STRING },
-    zipCode: { type: DataTypes.STRING(5) },
   },
 
   {

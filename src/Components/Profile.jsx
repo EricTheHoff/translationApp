@@ -40,12 +40,9 @@ export default function Profile() {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
-  const [zipcode, setZipcode] = useState("");
   const [email, setEmail] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [zipState, setZipState] = useState("");
 
   const id = useSelector((state) => state.userId);
 
@@ -55,7 +52,6 @@ export default function Profile() {
 
       .then((response) => {
         setEmail(response.data.email);
-        setZipcode(response.data.zipCode);
         setPassword(response.data.password);
         setProfileImage(response.data.profilePic);
         console.log(response.data.profilePic);
@@ -75,7 +71,6 @@ export default function Profile() {
       email: email,
       newPassword: newPassword,
       currentPassword: currentPassword,
-      zipcode: zipcode,
       profilePic: profileImage,
     };
     const response = await axios.put(`/editAccount`, requestData);
@@ -140,13 +135,6 @@ export default function Profile() {
 
             <hr />
 
-            <div className="zipcodeDiv">
-              <p>ZIP Code: </p>
-              <p>{zipcode}</p>
-            </div>
-
-            <hr />
-
             {/* <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a> */}
           </div>
           <p>?</p>
@@ -199,15 +187,6 @@ export default function Profile() {
               <input
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
-              />
-
-              <hr />
-
-              <label>ZIP Code</label>
-              <input
-                placeholder={zipcode}
-                type="text"
-                onChange={(e) => setZipcode(e.target.value)}
               />
 
               <hr />
