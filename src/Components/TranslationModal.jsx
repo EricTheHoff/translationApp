@@ -22,22 +22,27 @@ const TranslationModal = (props) => {
         centered
         className="modal d-flex justify-text-center"
       >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            <h4>
-              English: {selected}
-              <br></br>
-              {longLang}: {translation}
-            </h4>
-          </Modal.Title>
-        </Modal.Header>
+        <Modal.Header closeButton></Modal.Header>
+        <Modal.Title id="contained-modal-title-vcenter">
+          {" "}
+          <h1>Would you like to save this to your translations?</h1>
+        </Modal.Title>
         <Modal.Body>
-          <p>Would you like to save this to your translations?</p>
+          <p>
+            <span>English:</span> {selected}
+            <br></br>
+            <span>{longLang}:</span> {translation}
+          </p>
         </Modal.Body>
         <Modal.Footer>
           <form onSubmit={saveTranslation}>
+            <Button
+              className="btn bg-dark"
+              onClick={() => setNewTranslation(false)}
+            >
+              No
+            </Button>
             <Button type="submit">Yes</Button>
-            <Button onClick={() => setNewTranslation(false)}>No</Button>
           </form>
         </Modal.Footer>
       </Modal>

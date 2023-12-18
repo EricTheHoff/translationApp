@@ -8,7 +8,7 @@ import { Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import TranslationModal from "../Pages/TranslationModal";
+import TranslationModal from "./TranslationModal";
 import "../Styles/txt.css";
 
 const TextUpload = () => {
@@ -125,24 +125,36 @@ const TextUpload = () => {
 
   if (!uploaded) {
     return (
-      <div>
-        <h3 className="file-header">Text File Translator</h3>
-        <h4 className="file-subheader">
-          Please select a Plain Text (.txt) file to upload
-        </h4>
+      <div className="upload-container">
+        <div className="form-container">
+          <h4 className="form-label">Please select a .txt file to upload</h4>
 
-        <form
-          onSubmit={(e) => {
-            handleSubmit(e);
-          }}
-          className="file-form"
-        >
-          <input type="file" name="upload" onChange={handleChange} />
-          <br></br>
-          <button type="submit" disabled={!fileSelected}>
-            Upload
-          </button>
-        </form>
+          <form
+            onSubmit={(e) => {
+              handleSubmit(e);
+            }}
+          >
+            <input
+              type="file"
+              name="upload"
+              onChange={handleChange}
+              className="form-input"
+            />
+            <br></br>
+            <button
+              type="submit"
+              disabled={!fileSelected}
+              className="form-button"
+            >
+              Upload
+            </button>
+          </form>
+        </div>
+        <div className="cancel-button">
+          <Link className="button-link btn btn-dark" to="/translate">
+            Cancel
+          </Link>
+        </div>
       </div>
     );
   }
@@ -150,14 +162,23 @@ const TextUpload = () => {
   if (uploaded && !newTranslation) {
     return (
       <>
+        <div className="file-header">
+          <h1>
+            Select a Language & highlight text in the file to see its
+            translation
+          </h1>
+          <Link className="btn btn-dark button-link" to="/translate">
+            Select Another File
+          </Link>
+        </div>
         <div
+          className="file-container"
           onMouseUp={() => {
             handleSelection();
           }}
         >
-          <p>Highlight text in the file to see its translation</p>
           {translation && (
-            <div>
+            <div className="translation-container">
               <p>Translation: {translation}</p>{" "}
               <Button
                 variant="primary"
@@ -174,6 +195,7 @@ const TextUpload = () => {
             <br></br>
 
             <select
+              className="select-language"
               onChange={(e) => {
                 setLanguage(e.target.value);
                 setLongLang(e.target.options[e.target.selectedIndex].text);
@@ -212,10 +234,13 @@ const TextUpload = () => {
               <option value="ZH">Chinese</option>
             </select>
           </form>
-          <p id="content">file: {textFileContent}</p>
+          <div>
+            <p id="content" className="txt-file">
+              file: {textFileContent}{" "}
+            </p>
+          </div>
 
           <br></br>
-          <Link to="/translate">Select a New File</Link>
         </div>
       </>
     );
