@@ -2,16 +2,15 @@
     display: grid;
     gap: 20px 20px;
     grid-template-columns: auto auto auto;
-    /* background-color: #2196F3; */
-    /* padding: 0px; */
-    width: 30%;
+    background-color: rgb(226, 241, 241);
+    padding: 8%;
+    width: 80%;
+    margin-left: 15%;
+    margin-right: 50%;
   }
-  
-  .grid-item {
-    /* background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8); */
-    border-radius: 60px;
-    /* padding: 5px; */
-    /* font-size: 30px; */
-    text-align: center;
-  }
+
+
+/* button {
+  background-color: transparent;
+  border: 0px;
+} */

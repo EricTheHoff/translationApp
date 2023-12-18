@@ -16,15 +16,6 @@ function MapPage() {
   const [language, setLanguage] = useState("language");
   const [userLocation, setUserLocation] = useState(null);
   const [zipcode, setZipcode] = useState("");
-  const [userZipcode, setUserZipcode] = useState(null);
-
-  //access zipcode user entered on registration
-  useEffect(() => {
-    axios.get("/user").then((response) => {
-      setUserZipcode(response.data.zipCode);
-      console.log(userZipcode);
-    });
-  }, []);
 
   //set the radius equal to whatever is selected on dropdown
   const changeRadius = (e) => {
@@ -42,9 +33,7 @@ function MapPage() {
 
   useEffect(() => {
     // Get user's location when the component renders
-    if (userZipcode) {
-      setUserLocation(userZipcode);
-    } else if (navigator.geolocation) {
+    if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;

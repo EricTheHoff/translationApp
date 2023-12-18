@@ -14,7 +14,6 @@ const RegistrationForm = () => {
   const [passwordReg, setPasswordReg] = useState("");
   const [confirmReg, setConfirmReg] = useState("");
   const [emailReg, setEmailReg] = useState("");
-  const [zipReg, setZipReg] = useState("");
 
   const [seePassword, setSeePassword] = useState("");
 
@@ -24,7 +23,7 @@ const RegistrationForm = () => {
 
   const register = async (event) => {
     event.preventDefault();
-    if (emailReg === "" || passwordReg === "" || zipReg === "") {
+    if (emailReg === "" || passwordReg === "") {
       toast.error("All fields must be filled out before creating an account.");
       return;
     } else if (passwordReg !== confirmReg) {
@@ -36,14 +35,12 @@ const RegistrationForm = () => {
       .post("/register", {
         email: emailReg,
         password: passwordReg,
-        zipCode: zipReg,
         profilePic: user,
       })
       .then(async () => {
         const user = await axios.get("/user");
         dispatch({ type: "Logged In" });
         dispatch({ type: "Active User", payload: user.data.userId });
-        dispatch({ type: "Active Zip", payload: user.data.zipCode });
         navigate("/");
         toast.success("Registration Successful");
       })
@@ -85,16 +82,6 @@ const RegistrationForm = () => {
           placeholder="Confirm password"
           onChange={(e) => {
             setConfirmReg(e.target.value);
-          }}
-        />
-
-        <label>ZIP Code: </label>
-        <input
-          type="text"
-          maxLength="5"
-          placeholder="12345"
-          onChange={(e) => {
-            setZipReg(e.target.value);
           }}
         />
 

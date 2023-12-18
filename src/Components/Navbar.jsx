@@ -15,6 +15,8 @@ import meerkat from "../Images/Avatars/meerkat.png";
 import panda from "../Images/Avatars/panda.png";
 import rabbit from "../Images/Avatars/rabbit.png";
 import sealion from "../Images/Avatars/sealion.png";
+import "../Styles/images.css";
+
 const imageFiles = {
   user,
   bear,
@@ -32,34 +34,31 @@ const Navbar = () => {
   const auth = useSelector((state) => state.loggedIn);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const id = useSelector((state) => state.userId);
 
   const [navImage, setNavImage] = useState(user);
 
-    const saveToExpress = () => {
-        axios.get("/user-status")
+  const saveToExpress = () => {
+    axios
+      .get("/user-status")
 
-        .then(async (response) => {
-            if (!response.data.success) {
-                dispatch({ type: "Logged Out" });
-                dispatch({ type: "Inactive User" });
-                dispatch({ type: "Inactive Zip" });
-                navigate("/");
-            } else {
-                const user = await axios.get("/user");
-                dispatch({ type: "Logged In" });
-                dispatch({ type: "Active User", payload: user.data.userId });
-                dispatch({ type: "Active Zip", payload: user.data.zipCode });
-            }
-        })
-        .catch((error) => {
-            console.error(`The following has occurred: ${error}`)
-            dispatch({ type: "Logged Out" });
-            dispatch({ type: "Inactive User" });
-            dispatch({ type: "Inactive Zip" });
-            navigate("/");
-        })
-    };
+      .then(async (response) => {
+        if (!response.data.success) {
+          dispatch({ type: "Logged Out" });
+          dispatch({ type: "Inactive User" });
+          navigate("/login");
+        } else {
+          const user = await axios.get("/user");
+          dispatch({ type: "Logged In" });
+          dispatch({ type: "Active User", payload: user.data.userId });
+        }
+      })
+      .catch((error) => {
+        console.error(`The following has occurred: ${error}`);
+        dispatch({ type: "Logged Out" });
+        dispatch({ type: "Inactive User" });
+        navigate("/login");
+      });
+  };
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -72,16 +71,17 @@ const Navbar = () => {
   };
 
   const getAccount = () => {
-    axios.get('/user')
+    axios
+      .get("/user")
 
-    .then((response) => {
-        setNavImage(response.data.profilePic)
-    })
+      .then((response) => {
+        setNavImage(response.data.profilePic);
+      })
 
-    .catch((error) => {
-        return
-    })
-  }
+      .catch((error) => {
+        return;
+      });
+  };
 
   useEffect(() => {
     saveToExpress();
@@ -93,7 +93,16 @@ const Navbar = () => {
       <div className="navbar">
         <nav>
           <a href="/">translationApp</a>
+
           <a href="/map">Map</a>
+
+          <a href="/translate">Translate</a>
+
+          <a href="/translations">Saved Translations</a>
+
+          <a href="/study">Study</a>
+
+          <a href="/saved-tutors">Saved Tutors</a>
 
           <div className="dropdown">
             <a href="/account">
