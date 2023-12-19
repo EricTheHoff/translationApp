@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect } from "react";
 import { GoogleMap, MarkerF, InfoWindowF } from "@react-google-maps/api";
 import axios from "axios";
 import toast from "react-hot-toast";
+import "../styles/map.css";
 
 function Map({ userLocation, radius, language }) {
   const center = useMemo(() => userLocation, [userLocation]);
@@ -13,7 +14,6 @@ function Map({ userLocation, radius, language }) {
   const [placeWebsite, setPlaceWebsite] = useState("");
   const [places, setPlaces] = useState(null);
   const [clickedMarkers, setClickedMarkers] = useState({});
-  
 
   const handleSaveSchool = async (e) => {
     const formData = {
@@ -114,19 +114,20 @@ function Map({ userLocation, radius, language }) {
 
   return (
     <>
-      <div style={{ marginTop: "50px" }}></div>
-      {/* GoogleMap component */}
-      <GoogleMap
-        zoom={10}
-        center={center}
-        mapContainerClassName="map-container"
-      >
-        {/* set height of the map (this is the only way I could get it to render) */}
-        <div style={{ height: "60vh" }}></div>
+      <div className="map-container">
+        {/* GoogleMap component */}
+        <GoogleMap zoom={10} center={center}>
+          {/* set height of the map (this is the only way I could get it to render) */}
+          <div
+            style={{
+              height: "63vh",
+            }}
+          ></div>
 
-        {/* Display language school markers */}
-        {places && places}
-      </GoogleMap>
+          {/* Display language school markers */}
+          {places && places}
+        </GoogleMap>
+      </div>
     </>
   );
 }

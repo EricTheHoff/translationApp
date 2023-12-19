@@ -3,6 +3,7 @@ import { useLoadScript } from "@react-google-maps/api";
 import axios from "axios";
 import Map from "../Components/Map";
 import MapForm from "../Components/MapForm";
+import "../styles/map.css";
 
 const libraries = ["places"];
 
@@ -74,8 +75,7 @@ function MapPage() {
 
   if (!isLoaded) return <div>Loading...</div>;
   return (
-    <>
-      <Map userLocation={userLocation} radius={radius} language={language} />
+    <div className="map-page">
       <MapForm
         changeRadius={changeRadius}
         onZipcodeChange={handleZipcodeChange}
@@ -83,7 +83,8 @@ function MapPage() {
         zipcode={zipcode}
         changeLanguage={changeLanguage}
       />
-    </>
+      <Map userLocation={userLocation} radius={radius} language={language} />
+    </div>
   );
 }
 

@@ -1,0 +1,83 @@
+/* Add these styles to your CSS */
+.map-form-container {
+  max-width: 400px;
+  max-height: 150px;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1vh;
+  background-color: #f2d492;
+}
+
+.map-page {
+  margin-left: 10vw;
+  margin-right: 10vw;
+  margin-top: 7vh;
+}
+.zipcode-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.zipcode-container input {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #283845;
+  border-radius: 5px;
+  max-height: 5vh;
+  background-color: #f5e0b2;
+}
+
+.zipcode-container button {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #283845;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  max-height: 5vh;
+}
+*/ .zipcode-container button:hover {
+  background-color: #0056b3;
+}
+
+.select-container {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.select-container select {
+  padding-left: 7px;
+  width: 100%;
+  border: 1px solid #283845;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  background-color: #f5e0b2;
+  transition: border-color 0.3s ease;
+}
+
+.select-container select:hover {
+  background-color: #f9f9f9;
+}
+
+.select-container select:focus {
+  border-color: #007bff;
+}
+
+/* Optional: Add a transition effect for smoother interactions */
+.select-container select {
+  transition: border-color 0.3s ease;
+}
+
+.map-container {
+  border-radius: 15px;
+  border: 9px solid #283845;
+  width: 100%; /* Set the width as needed */
+}
