@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Container, Col, Row, Form, Button, Modal } from "react-bootstrap";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.css";
 import toast from "react-hot-toast";
 import { codeMapping, codes } from "../CountryCodes/countryCodes.js";
+import "bootstrap/dist/css/bootstrap.css";
 import '../Styles/bootstrapOverride.scss'
 import '../Styles/translationPage.css'
 
@@ -45,19 +45,17 @@ const TranslatePage = () => {
       .post("/translate", translationData)
 
       .then(({ data }) => {
-        console.log(data.translations[0]);
         setTranslatedText(data.translations[0].text);
         setNewTranslation(true);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(`The following error has occurred: ${error}`);
+        toast.error(`Something went wrong during translation. Please try again.`)
       });
   };
 
   const saveTranslation = async (e) => {
     e.preventDefault();
-
-    console.log(language);
 
     const translationData = {
       translatedText: translatedText,
@@ -72,11 +70,11 @@ const TranslatePage = () => {
         setNewTranslation(false);
       })
       .catch((error) => {
-        toast.error(`The following error has occurred: ${error}`);
+        console.error(`The following error has occurred: ${error}`)
+        toast.error(`Something went wrong. Translation not saved.`);
       });
   };
 
-//   if (newTranslation === false) {
     return (
       <>
         <Container fluid>
@@ -109,7 +107,7 @@ const TranslatePage = () => {
 
                     <Form
                         onSubmit={handleTranslation}
-                        className='border p-3 shadow text-center bkg-darker rounded'
+                        className='border p-3 mb-3 shadow text-center bkg-darker rounded'
                     >
                         <h4>Quick Translate</h4>
 
@@ -140,7 +138,7 @@ const TranslatePage = () => {
                                         onChange={(e) => setLanguage(e.target.value)}
                                         className='select'
                                     >
-                                        <option value='' default>--Choose a Language--</option>
+                                        <option value=''>--Choose a Language--</option>
                                         {codes.map((el, idx) => {
                                             return (
                                                 <option key={idx} value={el}>{codeMapping[el]}</option>
@@ -211,73 +209,8 @@ const TranslatePage = () => {
                 </Modal.Footer>
             </div>
         </Modal>
-
-
-        {/* <form onSubmit={handleSubmit}>
-          <button type="submit" onClick={() => setUploadText(true)}>
-            Text (.txt)
-          </button>
-          <button type="submit" onClick={() => setUploadPDF(true)}>
-            PDF (.pdf)
-          </button>
-        </form>
-
-        <br></br>
-
-        <hr></hr>
-
-        <br></br>
-
-        <h3>Would you like to translate your own text?</h3>
-        <h4>Please enter a word or phrase to be translated.</h4>
-
-        <form onSubmit={handleTranslation}>
-          <textarea
-            style={{
-              width: "85%",
-              height: "200px",
-              textAlign: "center",
-            }}
-            wrap="virtual"
-            maxLength="500"
-            placeholder="500 Character Limit"
-            onChange={(e) => setTranslation(e.target.value)}
-          />
-
-          <br></br>
-
-          <select onChange={(e) => setLanguage(e.target.value)}>
-            <option value='' selected>--Choose a Language--</option>
-            {codes.map((el, idx) => {
-                return (
-                    <option key={idx} value={el}>{codeMapping[el]}</option>
-                )
-            })}
-          </select>
-          <button type="submit">Translate</button>
-        </form> */}
-
       </>
     );
-//   } else {
-//     return (
-//       <>
-//         <Card style={{ width: "18rem", textAlign: "center" }}>
-//           <Card.Header>Translation</Card.Header>
-//           <Card.Body>
-//             <Card.Title>{translatedText}</Card.Title>
-//           </Card.Body>
-//           <Card.Footer>
-//             <form onSubmit={saveTranslation}>
-//               <p>Would you like to save this to your translations?</p>
-//               <button type="submit">Yes</button>
-//               <button onClick={() => setNewTranslation(false)}>No</button>
-//             </form>
-//           </Card.Footer>
-//         </Card>
-//       </>
-//     );
-//   }
 };
 
 export default TranslatePage;
