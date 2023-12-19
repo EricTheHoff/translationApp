@@ -91,33 +91,65 @@ const Navbar = () => {
   if (auth === true) {
     return (
       <div className="navbar">
-        <nav>
-          <a href="/">translationApp</a>
+        <div className="mobile-dropdown">
+          <a className="navHome" href="/">
+            translationApp
+          </a>
 
-          <a href="/map">Map</a>
+          <a className="bigScreenLink" href="/translate">
+            Translate
+          </a>
+          <a className="bigScreenLink" href="/study">
+            Study
+          </a>
+          <a className="bigScreenLink" href="/map">
+            Find&nbsp;a&nbsp;School
+          </a>
 
-          <a href="/translate">Translate</a>
+          <div className="mobile-dropdown-content">
+            <nav id="navTag">
+              <form className="navForm" action="/translate">
+                <button className="profileLink" id="translateLink">Translate</button>
+              </form>
 
-          <a href="/translations">Saved Translations</a>
+              <form className="navForm" action="/study">
+                <button className="profileLink" id="studyLink">Study</button>
+              </form>
 
-          <a href="/study">Study</a>
-
-          <a href="/saved-tutors">Saved Tutors</a>
-
-          <div className="dropdown">
-            <a href="/account">
-              <img
-                className="navImage"
-                src={imageFiles[navImage] ? imageFiles[navImage] : navImage}
-              ></img>
-            </a>
-            <div className="dropdown-content">
-              <a href="/account">Profile</a>
-              <br />
-              <button onClick={handleLogout}>Logout</button>
-            </div>
+              <form className="navForm" action="/map">
+                <button className="profileLink" id="mapLink">Find&nbsp;a&nbsp;School</button>
+              </form>
+            </nav>
           </div>
-        </nav>
+        </div>
+
+        <div className="dropdown">
+          <a href="/account">
+            <img
+              className="navImage"
+              src={imageFiles[navImage] ? imageFiles[navImage] : navImage}
+            ></img>
+          </a>
+          <div className="dropdown-content">
+            <form className="navForm" action="/account">
+              <button className="profileLink" id="pLink">Profile</button>
+            </form>
+
+            <form className="navForm" action="/translations">
+              <button className="profileLink" id="sLink">Saved&nbsp;Translations</button>
+            </form>
+
+            <form className="navForm" action="/saved-tutors">
+              <button className="profileLink" id="tLink">Saved&nbsp;Tutors</button>
+            </form>
+
+            <hr className="hrColor" />
+            <button id="logoutButton" onClick={handleLogout}>
+              Logout
+            </button>
+
+          </div>
+        </div>
       </div>
     );
   } else {
