@@ -10,14 +10,18 @@
   flex-direction: row; /* Horizontal layout for larger screens */
   align-items: center;
   padding-right: 50px;
+  background-color: #283845;
+  border-radius: 10px;
+  margin-bottom: 2vh;
 }
 
 .map-title {
   margin-left: 3vw;
   flex-grow: 1;
-  color: #283845;
+  color: white;
   font-size: 40px;
   text-align: center;
+  font-weight: bold;
 }
 
 .map-form-container {
@@ -27,8 +31,9 @@
   border: 1px solid #ccc;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 1vh;
+  margin-bottom: 2vh;
   background-color: #f2d492;
+  margin-top: 2vh;
 }
 
 .zipcode-container {
@@ -50,6 +55,7 @@
 .zipcode-container button {
   padding: 10px;
   font-size: 16px;
+  max-height: 5vh;
   background-color: #283845;
   color: #fff;
   border: none;
@@ -88,9 +94,51 @@
 }
 
 .map-container {
-  border-radius: 15px;
+  border-radius: 10px;
   border: 9px solid #283845;
   width: 100%; /* Set the width as needed */
+}
+
+/* Custom styles for the InfoWindowF content */
+div.info-window {
+  background-color: #fff !important;
+  color: #333 !important;
+  padding: 15px !important;
+  border-radius: 10px !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+div.info-window h1 {
+  margin-bottom: 10px;
+  font-size: 1.5em;
+  color: #283845;
+}
+
+div.info-window p {
+  margin-bottom: 5px;
+}
+
+.info-window a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.info-window a:hover {
+  text-decoration: underline;
+}
+
+.info-window button {
+  padding: 10px;
+  background-color: #283845;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.info-window button:hover {
+  background-color: #0056b3;
 }
 
 /* Responsive adjustments for small screens */

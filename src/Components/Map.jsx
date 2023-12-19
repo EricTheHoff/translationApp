@@ -3,6 +3,7 @@ import { GoogleMap, MarkerF, InfoWindowF } from "@react-google-maps/api";
 import axios from "axios";
 import toast from "react-hot-toast";
 import "../styles/map.css";
+import { HiOutlineCheckCircle } from "react-icons/hi2";
 
 function Map({ userLocation, radius, language }) {
   const center = useMemo(() => userLocation, [userLocation]);
@@ -47,18 +48,23 @@ function Map({ userLocation, radius, language }) {
           `http://localhost:2222/api/places?lat=${lat}&lng=${lng}&radius=${radius}&language=${language}`
         )
         .then(({ data }) => {
+          const extractUrlFromAttributions = (attributions) => {
+            const regex = /href="([^"]*)"/;
+            const match = attributions.match(regex);
+            return match ? match[1] : "";
+          };
           //set all places equal to the results sent back by server and map through them to separate by individual location
           const allPlaces = data.results.map((place) => {
             let position = {
               lat: +place.geometry.location.lat,
               lng: +place.geometry.location.lng,
             };
-
-            //return a marker for each individual location and have it open an infowindow when clicked
-            let htmlString =
-              '<a href="https://maps.google.com/maps/contrib/100961532820129391672">A Google User</a>';
-            let doc = new DOMParser().parseFromString(htmlString, "text/html");
-            let links = doc.querySelectorAll("a");
+            const photoLink =
+              place.photos && place.photos.length > 0
+                ? extractUrlFromAttributions(
+                    place.photos[0].html_attributions[0]
+                  )
+                : "";
             const { name, rating, vicinity } = place;
             //if the place icon equals the "graduation cap" which signifies it is a school, return the marker for it
             return (
@@ -73,31 +79,100 @@ function Map({ userLocation, radius, language }) {
                       setPlaceName(name);
                       setPlaceVicinity(vicinity);
                       setPlaceRating(rating);
-                      setPlaceWebsite(links[0].href);
+                      setPlaceWebsite(photoLink);
                     }}
                   >
                     {open && selectedMarkerId === place.place_id && (
-                      <InfoWindowF
-                        position={position}
-                        onCloseClick={() => setOpen(false)}
-                      >
-                        <>
-                          <h1>{name}</h1>
-                          <p>rating: {rating}</p>
-                          <p> Address: {vicinity}</p>
-                          <a href={links[0].href}>{links[0].href}</a>
-                          <br></br>
-                          <div>
-                            {clickedMarkers[place.place_id] ? (
-                              <p>Added</p>
-                            ) : (
-                              <button onClick={() => addClick(place.place_id)}>
-                                Add
-                              </button>
-                            )}
-                          </div>
-                        </>
-                      </InfoWindowF>
+                      <div className="info-window">
+                        <InfoWindowF
+                          position={position}
+                          onCloseClick={() => setOpen(false)}
+                        >
+                          <>
+                            <h1
+                              style={{
+                                margin: "0",
+                                textAlign: "center",
+                                fontSize: "2.5em",
+                                color: "#283845",
+                                fontFamily: "cursive",
+                                width: "100%",
+                              }}
+                            >
+                              {name}
+                            </h1>
+                            <ul
+                              style={{
+                                marginTop: "15px",
+                                fontSize: "20px",
+                              }}
+                            >
+                              <li
+                                style={{
+                                  fontFamily: "helvetica",
+                                  marginBottom: "8px",
+                                  color: "#283845",
+                                }}
+                              >
+                                Rating: {rating}
+                              </li>
+                              <li
+                                style={{
+                                  fontFamily: "helvetica",
+                                  marginBottom: "8px",
+                                  color: "#283845",
+                                }}
+                              >
+                                {" "}
+                                Address: {vicinity}
+                              </li>
+                              <li
+                                style={{
+                                  fontFamily: "helvetica",
+                                  marginBottom: "8px",
+                                  color: "#283845",
+                                  width: "100%",
+                                  maxWidth: "200px",
+                                }}
+                              >
+                                Website:{" "}
+                                {placeWebsite ? (
+                                  <a
+                                    style={{
+                                      fontFamily: "helvetica",
+                                      color: "blue",
+                                    }}
+                                    href={placeWebsite}
+                                  >
+                                    {placeWebsite}
+                                  </a>
+                                ) : (
+                                  <p>N/A</p>
+                                )}
+                              </li>
+                            </ul>
+                            <br></br>
+                            <div>
+                              {clickedMarkers[place.place_id] ? (
+                                <HiOutlineCheckCircle
+                                  style={{
+                                    fontSize: "35px",
+                                    marginLeft: "10px",
+                                  }}
+                                />
+                              ) : (
+                                <button
+                                  // style={{ marginBottom: "30px" }}
+                                  className="btn btn-primary"
+                                  onClick={() => addClick(place.place_id)}
+                                >
+                                  Add
+                                </button>
+                              )}
+                            </div>
+                          </>
+                        </InfoWindowF>
+                      </div>
                     )}
                   </MarkerF>
                 </div>

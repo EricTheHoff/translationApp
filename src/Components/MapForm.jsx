@@ -17,7 +17,12 @@ const MapForm = ({
           <option className="dropdown" value="16093.4">
             10 miles
           </option>
-          {/* ... (other options for radius) */}
+          <option className="dropdown" value="24140.2">
+            15 miles
+          </option>
+          <option className="dropdown" value="40233.6">
+            25 miles
+          </option>
         </select>
         <select onChange={changeLanguage}>
           <option className="dropdown" value="language">
