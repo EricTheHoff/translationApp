@@ -78,7 +78,7 @@ const TranslatePage = () => {
     return (
       <>
         <Container fluid>
-            <Row className='justify-content-center'>
+            <Row className='justify-content-center mt-3'>
                 <Col lg={6}>
                     <Form
                         onSubmit={handleSubmit}

@@ -16,7 +16,7 @@ const Login = ({ login }) => {
   return (
     <>
         <Container fluid>
-            <Row className='text-center mb-3 mt-5'>
+            <Row className='text-center mb-3 mt-5 light-title'>
                 <h3>Welcome to [APP NAME]</h3>
                 <h4>Please login to get started.</h4>
             </Row>
@@ -74,8 +74,8 @@ const Login = ({ login }) => {
                     </Form>
                 </Col>
             </Row>
-            <Row className='text-center mt-3'>
-                <p>Don't have an account? <NavLink to='/register'>Register for one here.</NavLink></p>
+            <Row className='text-center mt-3 light-title'>
+                <p>Don't have an account? <NavLink to='/register' className='light-title'>Register for one here.</NavLink></p>
                 
             </Row>
         </Container>

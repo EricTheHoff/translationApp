@@ -26,7 +26,7 @@ const StudyPage = () => {
     return (
         <>
             <Container fluid>
-                <Row className='text-center mb-3'>
+                <Row className='text-center mb-3 mt-3 light-title'>
                     <Col>
                         <h3>Study Translations</h3>
                         <h4>Choose your Study Pool</h4>
@@ -76,7 +76,7 @@ const StudyPage = () => {
                     </Col>
                 </Row>
                 <Row className='text-center'>
-                    <Link to='/'>Back to Home</Link>
+                    <Link to='/' className='light-title'>Back to Home</Link>
                 </Row>
             </Container>
         </>

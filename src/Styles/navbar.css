@@ -1,6 +1,6 @@
 .navbar {
-    background: linear-gradient(to bottom, #33ccff 0%, rgba(62, 118, 249, 0.91));
-    background: linear-gradient(to bottom, #72a2d1, #496786);
+    /* background: linear-gradient(to bottom, #33ccff 0%, rgba(62, 118, 249, 0.91)); */
+    background: linear-gradient(to bottom, #F2D492, #F5E0B2);
     color: white;
 
     position: fixed;
@@ -24,7 +24,7 @@
   font-size: large;
   text-decoration: none;
   font-weight: light;
-  color: white;
+  color: black;
 
   margin-left: 3%;
   margin-right: 20%;
@@ -33,15 +33,15 @@
 .bigScreenLink {
   font-size: 1.5vw;
   text-decoration: none;
-  color: white;
+  color: black;
   margin: 10%;
-  font-weight: lighter;
+  font-weight: 500;
 }
 
 .bigScreenLink:hover {
   /* text-decoration: underline; */
-  color: rgba(255, 255, 255, 0.663);
-  font-weight: lighter;
+  color: rgba(0, 0, 0, 0.663);
+  font-weight: normal;
 }
 
 .navLink {

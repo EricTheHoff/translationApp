@@ -38,7 +38,7 @@ const SavedTutorPage = () => {
   return (
     <>
       <div>
-        <Link to="/">Back to Home</Link>
+        <Link to="/" className='light-title'>Back to Home</Link>
         <div>{school}</div>
       </div>
     </>
