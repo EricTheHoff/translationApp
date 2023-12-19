@@ -41,7 +41,6 @@
 .bigScreenLink:hover {
   /* text-decoration: underline; */
   color: rgba(255, 255, 255, 0.663);
-  margin: 10%;
   font-weight: lighter;
 }
 
@@ -63,6 +62,27 @@
   display: inline-block;
 }
 
+#pLink {
+  width: 100%
+}
+#sLink {
+  width: 100%
+}
+#tLink {
+  width: 100%
+}
+#translateLink {
+  width: 100%
+}
+#studyLink {
+  width: 100%
+}
+#mapLink {
+  width: 100%
+}
+
+
+
 #logoutButton {
   background-color: transparent;
   border: none;
@@ -70,6 +90,7 @@
   text-align: center;
   padding: 0;
   font-size: 1vw;
+  padding-left: 5px;
 }
 
 #logoutButton:hover {
@@ -77,7 +98,7 @@
 }
 
 .profileLink:hover {
-  background-color: rgba(128, 128, 128, 0.663);
+  background-color: rgba(128, 128, 128, 0.404);
 }
 
 .dropdown {
@@ -115,13 +136,29 @@
 }
 
 .mobile-dropdown {
-  /* display: flex; */
+  position: relative;
   display: inline-block;
   margin-left: 1%;
 }
 
 .mobile-dropdown-content {
-  display: inline-block;
+  display: none;
+  position: absolute;
+  z-index: 1;
+  padding: 12px 16px;
+
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+
+  border-radius: 10px;
+  background-color:rgb(231, 231, 231);
+
+  margin: auto;
+
+  left: 0px;
+  top: 100%;
+
+  width: 300px;
+
 }
 
 .navForm {
@@ -184,6 +221,7 @@
       background-color:rgb(231, 231, 231);
     
       margin: auto;
+      width: 300%;
     }
     
     .mobile-dropdown:hover .mobile-dropdown-content {
@@ -222,7 +260,30 @@
     .mobile-dropdown-content {
       display: none;
     }
+
+    /* #pLink {
+      padding-right:85%;
+    }
+    #sLink {
+      padding-right: 58%;
+    }
+    #tLink {
+      padding-right: 70%;
+    } */
   }
+
+  /* @media only screen and (min-width: 1200px) {
+
+    #pLink {
+      padding-right:85%;
+    }
+    #sLink {
+      padding-right: 58%;
+    }
+    #tLink {
+      padding-right: 70%;
+    }
+  } */
 
   @media only screen and (max-width: 1500px) {
 
@@ -239,6 +300,7 @@
       /* margin: auto; */
       margin-bottom: 0;
     }
+
   }
 
   @media only screen and (min-width: 1500px) {
@@ -263,4 +325,23 @@
     .mobile-dropdown-content {
       display: none;
     }
+
+    /* #pLink {
+      width:80%;
+    }
+    #sLink {
+      width: 100%;
+    }
+    #tLink {
+      width: 58%;
+    }
+    #translateLink {
+      padding-right: 180%;
+    }
+    #studyLink {
+      width: 200%;
+    }
+    #mapLink {
+      width: 145%;
+    } */
   }

@@ -106,21 +106,21 @@ const Navbar = () => {
             Study
           </a>
           <a className="bigScreenLink" href="/map">
-            Map
+            Find&nbsp;a&nbsp;School
           </a>
 
           <div className="mobile-dropdown-content">
             <nav id="navTag">
               <form className="navForm" action="/translate">
-                <button className="navLink">Translate</button>
+                <button className="profileLink" id="translateLink">Translate</button>
               </form>
 
               <form className="navForm" action="/study">
-                <button className="navLink">Study</button>
+                <button className="profileLink" id="studyLink">Study</button>
               </form>
 
               <form className="navForm" action="/map">
-                <button className="navLink">Map</button>
+                <button className="profileLink" id="mapLink">Find&nbsp;a&nbsp;School</button>
               </form>
             </nav>
           </div>
@@ -135,15 +135,15 @@ const Navbar = () => {
           </a>
           <div className="dropdown-content">
             <form className="navForm" action="/account">
-              <button className="profileLink">Profile</button>
+              <button className="profileLink" id="pLink">Profile</button>
             </form>
 
             <form className="navForm" action="/translations">
-              <button className="profileLink">Saved Translations</button>
+              <button className="profileLink" id="sLink">Saved&nbsp;Translations</button>
             </form>
 
             <form className="navForm" action="/saved-tutors">
-              <button className="profileLink">Saved Tutors</button>
+              <button className="profileLink" id="tLink">Saved&nbsp;Tutors</button>
             </form>
 
             <hr className="hrColor" />
