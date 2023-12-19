@@ -117,13 +117,22 @@ export default function Profile() {
             }
           />
         </div>
+      <div className="bigBoyDiv">
         <br />
-        <div className="contentDiv">
-          <div className="header">
+          <div className="contentDiv">
+
+          <div className="profileheader">
+
+            <div className="titleDiv">
             <h1 className="h1">Profile</h1>
+            </div>
+
+            <div className="pTeg">
             <button className="editButton" onClick={() => setEditMode(true)}>
               Edit
             </button>
+            </div>
+
           </div>
 
           <div className="hrContainer">
@@ -139,13 +148,12 @@ export default function Profile() {
             {/* <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a> */}
           </div>
         </div>
-        <br />
-        <p>?</p>
+      </div>
       </>
     );
   } else {
     return (
-        <>
+      <>
       <div className="imgBackground">
           <img
             className="pic"
@@ -154,26 +162,29 @@ export default function Profile() {
             }
           />
               </div>
+        <div className="bigBoyDiv">
                 <form onSubmit={handleSubmit}>
           <div className="contentDiv">
-            <div className="header">
+            <div className="profileheader">
               <h1 className="h1">Edit Profile</h1>
 
-              <p className="pTeg">
+              <div className="pTeg">
                 <button className="save" type="submit">
                   Save
                 </button>
                 <button className="cancel" onClick={cancelButton}>
                   Cancel
                 </button>
-              </p>
+              </div>
             </div>
 
             <div className="hrContainer">
               <hr />
 
-              <label>Email</label>
+              <label className="profileLabels">Email: </label>
               <input
+                id="eProfileInput"
+                className="profileInputs"
                 placeholder={email}
                 type="text"
                 onChange={(e) => setEmail(e.target.value)}
@@ -181,8 +192,9 @@ export default function Profile() {
 
               <hr />
 
-              <label>Password</label>
+              <label className="profileLabels">Password: </label>
               <input
+                className="profileInputs"
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -206,6 +218,7 @@ export default function Profile() {
             </div>
           </div>
         </form>
+        </div>
         </>
     );
   }

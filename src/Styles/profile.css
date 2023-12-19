@@ -4,13 +4,27 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-.imgBackground {
-  background-color: rgb(255, 95, 95);
+.bigBoyDiv {
+  background-color: white;
 
-  max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 7vw;
+  margin-top: -4vw;
+
+  justify-content: center;
+  align-items: center;
+
+  display: flex;
+}
+
+.imgBackground {
+  background-color: transparent;
+  /* position: flex; */
+
+  /* max-width: 1000px; */
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 6vw;
 
   justify-content: center;
   align-items: center;
@@ -26,18 +40,111 @@ input::-webkit-inner-spin-button {
   max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
+  width: 100vw;
 
-  justify-content: center;
-  align-items: center;
+  justify-content: right;
+  align-items: right;
 
   display: inline-block;
   border-radius: 15px;
 
   padding: 5vw;
 
+  margin-bottom: 5vw;
+
   /* box-shadow: 11px; */
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
+
+.profileheader {
+  display: grid;
+}
+
+.titleDiv {
+  justify-content: right;
+}
+
+.pTeg {
+  display: flex;
+  justify-content: left;
+}
+
+@media only screen and (max-width: 600px) {
+  .pTeg {
+    display: flex;
+  }
+
+  .save {
+
+    /* padding-left: 2vw;
+    padding-right: 2vw;
+    padding-top: 0.5vw;
+    padding-bottom:0.5vw;
+   */
+
+    background-color: red;
+
+    border-radius: 10px;
+  
+    font-size: 5vw;
+  }
+  
+  .cancel {
+  
+    /* padding-left: 1.5vw;
+    padding-right: 1.5vw;
+    padding-top: 0.5vw;
+    padding-bottom:0.5vw; */
+  
+    border-radius: 10px;
+  
+    font-size: 5vw;
+    
+  }
+
+  .bigBoyDiv {
+    margin-top: -9vw;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .pTeg {
+    display: flex;
+  }
+
+  .editButton {
+    padding-left: 2.3vw;
+    padding-right: 2.3vw;
+    padding-top: 0.5vw;
+    padding-bottom:0.5vw;
+  
+    background-color: red;
+    color: white;
+  
+    border: none;
+    border-radius: 10px;
+  
+    font-size: .8vw;
+  }
+}
+
+.profileInputs {
+  border: none;
+  border-radius: 10px;
+  padding: 1vw;
+  background-color: rgb(238, 238, 238);
+  /* margin-left: 1vw; */
+  width:100%
+}
+
+.profileLabels {
+  margin-left: 0.5vw;
+}
+
+/* #eProfileInput {
+  width: 93%;
+} */
+
 
 /* .h1 {
   font-size: 30vw;
@@ -183,9 +290,9 @@ input::-webkit-inner-spin-button {
     margin: 5%;
 
   }
-}
+} */
 
-@media only screen and (min-width: 1000px) {
+/* @media only screen and (min-width: 1000px) {
   .save {
     margin-top: 45%;
     margin-bottom: 4%;
@@ -207,15 +314,85 @@ input::-webkit-inner-spin-button {
     margin-right: 5%;
   
   }
-} */
+}  */
+
+.h1 {
+  font-size: 30vw;
+  text-align: left;
+  margin-bottom: 0%;
+}
+
+.editButton {
+  padding-left: 2.3vw;
+  padding-right: 2.3vw;
+  padding-top: 0.5vw;
+  padding-bottom:0.5vw;
+
+  background-color: rgb(0, 115, 255);
+  color: white;
+
+  border: none;
+  border-radius: 10px;
+
+  font-size: .8vw;
+}
+
+.editButton:hover {
+  background-color: rgb(0, 81, 180);
+}
+
+.save {
+
+  padding-left: 2vw;
+  padding-right: 2vw;
+  padding-top: 0.5vw;
+  padding-bottom:0.5vw;
+
+  /* margin-left: 1vw;  */
+
+  background-color: rgb(0, 115, 255);
+  color: white;
+
+  border: none;
+  border-radius: 10px;
+
+  font-size: .8vw;
+}
+
+.save:hover {
+  background-color: rgb(0, 81, 180);
+}
+
+.cancel {
+
+  padding-left: 1.5vw;
+  padding-right: 1.5vw;
+  padding-top: 0.5vw;
+  padding-bottom:0.5vw;
+
+  /* margin-left: 9vw; */
+
+  background-color: rgb(195, 195, 195);
+  color: black;
+
+  border: none;
+  border-radius: 10px;
+
+  font-size: .8vw;
+  
+}
+
+.cancel:hover {
+  background-color: rgb(140, 140, 140);
+}
 
  .delete {
   border: none;
   background-color: transparent;
   color: rgb(255, 0, 0);
-  margin-left: 50%;
 }
 
 .delete:hover {
   color: rgb(253, 115, 115);
 }
+

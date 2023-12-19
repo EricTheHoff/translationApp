@@ -2,12 +2,14 @@
     display: grid;
     gap: 1.5vw 1.5vw;
     grid-template-columns: auto auto auto;
-    background-color: rgb(226, 226, 226);
+    background-color: rgb(238, 238, 238);
     margin-left: auto;
     margin-right: auto;
+    margin-top: 4vw;
     padding: 3vw;
     justify-content: center;
     border-radius: 15vw;
+    width: 20vw;
   }
 
 
@@ -20,6 +22,8 @@
   .grid-container {
     padding-left: 3px;
     padding-right: 3px;
+
+    width:70vw;
 
     gap: 2vw 8vw;
   }
