@@ -267,7 +267,7 @@ const StudySeed = () => {
             <>
                 <Container fluid>
                     <Row className='justify-content-center mb-2'>
-                        <div className='container'>
+                        <div className='containers'>
                             <div className='card-grid border p-3 bkg-lighter shadow rounded'>
                                 {flashcardData.map((el) => {
                                 return (

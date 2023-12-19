@@ -2,7 +2,7 @@ body {
     margin: 0;
 }
 
-.container {
+.containers {
     max-width: 900px;
     margin: 1rem 2rem;
 }
