@@ -48,6 +48,7 @@ const StudyPage = () => {
                                 <Button
                                     type='submit'
                                     variant='primary'
+                                    className='ibtn'
                                     onClick={() => setStudySaved(true)}
                                 >My Saved Translations
                                 </Button>
@@ -68,6 +69,7 @@ const StudyPage = () => {
                                 <Button
                                     type='submit'
                                     variant='primary'
+                                    className='ibtn'
                                     onClick={() => setStudySeed(true)}
                                 >Sample Translations
                                 </Button>

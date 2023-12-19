@@ -65,10 +65,22 @@ const Login = ({ login }) => {
                         </Row>
                         <Row className='justify-content-center mb-3'>
                             <Col xs='auto'>
-                                <Button type='submit' variant='primary'>Login</Button>
+                                <Button
+                                    type='submit'
+                                    variant='primary'
+                                    className='ibtn'
+                                >
+                                Login
+                                </Button>
                             </Col>
                             <Col xs='auto'>
-                                <Button variant='primary' onClick={myPassword}>Show Password</Button>
+                                <Button
+                                    variant='primary'
+                                    onClick={myPassword}
+                                    className='ibtn'
+                                >
+                                Show Password
+                                </Button>
                             </Col>
                         </Row>
                     </Form>
