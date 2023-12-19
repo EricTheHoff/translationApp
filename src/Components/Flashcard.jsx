@@ -25,14 +25,14 @@ const Flashcard = ({ flashcard, configuration }) => {
         return (
             <>
                 <div
-                className={`card ${flip ? 'flip' : ''}`}
-                style={{ height: height }}
+                className={`cards ${flip ? 'flip' : ''}`}
+                style={{ height: height, backgroundColor: '#F2D492' }}
                 onClick={() => setFlip(!flip)}
                 >
-                    <div className='front' ref={frontEl}>
+                    <div className='front text-center' ref={frontEl}>
                         {flashcard.word ? flashcard.word : flashcard.phrase}
                     </div>
-                    <div className='back' ref={backEl}>
+                    <div className='back text-center' ref={backEl}>
                         {flashcard.original ? flashcard.original : ''}
                     </div>
                 </div>
@@ -42,14 +42,14 @@ const Flashcard = ({ flashcard, configuration }) => {
         return (
             <>
                 <div
-                className={`card ${flip ? 'flip' : ''}`}
-                style={{ height: height }}
+                className={`cards ${flip ? 'flip' : ''}`}
+                style={{ height: height, backgroundColor: '#F2D492' }}
                 onClick={() => setFlip(!flip)}
                 >
-                    <div className='front' ref={frontEl}>
+                    <div className='front text-center' ref={frontEl}>
                         {flashcard.original}
                     </div>
-                    <div className='back' ref={backEl}>
+                    <div className='back text-center' ref={backEl}>
                         {flashcard.word}
                     </div>
                 </div>

@@ -35,22 +35,22 @@ const HomePage = () => {
       });
   };
 
-  const logout = () => {
-    axios
-      .post("/logout")
+//   const logout = () => {
+//     axios
+//       .post("/logout")
 
-      .then(() => {
-        dispatch({ type: "Logged Out" });
-        dispatch({ type: "Inactive User" });
-        navigate("/login");
-      })
-      .catch((error) => {
-        console.error(`The following error has occurred: ${error}`);
-        dispatch({ type: "Logged Out" });
-        dispatch({ type: "Inactive User" });
-        navigate("/login");
-      });
-  };
+//       .then(() => {
+//         dispatch({ type: "Logged Out" });
+//         dispatch({ type: "Inactive User" });
+//         navigate("/login");
+//       })
+//       .catch((error) => {
+//         console.error(`The following error has occurred: ${error}`);
+//         dispatch({ type: "Logged Out" });
+//         dispatch({ type: "Inactive User" });
+//         navigate("/login");
+//       });
+//   };
 
   useEffect(() => {
     saveToExpress();
@@ -60,31 +60,6 @@ const HomePage = () => {
     return (
         <>
             <TranslatePage />
-            
-            {/* <div>
-                <ul>
-                <li>
-                    <Link to="/account">Account Info</Link>
-                </li>
-                <li>
-                    <Link to="/map">Map</Link>
-                </li>
-                <li>
-                    <Link to="/translations">Saved Translations</Link>
-                </li>
-                <li>
-                    <Link to="/saved-tutors">Saved Tutors</Link>
-                </li>
-                <li>
-                    <Link to="/study">Study</Link>
-                </li>
-                <li>
-                    <Link to="/translate">Translate</Link>
-                </li>
-                </ul>
-
-                <button onClick={logout}>Logout</button>
-            </div> */}
         </>
     );
   } else {
@@ -92,13 +67,6 @@ const HomePage = () => {
       <>
         <LoginPage />
       </>
-      //   <div>
-      //     <ul>
-      //       <li>
-      //         <Link to="/register">Get Started</Link>
-      //       </li>
-      //     </ul>
-      //   </div>
     );
   }
 };

@@ -41,6 +41,7 @@ const SavedTutorPage = () => {
       <Link to="/">Back to Home</Link>
 
       <div className="tutorContainer">{school}</div>
+
     </>
   );
 };

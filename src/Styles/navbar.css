@@ -1,32 +1,347 @@
-/* .navbar {
-    background-color: lightskyblue;
+.navbar {
+    /* background: linear-gradient(to bottom, #33ccff 0%, rgba(62, 118, 249, 0.91)); */
+    background: linear-gradient(to bottom, #F2D492, #F5E0B2);
     color: white;
 
-    height: 8%;
-    /* position: fixed; */
-   /* top: 0;
-    width: 100%;
-    padding-left: 0%;
+    position: fixed;
 
-    text-align: left;
     font-size: small;
-} */
+    
+    border-radius: 28px;
+    width: 98%;
+    margin: auto; 
+    margin-top: 1%;
+    
+    display: inline-block;
+  }
+  
+#navTag {
+    text-align: left;
+    width: 40%;
+}
+
+.navHome {
+  font-size: large;
+  text-decoration: none;
+  font-weight: light;
+  color: black;
+
+  margin-left: 3%;
+  margin-right: 20%;
+}
+
+.bigScreenLink {
+  font-size: 1.5vw;
+  text-decoration: none;
+  color: black;
+  margin: 10%;
+  font-weight: 500;
+}
+
+.bigScreenLink:hover {
+  /* text-decoration: underline; */
+  color: rgba(0, 0, 0, 0.663);
+  font-weight: normal;
+}
+
+.navLink {
+  color: white;
+  border: none;
+  background-color: transparent;
+  font-size: 0.5vw;
+  text-align: left;
+  padding-right: 40px;
+}
+
+.profileLink {
+  color: rgb(113, 113, 113);
+  border: none;
+  background-color: transparent;
+  font-size: 1vw;
+  text-align: left;
+  display: inline-block;
+}
+
+#pLink {
+  width: 100%
+}
+#sLink {
+  width: 100%
+}
+#tLink {
+  width: 100%
+}
+#translateLink {
+  width: 100%
+}
+#studyLink {
+  width: 100%
+}
+#mapLink {
+  width: 100%
+}
+
+
+
+#logoutButton {
+  background-color: transparent;
+  border: none;
+  color: rgb(255, 0, 0);
+  text-align: center;
+  padding: 0;
+  font-size: 1vw;
+  padding-left: 5px;
+}
+
+#logoutButton:hover {
+  color: rgb(255, 149, 149);
+}
+
+.profileLink:hover {
+  background-color: rgba(128, 128, 128, 0.404);
+}
 
 .dropdown {
     position: relative;
     display: inline-block;
+    margin-right: 1%;
   }
   
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    padding: 12px 16px;
-    z-index: 1;
-  }
+.dropdown-content {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  padding: 12px 16px;
+  /* padding-bottom: 50px; */
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+
+  border-radius: 10px;
+  background-color:rgb(231, 231, 231);
+
+  margin: auto;
+
+  right: 0px;
+  top: 100%;
+
+  width: 300px;
+
+}
 
 .dropdown:hover .dropdown-content {
     display: block;
+  }
+
+.hrColor {
+  color:black;
+}
+
+.mobile-dropdown {
+  position: relative;
+  display: inline-block;
+  margin-left: 1%;
+}
+
+.mobile-dropdown-content {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  padding: 12px 16px;
+
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+
+  border-radius: 10px;
+  background-color:rgb(231, 231, 231);
+
+  margin: auto;
+
+  left: 0px;
+  top: 100%;
+
+  width: 300px;
+
+}
+
+.navForm {
+  padding: 0;
+  margin: 0;
+}
+
+  @media only screen and (max-width: 600px) {
+    .navbar {
+      border-radius: 0px;
+      margin-top: 0%;
+      padding: 0px;
+      position:static;
+      width: 100%;
+    }
+
+    .navLink {
+      margin: 1.5%;
+      font-size: 3vw;
+      color: black;
+      padding: 0;
+    }
+
+    .navlink:hover {
+      background-color: rgba(255, 0, 0, 0.663);
+      color: white;
+    }
+
+    .navHome {
+      margin-left: 2.5%;
+      font-size: 3.5vw;
+    }
+
+    .dropdown {
+      margin-right: 2.5%;
+    }
+
+    #profileLink {
+      font-size: 3vw;
+    }
+    
+    #logoutButton {
+      font-size: 3vw;
+    }
+
+    .mobile-dropdown {
+      position: relative;
+      display: inline-block;
+      margin-left: 1%;
+    }
+    
+    .mobile-dropdown-content {
+      display: none;
+      position: absolute;
+      z-index: 1;
+      padding: 12px 16px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    
+      border-radius: 10px;
+      background-color:rgb(231, 231, 231);
+    
+      margin: auto;
+      width: 300%;
+    }
+    
+    .mobile-dropdown:hover .mobile-dropdown-content {
+      display: block;
+    }
+
+    .bigScreenLink {
+      display: none;
+    }
+
+    .profileLink {
+      font-size: 3vw;
+    }
+
+  }
+
+  @media only screen and (min-width: 1200px) {
+    .navbar {
+      border-radius: 50px;
+      width: 98%;
+      margin-top: 1%;
+    }
+
+    .navLink {
+      display: none;
+    }
+
+    .bigScreenLink {
+      font-size: 1vw;
+    }
+
+    .navHome {
+      font-size: 1.3vw;
+    }
+
+    .mobile-dropdown-content {
+      display: none;
+    }
+
+    /* #pLink {
+      padding-right:85%;
+    }
+    #sLink {
+      padding-right: 58%;
+    }
+    #tLink {
+      padding-right: 70%;
+    } */
+  }
+
+  /* @media only screen and (min-width: 1200px) {
+
+    #pLink {
+      padding-right:85%;
+    }
+    #sLink {
+      padding-right: 58%;
+    }
+    #tLink {
+      padding-right: 70%;
+    }
+  } */
+
+  @media only screen and (max-width: 1500px) {
+
+    .mobile-dropdown-content {
+      display: none;
+      position: absolute;
+      z-index: 1;
+      padding: 12px 16px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    
+      border-radius: 10px;
+      background-color:rgb(231, 231, 231);
+    
+      /* margin: auto; */
+      margin-bottom: 0;
+    }
+
+  }
+
+  @media only screen and (min-width: 1500px) {
+    .navbar {
+      border-radius: 50px;
+      width: 98%;
+      margin-top: 1%;
+    }
+
+    .navLink {
+      display: none;
+    }
+
+    .bigScreenLink {
+      font-size: 1vw;
+    }
+
+    .navHome {
+      font-size: 1.3vw;
+    }
+
+    .mobile-dropdown-content {
+      display: none;
+    }
+
+    /* #pLink {
+      width:80%;
+    }
+    #sLink {
+      width: 100%;
+    }
+    #tLink {
+      width: 58%;
+    }
+    #translateLink {
+      padding-right: 180%;
+    }
+    #studyLink {
+      width: 200%;
+    }
+    #mapLink {
+      width: 145%;
+    } */
   }

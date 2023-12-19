@@ -7,6 +7,7 @@
   border-radius: 4px;
   cursor: pointer;
   align-self: flex-end;
+  color: white;
 }
 
 #pdf-container {
@@ -16,7 +17,7 @@
   border: 1px solid #ccc;
 }
 
-h1 {
+.header-1 {
   text-align: center;
   margin-top: 10vh;
 }
@@ -42,10 +43,10 @@ h1 {
 
 .upload-container {
   max-width: 500px;
-  height: 400px;
+  height: 300px;
   margin: auto;
   padding: 20px;
-  background-color: rgba(73, 103, 134, 0.8);
+  background-color: rgb(242, 212, 146, 0.9);
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -67,12 +68,12 @@ h1 {
 .cancel-button {
   margin-top: 12px;
   align-self: flex-start;
-  background-color: #f2d492;
+  background-color: #283845;
   border-radius: 5px;
 }
 
 .blue-button {
-  background-color: #496786;
+  background-color: #53606a;
 }
 
 /* file styles */
@@ -98,6 +99,8 @@ h1 {
   margin-bottom: 8px;
   font-weight: bold;
   text-align: center;
+  color: #283845;
+  font-size: 27px;
 }
 
 .form-input {
@@ -105,13 +108,13 @@ h1 {
   padding: 8px;
   margin-bottom: 16px;
   box-sizing: border-box;
-  border: 1px solid white;
+  border: 1px solid #283845;
   border-radius: 4px;
   outline: none;
 }
 
 .form-button {
-  background-color: black;
+  background-color: #283845;
   color: #fff;
   padding: 10px 15px;
   border: none;
@@ -122,7 +125,12 @@ h1 {
 
 .form-button:disabled {
   background-color: #ccc;
+  border: 1px solid gray;
   cursor: not-allowed;
+}
+
+.new-file-btn {
+  background-color: #283845;
 }
 
 /* Translation section styles */
@@ -146,7 +154,7 @@ h1 {
   outline: none;
   font-size: 14px; /* Adjust font size */
   color: white;
-  background-color: #496786;
+  background-color: #283845;
   transition: border-color 0.3s ease; /* Add a smooth transition for border color */
 
   /* Optional: Hover styles */
@@ -214,7 +222,7 @@ span {
 
   .cancel-button {
     margin-top: 12px;
-    align-self: flex-end; /* Move the cancel button to the right */
+    align-self: center; /* Move the cancel button to the right */
   }
 }
 

@@ -3,6 +3,7 @@ import { useLoadScript } from "@react-google-maps/api";
 import axios from "axios";
 import Map from "../Components/Map";
 import MapForm from "../Components/MapForm";
+import "../styles/map.css";
 
 const libraries = ["places"];
 
@@ -37,7 +38,6 @@ function MapPage() {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          console.log(position.coords);
           setUserLocation({ lat: latitude, lng: longitude });
         },
         (error) => {
@@ -74,16 +74,21 @@ function MapPage() {
 
   if (!isLoaded) return <div>Loading...</div>;
   return (
-    <>
+    <div className="map-page">
+      <div className="map-header">
+        <div className="map-title">
+          Find a language school <br></br> near you!
+        </div>
+        <MapForm
+          changeRadius={changeRadius}
+          onZipcodeChange={handleZipcodeChange}
+          onZipcodeSubmit={handleZipcodeSubmit}
+          zipcode={zipcode}
+          changeLanguage={changeLanguage}
+        />
+      </div>
       <Map userLocation={userLocation} radius={radius} language={language} />
-      <MapForm
-        changeRadius={changeRadius}
-        onZipcodeChange={handleZipcodeChange}
-        onZipcodeSubmit={handleZipcodeSubmit}
-        zipcode={zipcode}
-        changeLanguage={changeLanguage}
-      />
-    </>
+    </div>
   );
 }
 

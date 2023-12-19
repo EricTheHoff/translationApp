@@ -35,11 +35,6 @@ img {
   width: 40px;
 }
 
-.navImage:hover {
-  height: 40px;
-  width: 40px;
-}
-
 @media only screen and (max-width: 600px) {
     .pic {
         max-width: 70px;
@@ -49,11 +44,16 @@ img {
         margin-right: 46%;
         margin-top: -30%;
       }
+
+      .navImage {
+        height: 30px;
+        width: 30px;
+      }
   }
 
-/* @media only screen and (max-width: 1000px) {
-    .pic {
-        max-width: 100px;
-        max-height: 100px;
+@media only screen and (min-width: 1500px) {
+    .navImage {
+        height: 45px;
+        width: 45px;
       }
-  } */
+  }
