@@ -25,7 +25,7 @@ const Flashcard = ({ flashcard, configuration }) => {
         return (
             <>
                 <div
-                className={`card ${flip ? 'flip' : ''}`}
+                className={`cards ${flip ? 'flip' : ''}`}
                 style={{ height: height, backgroundColor: '#F2D492' }}
                 onClick={() => setFlip(!flip)}
                 >
@@ -42,7 +42,7 @@ const Flashcard = ({ flashcard, configuration }) => {
         return (
             <>
                 <div
-                className={`card ${flip ? 'flip' : ''}`}
+                className={`cards ${flip ? 'flip' : ''}`}
                 style={{ height: height, backgroundColor: '#F2D492' }}
                 onClick={() => setFlip(!flip)}
                 >
