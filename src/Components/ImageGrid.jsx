@@ -61,55 +61,55 @@ const ImageGrid = ({ setProfile }) => {
 
       <div className="grid-item1">
         <button className="gridButton" onClick={bearFunction}>
-          <img src={bear} />
+          <img className="avatar" src={bear} />
         </button>
       </div>
 
       <div className="grid-item2">
         <button className="gridButton" onClick={catFunction}>
-          <img src={cat} />
+          <img className="avatar" src={cat} />
         </button>
       </div>
 
       <div className="grid-item3">
         <button className="gridButton" onClick={chickenFunction}>
-          <img src={chicken} />
+          <img className="avatar" src={chicken} />
         </button>
       </div>
 
       <div className="grid-item4">
         <button className="gridButton" onClick={dogFunction}>
-          <img src={dog} />
+          <img className="avatar" src={dog} />
         </button>
       </div>
 
       <div className="grid-item5">
         <button className="gridButton" onClick={koalaFunction}>
-          <img src={koala} />
+          <img className="avatar" src={koala} />
         </button>
       </div>
 
       <div className="grid-item6">
         <button className="gridButton" onClick={meerkatFunction}>
-          <img src={meerkat} />
+          <img className="avatar" src={meerkat} />
         </button>
       </div>
 
       <div className="grid-item7">
         <button className="gridButton" onClick={pandaFunction}>
-          <img src={panda} />
+          <img className="avatar" src={panda} />
         </button>
       </div>
 
       <div className="grid-item8">
         <button className="gridButton" onClick={rabbitFunction}>
-          <img src={rabbit} />
+          <img className="avatar" src={rabbit} />
         </button>
       </div>
 
       <div className="grid-item9">
-        <button className="gridButton9" onClick={sealionFunction}>
-          <img src={sealion} />
+        <button className="gridButton" onClick={sealionFunction}>
+          <img className="avatar" src={sealion} />
         </button>
       </div>
 

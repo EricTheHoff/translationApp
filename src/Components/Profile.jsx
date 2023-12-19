@@ -108,14 +108,15 @@ export default function Profile() {
 
   if (!editMode) {
     return (
-      <div className="background">
-        <img
-          className="pic"
-          src={
-            imageFiles[profileImage] ? imageFiles[profileImage] : profileImage
-          }
-        />
-        <p>hello?</p>
+      <>
+        <div className="imgBackground">
+          <img
+            className="pic"
+            src={
+              imageFiles[profileImage] ? imageFiles[profileImage] : profileImage
+            }
+          />
+        </div>
         <br />
         <div className="contentDiv">
           <div className="header">
@@ -137,38 +138,35 @@ export default function Profile() {
 
             {/* <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a> */}
           </div>
-          <p>?</p>
         </div>
         <br />
         <p>?</p>
-      </div>
+      </>
     );
   } else {
     return (
-      <div className="background">
-        <form onSubmit={handleSubmit}>
+        <>
+      <div className="imgBackground">
           <img
-                        className="pic"
-                        src={
-                            imageFiles[profileImage] ? imageFiles[profileImage] : profileImage
-                        }
-                    />
-
-          <p>hello?</p>
-          <br />
+            className="pic"
+            src={
+                imageFiles[profileImage] ? imageFiles[profileImage] : profileImage
+            }
+          />
+              </div>
+                <form onSubmit={handleSubmit}>
           <div className="contentDiv">
             <div className="header">
               <h1 className="h1">Edit Profile</h1>
 
-                <p className="pTeg">
-                  <button className="save" type="submit">
-                    Save
-                  </button>
-                  <button className="cancel" onClick={cancelButton}>
-                    Cancel
-                  </button>
-                </p>
-       
+              <p className="pTeg">
+                <button className="save" type="submit">
+                  Save
+                </button>
+                <button className="cancel" onClick={cancelButton}>
+                  Cancel
+                </button>
+              </p>
             </div>
 
             <div className="hrContainer">
@@ -198,7 +196,7 @@ export default function Profile() {
                 </div>
               </div> */}
 
-                  <ImageGrid setProfile={setProfileImage} />
+              <ImageGrid setProfile={setProfileImage} />
               <br />
               <br />
 
@@ -206,13 +204,9 @@ export default function Profile() {
                 Delete Account
               </button>
             </div>
-
-            <p>?</p>
           </div>
         </form>
-        <br />
-        <p>?</p>
-      </div>
+        </>
     );
   }
 }
