@@ -31,13 +31,11 @@ function TutorCard({
   return (
     <div
       style={{
-        // display: "inline-block",
-        // // width: "25rem",
         margin: "5px auto",
       }}
     >
       <Card style={{ width: "21.5em"}}>
-        <div class="card-header">Your Saved Tutor</div>
+        <div class="card-header">My Saved Tutor</div>
         <Card.Body style={{ width: "18rem" }}>
           <Card.Text style={{ width: "18rem" }}>
             {name}

@@ -1,28 +1,49 @@
-.tutorContainer { 
+.translateContainer { 
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     justify-content: center;
 }
 
 @media (min-width: 750px) {
-    .tutorContainer {
+    .translateContainer {
     grid-template-columns: repeat(2, 1fr);
     
     }
 }
 
 @media (min-width: 1200px) {
-    .tutorContainer {
+    .translateContainer {
         grid-template-columns: repeat(3,1fr);
     }
     
 }
+
+.selectContainer { 
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    justify-content: center;
+}
+
+@media (min-width: 750px) {
+    .selectContainer {
+    grid-template-columns: repeat(2, 1fr);
+    
+    }
+}
+
+@media (min-width: 1200px) {
+    .selectContainer {
+        grid-template-columns: repeat(3,1fr);
+    }
+    
+}
+
 .languageContainer {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     justify-content: center;
-    align-items: center; /* Center items vertically */
-    gap: 10px; /* Add gap between elements for better spacing */
+    align-items: center; 
+    gap: 10px; 
   }
   
   @media (min-width: 750px) {
@@ -41,8 +62,21 @@
     text-align: center;
   }
   
-  /* Additional styling for better spacing */
+  
   .centeredText p {
     margin: 0;
   }
-
+  
+  
+  select {
+    text-align: center;
+  }
+  
+  
+  select[name="language"] {
+    margin-top: 40px; 
+  }
+  .translateContainer {
+    margin-top: 20px; 
+  }
+  
