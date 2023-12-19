@@ -7,6 +7,8 @@ import toast from "react-hot-toast";
 import { codeMapping } from "../CountryCodes/countryCodes.js";
 import "../Styles/savedtranslationspage.css";
 
+import { Container, Row, Col } from 'react-bootstrap';
+
 const SavedTranslationsPage = () => {
   const [savedTranslations, setSavedTranslations] = useState([]);
   const [filteredTranslations, setFilteredTranslations] = useState([]);
@@ -60,7 +62,7 @@ const SavedTranslationsPage = () => {
   if (language === "") {
     return (
       <>
-        <div className="languageContainer">
+        <div className="languageContainer mt-3">
           <label htmlFor="language"></label>
 
           <select name="language" onChange={(e) => setLanguage(e.target.value)}>
@@ -77,12 +79,13 @@ const SavedTranslationsPage = () => {
           </select>
           </div>
 
-          <div className="centeredText">
+          <div className="centeredText light-title mt-3">
             <p>Please Select a Language</p>
           </div>
-        
 
-        <Link to="/">Back to Home</Link>
+          <div className='text-center mt-3'>
+            <Link to="/" className='light-title'>Back to Home</Link>
+          </div>
       </>
     );
   } else {
@@ -103,7 +106,7 @@ const SavedTranslationsPage = () => {
           })}
         </select>
         </div>
-        <div className="translateContainer">
+        <div className="translateContainer text-center">
           {filteredTranslations.map((el) => (
             <SavedWord
               key={el.wordId}
@@ -114,7 +117,10 @@ const SavedTranslationsPage = () => {
             />
           ))}
         </div>
-        <Link to="/">Back to Home</Link>
+
+        <div className='text-center'>
+            <Link to="/" className='light-title'>Back to Home</Link>
+        </div>
       </>
     );
   }
