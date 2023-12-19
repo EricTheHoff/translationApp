@@ -9,7 +9,6 @@ import {
 } from "react-router-dom";
 import { RouterProvider } from "react-router-dom";
 import LoginPage from "./Pages/LoginPage.jsx";
-import RegisterPage from "./Pages/RegisterPage.jsx";
 import AccountInfoPage from "./Pages/AccountInfoPage.jsx";
 import MapPage from "./Pages/MapPage.jsx";
 import SavedTranslationsPage from "./Pages/SavedTranslationsPage.jsx";
@@ -23,13 +22,14 @@ import PDFUpload from "./Components/PDFUpload.jsx";
 import TextUpload from "./Components/TextUpload.jsx";
 import StudySaved from "./Components/StudySaved.jsx"
 import StudySeed from "./Components/StudySeed.jsx"
+import RegistrationForm from "./Components/RegistrationForm.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index element={<HomePage />} />
       <Route path="login" element={<LoginPage />} />
-      <Route path="register" element={<RegisterPage />} />
+      <Route path="register" element={<RegistrationForm />} />
       <Route path="account" element={<AccountInfoPage />} />
       <Route path="map" element={<MapPage />} />
       <Route path="translations" element={<SavedTranslationsPage />} />

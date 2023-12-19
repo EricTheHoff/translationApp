@@ -76,6 +76,7 @@ const Login = ({ login }) => {
             </Row>
             <Row className='text-center mt-3'>
                 <p>Don't have an account? <NavLink to='/register'>Register for one here.</NavLink></p>
+                
             </Row>
         </Container>
     </>
