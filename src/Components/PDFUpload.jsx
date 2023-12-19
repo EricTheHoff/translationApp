@@ -169,11 +169,11 @@ const PDFUpload = () => {
     return (
       <>
         <div className="file-header">
-          <h1>
+          <h1 className="header-1">
             Select a Language & highlight text in the file to see its
             translation
           </h1>
-          <Link className="btn btn-dark button-link" to="/translate">
+          <Link className="btn button-link new-file-btn" to="/translate">
             Select Another File
           </Link>
         </div>

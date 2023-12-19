@@ -25,7 +25,9 @@ const TranslationModal = (props) => {
         <Modal.Header closeButton></Modal.Header>
         <Modal.Title id="contained-modal-title-vcenter">
           {" "}
-          <h1>Would you like to save this to your translations?</h1>
+          <h1 className="header-1">
+            Would you like to save this to your translations?
+          </h1>
         </Modal.Title>
         <Modal.Body>
           <p>
