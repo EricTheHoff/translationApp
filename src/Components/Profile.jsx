@@ -108,21 +108,31 @@ export default function Profile() {
 
   if (!editMode) {
     return (
-      <div className="background">
-        <img
-          className="pic"
-          src={
-            imageFiles[profileImage] ? imageFiles[profileImage] : profileImage
-          }
-        />
-        <p>hello?</p>
+      <>
+        <div className="imgBackground">
+          <img
+            className="pic"
+            src={
+              imageFiles[profileImage] ? imageFiles[profileImage] : profileImage
+            }
+          />
+        </div>
+      <div className="bigBoyDiv">
         <br />
-        <div className="contentDiv">
-          <div className="header">
+          <div className="contentDiv">
+
+          <div className="profileheader">
+
+            <div className="titleDiv">
             <h1 className="h1">Profile</h1>
+            </div>
+
+            <div className="pTeg">
             <button className="editButton" onClick={() => setEditMode(true)}>
               Edit
             </button>
+            </div>
+
           </div>
 
           <div className="hrContainer">
@@ -137,45 +147,44 @@ export default function Profile() {
 
             {/* <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a> */}
           </div>
-          <p>?</p>
         </div>
-        <br />
-        <p>?</p>
       </div>
+      </>
     );
   } else {
     return (
-      <div className="background">
-        <form onSubmit={handleSubmit}>
+      <>
+      <div className="imgBackground">
           <img
-                        className="pic"
-                        src={
-                            imageFiles[profileImage] ? imageFiles[profileImage] : profileImage
-                        }
-                    />
-
-          <p>hello?</p>
-          <br />
+            className="pic"
+            src={
+                imageFiles[profileImage] ? imageFiles[profileImage] : profileImage
+            }
+          />
+              </div>
+        <div className="bigBoyDiv">
+                <form onSubmit={handleSubmit}>
           <div className="contentDiv">
-            <div className="header">
+            <div className="profileheader">
               <h1 className="h1">Edit Profile</h1>
 
-                <p className="pTeg">
-                  <button className="save" type="submit">
-                    Save
-                  </button>
-                  <button className="cancel" onClick={cancelButton}>
-                    Cancel
-                  </button>
-                </p>
-       
+              <div className="pTeg">
+                <button className="save" type="submit">
+                  Save
+                </button>
+                <button className="cancel" onClick={cancelButton}>
+                  Cancel
+                </button>
+              </div>
             </div>
 
             <div className="hrContainer">
               <hr />
 
-              <label>Email</label>
+              <label className="profileLabels">Email: </label>
               <input
+                id="eProfileInput"
+                className="profileInputs"
                 placeholder={email}
                 type="text"
                 onChange={(e) => setEmail(e.target.value)}
@@ -183,8 +192,9 @@ export default function Profile() {
 
               <hr />
 
-              <label>Password</label>
+              <label className="profileLabels">Password: </label>
               <input
+                className="profileInputs"
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -198,7 +208,7 @@ export default function Profile() {
                 </div>
               </div> */}
 
-                  <ImageGrid setProfile={setProfileImage} />
+              <ImageGrid setProfile={setProfileImage} />
               <br />
               <br />
 
@@ -206,13 +216,10 @@ export default function Profile() {
                 Delete Account
               </button>
             </div>
-
-            <p>?</p>
           </div>
         </form>
-        <br />
-        <p>?</p>
-      </div>
+        </div>
+        </>
     );
   }
 }
