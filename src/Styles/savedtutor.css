@@ -1,48 +1,71 @@
-.tutorContainer { 
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    justify-content: center;
+.tutorContainer {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  justify-content: center;
 }
 
 @media (min-width: 750px) {
-    .tutorContainer {
+  .tutorContainer {
     grid-template-columns: repeat(2, 1fr);
-    
-    }
+  }
 }
 
 @media (min-width: 1200px) {
-    .tutorContainer {
-        grid-template-columns: repeat(3,1fr);
-    }
-    
+  .tutorContainer {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 .languageContainer {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    justify-content: center;
-    align-items: center; /* Center items vertically */
-    gap: 10px; /* Add gap between elements for better spacing */
-  }
-  
-  @media (min-width: 750px) {
-    .languageContainer {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  
-  @media (min-width: 1200px) {
-    .languageContainer {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-  
-  .centeredText {
-    text-align: center;
-  }
-  
-  /* Additional styling for better spacing */
-  .centeredText p {
-    margin: 0;
-  }
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  justify-content: center;
+  align-items: center; /* Center items vertically */
+  gap: 10px; /* Add gap between elements for better spacing */
+}
 
+@media (min-width: 750px) {
+  .languageContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .languageContainer {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.centeredText {
+  text-align: center;
+}
+
+/* Additional styling for better spacing */
+.centeredText p {
+  margin: 0;
+}
+
+.no-tutor {
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 20px;
+  background-color: #3e4c58; /* Add your preferred background color */
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 30px;
+}
+
+.no-tutor-container {
+  display: flex;
+}
+
+.find-schools-link {
+  color: white;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 20px;
+  font-weight: 300;
+  cursor: pointer;
+}

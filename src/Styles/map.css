@@ -21,7 +21,7 @@
   color: white;
   font-size: 40px;
   text-align: center;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .map-form-container {
@@ -65,7 +65,7 @@
 }
 
 .zipcode-container button:hover {
-  background-color: #69747D;
+  background-color: #69747d;
 }
 
 .select-container {
