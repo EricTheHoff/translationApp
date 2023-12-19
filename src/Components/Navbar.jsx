@@ -154,14 +154,8 @@ const Navbar = () => {
     );
   } else {
     return (
-      <div>
-        <ul>
-          <li>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
-          </li>
-        </ul>
-      </div>
+      <>
+      </>
     );
   }
 };
