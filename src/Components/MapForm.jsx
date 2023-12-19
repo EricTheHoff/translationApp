@@ -1,5 +1,6 @@
 import React from "react";
-import { codes, codeMappingForMap } from '../CountryCodes/countryCodes.js'
+import { codes, codeMappingForMap } from "../CountryCodes/countryCodes.js";
+import "../styles/map.css";
 
 const MapForm = ({
   changeRadius,
@@ -9,8 +10,35 @@ const MapForm = ({
   changeLanguage,
 }) => {
   return (
-    <div>
+    <div className="map-form-container">
       {/* user zipcode input */}
+      <div className="select-container">
+        <select onChange={changeRadius}>
+          <option className="dropdown" value="16093.4">
+            10 miles
+          </option>
+          <option className="dropdown" value="24140.2">
+            15 miles
+          </option>
+          <option className="dropdown" value="40233.6">
+            25 miles
+          </option>
+        </select>
+        <select onChange={changeLanguage}>
+          <option className="dropdown" value="language">
+            Language
+          </option>
+          {codes.map((el, idx) => (
+            <option
+              key={idx}
+              className="dropdown"
+              value={codeMappingForMap[el]}
+            >
+              {codeMappingForMap[el]}
+            </option>
+          ))}
+        </select>
+      </div>
       <div className="zipcode-container">
         <input
           type="text"
@@ -18,113 +46,14 @@ const MapForm = ({
           onChange={onZipcodeChange}
           placeholder="Enter zipcode"
         />
-        <button onClick={onZipcodeSubmit}>Submit</button>
+        <button
+          onClick={onZipcodeSubmit}
+          className="btn btn-primary"
+          style={{ marginBottom: "15px" }}
+        >
+          Submit
+        </button>
       </div>
-      <div className="places-container"></div>
-
-      <select onChange={changeRadius}>
-        <option className="dropdown" value="16093.4">
-          10 miles
-        </option>
-        <option className="dropdown" value="24140.2">
-          15 miles
-        </option>
-        <option className="dropdown" value="40233.6">
-          25 miles
-        </option>
-      </select>
-      <select onChange={changeLanguage}>
-        <option className="dropdown" value="language">Select a Language</option>
-        {codes.map((el, idx) => {
-            return (
-                <option key={idx} className='dropdown' value={codeMappingForMap[el]}>{codeMappingForMap[el]}</option>
-            )
-        })}
-        {/* <option className="dropdown" value="bulgarian">
-          Bulgarian
-        </option>
-        <option className="dropdown" value="chinese">
-          Chinese
-        </option>
-        <option className="dropdown" value="czech">
-          Czech
-        </option>
-        <option className="dropdown" value="danish">
-          Danish
-        </option>
-        <option className="dropdown" value="german">
-          German
-        </option>
-        <option className="dropdown" value="greek">
-          Greek
-        </option>
-        <option className="dropdown" value="spanish">
-          Spanish
-        </option>
-        <option className="dropdown" value="estonian">
-          Estonian
-        </option>
-        <option className="dropdown" value="finnish">
-          Finnish
-        </option>
-        <option className="dropdown" value="french">
-          French
-        </option>
-        <option className="dropdown" value="hungarian">
-          Hungarian
-        </option>
-        <option className="dropdown" value="indonesian">
-          Indonesian
-        </option>
-        <option className="dropdown" value="italian">
-          Italian
-        </option>
-        <option className="dropdown" value="japanese">
-          Japanese
-        </option>
-        <option className="dropdown" value="korean">
-          Korean
-        </option>
-        <option className="dropdown" value="lithuanian">
-          Lithuanian
-        </option>
-        <option className="dropdown" value="latvian">
-          Latvian
-        </option>
-        <option className="dropdown" value="norwegian">
-          Norwegian
-        </option>
-        <option className="dropdown" value="dutch">
-          Dutch
-        </option>
-        <option className="dropdown" value="polish">
-          Polish
-        </option>
-        <option className="dropdown" value="portuguese">
-          Portuguese
-        </option>
-        <option className="dropdown" value="romanian">
-          Romanian
-        </option>
-        <option className="dropdown" value="russian">
-          Russian
-        </option>
-        <option className="dropdown" value="slovak">
-          Slovak
-        </option>
-        <option className="dropdown" value="slovenian">
-          Slovenian
-        </option>
-        <option className="dropdown" value="swedish">
-          Swedish
-        </option>
-        <option className="dropdown" value="turkish">
-          Turkish
-        </option>
-        <option className="dropdown" value="ukranian">
-          Ukranian
-        </option> */}
-      </select>
     </div>
   );
 };

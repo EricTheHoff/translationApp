@@ -1,0 +1,163 @@
+/* Common styles for all screen sizes */
+.map-page {
+  margin-left: 10vw;
+  margin-right: 10vw;
+  margin-top: 7vh; /* Center items vertically */
+}
+
+.map-header {
+  display: flex;
+  flex-direction: row; /* Horizontal layout for larger screens */
+  align-items: center;
+  padding-right: 50px;
+  background-color: #283845;
+  border-radius: 10px;
+  margin-bottom: 2vh;
+}
+
+.map-title {
+  margin-left: 3vw;
+  flex-grow: 1;
+  color: white;
+  font-size: 40px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.map-form-container {
+  max-width: 400px;
+  max-height: 150px;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2vh;
+  background-color: #f2d492;
+  margin-top: 2vh;
+}
+
+.zipcode-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.zipcode-container input {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #283845;
+  border-radius: 5px;
+  max-height: 5vh;
+  background-color: #f5e0b2;
+}
+
+.zipcode-container button {
+  padding: 10px;
+  font-size: 16px;
+  max-height: 5vh;
+  background-color: #283845;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.zipcode-container button:hover {
+  background-color: #0056b3;
+}
+
+.select-container {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.select-container select {
+  padding-left: 7px;
+  width: 100%;
+  border: 1px solid #283845;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  background-color: #f5e0b2;
+  transition: border-color 0.3s ease;
+}
+
+.select-container select:hover {
+  background-color: #e3d3ab;
+}
+
+.select-container select:focus {
+  border-color: #007bff;
+}
+
+.map-container {
+  border-radius: 10px;
+  border: 9px solid #283845;
+  width: 100%; /* Set the width as needed */
+}
+
+/* Custom styles for the InfoWindowF content */
+div.info-window {
+  background-color: #fff !important;
+  color: #333 !important;
+  padding: 15px !important;
+  border-radius: 10px !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+div.info-window h1 {
+  margin-bottom: 10px;
+  font-size: 1.5em;
+  color: #283845;
+}
+
+div.info-window p {
+  margin-bottom: 5px;
+}
+
+.info-window a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.info-window a:hover {
+  text-decoration: underline;
+}
+
+.info-window button {
+  padding: 10px;
+  background-color: #283845;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.info-window button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive adjustments for small screens */
+@media screen and (max-width: 600px) {
+  .map-header {
+    flex-direction: column; /* Vertical layout for small screens */
+    margin-bottom: 5vh;
+  }
+
+  .map-title {
+    margin-top: 5vh;
+    font-size: medium; /* Adjust the font size for smaller screens */
+  }
+
+  .zipcode-container,
+  .select-container {
+    flex-direction: column; /* Stack elements vertically on small screens */
+  }
+  .map-page {
+    margin: 0;
+  }
+}
