@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import TutorCard from "../Components/TutorCard.jsx";
+import "../Styles/savedtutor.css";
 
 const SavedTutorPage = () => {
   const [school, setSchool] = useState([]);
@@ -37,10 +38,10 @@ const SavedTutorPage = () => {
 
   return (
     <>
-      <div>
-        <Link to="/" className='light-title'>Back to Home</Link>
-        <div>{school}</div>
-      </div>
+      <Link to="/">Back to Home</Link>
+
+      <div className="tutorContainer">{school}</div>
+
     </>
   );
 };
