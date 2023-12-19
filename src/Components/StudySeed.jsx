@@ -30,7 +30,8 @@ const StudySeed = () => {
             setFlashcards(response.data)
         })
         .catch((error) => {
-            console.log(`The following error has occurred: ${error}`)
+            console.error(`The following error has occurred: ${error}`)
+            toast.error(`An error occurred while trying to get Sample Translations. Please try again.`)
         })
     },[difficulty])
 
@@ -86,8 +87,8 @@ const StudySeed = () => {
                         toast.success(`Ready to study!`)
                     })
                     .catch((error) => {
-                        console.log(`Error in Promise.all: ${error}`)
-                        toast.error(`Something went wrong. No Flashcards generated.`)
+                        console.error(`Error in Promise.all: ${error}`)
+                        toast.error(`An error occurred while generating flashcards. Please try again.`)
                         setLoading(false)
                     })
             }
@@ -133,7 +134,7 @@ const StudySeed = () => {
                                                 <Form.Group>
                                                     <Form.Label>Choose Difficulty</Form.Label>
                                                     <Form.Select onChange={(e) => setDifficulty(e.target.value)} className='select'>
-                                                        <option selected>--Difficulty--</option>
+                                                        <option>--Difficulty--</option>
                                                         <option value='1'>Easy</option>
                                                         <option value='2'>Medium</option>
                                                         <option value='3'>Hard</option>
@@ -146,7 +147,7 @@ const StudySeed = () => {
                                                 <Form.Group>
                                                     <Form.Label>Choose Configuration</Form.Label>
                                                     <Form.Select onChange={(e) => setEnglishFront(e.target.value)} className='select'>
-                                                        <option selected>--Configuration--</option>
+                                                        <option>--Configuration--</option>
                                                         <option value={false}>English on the Back</option>
                                                         <option value={true}>English on the Front</option>
                                                     </Form.Select>
@@ -156,7 +157,7 @@ const StudySeed = () => {
                                                 <Form.Group>
                                                     <Form.Label>Choose Language</Form.Label>
                                                     <Form.Select onChange={(e) => setLanguage(e.target.value)} className='select'>
-                                                        <option value='' selected>--Language--</option>
+                                                        <option value=''>--Language--</option>
                                                         {codes.map((el, idx) => {
                                                             return (
                                                             <option key={idx} value={el}>{codeMapping[el]}</option>
@@ -178,59 +179,6 @@ const StudySeed = () => {
                                 <Link to='/study'>Back to Study</Link>
                             </Row>
                         </Container>
-                        {/* <h3>Generate Flashcards from Sample Translations</h3>
-                        <form>
-            
-                            <label htmlFor='quantity'>Number of Flashcards: </label>
-                            <input
-                            type='number'
-                            name='quantity'
-                            min='1'
-                            max='50'
-                            step='1'
-                            placeholder='Maximum of 50'
-                            pattern='[1-9]|[1-4][0-9]|50'
-                            onChange={(e) => setNoOfCards(e.target.value)}
-                            />
-            
-                        <br/>
-                            
-                            <label htmlFor='difficulty'>Choose Sample Difficulty: </label>
-                            <select name='difficulty' onChange={(e) => setDifficulty(e.target.value)}>
-                                <option selected disabled>--Choose a Difficulty--</option>
-                                <option value='1'>Easy</option>
-                                <option value='2'>Medium</option>
-                                <option value='3'>Hard</option>
-                            </select>
-            
-                        <br/>
-            
-                            <label htmlFor='english-front'>Choose Flashcard Configuration: </label>
-                            <select name='english-front' onChange={(e) => setEnglishFront(e.target.value)}>
-                                <option selected disabled>--Choose a Configuration--</option>
-                                <option value={false}>English Text on the Back</option>
-                                <option value={true}>English Text on the Front</option>
-                            </select>
-            
-                        <br/>
-            
-                            <label htmlFor='language'>Choose a Language: </label>
-                            <select name='language' onChange={(e) => setLanguage(e.target.value)}>
-                                <option value='' selected>--Choose a Language--</option>
-                                {codes.map((el, idx) => {
-                                    return (
-                                        <option key={idx} value={el}>{codeMapping[el]}</option>
-                                    )
-                                })}
-                            </select>
-            
-                        <br/>
-            
-                            <p>Loading flashcards...</p>
-            
-                        </form>
-            
-                        <Link to='/study'>Back to Study</Link> */}
                     </>
                 ) : (
                     <>
@@ -265,7 +213,7 @@ const StudySeed = () => {
                                                 <Form.Group>
                                                     <Form.Label>Choose Difficulty</Form.Label>
                                                     <Form.Select onChange={(e) => setDifficulty(e.target.value)} className='select'>
-                                                        <option selected>--Difficulty--</option>
+                                                        <option>--Difficulty--</option>
                                                         <option value='1'>Easy</option>
                                                         <option value='2'>Medium</option>
                                                         <option value='3'>Hard</option>
@@ -278,7 +226,7 @@ const StudySeed = () => {
                                                 <Form.Group>
                                                     <Form.Label>Choose Configuration</Form.Label>
                                                     <Form.Select onChange={(e) => setEnglishFront(e.target.value)} className='select'>
-                                                        <option selected>--Configuration--</option>
+                                                        <option>--Configuration--</option>
                                                         <option value={false}>English on the Back</option>
                                                         <option value={true}>English on the Front</option>
                                                     </Form.Select>
@@ -288,7 +236,7 @@ const StudySeed = () => {
                                                 <Form.Group>
                                                     <Form.Label>Choose Language</Form.Label>
                                                     <Form.Select onChange={(e) => setLanguage(e.target.value)} className='select'>
-                                                        <option value='' selected>--Language--</option>
+                                                        <option value=''>--Language--</option>
                                                         {codes.map((el, idx) => {
                                                             return (
                                                             <option key={idx} value={el}>{codeMapping[el]}</option>
@@ -310,58 +258,6 @@ const StudySeed = () => {
                                 <Link to='/study'>Back to Study</Link>
                             </Row>
                         </Container>
-                        {/* <h3>Generate Flashcards from Sample Translations</h3>
-                        <form onSubmit={(e) => handleSubmit(e)}>
-            
-                            <label htmlFor='quantity'>Number of Flashcards: </label>
-                            <input
-                            type='number'
-                            name='quantity'
-                            min='1'
-                            max='50'
-                            step='1'
-                            placeholder='Maximum of 50'
-                            pattern='[1-9]|[1-4][0-9]|50'
-                            onChange={(e) => setNoOfCards(e.target.value)}
-                            />
-            
-                        <br/>
-                            
-                            <label htmlFor='difficulty'>Choose Sample Difficulty: </label>
-                            <select name='difficulty' onChange={(e) => setDifficulty(e.target.value)}>
-                                <option selected disabled>--Choose a Difficulty--</option>
-                                <option value='1'>Easy</option>
-                                <option value='2'>Medium</option>
-                                <option value='3'>Hard</option>
-                            </select>
-            
-                        <br/>
-            
-                            <label htmlFor='english-front'>Choose Flashcard Configuration: </label>
-                            <select name='english-front' onChange={(e) => setEnglishFront(e.target.value)}>
-                                <option selected disabled>--Choose a Configuration--</option>
-                                <option value={false}>English Text on the Back</option>
-                                <option value={true}>English Text on the Front</option>
-                            </select>
-            
-                        <br/>
-            
-                            <label htmlFor='language'>Choose a Language: </label>
-                            <select name='language' onChange={(e) => setLanguage(e.target.value)}>
-                                <option value='' selected>--Choose a Language--</option>
-                                {codes.map((el, idx) => {
-                                    return (
-                                        <option key={idx} value={el}>{codeMapping[el]}</option>
-                                    )
-                                })}
-                            </select>
-            
-                        <br/>
-            
-                            <button type='submit'>Study</button>
-            
-                        </form> */}
-            
                     </>
                 )} 
             </>
@@ -369,25 +265,35 @@ const StudySeed = () => {
     } else {
         return (
             <>
-                <div className='container'>
-                    <div className='card-grid'>
-                        {flashcardData.map((el) => {
-                        return (
-                            <Flashcard
-                            key={el.wordId}
-                            flashcard={el}
-                            configuration={englishFront}
-                            />
-                            )
-                        })}
-                    </div>
-                </div>
-                <button onClick={() => {
-                    setLanguage('')
-                    setFlashcardData([])
-                    setDisplay(false)
-                    }}
-                    >Study Another Language</button>
+                <Container fluid>
+                    <Row className='justify-content-center mb-2'>
+                        <div className='container'>
+                            <div className='card-grid border p-3 bkg-lighter shadow rounded'>
+                                {flashcardData.map((el) => {
+                                return (
+                                    <Flashcard
+                                    key={el.wordId}
+                                    flashcard={el}
+                                    configuration={englishFront}
+                                    />
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    </Row>
+                    <Row className='text-center justify-content-center mb-3'>
+                        <Col xs='auto' lg={4}>
+                            <Button variant='primary' onClick={() => {
+                                setLanguage('')
+                                setFlashcardData([])
+                                setDisplay(false)
+                            }}
+                            >Generate New Flashcards
+                            </Button>
+                        </Col>
+
+                    </Row>
+                </Container>
             </>
         )
     }

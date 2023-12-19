@@ -2,6 +2,7 @@ import React from "react";
 import { useState  } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Container, Row, Col, Button } from 'react-bootstrap';
+import toast from "react-hot-toast";
 
 const StudyPage = () => {
   const [studySaved, setStudySaved] = useState(false)
@@ -18,7 +19,7 @@ const StudyPage = () => {
         navigate('/study-seed')
         return
     } else {
-        alert(`Something went wrong. Please try again.`)
+        toast.error(`Something went wrong. Please try again.`)
     }
   }
 

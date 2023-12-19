@@ -45,19 +45,17 @@ const TranslatePage = () => {
       .post("/translate", translationData)
 
       .then(({ data }) => {
-        console.log(data.translations[0]);
         setTranslatedText(data.translations[0].text);
         setNewTranslation(true);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(`The following error has occurred: ${error}`);
+        toast.error(`Something went wrong during translation. Please try again.`)
       });
   };
 
   const saveTranslation = async (e) => {
     e.preventDefault();
-
-    console.log(language);
 
     const translationData = {
       translatedText: translatedText,
@@ -72,7 +70,8 @@ const TranslatePage = () => {
         setNewTranslation(false);
       })
       .catch((error) => {
-        toast.error(`The following error has occurred: ${error}`);
+        console.error(`The following error has occurred: ${error}`)
+        toast.error(`Something went wrong. Translation not saved.`);
       });
   };
 
@@ -139,7 +138,7 @@ const TranslatePage = () => {
                                         onChange={(e) => setLanguage(e.target.value)}
                                         className='select'
                                     >
-                                        <option value='' default>--Choose a Language--</option>
+                                        <option value=''>--Choose a Language--</option>
                                         {codes.map((el, idx) => {
                                             return (
                                                 <option key={idx} value={el}>{codeMapping[el]}</option>
