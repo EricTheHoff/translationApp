@@ -134,7 +134,7 @@ const PDFUpload = () => {
   if (!uploaded) {
     return (
       <div className="upload-container">
-        <h4 className="form-label">Please select a PDF file to upload</h4>
+        <h4 className="form-labels">Please select a PDF file to upload</h4>
         <div className="form-container">
           <form
             onSubmit={(e) => {
