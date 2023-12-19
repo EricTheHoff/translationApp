@@ -1,4 +1,4 @@
-import { Card, ListGroup } from "react-bootstrap";
+import { Card, ListGroup, Button } from "react-bootstrap";
 
 export default function SavedWord({
   translation,
@@ -23,7 +23,13 @@ export default function SavedWord({
           </ListGroup>
         </Card.Body>
         <Card.Footer>
-          <button onClick={() => handleDelete(id)}>Remove</button>
+            <Button
+                onClick={() => handleDelete(id)}
+                variant='primary'
+                className='ibtn'
+            >
+            Remove
+            </Button>
         </Card.Footer>
       </Card>
       </div>

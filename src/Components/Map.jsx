@@ -163,7 +163,7 @@ function Map({ userLocation, radius, language }) {
                               ) : (
                                 <button
                                   // style={{ marginBottom: "30px" }}
-                                  className="btn btn-primary"
+                                  className="btn btn-primary ibtn"
                                   onClick={() => addClick(place.place_id)}
                                 >
                                   Add
