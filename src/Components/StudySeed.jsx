@@ -5,6 +5,7 @@ import axios from 'axios'
 import Flashcard from './Flashcard.jsx'
 import toast from 'react-hot-toast'
 import { codes, codeMapping } from '../CountryCodes/countryCodes.js'
+import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 
 const StudySeed = () => {
     const [flashcards, setFlashcards] = useState([])
@@ -101,7 +102,83 @@ const StudySeed = () => {
             <>
                 {loading ? (
                     <>
-                        <h3>Generate Flashcards from Sample Translations</h3>
+                        <Container fluid>
+                            <Row className='text-center mb-3'>
+                                <h3>Generate Flashcards from Sample Translations</h3>
+                            </Row>
+                            <Row className='justify-content-center'>
+                                <Col xs='auto' lg={8}>
+                                    <Form className='border p-3 bkg-darker shadow rounded' onSubmit={(e) => handleSubmit(e)}>
+                                        <Row className='mb-3 justify-content-center'>
+                                            <Col>
+                                                <Form.Group>
+                                                    <Form.Label>Number of Flashcards</Form.Label>
+                                                    <Form.Control
+                                                        className='select'
+                                                        type='number'
+                                                        min='1'
+                                                        max='50'
+                                                        step='1'
+                                                        placeholder='--Max of 50--'
+                                                        pattern='[1-9]|[1-4][0-9]|50'
+                                                        onChange={(e) => setNoOfCards(e.target.value)}
+                                                        style={{
+                                                            backgroundColor: '#F5E0B2',
+                                                            borderColor: '#000',
+                                                        }}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col>
+                                                <Form.Group>
+                                                    <Form.Label>Choose Difficulty</Form.Label>
+                                                    <Form.Select onChange={(e) => setDifficulty(e.target.value)} className='select'>
+                                                        <option selected>--Difficulty--</option>
+                                                        <option value='1'>Easy</option>
+                                                        <option value='2'>Medium</option>
+                                                        <option value='3'>Hard</option>
+                                                    </Form.Select>
+                                                </Form.Group>
+                                            </Col>
+                                        </Row>
+                                        <Row className='mb-3 justify-content-center'>
+                                            <Col>
+                                                <Form.Group>
+                                                    <Form.Label>Choose Configuration</Form.Label>
+                                                    <Form.Select onChange={(e) => setEnglishFront(e.target.value)} className='select'>
+                                                        <option selected>--Configuration--</option>
+                                                        <option value={false}>English on the Back</option>
+                                                        <option value={true}>English on the Front</option>
+                                                    </Form.Select>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col>
+                                                <Form.Group>
+                                                    <Form.Label>Choose Language</Form.Label>
+                                                    <Form.Select onChange={(e) => setLanguage(e.target.value)} className='select'>
+                                                        <option value='' selected>--Language--</option>
+                                                        {codes.map((el, idx) => {
+                                                            return (
+                                                            <option key={idx} value={el}>{codeMapping[el]}</option>
+                                                        )
+                                                        })}
+                                                    </Form.Select>
+                                                </Form.Group>
+                                            </Col>
+                                        </Row>
+                                        <Row className='mb-1'>
+                                            <Col className='text-center'>
+                                                <p>Loading...</p>
+                                            </Col>
+                                        </Row>
+                                    </Form>
+                                </Col>
+                            </Row>
+                            <Row className='text-center mt-2'>
+                                <Link to='/study'>Back to Study</Link>
+                            </Row>
+                        </Container>
+                        {/* <h3>Generate Flashcards from Sample Translations</h3>
                         <form>
             
                             <label htmlFor='quantity'>Number of Flashcards: </label>
@@ -153,11 +230,87 @@ const StudySeed = () => {
             
                         </form>
             
-                        <Link to='/study'>Back to Study</Link>
+                        <Link to='/study'>Back to Study</Link> */}
                     </>
                 ) : (
                     <>
-                        <h3>Generate Flashcards from Sample Translations</h3>
+                        <Container fluid>
+                            <Row className='text-center mb-3'>
+                                <h3>Generate Flashcards from Sample Translations</h3>
+                            </Row>
+                            <Row className='justify-content-center'>
+                                <Col xs='auto' lg={8}>
+                                    <Form className='border p-3 bkg-darker shadow rounded' onSubmit={(e) => handleSubmit(e)}>
+                                        <Row className='mb-3 justify-content-center'>
+                                            <Col>
+                                                <Form.Group>
+                                                    <Form.Label>Number of Flashcards</Form.Label>
+                                                    <Form.Control
+                                                        className='select'
+                                                        type='number'
+                                                        min='1'
+                                                        max='50'
+                                                        step='1'
+                                                        placeholder='--Max of 50--'
+                                                        pattern='[1-9]|[1-4][0-9]|50'
+                                                        onChange={(e) => setNoOfCards(e.target.value)}
+                                                        style={{
+                                                            backgroundColor: '#F5E0B2',
+                                                            borderColor: '#000',
+                                                        }}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col>
+                                                <Form.Group>
+                                                    <Form.Label>Choose Difficulty</Form.Label>
+                                                    <Form.Select onChange={(e) => setDifficulty(e.target.value)} className='select'>
+                                                        <option selected>--Difficulty--</option>
+                                                        <option value='1'>Easy</option>
+                                                        <option value='2'>Medium</option>
+                                                        <option value='3'>Hard</option>
+                                                    </Form.Select>
+                                                </Form.Group>
+                                            </Col>
+                                        </Row>
+                                        <Row className='mb-3 justify-content-center'>
+                                            <Col>
+                                                <Form.Group>
+                                                    <Form.Label>Choose Configuration</Form.Label>
+                                                    <Form.Select onChange={(e) => setEnglishFront(e.target.value)} className='select'>
+                                                        <option selected>--Configuration--</option>
+                                                        <option value={false}>English on the Back</option>
+                                                        <option value={true}>English on the Front</option>
+                                                    </Form.Select>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col>
+                                                <Form.Group>
+                                                    <Form.Label>Choose Language</Form.Label>
+                                                    <Form.Select onChange={(e) => setLanguage(e.target.value)} className='select'>
+                                                        <option value='' selected>--Language--</option>
+                                                        {codes.map((el, idx) => {
+                                                            return (
+                                                            <option key={idx} value={el}>{codeMapping[el]}</option>
+                                                        )
+                                                        })}
+                                                    </Form.Select>
+                                                </Form.Group>
+                                            </Col>
+                                        </Row>
+                                        <Row className='mb-1'>
+                                            <Col className='text-center'>
+                                                <Button type='submit' variant='primary'>Study</Button>
+                                            </Col>
+                                        </Row>
+                                    </Form>
+                                </Col>
+                            </Row>
+                            <Row className='text-center mt-2'>
+                                <Link to='/study'>Back to Study</Link>
+                            </Row>
+                        </Container>
+                        {/* <h3>Generate Flashcards from Sample Translations</h3>
                         <form onSubmit={(e) => handleSubmit(e)}>
             
                             <label htmlFor='quantity'>Number of Flashcards: </label>
@@ -207,9 +360,8 @@ const StudySeed = () => {
             
                             <button type='submit'>Study</button>
             
-                        </form>
+                        </form> */}
             
-                        <Link to='/study'>Back to Study</Link>
                     </>
                 )} 
             </>
