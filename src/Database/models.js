@@ -38,7 +38,6 @@ UserDetail.init(
     email: { type: DataTypes.STRING, unique: true },
     password: { type: DataTypes.STRING },
     profilePic: { type: DataTypes.STRING },
-    zipCode: { type: DataTypes.STRING(5) },
   },
 
   {
@@ -117,3 +116,5 @@ UserDetail.hasOne(Images, { foreignKey: "userId" });
 Images.hasMany(UserDetail, { foreignKey: "userId" });
 
 SavedWord.belongsTo(UserDetail, { foreignKey: "userId" });
+FurtherStudy.belongsTo(UserDetail, { foreignKey: "userId" });
+UserDetail.hasMany(FurtherStudy, { foreignKey: "userId" });

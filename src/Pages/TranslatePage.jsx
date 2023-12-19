@@ -1,11 +1,13 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Card } from "react-bootstrap";
+import { Container, Col, Row, Form, Button, Modal } from "react-bootstrap";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import "bootstrap/dist/css/bootstrap.css";
 import toast from "react-hot-toast";
+import { codeMapping, codes } from "../CountryCodes/countryCodes.js";
+import "bootstrap/dist/css/bootstrap.css";
+import '../Styles/bootstrapOverride.scss'
+import '../Styles/translationPage.css'
 
 const TranslatePage = () => {
   const [uploadPDF, setUploadPDF] = useState(false);
@@ -15,7 +17,6 @@ const TranslatePage = () => {
   const [newTranslation, setNewTranslation] = useState(false);
   const [translatedText, setTranslatedText] = useState("");
   const navigate = useNavigate();
-  const id = useSelector((state) => state.userId);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,24 +45,21 @@ const TranslatePage = () => {
       .post("/translate", translationData)
 
       .then(({ data }) => {
-        console.log(data.translations[0]);
         setTranslatedText(data.translations[0].text);
         setNewTranslation(true);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(`The following error has occurred: ${error}`);
+        toast.error(`Something went wrong during translation. Please try again.`)
       });
   };
 
   const saveTranslation = async (e) => {
     e.preventDefault();
 
-    console.log(language);
-
     const translationData = {
       translatedText: translatedText,
       originalText: translation,
-      id: id,
       toLanguage: language,
     };
 
@@ -72,103 +70,147 @@ const TranslatePage = () => {
         setNewTranslation(false);
       })
       .catch((error) => {
-        toast.error(`The following error has occurred: ${error}`);
+        console.error(`The following error has occurred: ${error}`)
+        toast.error(`Something went wrong. Translation not saved.`);
       });
   };
 
-  if (newTranslation === false) {
     return (
       <>
-        <form onSubmit={handleSubmit}>
-          <button type="submit" onClick={() => setUploadText(true)}>
-            Text (.txt)
-          </button>
-          <button type="submit" onClick={() => setUploadPDF(true)}>
-            PDF (.pdf)
-          </button>
-        </form>
+        <Container fluid>
+            <Row className='justify-content-center'>
+                <Col lg={6}>
+                    <Form
+                        onSubmit={handleSubmit}
+                        className='border p-3 mb-3 shadow text-center bkg-darker rounded'
+                    >
+                        <h4>Translate a File</h4>
 
-        <br></br>
+                        <Row>
+                            <Col className='mb-3'>
+                                <Button
+                                    type='submit'
+                                    variant='primary'
+                                    onClick={() => setUploadText(true)}
+                                    className='me-2'
+                                >Text (.txt)
+                                </Button>
+                                <Button
+                                    type='submit'
+                                    variant='primary'
+                                    onClick={() => setUploadPDF(true)}
+                                >PDF (.pdf)
+                                </Button>
+                            </Col>
+                        </Row>
+                    </Form>
 
-        <hr></hr>
+                    <Form
+                        onSubmit={handleTranslation}
+                        className='border p-3 mb-3 shadow text-center bkg-darker rounded'
+                    >
+                        <h4>Quick Translate</h4>
 
-        <br></br>
+                        <Row>
+                            <Col>
+                                <Form.Group className='mb-3'>
+                                    <Form.Label>Please enter a word or phrase to be translated.</Form.Label>
+                                    <Form.Control
+                                        className='txt-area'
+                                        as='textarea'
+                                        maxLength={500}
+                                        placeholder='500 Character Limit'
+                                        style={{
+                                            backgroundColor: '#F5E0B2',
+                                            borderColor: '#000'
+                                        }}
+                                        wrap='soft'
+                                        onChange={(e) => setTranslation(e.target.value)}
+                                    />
+                                </Form.Group>
+                            </Col>
+                        </Row>
 
-        <h3>Would you like to translate your own text?</h3>
-        <h4>Please enter a word or phrase to be translated.</h4>
+                        <Row className='align-items-end d-flex justify-content-center'>
+                            <Col xs='auto'>
+                                <Form.Group className='mb-3'>
+                                    <Form.Select
+                                        onChange={(e) => setLanguage(e.target.value)}
+                                        className='select'
+                                    >
+                                        <option value=''>--Choose a Language--</option>
+                                        {codes.map((el, idx) => {
+                                            return (
+                                                <option key={idx} value={el}>{codeMapping[el]}</option>
+                                            )
+                                        })}
+                                    </Form.Select>
+                                </Form.Group>
+                            </Col>
+                            <Col xs='auto'>
+                                <Button
+                                    type='submit'
+                                    variant='primary'
+                                    className='mb-3'
+                                >Translate
+                                </Button>
+                            </Col>
+                        </Row>
+                    </Form>
+                </Col>
+                <Col lg={6}>
+                    <div className='border p-3 shadow text-center bkg-darker rounded' style={{ height: '100%' }}>
+                        <h1>Welcome to [APP NAME]!</h1>
+                        <hr/>
+                        <p className='about'>Have you ever used a translating app only to find yourself searching for the same translation over and over again?
+                            With [APP NAME], you can translate words and phrases from English to over 25 global languages and save those translations for further study!
+                            By using [APP NAME], you can do the following:
+                        </p>
+                        <ul className='about-list'>
+                            <li>
+                                <p>Translate words or phrases through the
+                                    <span className='about-bold'> Quick Translate </span>
+                                    or
+                                    <span className='about-bold'> Translate a File </span>
+                                features!</p>
+                            </li>
+                            <li>
+                                <p>Generate <a href='/study' className='about-bold'>customized flashcards</a> from your saved translations or from a sample pool of translations!</p>
+                            </li>
+                            <li>
+                                <p>Find <a href='/map' className='about-bold'>local language schools</a> in your area!</p>
+                            </li>
+                        </ul>
+                    </div>
+                </Col>
+            </Row>
+        </Container>
 
-        <form onSubmit={handleTranslation}>
-          <textarea
-            style={{
-              width: "85%",
-              height: "200px",
-              textAlign: "center",
-            }}
-            wrap="virtual"
-            maxLength="500"
-            placeholder="500 Character Limit"
-            onChange={(e) => setTranslation(e.target.value)}
-          />
+        <Modal show={newTranslation} onHide={() => setNewTranslation(false)} className='text-center'>
+            <div className='border border-dark bkg-darker'>
+                <Modal.Header closeButton className='border-bottom border-dark'>
+                    <Modal.Title>Would you like to save this {
+                        codes.filter((el) => el === language)
+                        .map((el) => codeMapping[el] + ' ')
+                    }  translation?
+                    </Modal.Title>
+                </Modal.Header>
 
-          <br></br>
+                <Modal.Body className='bkg-lighter'>{translatedText}</Modal.Body>
 
-          <select onChange={(e) => setLanguage(e.target.value)}>
-            <option selected default disabled>
-              --Choose a Language--
-            </option>
-            <option value="BG">Bulgarian</option>
-            <option value="CS">Czech</option>
-            <option value="DA">Danish</option>
-            <option value="DE">German</option>
-            <option value="EL">Greek</option>
-            <option value="ES">Spanish</option>
-            <option value="ET">Estonian</option>
-            <option value="FI">Finnish</option>
-            <option value="FR">French</option>
-            <option value="HU">Hungarian</option>
-            <option value="ID">Indonesian</option>
-            <option value="IT">Italian</option>
-            <option value="JA">Japanese</option>
-            <option value="KO">Korean</option>
-            <option value="LT">Lithuanian</option>
-            <option value="LV">Latvian</option>
-            <option value="NB">Norwegian (Bokmål)</option>
-            <option value="NL">Dutch</option>
-            <option value="PL">Polish</option>
-            <option value="PT">Portuguese</option>
-            <option value="RO">Romanian</option>
-            <option value="RU">Russian</option>
-            <option value="SK">Slovak</option>
-            <option value="SL">Slovenian</option>
-            <option value="SV">Swedish</option>
-            <option value="TR">Turkish</option>
-            <option value="UK">Ukrainian</option>
-            <option value="ZH">Chinese</option>
-          </select>
-          <button type="submit">Translate</button>
-        </form>
-
+                <Modal.Footer className='justify-content-center border-top border-dark'>
+                    <Button variant='primary' onClick={(e) => {
+                        saveTranslation(e)
+                        setNewTranslation(false)
+                    }}
+                    >Yes
+                    </Button>
+                    <Button variant='primary' onClick={() => setNewTranslation(false)}>No</Button>
+                </Modal.Footer>
+            </div>
+        </Modal>
       </>
     );
-  } else {
-    return (
-      <>
-        <Card style={{ width: "18rem", textAlign: "center" }}>
-          <Card.Header>Translation</Card.Header>
-          <Card.Body>
-            <Card.Title>{translatedText}</Card.Title>
-          </Card.Body>
-          <Card.Footer>
-            <form onSubmit={saveTranslation}>
-              <p>Would you like to save this to your translations?</p>
-              <button type="submit">Yes</button>
-              <button onClick={() => setNewTranslation(false)}>No</button>
-            </form>
-          </Card.Footer>
-        </Card>
-      </>
-    );
-  }
 };
 
 export default TranslatePage;

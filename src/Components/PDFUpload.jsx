@@ -12,7 +12,8 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
-import TranslationModal from "../Pages/TranslationModal";
+import TranslationModal from "./TranslationModal";
+import "../Styles/txt.css";
 
 const PDFUpload = () => {
   const [pdfFile, setPDFFile] = useState(null);
@@ -25,6 +26,7 @@ const PDFUpload = () => {
   const [modalShow, setModalShow] = React.useState(false);
   const [translation, setTranslation] = useState("");
   const [longLang, setLongLang] = useState("");
+  const [fileSelected, setFileSelected] = useState(false);
   const id = useSelector((state) => state.userId);
 
   const saveButton = () => {
@@ -92,9 +94,11 @@ const PDFUpload = () => {
       reader.readAsDataURL(selectedFile);
       reader.onload = (e) => {
         setPDFFile(e.target.result);
+        setFileSelected(true);
       };
     } else {
       setPDFFile(null);
+      setFileSelected(false);
     }
   };
 
@@ -105,35 +109,58 @@ const PDFUpload = () => {
       toast.error(`Please choose a file to upload.`);
     } else if (!pdfFile.includes("application/pdf")) {
       toast.error(`Please select a PDF File.`);
-    } else if (pdfFile !== null) {
-      setViewPDF(pdfFile);
-      toast.success("Successfully loaded");
     } else {
-      setViewPDF(null);
+      toast.promise(
+        new Promise((resolve) => {
+          setViewPDF(pdfFile);
+          resolve(); // Resolve the promise after setting the PDF content
+        }),
+        {
+          loading: "loading file...", // Display while setting the PDF content
+          success: () => {
+            setUploaded(true); // Set uploaded to true when the file is successfully loaded
+            return "Successfully loaded";
+          },
+          error: () => {
+            setUploaded(false); // Set uploaded to false when there's an error loading the file
+            return <b>Could not load PDF file content.</b>;
+          },
+        }
+      );
     }
   };
 
   if (!uploaded) {
     return (
-      <div>
-        <h3>Would you like to translate a file?</h3>
-        <h4>Please select a PDF file to upload.</h4>
-
-        <form
-          onSubmit={(e) => {
-            setUploaded(true);
-            handleSubmit(e);
-          }}
-        >
-          <label htmlFor="upload">Upload a File: </label>
-          <input type="file" name="upload" onChange={handleChange} />
-          <br></br>
-          <button type="submit">Upload</button>
-        </form>
-
-        <br></br>
-
-        <p>No PDF Uploaded</p>
+      <div className="upload-container">
+        <h4 className="form-label">Please select a PDF file to upload</h4>
+        <div className="form-container">
+          <form
+            onSubmit={(e) => {
+              handleSubmit(e);
+            }}
+          >
+            <input
+              type="file"
+              name="upload"
+              onChange={handleChange}
+              className="form-input"
+            />
+            <br></br>
+            <button
+              type="submit"
+              disabled={!fileSelected}
+              className="form-button"
+            >
+              Upload
+            </button>
+          </form>
+        </div>
+        <div className="cancel-button">
+          <Link className="button-link btn" to="/translate">
+            Cancel
+          </Link>
+        </div>
       </div>
     );
   }
@@ -141,16 +168,26 @@ const PDFUpload = () => {
   if (uploaded && !newTranslation) {
     return (
       <>
+        <div className="file-header">
+          <h1>
+            Select a Language & highlight text in the file to see its
+            translation
+          </h1>
+          <Link className="btn btn-dark button-link" to="/translate">
+            Select Another File
+          </Link>
+        </div>
         <div
+          className="file-container"
           onMouseUp={() => {
             handleSelection();
           }}
         >
-          <p>Highlight text in the file to see its translation</p>
           {translation && (
-            <div>
+            <div className="translation-container">
               <p>Translation: {translation}</p>{" "}
               <Button
+                className="blue-button"
                 variant="primary"
                 onClick={() => {
                   setModalShow(true);
@@ -165,6 +202,7 @@ const PDFUpload = () => {
             <br></br>
 
             <select
+              className="select-language"
               onChange={(e) => {
                 setLanguage(e.target.value);
                 setLongLang(e.target.options[e.target.selectedIndex].text);
@@ -204,7 +242,7 @@ const PDFUpload = () => {
             </select>
           </form>
           <br></br>
-          <div>
+          <div id="pdf-container">
             <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js">
               {viewPDF && (
                 <div id="pdffile">
@@ -214,10 +252,7 @@ const PDFUpload = () => {
               {!viewPDF && <>No PDF Uploaded</>}
             </Worker>
           </div>
-
-          <Link to="/translate">Select a New File</Link>
         </div>
-        ;
       </>
     );
   } else if (newTranslation) {

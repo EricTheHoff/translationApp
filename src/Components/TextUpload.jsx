@@ -8,7 +8,8 @@ import { Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import TranslationModal from "../Pages/TranslationModal";
+import TranslationModal from "./TranslationModal";
+import "../Styles/txt.css";
 
 const TextUpload = () => {
   const content = document.getElementById("content");
@@ -21,6 +22,7 @@ const TextUpload = () => {
   const [textFileContent, setTextFileContent] = useState("");
   const [modalShow, setModalShow] = React.useState(false);
   const [longLang, setLongLang] = useState("");
+  const [fileSelected, setFileSelected] = useState(false);
   const id = useSelector((state) => state.userId);
 
   const saveButton = () => {
@@ -82,6 +84,7 @@ const TextUpload = () => {
 
   const handleChange = (e) => {
     setTextFile(e.target.files[0]);
+    setFileSelected(true);
   };
 
   const handleSubmit = async (e) => {
@@ -107,33 +110,50 @@ const TextUpload = () => {
       }),
       {
         loading: "loading file...", // Display while reading the file
-        success: "successfully loaded",
-        error: <b>Could not load file content.</b>,
+        success: () => {
+          setUploaded(true); // Set uploaded to true when the file is successfully loaded
+          return "successfully loaded";
+        },
+        error: () => {
+          toast.error(<b>Could not load file content.</b>);
+          setUploaded(false); // Set uploaded to false when there's an error loading the file
+          return <b>Could not load file content.</b>;
+        },
       }
     );
   };
 
   if (!uploaded) {
     return (
-      <div>
-        <h3>Would you like to translate a file?</h3>
-        <h4>Please select a Plain Text (.txt) file to upload.</h4>
-
-        <form
-          onSubmit={(e) => {
-            setUploaded(true);
-            handleSubmit(e);
-          }}
-        >
-          <label htmlFor="upload">Upload a File: </label>
-          <input type="file" name="upload" onChange={handleChange} />
-          <br></br>
-          <button type="submit">Upload</button>
-        </form>
-
-        <br></br>
-
-        <p>No Text Uploaded</p>
+      <div className="upload-container">
+        <h4 className="form-label">Please select a .txt file to upload</h4>
+        <div className="form-container">
+          <form
+            onSubmit={(e) => {
+              handleSubmit(e);
+            }}
+          >
+            <input
+              type="file"
+              name="upload"
+              onChange={handleChange}
+              className="form-input"
+            />
+            <br></br>
+            <button
+              type="submit"
+              disabled={!fileSelected}
+              className="form-button"
+            >
+              Upload
+            </button>
+          </form>
+        </div>
+        <div className="cancel-button">
+          <Link className="button-link btn" to="/translate">
+            Cancel
+          </Link>
+        </div>
       </div>
     );
   }
@@ -141,16 +161,26 @@ const TextUpload = () => {
   if (uploaded && !newTranslation) {
     return (
       <>
+        <div className="file-header">
+          <h1>
+            Select a Language & highlight text in the file to see its
+            translation
+          </h1>
+          <Link className="btn btn-dark button-link" to="/translate">
+            Select Another File
+          </Link>
+        </div>
         <div
+          className="file-container"
           onMouseUp={() => {
             handleSelection();
           }}
         >
-          <p>Highlight text in the file to see its translation</p>
           {translation && (
-            <div>
+            <div className="translation-container">
               <p>Translation: {translation}</p>{" "}
               <Button
+                className="blue-button"
                 variant="primary"
                 onClick={() => {
                   setModalShow(true);
@@ -165,6 +195,7 @@ const TextUpload = () => {
             <br></br>
 
             <select
+              className="select-language"
               onChange={(e) => {
                 setLanguage(e.target.value);
                 setLongLang(e.target.options[e.target.selectedIndex].text);
@@ -203,10 +234,13 @@ const TextUpload = () => {
               <option value="ZH">Chinese</option>
             </select>
           </form>
-          <p id="content">file: {textFileContent}</p>
+          <div>
+            <p id="content" className="txt-file">
+              file: {textFileContent}{" "}
+            </p>
+          </div>
 
           <br></br>
-          <Link to="/translate">Select a New File</Link>
         </div>
       </>
     );

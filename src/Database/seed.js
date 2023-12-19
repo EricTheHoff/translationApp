@@ -22,7 +22,6 @@ const userOne = await UserDetail.create({
   email: "test@test.com",
   password: hash,
   profilePic: 'chicken',
-  zipCode: "93457",
 });
 
 const wordOne = await SavedWord.create({

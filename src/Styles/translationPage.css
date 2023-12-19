@@ -1,0 +1,37 @@
+.bkg-darker {
+    background-color: #F2D492;
+}
+
+.bkg-lighter {
+    background-color: #F5E0B2;
+}
+
+.txt-area {
+    height: 75px;
+    width: 100%;
+    text-align: center;
+    background-color: #F5E0B2;
+    border-color: #000;
+}
+
+.select {
+    background-color: #F5E0B2;
+    border-color: #000;
+}
+
+.about {
+    text-align: justify;
+    text-indent: 2em;
+}
+
+.about-bold {
+    font-weight: bold;
+}
+
+.about-list {
+    text-align: left;
+}
+
+.js-text {
+    text-align: justify;
+}
