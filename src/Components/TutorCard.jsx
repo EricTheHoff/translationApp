@@ -37,7 +37,7 @@ function TutorCard({
       }}
     >
       <Card style={{ width: "rem", width: "21.5em", margin: "10px auto" }}>
-        <div class="card-header">Your Saved Tutor</div>
+        <div className="card-header">Your Saved Tutor</div>
         <Card.Body style={{ width: "18rem" }}>
           <Card.Text style={{ width: "18rem" }}>
             {name}

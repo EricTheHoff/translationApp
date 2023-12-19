@@ -46,11 +46,7 @@ const MapForm = ({
           onChange={onZipcodeChange}
           placeholder="Enter zipcode"
         />
-        <button
-          onClick={onZipcodeSubmit}
-          className="btn btn-primary"
-          style={{ marginBottom: "15px" }}
-        >
+        <button onClick={onZipcodeSubmit} className="btn btn-primary">
           Submit
         </button>
       </div>

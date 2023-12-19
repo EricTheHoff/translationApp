@@ -43,7 +43,7 @@
 
 .upload-container {
   max-width: 500px;
-  height: 400px;
+  height: 300px;
   margin: auto;
   padding: 20px;
   background-color: rgb(242, 212, 146, 0.9);
@@ -73,7 +73,7 @@
 }
 
 .blue-button {
-  background-color: #283845;
+  background-color: #53606a;
 }
 
 /* file styles */
@@ -100,6 +100,7 @@
   font-weight: bold;
   text-align: center;
   color: #283845;
+  font-size: 27px;
 }
 
 .form-input {
@@ -124,6 +125,7 @@
 
 .form-button:disabled {
   background-color: #ccc;
+  border: 1px solid gray;
   cursor: not-allowed;
 }
 
@@ -220,7 +222,7 @@ span {
 
   .cancel-button {
     margin-top: 12px;
-    align-self: flex-end; /* Move the cancel button to the right */
+    align-self: center; /* Move the cancel button to the right */
   }
 }
 
