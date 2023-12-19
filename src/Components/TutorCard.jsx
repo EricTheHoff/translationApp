@@ -52,7 +52,7 @@ function TutorCard({
             Google Maps Link:
             <a href={website}> {website}</a>
           </Card.Text>
-          <Button onClick={(event) => handleDelete(event)}>Remove</Button>
+          <Button onClick={(event) => handleDelete(event)} className='ibtn'>Remove</Button>
         </Card.Body>
       </Card>
     </div>

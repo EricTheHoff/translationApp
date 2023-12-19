@@ -113,10 +113,22 @@ const RegistrationForm = () => {
                         </Row>
                         <Row className='justify-content-center'>
                             <Col xs='auto' className='mb-3'>
-                                <Button type='submit' variant='primary'>Create Account</Button>
+                                <Button
+                                    type='submit'
+                                    variant='primary'
+                                    className='ibtn'
+                                >
+                                Create Account
+                                </Button>
                             </Col>
                             <Col xs='auto'>
-                                <Button variant='primary' onClick={showPassword}>Show Passwords</Button>
+                                <Button
+                                    variant='primary'
+                                    onClick={showPassword}
+                                    className='ibtn'
+                                >
+                                Show Passwords
+                                </Button>
                             </Col>
                         </Row>
                     </Form>

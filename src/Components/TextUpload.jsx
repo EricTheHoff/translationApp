@@ -10,6 +10,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import TranslationModal from "./TranslationModal";
 import "../Styles/txt.css";
+import { codeMapping, codes } from "../CountryCodes/countryCodes.js";
 
 const TextUpload = () => {
   const content = document.getElementById("content");
@@ -143,14 +144,14 @@ const TextUpload = () => {
             <button
               type="submit"
               disabled={!fileSelected}
-              className="form-button"
+              className="form-button ibtn"
             >
               Upload
             </button>
           </form>
         </div>
         <div className="cancel-button">
-          <Link className="button-link btn" to="/translate">
+          <Link className="button-link btn ibtn" to="/translate">
             Cancel
           </Link>
         </div>
@@ -162,11 +163,11 @@ const TextUpload = () => {
     return (
       <>
         <div className="file-header">
-          <h1 className="header-1">
-            Select a Language & highlight text in the file to see its
-            translation
+          <h1 className="header-1 light-title">
+            Select a language & highlight text in your file to see a 
+            live translation!
           </h1>
-          <Link className="btn button-link new-file-btn" to="/translate">
+          <Link className="btn button-link new-file-btn ibtn" to="/translate">
             Select Another File
           </Link>
         </div>
@@ -180,7 +181,7 @@ const TextUpload = () => {
             <div className="translation-container">
               <p>Translation: {translation}</p>{" "}
               <Button
-                className="blue-button"
+                className="blue-button ibtn"
                 variant="primary"
                 onClick={() => {
                   setModalShow(true);
@@ -201,37 +202,12 @@ const TextUpload = () => {
                 setLongLang(e.target.options[e.target.selectedIndex].text);
               }}
             >
-              <option selected default disabled>
-                --Choose a Language--
-              </option>
-              <option value="BG">Bulgarian</option>
-              <option value="CS">Czech</option>
-              <option value="DA">Danish</option>
-              <option value="DE">German</option>
-              <option value="EL">Greek</option>
-              <option value="ES">Spanish</option>
-              <option value="ET">Estonian</option>
-              <option value="FI">Finnish</option>
-              <option value="FR">French</option>
-              <option value="HU">Hungarian</option>
-              <option value="ID">Indonesian</option>
-              <option value="IT">Italian</option>
-              <option value="JA">Japanese</option>
-              <option value="KO">Korean</option>
-              <option value="LT">Lithuanian</option>
-              <option value="LV">Latvian</option>
-              <option value="NB">Norwegian (Bokmål)</option>
-              <option value="NL">Dutch</option>
-              <option value="PL">Polish</option>
-              <option value="PT">Portuguese</option>
-              <option value="RO">Romanian</option>
-              <option value="RU">Russian</option>
-              <option value="SK">Slovak</option>
-              <option value="SL">Slovenian</option>
-              <option value="SV">Swedish</option>
-              <option value="TR">Turkish</option>
-              <option value="UK">Ukrainian</option>
-              <option value="ZH">Chinese</option>
+              <option>--Choose a Language--</option>
+                {codes.map((el, idx) => {
+                    return (
+                        <option key={idx} value={el}>{codeMapping[el]}</option>
+                    )
+                })}
             </select>
           </form>
           <div>

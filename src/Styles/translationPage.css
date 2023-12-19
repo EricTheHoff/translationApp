@@ -39,3 +39,10 @@
 .light-title {
     color: white;
 }
+
+.ibtn:hover {
+    background-color: #69747D;
+    border-color: #69747D;
+    color: #FFF;
+    transition: background-color 0.3s ease;
+}

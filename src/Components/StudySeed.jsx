@@ -248,7 +248,13 @@ const StudySeed = () => {
                                         </Row>
                                         <Row className='mb-1'>
                                             <Col className='text-center'>
-                                                <Button type='submit' variant='primary'>Study</Button>
+                                                <Button
+                                                    type='submit'
+                                                    variant='primary'
+                                                    className='ibtn'
+                                                >
+                                                Study
+                                                </Button>
                                             </Col>
                                         </Row>
                                     </Form>
@@ -285,12 +291,13 @@ const StudySeed = () => {
                         <Col xs='auto' lg={4}>
                             <Button
                                 variant='primary'
+                                className='ibtn'
+                                style={{ borderColor: '#FFF' }}
                                 onClick={() => {
                                     setLanguage('')
                                     setFlashcardData([])
                                     setDisplay(false)
                                 }}
-                                style={{ borderColor: '#FFF' }}
                             >
                             Generate New Flashcards
                             </Button>

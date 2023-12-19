@@ -21,6 +21,7 @@ const TranslationModal = (props) => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
         className="d-flex justify-text-center"
+        onHide={() => setNewTranslation(false)}
       >
         <Modal.Header closeButton></Modal.Header>
         <Modal.Title id="contained-modal-title-vcenter">
@@ -38,14 +39,14 @@ const TranslationModal = (props) => {
         </Modal.Body>
         <Modal.Footer>
           <form onSubmit={saveTranslation}>
+            <Button className="blue-button ibtn" type="submit">
+              Yes
+            </Button>
             <Button
-              className="btn btn-dark"
+              className="btn ibtn"
               onClick={() => setNewTranslation(false)}
             >
               No
-            </Button>
-            <Button className="blue-button" type="submit">
-              Yes
             </Button>
           </form>
         </Modal.Footer>

@@ -118,7 +118,13 @@ const StudySaved = () => {
                                 </Row>
                                 <Row className='mb-1'>
                                     <Col className='text-center'>
-                                        <Button type='submit' variant='primary'>Study</Button>
+                                        <Button
+                                            type='submit'
+                                            variant='primary'
+                                            className='ibtn'
+                                        >
+                                        Study
+                                        </Button>
                                     </Col>
                                 </Row>
                             </Form>
@@ -153,8 +159,9 @@ const StudySaved = () => {
                         <Col xs='auto' lg={4}>
                             <Button
                                 variant='primary'
-                                onClick={() => setDisplay(false)}
+                                className='ibtn'
                                 style={{ borderColor: '#FFF' }}
+                                onClick={() => setDisplay(false)}
                             >
                             Generate New Flashcards
                             </Button>

@@ -91,13 +91,14 @@ const TranslatePage = () => {
                                 <Button
                                     type='submit'
                                     variant='primary'
+                                    className='me-2 ibtn'
                                     onClick={() => setUploadText(true)}
-                                    className='me-2'
                                 >Text (.txt)
                                 </Button>
                                 <Button
                                     type='submit'
                                     variant='primary'
+                                    className='ibtn'
                                     onClick={() => setUploadPDF(true)}
                                 >PDF (.pdf)
                                 </Button>
@@ -151,7 +152,7 @@ const TranslatePage = () => {
                                 <Button
                                     type='submit'
                                     variant='primary'
-                                    className='mb-3'
+                                    className='mb-3 ibtn'
                                 >Translate
                                 </Button>
                             </Col>
@@ -199,13 +200,23 @@ const TranslatePage = () => {
                 <Modal.Body className='bkg-lighter'>{translatedText}</Modal.Body>
 
                 <Modal.Footer className='justify-content-center border-top border-dark'>
-                    <Button variant='primary' onClick={(e) => {
-                        saveTranslation(e)
-                        setNewTranslation(false)
-                    }}
-                    >Yes
+                    <Button
+                        variant='primary'
+                        className='ibtn'
+                        onClick={(e) => {
+                            saveTranslation(e)
+                            setNewTranslation(false)
+                        }}
+                    >
+                    Yes
                     </Button>
-                    <Button variant='primary' onClick={() => setNewTranslation(false)}>No</Button>
+                    <Button
+                        variant='primary'
+                        className='ibtn'
+                        onClick={() => setNewTranslation(false)}
+                    >
+                    No
+                    </Button>
                 </Modal.Footer>
             </div>
         </Modal>
