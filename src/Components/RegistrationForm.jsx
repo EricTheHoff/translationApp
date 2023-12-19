@@ -55,7 +55,7 @@ const RegistrationForm = () => {
   return (
     <>
         <Container fluid>
-            <Row className='text-center mb-3 mt-5'>
+            <Row className='text-center mb-3 mt-5 light-title'>
                 <h3>Welcome to [APP NAME]</h3>
                 <h4>Please create an account to get started.</h4>
             </Row>
@@ -122,8 +122,8 @@ const RegistrationForm = () => {
                     </Form>
                 </Col>
             </Row>
-            <Row className='text-center mt-3'>
-                <p>Already have an account? <NavLink to='/login'>Login here.</NavLink></p>
+            <Row className='text-center mt-3 light-title'>
+                <p>Already have an account? <NavLink to='/login' className='light-title'>Login here.</NavLink></p>
             </Row>
         </Container>
     </>

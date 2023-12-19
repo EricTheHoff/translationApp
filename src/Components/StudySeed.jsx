@@ -104,7 +104,7 @@ const StudySeed = () => {
                 {loading ? (
                     <>
                         <Container fluid>
-                            <Row className='text-center mb-3'>
+                            <Row className='text-center mb-3 mt-3 light-title'>
                                 <h3>Generate Flashcards from Sample Translations</h3>
                             </Row>
                             <Row className='justify-content-center'>
@@ -176,14 +176,14 @@ const StudySeed = () => {
                                 </Col>
                             </Row>
                             <Row className='text-center mt-2'>
-                                <Link to='/study'>Back to Study</Link>
+                                <Link to='/study' className='light-title'>Back to Study</Link>
                             </Row>
                         </Container>
                     </>
                 ) : (
                     <>
                         <Container fluid>
-                            <Row className='text-center mb-3'>
+                            <Row className='text-center mb-3 mt-3 light-title'>
                                 <h3>Generate Flashcards from Sample Translations</h3>
                             </Row>
                             <Row className='justify-content-center'>
@@ -255,7 +255,7 @@ const StudySeed = () => {
                                 </Col>
                             </Row>
                             <Row className='text-center mt-2'>
-                                <Link to='/study'>Back to Study</Link>
+                                <Link to='/study' className='light-title'>Back to Study</Link>
                             </Row>
                         </Container>
                     </>
@@ -283,12 +283,16 @@ const StudySeed = () => {
                     </Row>
                     <Row className='text-center justify-content-center mb-3'>
                         <Col xs='auto' lg={4}>
-                            <Button variant='primary' onClick={() => {
-                                setLanguage('')
-                                setFlashcardData([])
-                                setDisplay(false)
-                            }}
-                            >Generate New Flashcards
+                            <Button
+                                variant='primary'
+                                onClick={() => {
+                                    setLanguage('')
+                                    setFlashcardData([])
+                                    setDisplay(false)
+                                }}
+                                style={{ borderColor: '#FFF' }}
+                            >
+                            Generate New Flashcards
                             </Button>
                         </Col>
 
