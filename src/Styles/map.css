@@ -10,7 +10,7 @@
   flex-direction: row; /* Horizontal layout for larger screens */
   align-items: center;
   padding-right: 50px;
-  background-color: #283845;
+  background-color: #3e4c58;
   border-radius: 10px;
   margin-bottom: 2vh;
 }
@@ -95,7 +95,7 @@
 
 .map-container {
   border-radius: 10px;
-  border: 9px solid #283845;
+  border: 9px solid #3e4c58;
   width: 100%; /* Set the width as needed */
 }
 
