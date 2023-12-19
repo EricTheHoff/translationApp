@@ -1,4 +1,25 @@
-/* Add these styles to your CSS */
+/* Common styles for all screen sizes */
+.map-page {
+  margin-left: 10vw;
+  margin-right: 10vw;
+  margin-top: 7vh; /* Center items vertically */
+}
+
+.map-header {
+  display: flex;
+  flex-direction: row; /* Horizontal layout for larger screens */
+  align-items: center;
+  padding-right: 50px;
+}
+
+.map-title {
+  margin-left: 3vw;
+  flex-grow: 1;
+  color: #283845;
+  font-size: 40px;
+  text-align: center;
+}
+
 .map-form-container {
   max-width: 400px;
   max-height: 150px;
@@ -10,11 +31,6 @@
   background-color: #f2d492;
 }
 
-.map-page {
-  margin-left: 10vw;
-  margin-right: 10vw;
-  margin-top: 7vh;
-}
 .zipcode-container {
   display: flex;
   gap: 10px;
@@ -40,9 +56,9 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  max-height: 5vh;
 }
-*/ .zipcode-container button:hover {
+
+.zipcode-container button:hover {
   background-color: #0056b3;
 }
 
@@ -64,20 +80,36 @@
 }
 
 .select-container select:hover {
-  background-color: #f9f9f9;
+  background-color: #e3d3ab;
 }
 
 .select-container select:focus {
   border-color: #007bff;
 }
 
-/* Optional: Add a transition effect for smoother interactions */
-.select-container select {
-  transition: border-color 0.3s ease;
-}
-
 .map-container {
   border-radius: 15px;
   border: 9px solid #283845;
   width: 100%; /* Set the width as needed */
+}
+
+/* Responsive adjustments for small screens */
+@media screen and (max-width: 600px) {
+  .map-header {
+    flex-direction: column; /* Vertical layout for small screens */
+    margin-bottom: 5vh;
+  }
+
+  .map-title {
+    margin-top: 5vh;
+    font-size: medium; /* Adjust the font size for smaller screens */
+  }
+
+  .zipcode-container,
+  .select-container {
+    flex-direction: column; /* Stack elements vertically on small screens */
+  }
+  .map-page {
+    margin: 0;
+  }
 }

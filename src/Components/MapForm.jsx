@@ -17,28 +17,21 @@ const MapForm = ({
           <option className="dropdown" value="16093.4">
             10 miles
           </option>
-          <option className="dropdown" value="24140.2">
-            15 miles
-          </option>
-          <option className="dropdown" value="40233.6">
-            25 miles
-          </option>
+          {/* ... (other options for radius) */}
         </select>
         <select onChange={changeLanguage}>
           <option className="dropdown" value="language">
             Language
           </option>
-          {codes.map((el, idx) => {
-            return (
-              <option
-                key={idx}
-                className="dropdown"
-                value={codeMappingForMap[el]}
-              >
-                {codeMappingForMap[el]}
-              </option>
-            );
-          })}
+          {codes.map((el, idx) => (
+            <option
+              key={idx}
+              className="dropdown"
+              value={codeMappingForMap[el]}
+            >
+              {codeMappingForMap[el]}
+            </option>
+          ))}
         </select>
       </div>
       <div className="zipcode-container">

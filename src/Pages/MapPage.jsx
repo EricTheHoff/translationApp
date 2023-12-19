@@ -76,13 +76,18 @@ function MapPage() {
   if (!isLoaded) return <div>Loading...</div>;
   return (
     <div className="map-page">
-      <MapForm
-        changeRadius={changeRadius}
-        onZipcodeChange={handleZipcodeChange}
-        onZipcodeSubmit={handleZipcodeSubmit}
-        zipcode={zipcode}
-        changeLanguage={changeLanguage}
-      />
+      <div className="map-header">
+        <div className="map-title">
+          Find a language school <br></br> near you!
+        </div>
+        <MapForm
+          changeRadius={changeRadius}
+          onZipcodeChange={handleZipcodeChange}
+          onZipcodeSubmit={handleZipcodeSubmit}
+          zipcode={zipcode}
+          changeLanguage={changeLanguage}
+        />
+      </div>
       <Map userLocation={userLocation} radius={radius} language={language} />
     </div>
   );
