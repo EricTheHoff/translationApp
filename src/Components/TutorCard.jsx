@@ -31,12 +31,12 @@ function TutorCard({
   return (
     <div
       style={{
-        display: "inline-block",
-        width: "25rem",
+        // display: "inline-block",
+        // // width: "25rem",
         margin: "5px auto",
       }}
     >
-      <Card style={{ width: "rem", width: "21.5em", margin: "10px auto" }}>
+      <Card style={{ width: "21.5em"}}>
         <div class="card-header">Your Saved Tutor</div>
         <Card.Body style={{ width: "18rem" }}>
           <Card.Text style={{ width: "18rem" }}>
@@ -55,7 +55,7 @@ function TutorCard({
           <Button onClick={(event) => handleDelete(event)}>Remove</Button>
         </Card.Body>
       </Card>
-    </div>
+   </div> 
   );
 }
 
