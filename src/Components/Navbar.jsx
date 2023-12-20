@@ -1,7 +1,7 @@
 import React from "react";
 import "../Styles/navbar.css";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import "../Styles/profile.css";
@@ -38,8 +38,7 @@ const Navbar = () => {
   const [navImage, setNavImage] = useState(user);
 
   const saveToExpress = () => {
-    axios
-      .get("/user-status")
+    axios.get("/user-status")
 
       .then(async (response) => {
         if (!response.data.success) {
@@ -70,8 +69,7 @@ const Navbar = () => {
   };
 
   const getAccount = () => {
-    axios
-      .get("/user")
+    axios.get("/user")
 
       .then((response) => {
         setNavImage(response.data.profilePic);
