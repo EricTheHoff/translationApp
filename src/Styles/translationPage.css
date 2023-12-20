@@ -46,3 +46,7 @@
     color: #FFF;
     transition: background-color 0.3s ease;
 }
+
+.translation-card:hover {
+    background-color: #F2D492;
+}
