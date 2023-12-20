@@ -31,7 +31,7 @@ function TutorCard({
     >
   
       <Card style={{ width: "21.5em"}}>
-        <div class="card-header">My Saved Tutor</div>
+        <div class="card-header text-center">My Saved School</div>
         <Card.Body style={{ width: "18rem" }}>
           <Card.Text style={{ width: "18rem" }}>
             {name}
@@ -46,8 +46,10 @@ function TutorCard({
             Google Maps Link:
             <a href={website}> {website}</a>
           </Card.Text>
-          <Button onClick={(event) => handleDelete(event)} className='ibtn'>Remove</Button>
         </Card.Body>
+        <Card.Footer className='text-center'>
+          <Button onClick={(event) => handleDelete(event)} className='ibtn'>Remove</Button>
+        </Card.Footer>
       </Card>
    </div> 
   );
