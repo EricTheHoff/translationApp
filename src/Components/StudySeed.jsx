@@ -22,6 +22,7 @@ const StudySeed = () => {
         setDisplay(true)
     }
 
+    // Grabs all sample phrases from the database. If a user updates the difficulty, it re-runs.
     useEffect(() => {
         const postData = { difficulty: difficulty }
         axios.post('/seed-translations', postData)
@@ -36,6 +37,8 @@ const StudySeed = () => {
     },[difficulty])
 
 
+    // Sample phrases are saved all in English. Once the language is selected, it translates each phrase into the target language.
+    // It hides the study button until all promises are resolved so users can't generate flashcards before it's ready.
     useEffect(() => {
         if (language !== '') {
             if (noOfCards > flashcards.length) {

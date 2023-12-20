@@ -1,4 +1,4 @@
-const initialState = { loggedIn: false, userId: null, profileImage: 'user', navImage: 'user' }
+const initialState = { loggedIn: false, profileImage: 'user', navImage: 'user' }
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -11,16 +11,6 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 loggedIn: false
-            }
-        case 'Active User':
-            return {
-                ...state,
-                userId: action.payload
-            }
-        case 'Inactive User':
-            return {
-                ...state,
-                userId: null
             }
         case 'profileImage' :
             return {

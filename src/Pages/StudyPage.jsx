@@ -9,6 +9,7 @@ const StudyPage = () => {
   const [studySeed, setStudySeed] = useState(false);
   const navigate = useNavigate();
 
+  // Function to switch between study pools.
   const submit = (e) => {
     e.preventDefault();
 
