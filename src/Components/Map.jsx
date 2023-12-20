@@ -16,6 +16,7 @@ function Map({ userLocation, radius, language }) {
   const [places, setPlaces] = useState(null);
   const [clickedMarkers, setClickedMarkers] = useState({});
 
+  //save school to saved schools page
   const handleSaveSchool = async (e) => {
     const formData = {
       name: placeName,
@@ -29,6 +30,7 @@ function Map({ userLocation, radius, language }) {
     } else toast.error("This school has already been added");
   };
 
+  //if a school is added the button is replaced with a checkmark
   const addClick = (placeId) => {
     handleSaveSchool();
     setClickedMarkers((prevClickedMarkers) => ({
@@ -38,7 +40,7 @@ function Map({ userLocation, radius, language }) {
   };
 
   useEffect(() => {
-    // send lat/lng to server so it can send get request to find language schools within 25 miles
+    // send lat/lng to server so it can send request to find language schools within 25 miles
     if (userLocation) {
       const { lat, lng } = userLocation;
       axios
@@ -46,17 +48,22 @@ function Map({ userLocation, radius, language }) {
           `http://localhost:2222/api/places?lat=${lat}&lng=${lng}&radius=${radius}&language=${language}`
         )
         .then(({ data }) => {
+          // Variable to extract the link to the school from the attributions
           const extractUrlFromAttributions = (attributions) => {
             const regex = /href="([^"]*)"/;
             const match = attributions.match(regex);
             return match ? match[1] : "";
           };
-          //set all places equal to the results sent back by server and map through them to separate by individual location
+
+          //map through to data.results to separate by individual location
           const allPlaces = data.results.map((place) => {
+            // Extract latitude and longitude from the location data
             let position = {
               lat: +place.geometry.location.lat,
               lng: +place.geometry.location.lng,
             };
+
+             // Extract the link from the attributions of the website, if available
             const photoLink =
               place.photos && place.photos.length > 0
                 ? extractUrlFromAttributions(
@@ -64,8 +71,8 @@ function Map({ userLocation, radius, language }) {
                   )
                 : "";
             const { name, rating, vicinity } = place;
-            //if the place icon equals the "graduation cap" which signifies it is a school, return the marker for it
             return (
+              //if the place icon equals the "graduation cap" which signifies it is a school, return the marker for it
               place.icon ===
                 "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/school-71.png" && (
                 <div key={place.place_id}>
@@ -152,6 +159,7 @@ function Map({ userLocation, radius, language }) {
                             <br></br>
                             <div>
                               {clickedMarkers[place.place_id] ? (
+                                //if school was added, add button becomes a checkmark
                                 <HiOutlineCheckCircle
                                   style={{
                                     fontSize: "35px",
