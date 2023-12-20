@@ -150,10 +150,8 @@ const TextUpload = () => {
             </button>
           </form>
         </div>
-        <div className="cancel-button">
-          <Link className="button-link btn ibtn" to="/translate">
-            Cancel
-          </Link>
+        <div>
+          <Link to="/translate">Back to Home</Link>
         </div>
       </div>
     );
@@ -164,8 +162,8 @@ const TextUpload = () => {
       <>
         <div className="file-header">
           <h1 className="header-1 light-title">
-            Select a language & highlight text in your file to see a 
-            live translation!
+            Select a language & highlight text in your file to see a live
+            translation!
           </h1>
           <Link className="btn button-link new-file-btn ibtn" to="/translate">
             Select Another File
@@ -203,11 +201,13 @@ const TextUpload = () => {
               }}
             >
               <option>--Choose a Language--</option>
-                {codes.map((el, idx) => {
-                    return (
-                        <option key={idx} value={el}>{codeMapping[el]}</option>
-                    )
-                })}
+              {codes.map((el, idx) => {
+                return (
+                  <option key={idx} value={el}>
+                    {codeMapping[el]}
+                  </option>
+                );
+              })}
             </select>
           </form>
           <div>
