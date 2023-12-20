@@ -15,7 +15,6 @@ const RegistrationForm = () => {
   const [passwordReg, setPasswordReg] = useState("");
   const [confirmReg, setConfirmReg] = useState("");
   const [emailReg, setEmailReg] = useState("");
-
   const [seePassword, setSeePassword] = useState("");
 
   const showPassword = () => {

@@ -9,8 +9,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import { Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import TranslationModal from "./TranslationModal";
 import "../Styles/txt.css";
@@ -32,7 +30,6 @@ const PDFUpload = () => {
 
   const saveButton = () => {
     setNewTranslation(true);
-    console.log(newTranslation);
   };
 
   const handleSelection = async () => {
@@ -66,8 +63,6 @@ const PDFUpload = () => {
 
   const saveTranslation = async (e) => {
     e.preventDefault();
-
-    console.log(language);
 
     const translationData = {
       translatedText: translation,

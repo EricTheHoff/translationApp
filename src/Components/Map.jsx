@@ -25,7 +25,6 @@ function Map({ userLocation, radius, language }) {
     };
     const res = await axios.post("/save-school", formData);
     if (res.data.success) {
-      console.log("successfully added");
       toast.success("Added to your Schools!");
     } else toast.error("This school has already been added");
   };
@@ -41,7 +40,6 @@ function Map({ userLocation, radius, language }) {
   useEffect(() => {
     // send lat/lng to server so it can send get request to find language schools within 25 miles
     if (userLocation) {
-      // console.log(radius);
       const { lat, lng } = userLocation;
       axios
         .get(
@@ -181,7 +179,6 @@ function Map({ userLocation, radius, language }) {
           });
 
           setPlaces(allPlaces);
-          // console.log(language);
         })
         .catch((err) => console.log(err));
     }

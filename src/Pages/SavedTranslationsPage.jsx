@@ -6,8 +6,7 @@ import SavedWord from "../Components/SavedWord";
 import toast from "react-hot-toast";
 import { codeMapping } from "../CountryCodes/countryCodes.js";
 import "../Styles/savedtranslationspage.css";
-
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from "react-bootstrap";
 
 const SavedTranslationsPage = () => {
   const [savedTranslations, setSavedTranslations] = useState([]);
@@ -67,7 +66,7 @@ const SavedTranslationsPage = () => {
 
           <select name="language" onChange={(e) => setLanguage(e.target.value)}>
             <option value="" selected>
-                     --Choose a Language--
+              --Choose a Language--
             </option>
             {uniqueToLanguages.map((language, idx) => {
               return (
@@ -77,34 +76,36 @@ const SavedTranslationsPage = () => {
               );
             })}
           </select>
-          </div>
+        </div>
 
-          <div className="centeredText light-title mt-3">
-            <p>Please Select a Language</p>
-          </div>
+        <div className="centeredText light-title mt-3">
+          <p>Please Select a Language</p>
+        </div>
 
-          <div className='text-center mt-3'>
-            <Link to="/" className='light-title'>Back to Home</Link>
-          </div>
+        <div className="text-center mt-3">
+          <Link to="/" className="light-title">
+            Back to Home
+          </Link>
+        </div>
       </>
     );
   } else {
     return (
       <>
         <div className="languageContainer">
-        <label htmlFor="language"></label>
-        <select name="language" onChange={(e) => setLanguage(e.target.value)}>
-          <option value="" selected>
-            --Choose a Language--
-          </option>
-          {uniqueToLanguages.map((language, idx) => {
-            return (
-              <option key={idx} value={language}>
-                {codeMapping[language]}
-              </option>
-            );
-          })}
-        </select>
+          <label htmlFor="language"></label>
+          <select name="language" onChange={(e) => setLanguage(e.target.value)}>
+            <option value="" selected>
+              --Choose a Language--
+            </option>
+            {uniqueToLanguages.map((language, idx) => {
+              return (
+                <option key={idx} value={language}>
+                  {codeMapping[language]}
+                </option>
+              );
+            })}
+          </select>
         </div>
         <div className="translateContainer text-center">
           {filteredTranslations.map((el) => (
@@ -118,8 +119,10 @@ const SavedTranslationsPage = () => {
           ))}
         </div>
 
-        <div className='text-center'>
-            <Link to="/" className='light-title'>Back to Home</Link>
+        <div className="text-center">
+          <Link to="/" className="light-title">
+            Back to Home
+          </Link>
         </div>
       </>
     );

@@ -65,7 +65,6 @@ function MapPage() {
         }`
       )
       .then(({ data }) => {
-        // console.log(data);
         const { lat, lng } = data.results[0].geometry.location;
         setUserLocation({ lat, lng });
       })

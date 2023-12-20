@@ -55,7 +55,6 @@ export default function Profile() {
         setEmail(response.data.email);
         setPassword(response.data.password);
         setProfileImage(response.data.profilePic);
-        console.log(response.data.profilePic);
       });
   };
 
@@ -77,7 +76,6 @@ export default function Profile() {
     const response = await axios.put(`/editAccount`, requestData);
     if (response.data.success) {
       setEditMode(false);
-      console.log("success");
       toast.success("Account Updated");
     } else {
       toast.error(
