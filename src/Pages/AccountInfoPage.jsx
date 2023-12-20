@@ -7,7 +7,6 @@ const AccountInfoPage = () => {
   return (
     <div>
       <Profile />
-      {/* <Link to="/">Back to Home</Link> */}
     </div>
   );
 };
