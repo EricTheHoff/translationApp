@@ -4,10 +4,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
 import TranslationModal from "./TranslationModal";
 import "../Styles/txt.css";
 import { codeMapping, codes } from "../CountryCodes/countryCodes.js";
@@ -28,15 +26,15 @@ const TextUpload = () => {
 
   const saveButton = () => {
     setNewTranslation(true);
-    console.log(newTranslation);
   };
 
+  // set selectedText equal to the highlighted text as a string
   const handleSelection = async () => {
     const selection = window.getSelection();
     if (selection && selection.toString().trim() !== "") {
       const selectedText = selection.toString();
 
-      // Check if the selection is within the element with id 'pdffile'
+      // Check if the selection is within the actual file
       const contentElement = document.getElementById("content");
       if (contentElement && contentElement.contains(selection.anchorNode)) {
         // Perform translation when text is highlighted
@@ -60,10 +58,9 @@ const TextUpload = () => {
     }
   };
 
+  //save the translation/original text to the database
   const saveTranslation = async (e) => {
     e.preventDefault();
-
-    console.log(language);
 
     const translationData = {
       translatedText: translation,
@@ -91,14 +88,16 @@ const TextUpload = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    //no file selected
     if (!textFile) {
       toast.error(`Please choose a file to upload.`);
       return;
+      //file selected not .txt type
     } else if (textFile.type !== "text/plain") {
       toast.error(`Please select a Plain Text file (.txt) instead.`);
       return;
     }
-
+    //pdf file selected ==> load content
     toast.promise(
       new Promise((resolve) => {
         const reader = new FileReader();
@@ -124,6 +123,7 @@ const TextUpload = () => {
     );
   };
 
+  //display this before a file is uploaded
   if (!uploaded) {
     return (
       <div className="upload-container">
@@ -157,6 +157,7 @@ const TextUpload = () => {
     );
   }
 
+  //display this after a file was uploaded
   if (uploaded && !newTranslation) {
     return (
       <>
@@ -165,7 +166,7 @@ const TextUpload = () => {
             Select a language & highlight text in your file to see a live
             translation!
           </h1>
-          <Link className="btn button-link new-file-btn ibtn" to="/translate">
+          <Link className="btn new-file-btn ibtn" to="/translate">
             Select Another File
           </Link>
         </div>
@@ -220,6 +221,7 @@ const TextUpload = () => {
         </div>
       </>
     );
+    //display this if text was highlighted and "save translation" was clicked
   } else if (newTranslation) {
     // Render the modal when newTranslation is true
     return (

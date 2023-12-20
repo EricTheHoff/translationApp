@@ -47,11 +47,15 @@ const SavedTutorPage = () => {
 
   return (
     <>
-      <Link to="/">Back to Home</Link>
-
-      <div className={hasSavedTutors ? "tutorContainer" : "no-tutor-container"}>
+      <div className={hasSavedTutors ? "tutorContainer mt-3" : "no-tutor-container mt-3"}>
         {school}
       </div>
+
+      <div className="text-center">
+          <Link to="/" className="light-title">
+            Back to Home
+          </Link>
+    </div>
     </>
   );
 };

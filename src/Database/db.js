@@ -10,17 +10,16 @@ async function myDataBaseConnection(uri) {
       dialect: "postgres",
       define: {
         underscored: true,
-        timestamps: false
+        timestamps: false,
       },
       dialectOptions: {
-        charset: 'utf8',
-        encoding: 'UTF8'
-      }
+        charset: "utf8",
+        encoding: "UTF8",
+      },
     }
   );
   try {
     await sequelize.authenticate();
-    console.log("Connected to translationApp successfully!");
   } catch (error) {
     console.error("Unable to connect to translationApp:", error);
   }

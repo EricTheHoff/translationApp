@@ -63,7 +63,6 @@ const Navbar = () => {
     e.preventDefault();
     const res = await axios.post("/logout");
     if (res.data.success) {
-      console.log("success with logout");
       navigate("/login");
       window.location.reload();
     }

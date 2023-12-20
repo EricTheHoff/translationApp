@@ -11,7 +11,7 @@ const MapForm = ({
 }) => {
   return (
     <div className="map-form-container">
-      {/* user zipcode input */}
+      {/* Distance selection */}
       <div className="select-container">
         <select onChange={changeRadius}>
           <option className="dropdown" value="16093.4">
@@ -24,6 +24,7 @@ const MapForm = ({
             25 miles
           </option>
         </select>
+        {/* language selection */}
         <select onChange={changeLanguage}>
           <option className="dropdown" value="language">
             Language
@@ -39,6 +40,7 @@ const MapForm = ({
           ))}
         </select>
       </div>
+      {/* zipcode input */}
       <div className="zipcode-container">
         <input
           type="text"
@@ -46,6 +48,7 @@ const MapForm = ({
           onChange={onZipcodeChange}
           placeholder="Enter zipcode"
         />
+        {/* submit */}
         <button onClick={onZipcodeSubmit} className="btn btn-primary">
           Submit
         </button>

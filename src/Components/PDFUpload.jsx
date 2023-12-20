@@ -9,8 +9,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import { Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import TranslationModal from "./TranslationModal";
 import "../Styles/txt.css";
@@ -32,15 +30,15 @@ const PDFUpload = () => {
 
   const saveButton = () => {
     setNewTranslation(true);
-    console.log(newTranslation);
   };
 
+  // set selectedText equal to the highlighted text as a string
   const handleSelection = async () => {
     const selection = window.getSelection();
     if (selection && selection.toString().trim() !== "") {
       const selectedText = selection.toString();
 
-      // Check if the selection is within the element with id 'pdffile'
+      // Check if the selection is within the actual file
       const pdffileElement = document.getElementById("pdffile");
       if (pdffileElement && pdffileElement.contains(selection.anchorNode)) {
         // Perform translation when text is highlighted
@@ -64,10 +62,9 @@ const PDFUpload = () => {
     }
   };
 
+  //save the translation/original text to the database
   const saveTranslation = async (e) => {
     e.preventDefault();
-
-    console.log(language);
 
     const translationData = {
       translatedText: translation,
@@ -106,10 +103,13 @@ const PDFUpload = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    //no file selected
     if (!pdfFile) {
       toast.error(`Please choose a file to upload.`);
+      //file selected not pdf type
     } else if (!pdfFile.includes("application/pdf")) {
       toast.error(`Please select a PDF File.`);
+      //pdf file selected ==> load content
     } else {
       toast.promise(
         new Promise((resolve) => {
@@ -131,6 +131,7 @@ const PDFUpload = () => {
     }
   };
 
+  //display this before a file is uploaded
   if (!uploaded) {
     return (
       <div className="upload-container">
@@ -164,6 +165,7 @@ const PDFUpload = () => {
     );
   }
 
+  //display this after a file was uploaded
   if (uploaded && !newTranslation) {
     return (
       <>
@@ -231,8 +233,8 @@ const PDFUpload = () => {
         </div>
       </>
     );
+    //display this if text was highlighted and "save translation" was clicked
   } else if (newTranslation) {
-    // Render the modal when newTranslation is true
     return (
       <>
         <TranslationModal
