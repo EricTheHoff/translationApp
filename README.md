@@ -48,16 +48,19 @@ Once you connect your respective keys to these variables, you should be good to 
 
 ## How to Use **BabelBuddy**
 1. Log into the application with your email and password (or register for one if you don't have an account).
-![Login]()
-2. From the Home Page, you can use the Quick Translate or the File Translation features. Both allow you to save translations to your account.
-![Quick-Translate]()
-![File-Translate]()
+![Login](./public/README_images/Login.png "Login")
+2. From the Home Page, you can use the Quick Translate feature to translate a word or phrase.
+![Quick-Translate](./public/README_images/Quick-Translate.png "Quick Translate")
+Alternatively, you can also translate a word or phrase from a file.
+![File-Translate](./public/README_images/File-Translate.png "File Translate")
 3. To study your translations, you can go to the Study Page and choose to generate flashcards from your saved translations or from a set of pre-loaded sample translations.
-![Further-Study]()
-![Sample]()
-![Flashcards]()
+![Further-Study](./public/README_images/Further-Study.png "Further Study")
+![Sample](./public/README_images/Sample.png "Sample Translations")
+![Flashcards](./public/README_images/Flashcards.png "Flashcards")
 4. To find a language school near you, go to the Find a School page. You can enter in a zip code, language, and radius to find language schools near you. You can save schools to your account so you can compare them later.
-![Map]()
+![Map](./public/README_images/Map.png "Map")
 5. To view your saved schools or saved translations, simply hover over your profile and select them from the pop-up menu.
-![Saved-Translations]()
-![Saved-Schools]()
+![Saved-Schools](./public/README_images/Saved-Schools.png "Saved Schools")
+![Saved-Translations](./public/README_images/Saved-Translations.png "Saved Translations")
+6. To Edit your Profile information, navigate to the Profile option when hovering over your profile.
+![Profile](./public/README_images/Profile.png "Profile")
