@@ -18,6 +18,7 @@ import ImageGrid from "./ImageGrid";
 import toast from "react-hot-toast";
 import "../Styles/navbar.css";
 import "../Styles/images.css";
+import Button from "react-bootstrap/Button";
 
 const imageFiles = {
   user,
@@ -128,9 +129,9 @@ export default function Profile() {
             </div>
 
             <div className="pTeg">
-            <button className="editButton" onClick={() => setEditMode(true)}>
+            <Button className="ibtn" onClick={() => setEditMode(true)}>
               Edit
-            </button>
+            </Button>
             </div>
 
           </div>
@@ -169,12 +170,12 @@ export default function Profile() {
               <h1 className="h1">Edit Profile</h1>
 
               <div className="pTeg">
-                <button className="save" type="submit">
+                <Button className="ibtn" type="submit">
                   Save
-                </button>
-                <button className="cancel" onClick={cancelButton}>
+                </Button>
+                <Button className="ibtn" onClick={cancelButton}>
                   Cancel
-                </button>
+                </Button>
               </div>
             </div>
 
