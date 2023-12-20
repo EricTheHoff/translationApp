@@ -56,7 +56,7 @@ const RegistrationForm = () => {
     <>
         <Container fluid>
             <Row className='text-center mb-3 mt-5 light-title'>
-                <h3>Welcome to [APP NAME]</h3>
+                <h3>Welcome to Babel Buddy</h3>
                 <h4>Please create an account to get started.</h4>
             </Row>
             <Row className='text-center justify-content-center'>
