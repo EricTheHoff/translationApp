@@ -34,32 +34,15 @@ const HomePage = () => {
       });
   };
 
-//   const logout = () => {
-//     axios
-//       .post("/logout")
-
-//       .then(() => {
-//         dispatch({ type: "Logged Out" });
-//         dispatch({ type: "Inactive User" });
-//         navigate("/login");
-//       })
-//       .catch((error) => {
-//         console.error(`The following error has occurred: ${error}`);
-//         dispatch({ type: "Logged Out" });
-//         dispatch({ type: "Inactive User" });
-//         navigate("/login");
-//       });
-//   };
-
   useEffect(() => {
     saveToExpress();
   }, []);
 
   if (auth === true) {
     return (
-        <>
-            <TranslatePage />
-        </>
+      <>
+        <TranslatePage />
+      </>
     );
   } else {
     return (

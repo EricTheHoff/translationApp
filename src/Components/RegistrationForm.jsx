@@ -31,8 +31,7 @@ const RegistrationForm = () => {
       return;
     }
 
-    await axios
-      .post("/register", {
+    await axios.post("/register", {
         email: emailReg,
         password: passwordReg,
         profilePic: user,
