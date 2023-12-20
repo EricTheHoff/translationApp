@@ -18,14 +18,14 @@ function MapPage() {
   const [userLocation, setUserLocation] = useState(null);
   const [zipcode, setZipcode] = useState("");
 
-  //set the radius equal to whatever is selected on dropdown
+  //set the radius equal to dropdown selection
   const changeRadius = (e) => {
     e.preventDefault();
     const selectedRadius = e.target.value;
     setRadius(selectedRadius);
   };
 
-  //set the language equal to whatever is selected on dropdown
+  //set the language equal to dropdown selection
   const changeLanguage = (e) => {
     e.preventDefault();
     const selectedLanguage = e.target.value;
@@ -57,7 +57,7 @@ function MapPage() {
 
   //changes geolocation based on what was entered as zipcode
   const handleZipcodeSubmit = () => {
-    // Fetch latitude and longitude based on the entered zipcode
+    // Find latitude and longitude based on the entered zipcode
     axios
       .get(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${zipcode}&key=${
