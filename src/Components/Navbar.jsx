@@ -93,7 +93,7 @@ const Navbar = () => {
       <div className="navbar">
         <div className="mobile-dropdown">
           <a className="navHome" href="/">
-            translationApp
+            BabelBuddy
           </a>
 
           <a className="bigScreenLink" href="/translate">

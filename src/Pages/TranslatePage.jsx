@@ -161,7 +161,7 @@ const TranslatePage = () => {
                 </Col>
                 <Col lg={6}>
                     <div className='border p-3 shadow text-center bkg-darker rounded' style={{ height: '100%' }}>
-                        <h1>Welcome to Babel Buddy!</h1>
+                        <h1>Welcome to BabelBuddy!</h1>
                         <hr/>
                         <p className='about'>Have you ever used a translating app only to find yourself searching for the same translation over and over again?
                             With Babel Buddy, you can translate words and phrases from English to over 25 global languages and save those translations for further study!
