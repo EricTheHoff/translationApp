@@ -1,11 +1,8 @@
 import {
-  SchoolDetail,
-  UserDetail,
   FurtherStudy,
   SavedWord,
 } from "../src/Database/models.js";
 import axios from "axios";
-import bcrypt from "bcryptjs";
 
 const translateFunctions = {
   getSavedWords: async (req, res) => {
@@ -28,7 +25,6 @@ const translateFunctions = {
 
   getSavedPhrases: async (req, res) => {
     const savedPhrases = await FurtherStudy.findAll();
-    console.log(savedPhrases);
     res.json(savedPhrases);
   },
 
@@ -49,7 +45,6 @@ const translateFunctions = {
         target_lang: language,
         source_lang: source,
       };
-      console.log(req.body);
 
       const response = await axios.post(
         "https://api-free.deepl.com/v2/translate",
@@ -67,7 +62,7 @@ const translateFunctions = {
     }
   },
   saveTranslation: async (req, res) => {
-    const id = req.session.userId
+    const id = req.session.userId;
     const { translatedText, originalText, toLanguage } = req.body;
 
     const translation = await SavedWord.create({

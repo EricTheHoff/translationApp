@@ -4,10 +4,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
 import TranslationModal from "./TranslationModal";
 import "../Styles/txt.css";
 import { codeMapping, codes } from "../CountryCodes/countryCodes.js";
@@ -28,7 +26,6 @@ const TextUpload = () => {
 
   const saveButton = () => {
     setNewTranslation(true);
-    console.log(newTranslation);
   };
 
   const handleSelection = async () => {
@@ -62,8 +59,6 @@ const TextUpload = () => {
 
   const saveTranslation = async (e) => {
     e.preventDefault();
-
-    console.log(language);
 
     const translationData = {
       translatedText: translation,
@@ -165,7 +160,7 @@ const TextUpload = () => {
             Select a language & highlight text in your file to see a live
             translation!
           </h1>
-          <Link className="btn button-link new-file-btn ibtn" to="/translate">
+          <Link className="btn new-file-btn ibtn" to="/translate">
             Select Another File
           </Link>
         </div>

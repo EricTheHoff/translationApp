@@ -1,7 +1,6 @@
 import express from "express";
 import morgan from "morgan";
 import ViteExpress from "vite-express";
-import axios from "axios";
 import session from "express-session";
 import env from "dotenv";
 import imgFunctions from "./imgController.js";
@@ -62,8 +61,6 @@ const {
   deleteUserSchool,
   placeSearch,
 } = schoolFunctions;
-
-console.log(process.env.VITE_REACT_APP_GOOGLE_API_KEY);
 
 const loginRequired = (req, res, next) => {
   if (!req.session.userId) {

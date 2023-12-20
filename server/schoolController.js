@@ -1,10 +1,5 @@
-import {
-  SchoolDetail,
-  UserDetail,
-  FurtherStudy,
-} from "../src/Database/models.js";
+import { SchoolDetail, UserDetail } from "../src/Database/models.js";
 import axios from "axios";
-import bcrypt from "bcryptjs";
 
 const schoolFunctions = {
   getSavedSchools: async (req, res) => {
@@ -108,14 +103,11 @@ const schoolFunctions = {
     try {
       const { lat, lng, radius, language } = req.query;
       const types = ["tutor", "academy", "institute", "center"];
-      console.log(radius);
-      // console.log(language);
       const apiKey = process.env.VITE_REACT_APP_GOOGLE_API_KEY;
 
       const response = await axios.get(
         `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=${radius}&type=${types}&keyword=${language}%20learning&key=${apiKey}`
       );
-      // console.log(response.data);
 
       res.json(response.data);
     } catch (error) {
