@@ -1,14 +1,13 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import React from "react";
 import Login from "../Components/Login.jsx";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 
 const LoginPage = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // Function to handle the login event. Passing this to the Login component as a property.
   const login = async (e, loginData) => {
     e.preventDefault();
     const response = await axios.post("/login", loginData);

@@ -18,6 +18,7 @@ const TranslatePage = () => {
   const [translatedText, setTranslatedText] = useState("");
   const navigate = useNavigate();
 
+  // Function to switch between file uploads.
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -32,6 +33,7 @@ const TranslatePage = () => {
     }
   };
 
+  // Function to handle the translation.
   const handleTranslation = async (e) => {
     e.preventDefault();
 
@@ -56,6 +58,7 @@ const TranslatePage = () => {
       });
   };
 
+  // Function to save the translation.
   const saveTranslation = async (e) => {
     e.preventDefault();
 

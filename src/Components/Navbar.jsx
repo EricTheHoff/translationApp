@@ -43,18 +43,15 @@ const Navbar = () => {
       .then(async (response) => {
         if (!response.data.success) {
           dispatch({ type: "Logged Out" });
-          dispatch({ type: "Inactive User" });
           navigate("/login");
         } else {
-          const user = await axios.get("/user");
+          await axios.get("/user");
           dispatch({ type: "Logged In" });
-          dispatch({ type: "Active User", payload: user.data.userId });
         }
       })
       .catch((error) => {
         console.error(`The following has occurred: ${error}`);
         dispatch({ type: "Logged Out" });
-        dispatch({ type: "Inactive User" });
         navigate("/login");
       });
   };
