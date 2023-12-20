@@ -1,17 +1,12 @@
 .navbar {
-    /* background: linear-gradient(to bottom, #33ccff 0%, rgba(62, 118, 249, 0.91)); */
     background: linear-gradient(to bottom, #F5E0B2,#F2D492);
     color: white;
-
     position: fixed;
-
     font-size: small;
-    
     border-radius: 28px;
     width: 98%;
     margin: auto; 
     margin-top: 1%;
-    
     display: inline-block;
   }
   
@@ -25,7 +20,6 @@
   text-decoration: none;
   font-weight: light;
   color: black;
-
   margin-left: 3%;
   margin-right: 20%;
 }
@@ -79,8 +73,6 @@
   width: 100%
 }
 
-
-
 #logoutButton {
   background-color: transparent;
   border: none;
@@ -110,19 +102,13 @@
   position: absolute;
   z-index: 5;
   padding: 12px 16px;
-  /* padding-bottom: 50px; */
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-
   border-radius: 10px;
   background-color:#F5E0B2;
-
   margin: auto;
-
   right: 0px;
   top: 100%;
-
   width: 300px;
-
 }
 
 .dropdown:hover .dropdown-content {
@@ -144,19 +130,13 @@
   position: absolute;
   z-index: 10;
   padding: 12px 16px;
-
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-
   border-radius: 10px;
   background-color:#F5E0B2;
-
   margin: auto;
-
   left: 0px;
   top: 100%;
-
   width: 300px;
-
 }
 
 .navForm {
@@ -214,10 +194,8 @@
       z-index: 1;
       padding: 12px 16px;
       box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    
       border-radius: 10px;
       background-color:#F5E0B2;
-    
       margin: auto;
       width: 300%;
     }
@@ -258,30 +236,7 @@
     .mobile-dropdown-content {
       display: none;
     }
-
-    /* #pLink {
-      padding-right:85%;
-    }
-    #sLink {
-      padding-right: 58%;
-    }
-    #tLink {
-      padding-right: 70%;
-    } */
   }
-
-  /* @media only screen and (min-width: 1200px) {
-
-    #pLink {
-      padding-right:85%;
-    }
-    #sLink {
-      padding-right: 58%;
-    }
-    #tLink {
-      padding-right: 70%;
-    }
-  } */
 
   @media only screen and (max-width: 1500px) {
 
@@ -291,11 +246,8 @@
       z-index: 1;
       padding: 12px 16px;
       box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    
       border-radius: 10px;
       background-color:#F5E0B2;
-    
-      /* margin: auto; */
       margin-bottom: 0;
     }
 
@@ -323,23 +275,4 @@
     .mobile-dropdown-content {
       display: none;
     }
-
-    /* #pLink {
-      width:80%;
-    }
-    #sLink {
-      width: 100%;
-    }
-    #tLink {
-      width: 58%;
-    }
-    #translateLink {
-      padding-right: 180%;
-    }
-    #studyLink {
-      width: 200%;
-    }
-    #mapLink {
-      width: 145%;
-    } */
   }

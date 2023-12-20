@@ -1,7 +1,7 @@
 import React from "react";
 import "../Styles/navbar.css";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import "../Styles/profile.css";
@@ -38,8 +38,7 @@ const Navbar = () => {
   const [navImage, setNavImage] = useState(user);
 
   const saveToExpress = () => {
-    axios
-      .get("/user-status")
+    axios.get("/user-status")
 
       .then(async (response) => {
         if (!response.data.success) {
@@ -71,8 +70,7 @@ const Navbar = () => {
   };
 
   const getAccount = () => {
-    axios
-      .get("/user")
+    axios.get("/user")
 
       .then((response) => {
         setNavImage(response.data.profilePic);
@@ -109,15 +107,21 @@ const Navbar = () => {
           <div className="mobile-dropdown-content">
             <nav id="navTag">
               <form className="navForm" action="/translate">
-                <button className="profileLink" id="translateLink">Translate</button>
+                <button className="profileLink" id="translateLink">
+                  Translate
+                </button>
               </form>
 
               <form className="navForm" action="/study">
-                <button className="profileLink" id="studyLink">Study</button>
+                <button className="profileLink" id="studyLink">
+                  Study
+                </button>
               </form>
 
               <form className="navForm" action="/map">
-                <button className="profileLink" id="mapLink">Find&nbsp;a&nbsp;School</button>
+                <button className="profileLink" id="mapLink">
+                  Find&nbsp;a&nbsp;School
+                </button>
               </form>
             </nav>
           </div>
@@ -132,31 +136,33 @@ const Navbar = () => {
           </a>
           <div className="dropdown-content">
             <form className="navForm" action="/account">
-              <button className="profileLink" id="pLink">Profile</button>
+              <button className="profileLink" id="pLink">
+                Profile
+              </button>
             </form>
 
             <form className="navForm" action="/translations">
-              <button className="profileLink" id="sLink">Saved&nbsp;Translations</button>
+              <button className="profileLink" id="sLink">
+                Saved&nbsp;Translations
+              </button>
             </form>
 
             <form className="navForm" action="/saved-tutors">
-              <button className="profileLink" id="tLink">Saved&nbsp;Tutors</button>
+              <button className="profileLink" id="tLink">
+                Saved&nbsp;Tutors
+              </button>
             </form>
 
             <hr className="hrColor" />
             <button id="logoutButton" onClick={handleLogout}>
               Logout
             </button>
-
           </div>
         </div>
       </div>
     );
   } else {
-    return (
-      <>
-      </>
-    );
+    return <></>;
   }
 };
 

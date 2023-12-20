@@ -8,7 +8,7 @@ import panda from "../Images/Avatars/panda.png";
 import rabbit from "../Images/Avatars/rabbit.png";
 import sealion from "../Images/Avatars/sealion.png";
 import "../Styles/imageGrid.css";
-import '../Styles/images.css'
+import "../Styles/images.css";
 
 const ImageGrid = ({ setProfile }) => {
   const bearFunction = (event) => {
@@ -58,7 +58,6 @@ const ImageGrid = ({ setProfile }) => {
 
   return (
     <div className="grid-container">
-
       <div className="grid-item1">
         <button className="gridButton" onClick={bearFunction}>
           <img className="avatar" src={bear} />
@@ -112,7 +111,6 @@ const ImageGrid = ({ setProfile }) => {
           <img className="avatar" src={sealion} />
         </button>
       </div>
-
     </div>
   );
 };

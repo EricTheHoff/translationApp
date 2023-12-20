@@ -5,35 +5,25 @@ input::-webkit-inner-spin-button {
 }
 
 .bigBoyDiv {
-  /* background: linear-gradient(to bottom, #283845, #141c23); */
   background-color: transparent;
   margin-left: auto;
   margin-right: auto;
   margin-top: -4vw;
-
   justify-content: center;
   align-items: center;
-
   display: flex;
 }
 
 .imgBackground {
   background-color: transparent;
-  /* position: flex; */
-
-  /* max-width: 1000px; */
   margin-left: auto;
   margin-right: auto;
   margin-top: 6vw;
-
   justify-content: center;
   align-items: center;
-
   display: flex;
   padding: 0;
 }
-
-/* Main Profile Page */
 
 .contentDiv {
   background-color: #F2D492;
@@ -41,18 +31,12 @@ input::-webkit-inner-spin-button {
   margin-left: auto;
   margin-right: auto;
   width: 100vw;
-
   justify-content: right;
   align-items: right;
-
   display: inline-block;
   border-radius: 15px;
-
   padding: 5vw;
-
   margin-bottom: 5vw;
-
-  /* box-shadow: 11px; */
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
@@ -75,31 +59,14 @@ input::-webkit-inner-spin-button {
   }
 
   .save {
-
-    /* padding-left: 2vw;
-    padding-right: 2vw;
-    padding-top: 0.5vw;
-    padding-bottom:0.5vw;
-   */
-
     background-color: red;
-
     border-radius: 10px;
-  
     font-size: 5vw;
   }
   
   .cancel {
-  
-    /* padding-left: 1.5vw;
-    padding-right: 1.5vw;
-    padding-top: 0.5vw;
-    padding-bottom:0.5vw; */
-  
     border-radius: 10px;
-  
     font-size: 5vw;
-    
   }
 
   .bigBoyDiv {
@@ -117,12 +84,9 @@ input::-webkit-inner-spin-button {
     padding-right: 2.3vw;
     padding-top: 0.5vw;
     padding-bottom:0.5vw;
-  
     color: white;
-  
     border: none;
     border-radius: 10px;
-  
     font-size: .8vw;
   }
 }
@@ -132,188 +96,12 @@ input::-webkit-inner-spin-button {
   border-radius: 10px;
   padding: 1vw;
   background-color: #F5E0B2;
-  /* margin-left: 1vw; */
   width:100%
 }
 
 .profileLabels {
   margin-left: 0.5vw;
 }
-
-/* #eProfileInput {
-  width: 93%;
-} */
-
-
-/* .h1 {
-  font-size: 30vw;
-  padding-top: 5%;
-  padding-left: 5%;
-  margin-bottom: 0%;
-}
-
-.header {
-  display: flex;
-}
-
-.editButton {
-  margin: 6%;
-  margin-left: 55%;
-  margin-right: 6%;
-
-  width: 15%;
-  padding-left: 5%;
-  padding-right: 5%;
-  
-  text-align: center;
-  border: none;
-  background-color: rgb(0, 115, 255);
-  color: white;
-  border-radius: 10px;
-  font-size: 1.5vw;
-}
-
-.hrContainer {
-  background-color: azure;
-  width: 80%;
-  margin: 10%;
-  border-radius: 15px;
-}
-
-.emailDiv {
-  display: flex;
-}
-
-.zipcodeDiv{
-  display: flex;
-} */
-
-/* editing profile css */
-
-/* .delete {
-  border: none;
-  background-color: transparent;
-  color: rgb(255, 0, 0);
-  margin-left: 50%;
-}
-
-.save {
-  margin-top: 45%;
-  margin-bottom: -2%;
-  margin-left: 320%;
-  margin-right: 1%;
-
-  padding-left: 22%;
-  padding-right: 22%;
-
-  background-color: rgb(0, 115, 255);
-  color: white;
-
-  border: none;
-  border-radius: 10px;
-
-  font-size: 1.5vw;
-}
-
-.cancel {
-  margin-top: 45%;
-  margin-bottom: -2%;
-  margin-left: 1%;
-  margin-right: 5%;
-
-  padding-left: 15%;
-  padding-right: 15%;
-  
-
-  background-color: rgb(195, 195, 195);
-  color: black;
-
-  border: none;
-  border-radius: 10px;
-
-  font-size: 1.5vw;
-  
-}
-
-#editImgBtn {
-  background-color: blueviolet;
-  border-color: burlywood;
-  border: 2px;
-  color: white;
-  z-index: 1;
-  border-radius: 20px;
-}
-
-.pTeg {
-  display: flex;
-}
-
-@media only screen and (max-width: 600px) {
-  .editButton {
-    margin: 6%;
-    margin-left: 51%;
-    margin-right: 6%;
-    margin-top: 6.5%;
-
-    border-radius: 8px;
-  }
-
-  .cancel {
-    margin-top: 6%;
-    margin-bottom: 6%;
-    margin-left: 0%;
-    margin-right: 5%;
-  
-    padding-left: 1%;
-    padding-right: 1%;
-  }
-
-  .save {
-    margin-top: 6%;
-    margin-bottom: 6%;
-    margin-left: 30%;
-    margin-right: 1%;
-  
-    padding-left: 2%;
-    padding-right: 2%;
-  
-  }
-
-  .pTeg {
-    display:inline-block;
-  }
-
-  .contentDiv {
-    background-color: azure;
-    width: 90%;
-    margin: 5%;
-
-  }
-} */
-
-/* @media only screen and (min-width: 1000px) {
-  .save {
-    margin-top: 45%;
-    margin-bottom: 4%;
-    margin-left: 325%;
-    margin-right: 1%;
-  }
-  
-  .cancel {
-    margin-top: 45%;
-    margin-bottom: 4%;
-    margin-left: 1%;
-    margin-right: 5%;
-  }
-
-  .editButton {
-    margin-top: 5%;
-    margin-bottom: 50%;
-    margin-left: 62%;
-    margin-right: 5%;
-  
-  }
-}  */
 
 .h1 {
   font-size: 30vw;
@@ -326,13 +114,10 @@ input::-webkit-inner-spin-button {
   padding-right: 2.3vw;
   padding-top: 0.5vw;
   padding-bottom:0.5vw;
-
   background-color: #141c23;
   color: white;
-
   border: none;
   border-radius: 10px;
-
   font-size: .8vw;
 }
 
@@ -341,20 +126,14 @@ input::-webkit-inner-spin-button {
 }
 
 .save {
-
   padding-left: 2vw;
   padding-right: 2vw;
   padding-top: 0.5vw;
   padding-bottom:0.5vw;
-
-  /* margin-left: 1vw;  */
-
   background-color: #283845;;
   color: white;
-
   border: none;
   border-radius: 10px;
-
   font-size: .8vw;
 }
 
@@ -363,22 +142,15 @@ input::-webkit-inner-spin-button {
 }
 
 .cancel {
-
   padding-left: 1.5vw;
   padding-right: 1.5vw;
   padding-top: 0.5vw;
   padding-bottom:0.5vw;
-
-  /* margin-left: 9vw; */
-
   background-color: #3a546a;
   color: white;
-
   border: none;
   border-radius: 10px;
-
   font-size: .8vw;
-  
 }
 
 .cancel:hover {
@@ -394,4 +166,3 @@ input::-webkit-inner-spin-button {
 .delete:hover {
   color: rgb(253, 115, 115);
 }
-

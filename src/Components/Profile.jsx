@@ -118,109 +118,85 @@ export default function Profile() {
             }
           />
         </div>
-      <div className="bigBoyDiv">
-        <br />
+        <div className="bigBoyDiv">
+          <br />
           <div className="contentDiv">
-
-          <div className="profileheader">
-
-            <div className="titleDiv">
-            <h1 className="h1">Profile</h1>
+            <div className="profileheader">
+              <div className="titleDiv">
+                <h1 className="h1">Profile</h1>
+              </div>
+              <div className="pTeg">
+                <Button className="ibtn" onClick={() => setEditMode(true)}>
+                  Edit
+                </Button>
+              </div>
             </div>
-
-            <div className="pTeg">
-            <Button className="ibtn" onClick={() => setEditMode(true)}>
-              Edit
-            </Button>
+            <div className="hrContainer">
+              <hr />
+              <div className="emailDiv">
+                <p>Email: </p>
+                <p>{email}</p>
+              </div>
+              <hr />
             </div>
-
-          </div>
-
-          <div className="hrContainer">
-            <hr />
-
-            <div className="emailDiv">
-              <p>Email: </p>
-              <p>{email}</p>
-            </div>
-
-            <hr />
-
-            {/* <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a> */}
           </div>
         </div>
-      </div>
       </>
     );
   } else {
     return (
       <>
-      <div className="imgBackground">
+        <div className="imgBackground">
           <img
             className="pic"
             src={
-                imageFiles[profileImage] ? imageFiles[profileImage] : profileImage
+              imageFiles[profileImage] ? imageFiles[profileImage] : profileImage
             }
           />
-              </div>
-        <div className="bigBoyDiv">
-                <form onSubmit={handleSubmit}>
-          <div className="contentDiv">
-            <div className="profileheader">
-              <h1 className="h1">Edit Profile</h1>
-
-              <div className="pTeg">
-                <Button className="ibtn" type="submit">
-                  Save
-                </Button>
-                <Button className="ibtn" onClick={cancelButton}>
-                  Cancel
-                </Button>
-              </div>
-            </div>
-
-            <div className="hrContainer">
-              <hr />
-
-              <label className="profileLabels">Email: </label>
-              <input
-                id="eProfileInput"
-                className="profileInputs"
-                placeholder={email}
-                type="text"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-
-              <hr />
-
-              <label className="profileLabels">Password: </label>
-              <input
-                className="profileInputs"
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-
-              <hr />
-
-              {/* <div className="dropdown">
-                <p id="editImgBtn">Edit Image</p>
-                <div className="dropdown-content">
-                  <ImageGrid setProfile={setProfileImage} />
-                </div>
-              </div> */}
-
-              <ImageGrid setProfile={setProfileImage} />
-              <br />
-              <br />
-
-              <button className="delete" onClick={handleDelete}>
-                Delete Account
-              </button>
-            </div>
-          </div>
-        </form>
         </div>
-        </>
+        <div className="bigBoyDiv">
+          <form onSubmit={handleSubmit}>
+            <div className="contentDiv">
+              <div className="profileheader">
+                <h1 className="h1">Edit Profile</h1>
+                <div className="pTeg">
+                  <Button className="ibtn" type="submit">
+                    Save
+                  </Button>
+                  <Button className="ibtn" onClick={cancelButton}>
+                    Cancel
+                  </Button>
+                </div>
+              </div>
+              <div className="hrContainer">
+                <hr />
+                <label className="profileLabels">Email: </label>
+                <input
+                  id="eProfileInput"
+                  className="profileInputs"
+                  placeholder={email}
+                  type="text"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <hr />
+                <label className="profileLabels">Password: </label>
+                <input
+                  className="profileInputs"
+                  type="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <hr />
+                <ImageGrid setProfile={setProfileImage} />
+                <br />
+                <br />
+                <button className="delete" onClick={handleDelete}>
+                  Delete Account
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </>
     );
   }
 }
