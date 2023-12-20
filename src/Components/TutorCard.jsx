@@ -1,11 +1,8 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import ListGroup from "react-bootstrap/ListGroup";
 import axios from "axios";
-import { useState } from "react";
 import toast from "react-hot-toast";
 import "../Styles/tutorcard.css";
-import { Col, Row, Container } from "react-bootstrap";
 
 function TutorCard({
   name,
@@ -20,9 +17,7 @@ function TutorCard({
     event.preventDefault();
 
     const res = await axios.delete(`http://localhost:2222/deleteSchools/${id}`);
-    console.log(res.data);
     if (res.data.success) {
-      console.log("deleted successfully");
       setDeleter(!deleter);
       toast.success("School Removed");
     }

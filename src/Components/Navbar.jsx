@@ -64,7 +64,6 @@ const Navbar = () => {
     e.preventDefault();
     const res = await axios.post("/logout");
     if (res.data.success) {
-      console.log("success with logout");
       navigate("/login");
       window.location.reload();
     }
@@ -109,15 +108,21 @@ const Navbar = () => {
           <div className="mobile-dropdown-content">
             <nav id="navTag">
               <form className="navForm" action="/translate">
-                <button className="profileLink" id="translateLink">Translate</button>
+                <button className="profileLink" id="translateLink">
+                  Translate
+                </button>
               </form>
 
               <form className="navForm" action="/study">
-                <button className="profileLink" id="studyLink">Study</button>
+                <button className="profileLink" id="studyLink">
+                  Study
+                </button>
               </form>
 
               <form className="navForm" action="/map">
-                <button className="profileLink" id="mapLink">Find&nbsp;a&nbsp;School</button>
+                <button className="profileLink" id="mapLink">
+                  Find&nbsp;a&nbsp;School
+                </button>
               </form>
             </nav>
           </div>
@@ -132,31 +137,33 @@ const Navbar = () => {
           </a>
           <div className="dropdown-content">
             <form className="navForm" action="/account">
-              <button className="profileLink" id="pLink">Profile</button>
+              <button className="profileLink" id="pLink">
+                Profile
+              </button>
             </form>
 
             <form className="navForm" action="/translations">
-              <button className="profileLink" id="sLink">Saved&nbsp;Translations</button>
+              <button className="profileLink" id="sLink">
+                Saved&nbsp;Translations
+              </button>
             </form>
 
             <form className="navForm" action="/saved-tutors">
-              <button className="profileLink" id="tLink">Saved&nbsp;Tutors</button>
+              <button className="profileLink" id="tLink">
+                Saved&nbsp;Tutors
+              </button>
             </form>
 
             <hr className="hrColor" />
             <button id="logoutButton" onClick={handleLogout}>
               Logout
             </button>
-
           </div>
         </div>
       </div>
     );
   } else {
-    return (
-      <>
-      </>
-    );
+    return <></>;
   }
 };
 
