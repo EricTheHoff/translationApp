@@ -31,4 +31,33 @@ Have you ever used a language program to translate something only to forget it a
 * Bcrypt
 * Axios
 
-## How to Run **Babel
+## How to Run **BabelBuddy** Locally
+**BabelBuddy** has not been deployed as a live application, so it has to be ran locally.
+
+After downloading the GitHub repository and added it to a local directory, run the following terminal commands:
+* `npm i` or `npm install` *(Installs project dependencies)*
+* `npm run initdb` and `npm run seed` *(Creates and seeds the database)*
+* `npm run dev` *(Launches the application)*
+  * Currently, the URL for the app is set to http://localhost:2222
+
+Please note that **BabelBuddy** makes use of two API keys; Google Maps API and DeepL API. In order to use the translation and map features, you will need to create a `.env` file and add the following variables:
+* `VITE_REACT_APP_GOOGLE_API_KEY`
+* `REACT_APP_DEEPL_API_KEY`
+
+Once you connect your respective keys to these variables, you should be good to go!
+
+## How to Use **BabelBuddy**
+1. Log into the application with your email and password (or register for one if you don't have an account).
+![Login]()
+2. From the Home Page, you can use the Quick Translate or the File Translation features. Both allow you to save translations to your account.
+![Quick-Translate]()
+![File-Translate]()
+3. To study your translations, you can go to the Study Page and choose to generate flashcards from your saved translations or from a set of pre-loaded sample translations.
+![Further-Study]()
+![Sample]()
+![Flashcards]()
+4. To find a language school near you, go to the Find a School page. You can enter in a zip code, language, and radius to find language schools near you. You can save schools to your account so you can compare them later.
+![Map]()
+5. To view your saved schools or saved translations, simply hover over your profile and select them from the pop-up menu.
+![Saved-Translations]()
+![Saved-Schools]()
