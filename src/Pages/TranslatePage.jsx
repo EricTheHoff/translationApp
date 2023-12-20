@@ -78,7 +78,7 @@ const TranslatePage = () => {
   };
 
   return (
-    <div>
+    <>
       <Container fluid>
         <Row className="justify-content-center mt-3">
           <Col lg={6}>
@@ -135,53 +135,6 @@ const TranslatePage = () => {
                       onChange={(e) => setTranslation(e.target.value)}
                     />
                   </Form.Group>
-                </Col>
-                <Col lg={6}>
-                  <div
-                    className="border p-3 shadow text-center bkg-darker rounded"
-                    style={{ height: "100%" }}
-                  >
-                    <h1>Welcome to BabelBuddy!</h1>
-                    <hr />
-                    <p className="about">
-                      Have you ever used a translating app only to find yourself
-                      searching for the same translation over and over again?
-                      With Babel Buddy, you can translate words and phrases from
-                      English to over 25 global languages and save those
-                      translations for further study! By using Babel Buddy, you
-                      can do the following:
-                    </p>
-                    <ul className="about-list">
-                      <li>
-                        <p>
-                          Translate words or phrases through the
-                          <span className="about-bold"> Quick Translate </span>
-                          or
-                          <span className="about-bold"> Translate a File </span>
-                          features!
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          Generate{" "}
-                          <a href="/study" className="about-bold">
-                            customized flashcards
-                          </a>{" "}
-                          from your saved translations or from a sample pool of
-                          translations!
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          Find{" "}
-                          <a href="/map" className="about-bold">
-                            local language schools
-                          </a>{" "}
-                          in your area!
-                        </p>
-                      </li>
-                    </ul>
-                  </div>
                 </Col>
               </Row>
 
@@ -299,7 +252,7 @@ const TranslatePage = () => {
           </Modal.Footer>
         </div>
       </Modal>
-    </div>
+    </>
   );
 };
 
