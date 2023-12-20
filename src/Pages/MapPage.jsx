@@ -4,6 +4,7 @@ import axios from "axios";
 import Map from "../Components/Map";
 import MapForm from "../Components/MapForm";
 import "../styles/map.css";
+import toast from "react-hot-toast";
 
 const libraries = ["places"];
 
@@ -58,17 +59,21 @@ function MapPage() {
   //changes geolocation based on what was entered as zipcode
   const handleZipcodeSubmit = () => {
     // Find latitude and longitude based on the entered zipcode
-    axios
-      .get(
-        `https://maps.googleapis.com/maps/api/geocode/json?address=${zipcode}&key=${
-          import.meta.env.VITE_REACT_APP_GOOGLE_API_KEY
-        }`
-      )
-      .then(({ data }) => {
-        const { lat, lng } = data.results[0].geometry.location;
-        setUserLocation({ lat, lng });
-      })
-      .catch((err) => console.log(err));
+    if (/^\d{5}$/.test(zipcode)) {
+      axios
+        .get(
+          `https://maps.googleapis.com/maps/api/geocode/json?address=${zipcode}&key=${
+            import.meta.env.VITE_REACT_APP_GOOGLE_API_KEY
+          }`
+        )
+        .then(({ data }) => {
+          const { lat, lng } = data.results[0].geometry.location;
+          setUserLocation({ lat, lng });
+        })
+        .catch((err) => console.log(err));
+    } else {
+      toast("Please enter a valid zipcode");
+    }
   };
 
   if (!isLoaded) return <div>Loading...</div>;
