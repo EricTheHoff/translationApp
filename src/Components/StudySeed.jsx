@@ -35,7 +35,7 @@ const StudySeed = () => {
         })
     },[difficulty])
 
-
+    
     useEffect(() => {
         if (language !== '') {
             if (noOfCards > flashcards.length) {
