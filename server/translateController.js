@@ -65,16 +65,20 @@ const translateFunctions = {
     const id = req.session.userId;
     const { translatedText, originalText, toLanguage } = req.body;
 
-    const translation = await SavedWord.create({
-      word: translatedText,
-      original: originalText,
-      userId: id,
-      toLanguage: toLanguage,
-    });
-    if (translation) {
-      res.status(200).json({ message: "OK" });
+    if (translatedText.length > 650) {
+        res.status(500).json({ error: "String Too Long"})
     } else {
-      res.status(500).json({ error: "Internal Server Error" });
+        const translation = await SavedWord.create({
+          word: translatedText,
+          original: originalText,
+          userId: id,
+          toLanguage: toLanguage,
+        });
+        if (translation) {
+          res.status(200).json({ message: "OK" });
+        } else {
+          res.status(500).json({ error: "Internal Server Error" });
+        }
     }
   },
   getSeedTranslations: async (req, res) => {

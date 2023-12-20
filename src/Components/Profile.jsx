@@ -45,8 +45,6 @@ export default function Profile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const id = useSelector((state) => state.userId);
-
   const getAccount = async () => {
     await axios
       .get("/user")
@@ -69,8 +67,8 @@ export default function Profile() {
 
     const requestData = {
       email: email,
-      newPassword: newPassword,
       currentPassword: currentPassword,
+      newPassword: newPassword,
       profilePic: profileImage,
     };
     const response = await axios.put(`/editAccount`, requestData);
@@ -173,15 +171,29 @@ export default function Profile() {
                   id="eProfileInput"
                   className="profileInputs"
                   placeholder={email}
-                  type="text"
+                  type="email"
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 <hr />
-                <label className="profileLabels">Password: </label>
+                <label className="profileLabels">Current Password: </label>
                 <input
                   className="profileInputs"
                   type="password"
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => setCurrentPassword(e.target.value)}
+                />
+                <hr />
+                <label className="profileLabels"> New Password: </label>
+                <input
+                  className="profileInputs"
+                  type="password"
+                  onChange={(e) => setNewPassword(e.target.value)}
+                />
+                <hr />
+                <label className="profileLabels"> Confirm Password: </label>
+                <input
+                  className="profileInputs"
+                  type="password"
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                 />
                 <hr />
                 <ImageGrid setProfile={setProfileImage} />

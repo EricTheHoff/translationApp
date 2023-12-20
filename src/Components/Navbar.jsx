@@ -148,7 +148,7 @@ const Navbar = () => {
 
             <form className="navForm" action="/saved-tutors">
               <button className="profileLink" id="tLink">
-                Saved&nbsp;Tutors
+                Saved&nbsp;Schools
               </button>
             </form>
 

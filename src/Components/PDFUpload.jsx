@@ -80,7 +80,8 @@ const PDFUpload = () => {
         setNewTranslation(false);
       })
       .catch((error) => {
-        toast.error(`The following error has occurred: ${error}`);
+        console.error(`The following error has occurred: ${error}`)
+        toast.error(`Translation could not be saved. Try saving a smaller phrase instead.`);
       });
   };
 
