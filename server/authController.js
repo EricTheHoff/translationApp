@@ -64,7 +64,6 @@ const authFunctions = {
     }
   },
   editAccount: async (req, res) => {
-    // const { id } = req.params
     const id = req.session.userId;
     const { email, newPassword, currentPassword, profilePic } = req.body;
     const user = await UserDetail.findOne({ where: { userId: id } });
