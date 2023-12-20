@@ -146,7 +146,7 @@
 
   @media only screen and (max-width: 600px) {
     .navbar {
-      border-radius: 0px;
+      /* border-radius: 0px; */
       margin-top: 0%;
       padding: 0px;
       position:static;
@@ -166,7 +166,7 @@
     }
 
     .navHome {
-      margin-left: 2.5%;
+      margin-left: 8%;
       font-size: 3.5vw;
     }
 
@@ -243,7 +243,7 @@
     .mobile-dropdown-content {
       display: none;
       position: absolute;
-      z-index: 1;
+      z-index: 10;
       padding: 12px 16px;
       box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
       border-radius: 10px;

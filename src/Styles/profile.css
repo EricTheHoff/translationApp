@@ -72,6 +72,10 @@ input::-webkit-inner-spin-button {
   .bigBoyDiv {
     margin-top: -9vw;
   }
+
+  .h1 {
+    padding-top: 30px;
+  }
 }
 
 @media only screen and (min-width: 600px) {
