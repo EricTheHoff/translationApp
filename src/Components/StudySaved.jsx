@@ -17,6 +17,7 @@ const StudySaved = () => {
     const [display, setDisplay] = useState(false)
     const uniqueToLanguages = [...new Set(flashcards.map((el) => el.toLanguage))]
 
+    // On submission, it's grabbing a random element from the filteredCards array for each flashcard. That way there is an element of randomness to the order they're generated.
     const handleSubmit = (e, number) => {
         e.preventDefault()
     
