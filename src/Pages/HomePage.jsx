@@ -11,6 +11,7 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // Function to check if a session exists in Express.
   const saveToExpress = () => {
     axios
       .get("/user-status")
@@ -18,18 +19,15 @@ const HomePage = () => {
       .then(async (response) => {
         if (!response.data.success) {
           dispatch({ type: "Logged Out" });
-          dispatch({ type: "Inactive User" });
           navigate("/login");
         } else {
-          const user = await axios.get("/user");
+          await axios.get("/user");
           dispatch({ type: "Logged In" });
-          dispatch({ type: "Active User", payload: user.data.userId });
         }
       })
       .catch((error) => {
         console.error(`The following has occurred: ${error}`);
         dispatch({ type: "Logged Out" });
-        dispatch({ type: "Inactive User" });
         navigate("/login");
       });
   };

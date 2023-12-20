@@ -1,8 +1,4 @@
-import {
-  SchoolDetail,
-  UserDetail,
-  FurtherStudy,
-} from "../src/Database/models.js";
+import { UserDetail } from "../src/Database/models.js";
 import bcrypt from "bcryptjs";
 
 const authFunctions = {
