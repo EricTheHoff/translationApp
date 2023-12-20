@@ -65,7 +65,7 @@ const translateFunctions = {
     const id = req.session.userId;
     const { translatedText, originalText, toLanguage } = req.body;
 
-    if (translatedText.length > 650) {
+    if (translatedText.length > 650 || originalText.length > 500) {
         res.status(500).json({ error: "String Too Long"})
     } else {
         const translation = await SavedWord.create({
