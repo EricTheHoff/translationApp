@@ -63,24 +63,28 @@ const authFunctions = {
     const id = req.session.userId;
     const { email, newPassword, currentPassword, profilePic } = req.body;
     const user = await UserDetail.findOne({ where: { userId: id } });
-    const hashMatch = await bcrypt.compare(currentPassword, user.password);
-
-    if (newPassword === "") {
-      user.email = email;
-      user.profilePic = profilePic;
-
-      await user.save();
-      res.json({ success: true });
-    } else if (hashMatch === false) {
-      res.json({ success: false });
+    
+    if (user) {
+        const hashMatch = await bcrypt.compare(currentPassword, user.password);
+        if (newPassword === "") {
+          user.email = email;
+          user.profilePic = profilePic;
+    
+          await user.save();
+          res.json({ success: true });
+        } else if (hashMatch === false) {
+          res.json({ success: false });
+        } else {
+          const salt = bcrypt.genSaltSync(12);
+          const hash = await bcrypt.hash(newPassword, salt);
+          user.email = email;
+          user.password = hash;
+    
+          res.json({ success: true });
+          await user.save();
+        }
     } else {
-      const salt = bcrypt.genSaltSync(12);
-      const hash = await bcrypt.hash(newPassword, salt);
-      user.email = email;
-      user.password = hash;
-
-      res.json({ success: true });
-      await user.save();
+        res.json({ success: false })
     }
   },
   deleteAccount: async (req, res) => {
